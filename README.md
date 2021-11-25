@@ -13,4 +13,4 @@ Check Your Favorite Youtuber's Subscriber.
 [日本語 (Japanese)](https://github.com/cottons-kr/CheckSub/blob/main/README-jp.md)
 
 # License
-[VL License](https://fluffy-cat-594.notion.site/LICENSE-512b389faf6f4960bf74fb7a4ee929ba)
+[MIT License](https://github.com/cottons-kr/CheckSub/blob/main/LICENSE)
