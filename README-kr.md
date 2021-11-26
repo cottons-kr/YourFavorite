@@ -8,7 +8,7 @@
 4. 직관적이고 깔끔한 디자인
 
 # 요구사양
-OS : Windows 10/11 64bit 이상, Linux Kernel 4.x.x 64bit 이상
+OS : Windows 7 64bit 이상, Linux Kernel 4.x.x 64bit 이상
 
 CPU : 1Ghz 듀얼코어 이상, x64 아키텍처
 
