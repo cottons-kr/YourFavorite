@@ -18,10 +18,14 @@ app.on('ready', () => {
     const win = new BrowserWindow({
         width: 1920,
         height: 1080,
+        show: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
     })
     win.loadURL("http://127.0.0.1:9999")
+    win.once("ready-to-show", () => {
+        win.show()
+    })
 })

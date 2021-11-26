@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="../css/index.css">
     <title>YourFavorite</title>
 </head>
@@ -16,12 +17,14 @@
     <div class="container"></div>
 
     <div class="addTuberPopup">
-        <span
-            ><h4 id="addTuberPopupText">유튜버 추가하기</h4>
+        <span>
+            <h4 id="addTuberPopupText">유튜버 추가하기</h4>
             <img id="addTuberPopupExit" src="../resource/x-circle.svg">
         </span>
-        <input id="addTuberPopupInput" type="text" placeholder="채널 URL을 입력하세요">
+        <form id="addTuberPopupForm">
+            <input type="text" placeholder="채널 URL을 입력하세요">
+        </form>
     </div>
-    <script type="module" src="../js/index.js"></script>
 </body>
+<script type="module" charset="utf-8" src="../js/index.js"></script>
 </html>
