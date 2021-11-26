@@ -1,8 +1,18 @@
 from requests.api import get
 from selenium import webdriver
 import sys
+from socket import *
 
-def getInfo(url):
+IP = "127.0.0.1"
+PORT = 9999
+
+def main(url):
+    server_socket = socket(AF_INET, SOCK_STREAM)
+    server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+    server_socket.bind((IP, PORT))
+    server_socket.listen(1)
+    client_socket, addr = server_socket.accept()
+
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
     driver = webdriver.Chrome(executable_path='chromedriver', options=options)
@@ -15,4 +25,4 @@ def getInfo(url):
     driver.quit()
 
 if __name__ == "__main__":
-    getInfo(sys.argv[1])
+    main(sys.argv[1])

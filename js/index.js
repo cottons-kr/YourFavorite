@@ -17,7 +17,7 @@ addTuberPopupExit.addEventListener("click", () => {
     addTuberPopup.style.visibility = "hidden"
 })
 addTuberPopupInput.addEventListener("change", () => {
-    const getChannel = spawn("python", ["Youtube.py", addTuberPopupInput.value])
+    
 })
 
 if (localStorage.length == 0) {

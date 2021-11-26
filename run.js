@@ -1,16 +1,22 @@
+const express = require('express')
 const { app, BrowserWindow } = require('electron');
+const server = express()
 
-function createWindow () {
-  let win = new BrowserWindow({
-    width: 1920,
-    height: 1080,
-    /*frame: false,*/
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
-  win.loadFile('html/index.html')
-  /*win.setMenu(null)*/
-}
+server.get('/', function(req,res) {
+    res.sendFile(__dirname + "/html/index.html")
+})
 
-app.on('ready', createWindow);
+server.get('/main', function(req,res) {
+    res.sendFile(__dirname + "/html/index.html")
+})
+
+server.use(express.static(__dirname))
+server.listen(9999)
+
+app.on('ready', () => {
+    const win = new BrowserWindow({
+        width: 1920,
+        height: 1080
+    })
+    win.loadURL("http://127.0.0.1:9999")
+})
