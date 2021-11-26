@@ -1,4 +1,4 @@
-# CheckSub
+# YourFavorite
 좋아하는 유튜버의 구독자수를 확인하세요.
 
 # 특성
