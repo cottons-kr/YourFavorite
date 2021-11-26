@@ -19,3 +19,8 @@ Disk : 1GB 이상의 여유공간
 Network : 10Mbps 이상
 
 Display : 1080p 이상
+
+# 설치
+|Windows|Linux|
+|-|-|
+|yf-win.msi|ys-lix|
