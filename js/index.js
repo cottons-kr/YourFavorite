@@ -1,11 +1,19 @@
 const addButton = document.querySelector("#addButtonImg")
 const container = document.querySelector(".container")
+const addTuberPopup = document.querySelector(".addTuberPopup")
+const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
 
 addButton.addEventListener("mouseover", () => {
     addButton.style.opacity = 1
 })
 addButton.addEventListener("mouseout", () => {
     addButton.style.opacity = 0.1
+})
+addButton.addEventListener("click", () => {
+    addTuberPopup.style.visibility = "visible"
+})
+addTuberPopupExit.addEventListener("click", () => {
+    addTuberPopup.style.visibility = "hidden"
 })
 
 if (localStorage.length == 0) {
