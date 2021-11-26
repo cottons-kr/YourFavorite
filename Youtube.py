@@ -1,8 +1,6 @@
 from requests.api import get
-import selenium
 from selenium import webdriver
-from time import sleep
-import time
+import sys
 
 def getInfo(url):
     options = webdriver.ChromeOptions()
@@ -11,6 +9,10 @@ def getInfo(url):
     driver.get(url)
     subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''')
     subscriber = subscriber.get_attribute("aria-label")
-    print(subscriber)
+    channelName = driver.find_element_by_xpath('''//*[@id="channel-name"]''')
+    avatar = driver.find_element_by_xpath('''//*[@id="img"]''')
+    print(subscriber, channelName, avatar)
+    driver.quit()
 
-getInfo("https://www.youtube.com/c/PartitionZion")
+if __name__ == "__main__":
+    getInfo(sys.argv[1])

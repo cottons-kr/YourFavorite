@@ -1,6 +1,7 @@
 const addButton = document.querySelector("#addButtonImg")
 const container = document.querySelector(".container")
 const addTuberPopup = document.querySelector(".addTuberPopup")
+const addTuberPopupInput = document.querySelector("#addTuberPopupInput")
 const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
 
 addButton.addEventListener("mouseover", () => {
@@ -14,6 +15,9 @@ addButton.addEventListener("click", () => {
 })
 addTuberPopupExit.addEventListener("click", () => {
     addTuberPopup.style.visibility = "hidden"
+})
+addTuberPopupInput.addEventListener("change", () => {
+    const getChannel = spawn("python", ["Youtube.py", addTuberPopupInput.value])
 })
 
 if (localStorage.length == 0) {

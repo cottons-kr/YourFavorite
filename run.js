@@ -10,7 +10,7 @@ function createWindow () {
     }
   })
   win.loadFile('html/index.html')
-  win.setMenu(null)
+  /*win.setMenu(null)*/
 }
 
 app.on('ready', createWindow);
