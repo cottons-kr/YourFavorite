@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cottons-kr/YourFavorite/issues"
   },
-  "homepage": "https://github.com/cottons-kr/YourFavorite#readme"
+  "homepage": "https://github.com/cottons-kr/YourFavorite#readme",
+  "devDependencies": {
+    "electron": "^16.0.2"
+  }
 }
