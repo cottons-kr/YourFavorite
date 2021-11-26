@@ -7,7 +7,7 @@ Check your favorite YouTuber's information and live news
 3. It changes the theme YouTuber's personality color.
 4. simple & modern design.
 
-#Requirements
+# Requirements
 OS : up to Windows 7 64bit, up to Linux Kernel 4.x.x 64bit
 
 CPU : up to 1Ghz Dual-Core cpu, x64 architecture
