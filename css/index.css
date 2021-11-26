@@ -1,0 +1,23 @@
+html {
+    margin: 0%;
+    padding: 0%;
+    overflow: hidden;
+}
+
+* {
+    font-family: Arial;
+}
+
+body {
+    background: linear-gradient(45deg, white, skyblue) no-repeat fixed;
+    background-position: 5% 95%;
+}
+
+.list {
+    width: 20%;
+    height: 80%;
+    background-color: whitesmoke;
+
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
