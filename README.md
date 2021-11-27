@@ -1,6 +1,4 @@
 # YourFavorite
-https://github.io/cottons-kr/YourFavorite/
-
 Get easier access to your favorite YouTubers.
 
 좋아하는 유튜버에 더 쉽게 접근하세요.
