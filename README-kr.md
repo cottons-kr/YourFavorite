@@ -8,7 +8,7 @@
 4. 직관적이고 깔끔한 디자인
 
 # 요구사양
-OS : Windows 7 64bit 이상, Linux Kernel 4.x.x 64bit 이상
+OS : Windows 10 64bit 이상, Linux Kernel 4.x.x 64bit 이상
 
 CPU : 1Ghz 듀얼코어 이상, x64 아키텍처
 
@@ -21,6 +21,13 @@ Network : 10Mbps 이상
 Display : 1080p 이상
 
 # 설치
-|Windows|Linux|
-|-|-|
-|yf-win.msi|ys-lix|
+## Windows
+1. Microsoft Store에서 설치
+2. 설치파일을 통한 설치
+
+Windows 10, 11 (x64)에서만 설치 가능합니다.
+## Linux
+1. 설치파일을 통한 설치
+2. 셸을 통한 설치
+
+x64 아키텍처에서만 설치 가능합니다.
