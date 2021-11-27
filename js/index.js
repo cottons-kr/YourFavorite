@@ -12,16 +12,18 @@ const REGEX = /[^0-9]/g
 function loadInfo(event) {
     event.preventDefault()
     const url = addTuberPopupInput.value
+    let subscriber, channelName, profileImg;
+
     addTuberPopupInput.value = ""
     const getInfo = spawn("python", ["Youtube.py", url])
     getInfo.stdout.on("data", (result) => {
-        const subscriber = decodeURIComponent(decodeURI(result))
-        console.log(subscriber)
+        console.log(result.toString())
     })
+    return subscriber;
 }
 
-function addTuber(url) {
-    
+function addTuber(event) {
+    event.preventDefault()
 }
 
 addButton.addEventListener("mouseover", () => {
@@ -38,6 +40,6 @@ addTuberPopupExit.addEventListener("click", () => {
 })
 addTuberPopupForm.addEventListener("submit", loadInfo)
 
-// if (localStorage.length == 0) {
-//     container.innerHTML = `<h1 id="noList">등록한 유튜버가 없습니다. 옆에 있는 추가 버튼으로 추가해보세요!</h1>`
-// }
+if (localStorage.length == 0) {
+    container.innerHTML = `<h1 id="noList">등록한 유튜버가 없습니다. 옆에 있는 추가 버튼으로 추가해보세요!</h1>`
+}
