@@ -47,6 +47,7 @@ body {
 
 #listChannelName {
     width: 50%;
+    font-weight: bold;
 
     display: inline-block;
 }
