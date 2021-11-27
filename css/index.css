@@ -6,6 +6,7 @@ html {
 }
 
 * {
+    margin: 0;
     font-family: Arial;
 }
 
@@ -19,7 +20,6 @@ body {
     width: 20%;
     height: 80%;
     background-color: rgba(255, 255, 255, 0.4);
-    text-align: center;
     float: left;
     position: relative;
 
@@ -28,6 +28,37 @@ body {
     margin-bottom: 5%;
 
     border-radius: 30px / 30px
+}
+
+
+#tuberList * {
+    width: 90%;
+    background-color: whitesmoke;
+    
+    margin-top: 3%;
+    margin-left: 5%;
+
+    border-radius: 20px / 20px
+}
+
+#channel {
+    display: block;
+}
+
+#listChannelName {
+    width: 50%;
+
+    display: inline-block;
+}
+
+#listProfileImg {
+    width: 20%;
+    height: 20%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 2%;
+
+    border-radius: 20px / 20px
 }
 
 .container {
@@ -44,6 +75,7 @@ body {
 }
 
 .addButton {
+    text-align: center;
     padding-top: 30px;
 }
 
@@ -56,6 +88,7 @@ li {
 }
 
 #noList {
+    margin-top: 5%;
     text-align: center;
     color: black;
 }
@@ -88,19 +121,4 @@ li {
     margin-top: 2%;
     margin-left: 54%;
     display: inline-block;
-}
-
-.tuberInform {
-    width: 500px;
-    height: 150px;
-    margin-top: 25px;
-    margin-left: 30px;
-    background-color: white;
-    border-radius: 10px;
-    display: flex;
-}
-
-.profile_img {
-    width: 48px;
-    height: 48px;
 }
