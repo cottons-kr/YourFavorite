@@ -20,6 +20,8 @@ Network : 10Mbps 이상
 
 Display : 1080p 이상
 
+Python 3.7 이상 권장
+
 # 필요한 Python Packages
 - selenium
 - requests
