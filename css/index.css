@@ -123,3 +123,21 @@ li {
     margin-left: 54%;
     display: inline-block;
 }
+
+#channelName {
+    font-size: 150%;
+    margin-top: 4%;
+    display: inline-block;
+}
+
+#profileImg {
+    vertical-align: top;
+    display: inline-block;
+
+    margin: 3%;
+    margin-right: 2%;
+}
+
+#profileImg img {
+    border-radius: 20px / 20px
+}

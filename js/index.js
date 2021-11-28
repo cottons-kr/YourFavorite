@@ -7,8 +7,8 @@ const addTuberPopup = document.querySelector(".addTuberPopup")
 const addTuberPopupForm = document.querySelector("#addTuberPopupForm")
 const addTuberPopupInput = document.querySelector("#addTuberPopupForm input")
 const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
-const tuberList = document.querySelector("#tuberList").children
 const tuberListContainer = document.querySelector("#tuberList")
+const tuberInfo = document.querySelector(".tuberInfo")
 
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
@@ -78,7 +78,7 @@ profileImg = info[2]
 function addTuber(event) {
     event.preventDefault()
     const url = addTuberPopupInput.value
-    option.args = [url]
+    option.args = [url, "simple"]
     console.log(option)
     let subscriber, channelName, profileImg;
 
@@ -105,6 +105,10 @@ function addTuber(event) {
         localStorage.setItem(number, JSON.stringify(json))
         addList(number)
     })
+}
+
+function showInfo(info) {
+
 }
 
 addButton.addEventListener("mouseover", () => {
