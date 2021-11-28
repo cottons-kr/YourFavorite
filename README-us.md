@@ -20,7 +20,7 @@ Network speed: up to 10Mbps
 
 Display : up to 1080p
 
-#need to python package when using this program
+# need to python package when using this program
 * selenium
 * requests
 * bs4
