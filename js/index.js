@@ -108,7 +108,7 @@ function addTuber(event) {
 }
 
 function showInfo(info) {
-
+    
 }
 
 addButton.addEventListener("mouseover", () => {
