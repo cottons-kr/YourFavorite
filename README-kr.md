@@ -20,14 +20,7 @@ Network : 10Mbps 이상
 
 Display : 1080p 이상
 
-# 설치
-## Windows
-1. Microsoft Store에서 설치
-2. 설치파일을 통한 설치
-
-Windows 10, 11 (x64)에서만 설치 가능합니다.
-## Linux
-1. 설치파일을 통한 설치
-2. 셸을 통한 설치
-
-x64 아키텍처에서만 설치 가능합니다.
+# 필요한 Python Packages
+- selenium
+- requests
+- bs4
