@@ -2,7 +2,7 @@ from requests.api import get
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import sys
-import time
+import base64
 
 def main(url):
     options = webdriver.ChromeOptions()
@@ -20,7 +20,7 @@ def main(url):
     elif "억" in subscriber:
         subscriber = subscriber.replace("억명", "c")
 
-    print(f"{subscriber}::{channelName}::{profileImg}")
+    print(base64.b64encode(f"{subscriber}::{channelName}::{profileImg}".encode("utf-8")))
     driver.quit()
 
 if __name__ == "__main__":
