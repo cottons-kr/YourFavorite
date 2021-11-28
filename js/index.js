@@ -34,7 +34,7 @@ function loadList(){
         const img = document.createElement("img")
         const p = document.createElement("p")
 
-        channel.setAttribute("id", "channel")
+        channel.setAttribute("id", info["channelName"])
         listProfileImg.setAttribute("id", "listProfileImg")
         listChannelName.setAttribute("id", "listChannelName")
         img.setAttribute("src", info["profileImg"])
@@ -58,7 +58,7 @@ function addList(number) {
     const img = document.createElement("img")
     const p = document.createElement("p")
 
-    channel.setAttribute("id", "channel")
+    channel.setAttribute("id", info["channelName"])
     listProfileImg.setAttribute("id", "listProfileImg")
     listChannelName.setAttribute("id", "listChannelName")
     img.setAttribute("src", info["profileImg"])
@@ -136,3 +136,4 @@ if (localStorage.length == 0) {
 }
 
 loadList()
+
