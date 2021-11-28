@@ -24,8 +24,3 @@ Display : up to 1080p
 * selenium
 * requests
 * bs4
-
-# download
-|Windows|Linux|
-|-|-|
-|yf-win.msi|ys-lix|
