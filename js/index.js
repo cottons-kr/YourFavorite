@@ -11,6 +11,8 @@ const tuberListContainer = document.querySelector("#tuberList")
 const infoProfileImg = document.querySelector("#infoProfileImg img")
 const infoChannelName = document.querySelector("#infoChannelName h1")
 const infoSubscriber = document.querySelector("#infoSubscriber")
+const noList = document.querySelector("#noList")
+const addTuberLoading = document.querySelector("#addTuberLoading")
 
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
@@ -95,6 +97,8 @@ function addTuber(event) {
     let subscriber, channelName, profileImg;
 
     addTuberPopupInput.value = ""
+    addTuberPopupForm.style.display = "none"
+    addTuberLoading.style.display = "block"
     PythonShell.run("getInfo.py", option, (error, result) => {
         if (error) {
             console.log("Error")
@@ -116,6 +120,9 @@ function addTuber(event) {
         const number = localStorage.length
         localStorage.setItem(number, JSON.stringify(json))
         addList(number)
+
+        addTuberPopupForm.style.display = "block"
+        addTuberLoading.style.display = "none"
     })
 }
 
@@ -132,7 +139,6 @@ function showInfo(number) {
 }
 
 function toggleNoList() {
-    const noList = document.querySelector("#noList")
     if (noList.style.display !== "none" && localStorage.length !== 0) {
         noList.style.display = "none"
     }

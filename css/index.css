@@ -164,6 +164,10 @@ li {
     display: none;
 }
 
+#addTuberLoading {
+    display: none;
+}
+
 #showLoading {
     display: block;
 }
