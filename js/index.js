@@ -29,6 +29,7 @@ function loadList(){
         info = JSON.parse(info)
 
         const channel = document.createElement("div")
+        channel.addEventListener("click", showInfo(i))
         const listProfileImg = document.createElement("div")
         const listChannelName = document.createElement("div")
         const img = document.createElement("img")
@@ -53,6 +54,7 @@ function addList(number) {
     info = JSON.parse(info)
 
     const channel = document.createElement("div")
+    channel.addEventListener("click", showInfo(number))
     const listProfileImg = document.createElement("div")
     const listChannelName = document.createElement("div")
     const img = document.createElement("img")
