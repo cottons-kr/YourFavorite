@@ -30,7 +30,7 @@ def main(url, type):
             subscriber = "notShown"
         try:
             streamDiv = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse[1]/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer[1]/div[3]/ytd-channel-featured-content-renderer/div[2]''')
-            streamDiv = streams.find_elements_by_tag_name("ytd-video-renderer")
+            streamDiv = streamDiv.find_elements_by_tag_name("ytd-video-renderer")
             streams = []
         except:
             streams = "noStream"
