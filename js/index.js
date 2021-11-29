@@ -94,14 +94,14 @@ function addTuber(event) {
     const url = addTuberPopupInput.value
     option.args = [url, "simple"]
     console.log(option)
-    let subscriber, channelName, profileImg;
+    let channelName, profileImg;
 
     addTuberPopupInput.value = ""
     addTuberPopupForm.style.display = "none"
     addTuberLoading.style.display = "block"
     PythonShell.run("getInfo.py", option, (error, result) => {
         if (error) {
-            console.log("Error")
+            console.log(error)
         }
 
         const data = result[0].replace("b'", '').replace("'", '')
@@ -129,11 +129,16 @@ function showInfo(number) {
     info = JSON.parse(info)
     infoProfileImg.src = info["profileImg"]
     infoChannelName.innerText = info["channelName"]
-    if (info["subscriber"] === "notShown") {
-        infoSubscriber.style.visibility = "hidden"
-    } else {
-        infoSubscriber.innerText = info["subscriber"]
-    }
+    option.args = [info["url"], "all"]
+    PythonShell.run("getInfo.py", option, (error, result) => {
+        if (error) {
+            console.log(error)
+        }
+
+        const data = result[0].replace("b'", '').replace("'", '')
+        const buff = Buffer.from(data, "base64")
+        const info = buff.toString("utf-8").split(":::")
+    })
 }
 
 function toggleNoList() {

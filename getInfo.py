@@ -5,6 +5,8 @@ import sys
 import time
 import base64
 
+waitTime = 2
+
 def main(url, type):
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
@@ -20,13 +22,12 @@ def main(url, type):
     elif type == "recentVideos":
         driver.get(url+"/videos")
         driver.execute_script("window.scrollTo(0, 10000)")
-        time.sleep(2)
+        time.sleep(waitTime)
         try:
             recentVideos = driver.find_element_by_xpath("/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-grid-renderer/div[1]")
             recentVideos = recentVideos.find_elements_by_tag_name("ytd-grid-video-renderer")
         except:
-            print(base64.b64encode('noVideos'))
-            driver.quit()
+            recentVideos = "noVideo"
         for video in recentVideos:
             videoInfo = video.find_element_by_id("video-title").get_attribute("aria-label")
             videoLink = video.find_element_by_id("video-title").get_attribute("href")
@@ -37,10 +38,33 @@ def main(url, type):
         driver.quit()
     
     elif type == "all":
+        driver.get(url)
         try:
             subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')[1].replace('명', '')
         except:
             subscriber = "notShown"
+
+        driver.get(url+"/videos")
+        driver.execute_script("window.scrollTo(0, 10000)")
+        time.sleep(2)
+        try:
+            recentVideos = driver.find_element_by_xpath("/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-grid-renderer/div[1]")
+            recentVideos = recentVideos.find_elements_by_tag_name("ytd-grid-video-renderer")
+        except:
+            recentVideos = "noVideo"
+        if recentVideos != "noVideo":
+            for video in recentVideos:
+                videoInfo = video.find_element_by_id("video-title").get_attribute("aria-label")
+                videoLink = video.find_element_by_id("video-title").get_attribute("href")
+                videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
+                videoName = videoInfo.split(" 게시자: ")[0]
+                videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+        
+        driver.get(url+"/community")
+        driver.execute_script("window.scrollTo(0, 999999999)")
+        time.sleep(waitTime)
+        try:
+            communityLog = 
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
