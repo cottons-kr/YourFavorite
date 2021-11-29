@@ -27,31 +27,7 @@ const option = {
 
 function loadList(){
     for(let i = 0; i < localStorage.length; i++){
-        let info = localStorage.getItem(localStorage.key(i.toString()))
-        info = JSON.parse(info)
-
-        const channel = document.createElement("div")
-        const channelButton = document.createElement("button")
-        const listProfileImg = document.createElement("div")
-        const listChannelName = document.createElement("div")
-        const img = document.createElement("img")
-        const p = document.createElement("p")
-
-        channel.setAttribute("id", info["channelName"])
-        listProfileImg.setAttribute("id", "listProfileImg")
-        listChannelName.setAttribute("id", "listChannelName")
-        img.setAttribute("src", info["profileImg"])
-        channelButton.setAttribute("id", "channelButton")
-        channelButton.addEventListener("click", () => {showInfo(i)})
-        p.innerText = info["channelName"]
-
-        listProfileImg.appendChild(img)
-        listChannelName.appendChild(p)
-        channel.appendChild(listProfileImg)
-        channel.appendChild(listChannelName)
-        channelButton.appendChild(channel)
-        tuberListContainer.appendChild(channelButton)
-        toggleNoList()
+        addList(i)
      }
 }
 
