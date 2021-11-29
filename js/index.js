@@ -49,6 +49,7 @@ function loadList(){
         channel.appendChild(listChannelName)
         channelButton.appendChild(channel)
         tuberListContainer.appendChild(channelButton)
+        toggleNoList()
      }
 }
 
@@ -77,6 +78,7 @@ function addList(number) {
     channel.appendChild(listChannelName)
     channelButton.appendChild(channel)
     tuberListContainer.appendChild(channelButton)
+    toggleNoList()
 }
 
 /*
@@ -129,6 +131,13 @@ function showInfo(number) {
     }
 }
 
+function toggleNoList() {
+    const noList = document.querySelector("#noList")
+    if (noList.style.display !== "none" && localStorage.length !== 0) {
+        noList.style.display = "none"
+    }
+}
+
 addButton.addEventListener("mouseover", () => {
     addButton.style.opacity = 1
 })
@@ -142,10 +151,6 @@ addTuberPopupExit.addEventListener("click", () => {
     addTuberPopup.style.visibility = "hidden"
 })
 addTuberPopupForm.addEventListener("submit", addTuber)
-
-if (localStorage.length == 0) {
-    container.innerHTML = `<h1 id="noList">등록한 유튜버가 없습니다. 옆에 있는 추가 버튼으로 추가해보세요!</h1>`
-}
 
 loadList()
 

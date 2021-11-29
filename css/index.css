@@ -159,3 +159,11 @@ li {
     right: 59.9%;
     top: 19.5%;
 }
+
+#loading {
+    display: none;
+}
+
+#showLoading {
+    display: block;
+}
