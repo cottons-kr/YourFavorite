@@ -116,7 +116,11 @@ function showInfo(number) {
     info = JSON.parse(info)
     profileImg.src = info["profileImg"]
     channelName.innerText = info["channelName"]
-    subscriber.innerText = info["subscriber"]
+    if (info["subscriber"] === "notShown") {
+        subscriber.style.visibility = "hidden"
+    } else {
+        subscriber.innerText = info["subscriber"]
+    }
 }
 
 addButton.addEventListener("mouseover", () => {
