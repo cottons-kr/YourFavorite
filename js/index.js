@@ -107,14 +107,12 @@ function addTuber(event) {
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
         const info = buff.toString("utf-8").split("::")
-        
-        subscriber = info[0]
-        channelName = info[1]
-        profileImg = info[2]
+
+        channelName = info[0]
+        profileImg = info[1]
         const json = {
             "channelName": channelName,
             "profileImg": profileImg,
-            "subscriber": subscriber,
             "url": url
         }
         const number = localStorage.length

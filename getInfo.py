@@ -12,13 +12,9 @@ def main(url, type):
 
     if type == "simple":
         driver.get(url)
-        try:
-            subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')[1].replace('명', '')
-        except:
-            subscriber = "notShown"
         channelName = driver.find_element_by_xpath('''//*[@id="channel-name"]''').get_attribute('innerText')
         profileImg = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/yt-img-shadow/img''').get_attribute("src")
-        print(base64.b64encode(f"{subscriber}::{channelName}::{profileImg}".encode("utf-8")))
+        print(base64.b64encode(f"{channelName}::{profileImg}".encode("utf-8")))
         driver.quit()
     
     elif type == "recentVideos":
@@ -39,6 +35,12 @@ def main(url, type):
             videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
         print(base64.b64encode(f"{videoLink}::{videoName}::{videoView}::{videoUpload}".encode("utf-8")))
         driver.quit()
+    
+    elif type == "all":
+        try:
+            subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')[1].replace('명', '')
+        except:
+            subscriber = "notShown"
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
