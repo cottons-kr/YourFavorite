@@ -8,9 +8,9 @@ const addTuberPopupForm = document.querySelector("#addTuberPopupForm")
 const addTuberPopupInput = document.querySelector("#addTuberPopupForm input")
 const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
 const tuberListContainer = document.querySelector("#tuberList")
-const profileImg = document.querySelector("#profileImg img")
-const channelName = document.querySelector("#channelName h1")
-const subscriber = document.querySelector("#subscriber")
+const infoProfileImg = document.querySelector("#infoProfileImg img")
+const infoChannelName = document.querySelector("#infoChannelName h1")
+const infoSubscriber = document.querySelector("#infoSubscriber")
 
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
@@ -29,7 +29,7 @@ function loadList(){
         info = JSON.parse(info)
 
         const channel = document.createElement("div")
-        channel.addEventListener("click", showInfo(i))
+        const channelButton = document.createElement("button")
         const listProfileImg = document.createElement("div")
         const listChannelName = document.createElement("div")
         const img = document.createElement("img")
@@ -39,13 +39,16 @@ function loadList(){
         listProfileImg.setAttribute("id", "listProfileImg")
         listChannelName.setAttribute("id", "listChannelName")
         img.setAttribute("src", info["profileImg"])
+        channelButton.setAttribute("id", "channelButton")
+        channelButton.addEventListener("click", () => {showInfo(i)})
         p.innerText = info["channelName"]
 
         listProfileImg.appendChild(img)
         listChannelName.appendChild(p)
         channel.appendChild(listProfileImg)
         channel.appendChild(listChannelName)
-        tuberListContainer.appendChild(channel)
+        channelButton.appendChild(channel)
+        tuberListContainer.appendChild(channelButton)
      }
 }
 
@@ -54,7 +57,7 @@ function addList(number) {
     info = JSON.parse(info)
 
     const channel = document.createElement("div")
-    channel.addEventListener("click", showInfo(number))
+    const channelButton = document.createElement("button")
     const listProfileImg = document.createElement("div")
     const listChannelName = document.createElement("div")
     const img = document.createElement("img")
@@ -64,13 +67,16 @@ function addList(number) {
     listProfileImg.setAttribute("id", "listProfileImg")
     listChannelName.setAttribute("id", "listChannelName")
     img.setAttribute("src", info["profileImg"])
+    channelButton.setAttribute("id", "channelButton")
+    channelButton.addEventListener("click", () => {showInfo(number)})
     p.innerText = info["channelName"]
 
     listProfileImg.appendChild(img)
     listChannelName.appendChild(p)
     channel.appendChild(listProfileImg)
     channel.appendChild(listChannelName)
-    tuberListContainer.appendChild(channel)
+    channelButton.appendChild(channel)
+    tuberListContainer.appendChild(channelButton)
 }
 
 /*
@@ -114,12 +120,12 @@ function addTuber(event) {
 function showInfo(number) {
     let info = localStorage.getItem(localStorage.key(number.toString()))
     info = JSON.parse(info)
-    profileImg.src = info["profileImg"]
-    channelName.innerText = info["channelName"]
+    infoProfileImg.src = info["profileImg"]
+    infoChannelName.innerText = info["channelName"]
     if (info["subscriber"] === "notShown") {
-        subscriber.style.visibility = "hidden"
+        infoSubscriber.style.visibility = "hidden"
     } else {
-        subscriber.innerText = info["subscriber"]
+        infoSubscriber.innerText = info["subscriber"]
     }
 }
 

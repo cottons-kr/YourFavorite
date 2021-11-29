@@ -27,27 +27,15 @@ body {
     margin-top: 5%;
     margin-bottom: 5%;
 
-    border-radius: 30px / 30px
+    border-radius: 30px / 30px;
 }
 
-
-#tuberList * {
-    width: 90%;
-    background-color: whitesmoke;
-    
-    margin-top: 3%;
-    margin-left: 5%;
-
-    border-radius: 20px / 20px
-}
-
-#channel {
+#channelButton {
     display: block;
 }
 
 #listChannelName {
     width: 50%;
-    font-weight: bold;
 
     display: inline-block;
 }
@@ -57,9 +45,17 @@ body {
     height: 20%;
     display: inline-block;
     vertical-align: top;
-    margin-bottom: 2%;
+    margin: 2%;
+    margin-top: 2.5%;
 
-    border-radius: 20px / 20px
+    border-radius: 20px / 20px;
+}
+
+#listProfileImg img {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 20px / 20px;
 }
 
 .container {
@@ -72,7 +68,7 @@ body {
     margin-top: 5%;
     margin-bottom: 5%;
 
-    border-radius: 30px / 30px
+    border-radius: 30px / 30px;
 }
 
 .addButton {
@@ -82,6 +78,21 @@ body {
 
 #addButtonImg {
     opacity: 0.1;
+}
+
+#channelButton {
+    width: 90%;
+    background-color: whitesmoke;
+    
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    
+    margin-top: 3%;
+    margin-left: 5%;
+
+    border-radius: 20px / 20px;
 }
 
 li {
@@ -124,13 +135,13 @@ li {
     display: inline-block;
 }
 
-#channelName {
+#infoChannelName {
     font-size: 150%;
     margin-top: 3%;
     display: inline-block;
 }
 
-#profileImg {
+#infoProfileImg {
     vertical-align: top;
     position: relative;
     display: inline-block;
@@ -139,11 +150,11 @@ li {
     margin-right: 2%;
 }
 
-#profileImg img {
+#infoProfileImg img {
     border-radius: 20px / 20px
 }
 
-#subscriber {
+#infoSubscriber {
     position: absolute;
     right: 59.9%;
     top: 19.5%;
