@@ -1,5 +1,6 @@
 const { PythonShell } = require("python-shell")
 const os = require('os');
+const { parse } = require("path");
 
 const addButton = document.querySelector("#addButtonImg")
 const container = document.querySelector(".container")
@@ -117,7 +118,8 @@ function showInfo(number) {
 
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
-        const info = buff.toString("utf-8")
+        let info = buff.toString("utf-8")
+        info = JSON.parse(info)
         console.log(info)
     })
 }
