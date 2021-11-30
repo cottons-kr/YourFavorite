@@ -24,7 +24,7 @@ const infoCommunity = document.querySelector(".infoCommunity li")
 const infoAbout = document.querySelector(".infoAbout li")
 
 const userName = os.userInfo().username
-const pythonPath = `./pypy3.8-v7.3.7-win64/python.exe`
+const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
 const option = {
     mode: "text",
     pythonPath: pythonPath,
