@@ -113,7 +113,8 @@ function showInfo(number) {
 
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
-        const info = buff.toString("utf-8").split(":::")
+        const info = buff.toString("utf-8")
+        console.log(info)
     })
 }
 
