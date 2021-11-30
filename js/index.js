@@ -1,6 +1,5 @@
 const { PythonShell } = require("python-shell")
 const os = require('os');
-const { parse } = require("path");
 
 const addButton = document.querySelector("#addButtonImg")
 const container = document.querySelector(".container")
@@ -18,6 +17,7 @@ const infoVideos = document.querySelector(".infoVideos")
 const infoStream = document.querySelector(".infoStream li")
 const infoCommunity = document.querySelector(".infoCommunity")
 const infoAbout = document.querySelector(".infoAbout")
+const infoLoading = document.querySelector("#infoLoading")
 
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
@@ -106,6 +106,7 @@ function addTuber(event) {
 }
 
 function showInfo(number) {
+    infoLoading.style.display = "block"
     let info = localStorage.getItem(localStorage.key(number.toString()))
     info = JSON.parse(info)
     infoProfileImg.src = info["profileImg"]
@@ -121,7 +122,7 @@ function showInfo(number) {
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
         
-        infoSubscriber.innerText = info["subscriber"]
+        //infoSubscriber.innerText = info["subscriber"]
 
         if (info["stream"] !== "CantLoad") {
             for (let stream of info["streams"]) {
@@ -134,7 +135,7 @@ function showInfo(number) {
                 div.appendChild(span)
                 infoStream.appendChild(div)
             }
-            infoStream.style.display = "block"
+            //infoStream.style.display = "block"
         }
     })
 }
