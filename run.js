@@ -9,6 +9,7 @@ server.get('/', function(req,res) {
 
 server.get('/', function(req,res) {
     res.sendFile(__dirname + "/js/index.js")
+    res.sendFile(__dirname + "/js/setting.js")
 })
 
 server.use(express.static(__dirname))
