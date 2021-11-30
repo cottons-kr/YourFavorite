@@ -13,14 +13,18 @@ const infoChannelName = document.querySelector("#infoChannelName h1")
 const infoSubscriber = document.querySelector("#infoSubscriber")
 const noList = document.querySelector("#noList")
 const addTuberLoading = document.querySelector("#addTuberLoading")
-const infoVideos = document.querySelector(".infoVideos")
-const infoStream = document.querySelector(".infoStream li")
-const infoCommunity = document.querySelector(".infoCommunity")
-const infoAbout = document.querySelector(".infoAbout")
+const infoVideosContainer = document.querySelector(".infoVideos")
+const infoStreamContainer = document.querySelector(".infoStream")
+const infoCommunityContainer = document.querySelector(".infoCommunity")
+const infoAboutContainer = document.querySelector(".infoAbout")
 const infoLoading = document.querySelector("#infoLoading")
+const infoVideos = document.querySelector(".infoVideos li")
+const infoStream = document.querySelector(".infoStream li")
+const infoCommunity = document.querySelector(".infoCommunity li")
+const infoAbout = document.querySelector(".infoAbout li")
 
 const userName = os.userInfo().username
-const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
+const pythonPath = `./pypy3.8-v7.3.7-win64/python.exe`
 const option = {
     mode: "text",
     pythonPath: pythonPath,
@@ -106,7 +110,8 @@ function addTuber(event) {
 }
 
 function showInfo(number) {
-    infoLoading.style.display = "block"
+    infoSubscriber.innerText = ""
+    //infoLoading.style.display = "block"
     let info = localStorage.getItem(localStorage.key(number.toString()))
     info = JSON.parse(info)
     infoProfileImg.src = info["profileImg"]
@@ -122,20 +127,26 @@ function showInfo(number) {
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
         
-        //infoSubscriber.innerText = info["subscriber"]
+        infoSubscriber.innerText = info["subscriber"]
 
         if (info["stream"] !== "CantLoad") {
             for (let stream of info["streams"]) {
                 const div = document.createElement("div")
                 const img = document.createElement("img")
                 const span = document.createElement("span")
+                const button = document.createElement("button")
+                const a = document.createElement("a")
+                a.setAttribute("href", stream[1])
+                a.setAttribute("id", "streamButton")
                 img.setAttribute("src", getThumbnail(stream[1]))
                 span.innerText = stream[0]
                 div.appendChild(img)
                 div.appendChild(span)
-                infoStream.appendChild(div)
+                button.appendChild(div)
+                a.appendChild(div)
+                infoStream.appendChild(a)
             }
-            //infoStream.style.display = "block"
+            infoStreamContainer.style.display = "block"
         }
     })
 }
@@ -148,6 +159,48 @@ function toggleNoList() {
 
 function getThumbnail(url) {
     return (`https://i.ytimg.com/vi/${url.replace(/^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/g,"$1")}/original.jpg`)
+}
+
+function getAverageRGB(imgEl) {
+    let blockSize = 5, 
+        defaultRGB = {r:0,g:0,b:0},
+        canvas = document.createElement('canvas'),
+        context = canvas.getContext && canvas.getContext('2d'),
+        data, width, height,
+        i = -4,
+        length,
+        rgb = {r:0,g:0,b:0},
+        count = 0;
+
+    if (!context) {
+        return defaultRGB;
+    }
+
+    height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+    width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+
+    context.drawImage(imgEl, 0, 0);
+
+    try {
+        data = context.getImageData(0, 0, width, height);
+    } catch(e) {
+        return defaultRGB;
+    }
+
+    length = data.data.length;
+
+    while ( (i += blockSize * 4) < length ) {
+        ++count;
+        rgb.r += data.data[i];
+        rgb.g += data.data[i+1];
+        rgb.b += data.data[i+2];
+    }
+
+    rgb.r = ~~(rgb.r/count);
+    rgb.g = ~~(rgb.g/count);
+    rgb.b = ~~(rgb.b/count);
+
+    return rgb;
 }
 
 addButton.addEventListener("mouseover", () => {

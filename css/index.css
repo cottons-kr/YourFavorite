@@ -175,3 +175,28 @@ li {
 .infoVideos, .infoStream, .infoAbout, .infoCommunity{
     display: none;
 }
+
+.infoStream {
+    width: 40%;
+    height: 30%;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    margin-left: 3%;
+    border-radius: 30px / 30px;
+}
+
+.infoStream h2 {
+    color: rgba(255, 99 ,71, 0.8);
+    padding: 5%;
+    padding-top: 4%;
+}
+
+#streamButton {
+    width: 50%;
+    height: 20%;
+}
+
+#streamButton div img {
+    width: 100%;
+    height: 100%;
+}
