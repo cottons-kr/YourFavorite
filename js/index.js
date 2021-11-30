@@ -13,6 +13,10 @@ const infoChannelName = document.querySelector("#infoChannelName h1")
 const infoSubscriber = document.querySelector("#infoSubscriber")
 const noList = document.querySelector("#noList")
 const addTuberLoading = document.querySelector("#addTuberLoading")
+const infoVideos = document.querySelector(".infoVideos")
+const infoStream = document.querySelector(".infoStream")
+const infoCommunity = document.querySelector(".infoCommunity")
+const infoAbout = document.querySelector(".infoAbout")
 
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
