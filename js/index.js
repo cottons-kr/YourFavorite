@@ -134,15 +134,14 @@ function showInfo(number) {
                 const div = document.createElement("div")
                 const img = document.createElement("img")
                 const span = document.createElement("span")
-                const button = document.createElement("button")
                 const a = document.createElement("a")
                 a.setAttribute("href", stream[1])
-                a.setAttribute("id", "streamButton")
+                a.setAttribute("id", "stream")
                 img.setAttribute("src", getThumbnail(stream[1]))
                 span.innerText = stream[0]
+                span.style.display = "none"
                 div.appendChild(img)
                 div.appendChild(span)
-                button.appendChild(div)
                 a.appendChild(div)
                 infoStream.appendChild(a)
             }

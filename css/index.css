@@ -185,18 +185,36 @@ li {
     border-radius: 30px / 30px;
 }
 
+#infoStreamList {
+    margin-left: 5%;
+    width: 90%;
+    height: 60%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
 .infoStream h2 {
     color: rgba(255, 99 ,71, 0.8);
     padding: 5%;
     padding-top: 4%;
 }
 
-#streamButton {
+#stream, #stream img{
     width: 50%;
-    height: 20%;
+    height: 27%;
 }
 
-#streamButton div img {
+a {
+    text-decoration: none;
+}
+
+#stream ul {
     width: 100%;
     height: 100%;
+    list-style: none;
+}
+
+#stream ul li, #stream div {
+    display: inline-block;
 }
