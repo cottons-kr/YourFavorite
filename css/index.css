@@ -171,3 +171,7 @@ li {
 #showLoading {
     display: block;
 }
+
+.infoVideos, .infoStream, .infoAbout, .infoCommunity{
+    display: none;
+}

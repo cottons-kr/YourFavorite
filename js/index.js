@@ -15,7 +15,7 @@ const infoSubscriber = document.querySelector("#infoSubscriber")
 const noList = document.querySelector("#noList")
 const addTuberLoading = document.querySelector("#addTuberLoading")
 const infoVideos = document.querySelector(".infoVideos")
-const infoStream = document.querySelector(".infoStream")
+const infoStream = document.querySelector(".infoStream li")
 const infoCommunity = document.querySelector(".infoCommunity")
 const infoAbout = document.querySelector(".infoAbout")
 
@@ -120,7 +120,22 @@ function showInfo(number) {
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
-        console.log(info)
+        
+        infoSubscriber.innerText = info["subscriber"]
+
+        if (info["stream"] !== "CantLoad") {
+            for (let stream of info["streams"]) {
+                const div = document.createElement("div")
+                const img = document.createElement("img")
+                const span = document.createElement("span")
+                img.setAttribute("src", getThumbnail(stream[1]))
+                span.innerText = stream[0]
+                div.appendChild(img)
+                div.appendChild(span)
+                infoStream.appendChild(div)
+            }
+            infoStream.style.display = "block"
+        }
     })
 }
 
@@ -128,6 +143,10 @@ function toggleNoList() {
     if (noList.style.display !== "none" && localStorage.length !== 0) {
         noList.style.display = "none"
     }
+}
+
+function getThumbnail(url) {
+    return (`https://i.ytimg.com/vi/${url.replace(/^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/g,"$1")}/original.jpg`)
 }
 
 addButton.addEventListener("mouseover", () => {

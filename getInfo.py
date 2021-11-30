@@ -29,15 +29,17 @@ def main(url, type):
             subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')[1].replace('명', '')
         except:
             subscriber = "CantLoad"
+        streams = []
         try:
             streamDiv = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse[1]/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer[1]/div[3]/ytd-channel-featured-content-renderer/div[2]''')
             streamDiv = streamDiv.find_elements_by_tag_name("ytd-video-renderer")
-            streams = []
         except:
             streams = "CantLoad"
         if streams != "CantLoad":
             for stream in streamDiv:
-                streams.append(stream.find_element_by_xpath('''.//*[@id="thumbnail"]''').get_attribute("href"))
+                link = stream.find_element_by_xpath('''.//*[@id="thumbnail"]''').get_attribute("href")
+                name = stream.find_element_by_xpath('''.//*[@id="video-title"]/yt-formatted-string''').get_attribute("innerText")
+                streams.append([name, link])
 
         driver.get(url+"/videos")
         driver.execute_script("window.scrollTo(0, 999999999)")
