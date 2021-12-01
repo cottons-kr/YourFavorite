@@ -217,4 +217,3 @@ addTuberPopupExit.addEventListener("click", () => {
 addTuberPopupForm.addEventListener("submit", addTuber)
 
 loadList()
-
