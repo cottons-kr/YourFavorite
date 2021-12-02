@@ -207,13 +207,8 @@ li {
     white-space: nowrap;
 }
 
-#infoStreamList li {
-    list-style-type: none;
-    display: inline-block;
-}
-
 ::-webkit-scrollbar {
-    height: 10px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -237,12 +232,23 @@ li {
 }
 
 #streamThumbnail {
-    width: 70%;
+    width: 135%;
     border-radius: 10px;
-    position: relative;
 }
 
 #streamName {
     width: 100%;
-    height: 100%;
+}
+
+ul {
+    width: 200%;
+    padding: 0%;
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+#infoStreamList ul li {
+    flex: 1;
+    margin-right: 15px;
 }
