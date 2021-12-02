@@ -179,7 +179,7 @@ li {
     display: block;
 }
 
-.infoAbout, .infoCommunity{
+.infoAbout {
     display: none;
 }
 
@@ -187,6 +187,8 @@ li {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .infoStream {
@@ -255,7 +257,6 @@ li {
     height: 73%;
     background-color: rgba(255, 255, 255, 0.6);
 
-    margin-left: 3%;
     border-radius: 30px / 30px;
 }
 
@@ -296,4 +297,55 @@ li {
 
 #video:not(:last-child) {
     margin-right: 1%;
+}
+
+.infoCommunity {
+    width: 35%;
+    height: 34.5%;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    margin-left: 3%;
+    margin-top: 2%;
+    border-radius: 30px / 30px;
+}
+
+#infoCommunityRoot {
+    width: 100%;
+    height: 90%;
+}
+
+#infoCommunityTitle {
+    margin-left: 5%;
+}
+
+#infoCommunityTitle h2 {
+    color: rgba(255, 99 ,71, 0.8);
+    text-align: left;
+}
+
+
+#infoCommunityList {
+    margin-top: 2%;
+    margin-left: 5%;
+    width: 90%;
+    height: 80%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#community {
+    min-width: 60%;
+    height: 95%;
+    background-color: rgba(255, 99 ,71, 0.25);
+    border-radius: 20px/ 20px;
+}
+
+#community p {
+    padding: 3%;
+}
+
+#community:not(:last-child) {
+    margin-right: 4%;
 }
