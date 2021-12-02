@@ -204,7 +204,8 @@ li {
     height: 80%;
     overflow-x: auto;
     overflow-y: hidden;
-    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 ::-webkit-scrollbar {
@@ -232,7 +233,7 @@ li {
 }
 
 #streamThumbnail {
-    width: 135%;
+    height: 97%;
     border-radius: 10px;
 }
 
@@ -240,15 +241,7 @@ li {
     width: 100%;
 }
 
-ul {
-    width: 200%;
-    padding: 0%;
-    display: flex;
-    justify-content: space-between;
-    flex-shrink: 0;
-}
-
-#infoStreamList ul li {
-    flex: 1;
-    margin-right: 15px;
+#stream:not(:last-child) {
+    margin-right: 5%;
+    flex-shrink: 1;
 }
