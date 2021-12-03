@@ -1,8 +1,8 @@
 const { PythonShell } = require("python-shell")
 const os = require('os');
+const { info } = require("console");
 
 const addButton = document.querySelector("#addButtonImg")
-const container = document.querySelector(".container")
 const addTuberPopup = document.querySelector(".addTuberPopup")
 const addTuberPopupForm = document.querySelector("#addTuberPopupForm")
 const addTuberPopupInput = document.querySelector("#addTuberPopupForm input")
@@ -13,15 +13,12 @@ const infoChannelName = document.querySelector("#infoChannelName h1")
 const infoSubscriber = document.querySelector("#infoSubscriber")
 const noList = document.querySelector("#noList")
 const addTuberLoading = document.querySelector("#addTuberLoading")
-const infoVideosContainer = document.querySelector(".infoVideos")
 const infoStreamContainer = document.querySelector(".infoStream")
-const infoCommunityContainer = document.querySelector(".infoCommunity")
-const infoAboutContainer = document.querySelector(".infoAbout")
-const infoLoading = document.querySelector("#infoLoading")
-const infoVideos = document.querySelector(".infoVideos li")
 const infoStream = document.querySelector(".infoStream li")
-const infoCommunity = document.querySelector(".infoCommunity li")
-const infoAbout = document.querySelector(".infoAbout li")
+const infoAbout = document.querySelector("#infoAbout")
+const infoAboutMoreButton = document.querySelector("#infoAboutMoreButton")
+const infoAboutMorePopup = document.querySelector("#infoAboutMorePopup")
+const infoAboutMorePopupExitButton = document.querySelector("#infoAboutMorePopupExitButton")
 
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
@@ -32,7 +29,6 @@ const option = {
     scriptPath: "",
     encoding: "utf8"
 }
-
 
 function loadList(){
     for(let i = 0; i < localStorage.length; i++){
@@ -202,6 +198,10 @@ function getAverageRGB(imgEl) {
     return rgb;
 }
 
+function showMoreAbout() {
+    infoAboutMorePopup.style.display = "block"
+}
+
 addButton.addEventListener("mouseover", () => {
     addButton.style.opacity = 1
 })
@@ -215,5 +215,12 @@ addTuberPopupExit.addEventListener("click", () => {
     addTuberPopup.style.visibility = "hidden"
 })
 addTuberPopupForm.addEventListener("submit", addTuber)
+infoAboutMoreButton.addEventListener("click", showMoreAbout)
+infoAboutMorePopupExitButton.addEventListener("click", () => {
+    infoAboutMorePopup.style.display = "none"
+})
 
 loadList()
+if (infoAbout.innerText.length >= 10) {
+    infoAbout.innerText = `${infoAbout.innerText.substr(0, 20)}...`
+}

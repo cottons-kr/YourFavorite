@@ -1,12 +1,11 @@
 from requests.api import get
 from selenium import webdriver
-#from bs4 import BeautifulSoup
 import sys
 import time
 import base64
 import json
 
-waitTime = 2
+waitTime = 100
 
 def main(url, type):
     options = webdriver.ChromeOptions()
@@ -15,7 +14,7 @@ def main(url, type):
 
     if type == "simple":
         driver.get(url)
-        time.sleep(waitTime)
+        driver.implicitly_wait(waitTime)
         channelName = driver.find_element_by_xpath('''//*[@id="channel-name"]''').get_attribute('innerText')
         profileImg = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/yt-img-shadow/img''').get_attribute("src")
         print(base64.b64encode(f"{channelName}::{profileImg}".encode("utf-8")))
@@ -24,7 +23,7 @@ def main(url, type):
     elif type == "all":
         driver.get(url)
         driver.execute_script("window.scrollTo(0, 999999999)")
-        time.sleep(waitTime)
+        driver.implicitly_wait(waitTime)
         try:
             subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')[1].replace('명', '')
         except:
@@ -44,7 +43,7 @@ def main(url, type):
         driver.get(url+"/videos")
         driver.execute_script("window.scrollTo(0, 999999999)")
         videos = []
-        time.sleep(waitTime)
+        driver.implicitly_wait(waitTime)
         try:
             recentVideos = driver.find_element_by_xpath("/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-grid-renderer/div[1]")
             recentVideos = recentVideos.find_elements_by_tag_name("ytd-grid-video-renderer")
@@ -62,7 +61,7 @@ def main(url, type):
         driver.get(url+"/community")
         driver.execute_script("window.scrollTo(0, 999999999)")
         communitys = []
-        time.sleep(waitTime)
+        driver.implicitly_wait(waitTime)
         try:
             communityLogs = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-backstage-items/ytd-item-section-renderer/div[3]''')
             communityLogs = communityLogs.find_elements_by_tag_name("ytd-backstage-post-thread-renderer")
@@ -78,7 +77,7 @@ def main(url, type):
         
         driver.get(url+"/about")
         driver.execute_script("window.scrollTo(0, 999999999)")
-        time.sleep(waitTime)
+        driver.implicitly_wait(waitTime)
         try:
             about = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[1]/div[1]/yt-formatted-string[2]''').get_attribute("innerText")
         except:
@@ -117,6 +116,7 @@ def main(url, type):
         }
         jsonString = json.dumps(jsonData, ensure_ascii=False)
         print(base64.b64encode(jsonString.encode("utf-8")))
+        #print(jsonString)
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])

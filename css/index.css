@@ -165,7 +165,7 @@ li {
 }
 
 #infoProfileImg img {
-    border-radius: 20px / 20px
+    border-radius: 50% / 50%;
 }
 
 #infoSubscriber {
@@ -187,7 +187,52 @@ li {
 }
 
 .infoAbout {
+    float: right;
+    display: inline-block;
+    width: 20%;
+    height: 17%;
+
+    margin: 2%;
+}
+
+#infoAboutRoot {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#infoAboutMoreButton {
+    margin: 0%;
+    padding: 0%;
+    margin-right: 20%;
+    background: rgba(255, 99 ,71, 0);
+}
+
+#infoAboutMorePopup {
     display: none;
+    position: absolute;
+    width: 20%;
+    background-color: whitesmoke;
+    border-radius: 20px / 20px;
+
+    margin-left: 77%;
+    margin-top: 8%;
+}
+
+#infoAboutMorePopupExitButton {
+    margin-left: 3%;
+    margin-top: 3%;
+}
+
+#infoAboutmore {
+    margin: 3%;
+}
+
+#infoAboutImg, #infoAbout, #infoTotalViewImg, #infoTotalView, #infoLocationImg, #infoLocation, #infoJoinDateImg, #infoJoinDate {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#infoAbout, #infoTotalView, #infoLocation, #infoJoinDate {
+    margin: 2.5%;
 }
 
 .infoRoot {
@@ -358,4 +403,3 @@ li {
 #community:not(:last-child) {
     margin-right: 4%;
 }
-
