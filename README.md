@@ -8,8 +8,8 @@ Get easier access to your favorite YouTubers.
 
 [한국어 (Korean)](https://github.com/cottons-kr/YourFavorite/blob/main/README-kr.md)
 
-# PatchNote
-[한국어 (Korean)](https://github.com/cottons-kr/YourFavorite/blob/main/Patchnote-kr.md)
+# ReleaseNote
+[한국어 (Korean)](https://github.com/cottons-kr/YourFavorite/blob/main/Releasenote-kr.md)
 
 # License
 [MIT License](https://github.com/cottons-kr/YourFavorite/blob/main/LICENSE)
