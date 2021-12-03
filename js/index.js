@@ -152,6 +152,9 @@ function showInfo(number) {
         }
 
         for (let video of info["videos"]) {
+            if (video[1] === undefined) {
+                break
+            }
             const div = document.createElement("div")
             const a = document.createElement("a")
             const img = document.createElement("img")
@@ -166,6 +169,9 @@ function showInfo(number) {
         }
 
         for (let community of info["communitys"]) {
+            if (community[0] === undefined) {
+                break
+            }
             const div = document.createElement("div")
             const p = document.createElement("p")
             div.setAttribute("id", "community")
@@ -175,17 +181,15 @@ function showInfo(number) {
             infoCommunityList.appendChild(div)
         }
 
-        if (info["about"] !== "CantLoad") {
-            const about = info["about"]
-            infoAbout.innerText = about[0]
-            if (infoAbout.innerText.length >= 10) {
-                infoAbout.innerText = `${infoAbout.innerText.substr(0, 20)}...`
-            }
-            infoTotalView.innerText = about[3]
-            infoLocation.innerText = about[1]
-            infoJoinDate.innerText = about[2]
-            infoAboutmore.innerText = about[0]
+        const about = info["about"]
+        infoAbout.innerText = about[0]
+        if (infoAbout.innerText.length > 10) {
+            infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
         }
+        infoTotalView.innerText = about[3]
+        infoLocation.innerText = about[1]
+        infoJoinDate.innerText = about[2]
+        infoAboutmore.innerText = about[0]
     })
 }
 
