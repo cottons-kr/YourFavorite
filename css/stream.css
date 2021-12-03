@@ -29,20 +29,12 @@
     flex-shrink: 1;
 }
 
-#thumbnailEffect {
-    background: linear-gradient(rgba(0, 0, 0, 0), 8%, white);
-}
-
-#streamThumbnailRoot {
-    height: 98%;
-}
-
 #streamThumbnail {
     height: 100%;
     border-radius: 10px;
 }
 
-#streamRoot {
+#stream {
+    width: 120%;
     height: 97%;
-    position: relative;
 }
