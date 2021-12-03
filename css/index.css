@@ -10,6 +10,13 @@ html {
     font-family: Arial;
 }
 
+@font-face {
+    font-family: 'KOTRA_BOLD-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;
     background-position: 0% 100%;
@@ -349,3 +356,4 @@ li {
 #community:not(:last-child) {
     margin-right: 4%;
 }
+
