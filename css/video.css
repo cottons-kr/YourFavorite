@@ -1,0 +1,46 @@
+.infoVideos {
+    width: 56%;
+    height: 73%;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    border-radius: 30px / 30px;
+}
+
+#infoVideosRoot {
+    width: 100%;
+    height: 90%;
+}
+
+#infoVideosTitle {
+    margin-left: 5%;
+}
+
+#infoVideosTitle h2 {
+    color: rgba(255, 99 ,71, 0.8);
+    text-align: left;
+}
+
+#infoVideosList {
+    margin-top: 2%;
+    margin-left: 5%;
+    width: 90%;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: show;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#videoThumbnail {
+    height: 100%;
+    border-radius: 10px;
+}
+
+#video {
+    margin-top: 1%;
+    height: 26.2%;
+}
+
+#video:not(:last-child) {
+    margin-right: 1%;
+}

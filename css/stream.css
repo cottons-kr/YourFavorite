@@ -38,3 +38,14 @@
     width: 120%;
     height: 97%;
 }
+
+#infoStreamTitle {
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+#infoStreamTitle h2 {
+    color: rgba(255, 99 ,71, 0.8);
+
+    text-align: left;
+}
