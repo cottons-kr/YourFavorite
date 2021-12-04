@@ -28,7 +28,10 @@ const infoAboutImg = document.querySelector("#infoAboutImg")
 const infoTotalViewImg = document.querySelector("#infoTotalViewImg")
 const infoLocationImg = document.querySelector("#infoLocationImg")
 const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
+const infoRoot = document.querySelector(".infoRoot")
+const pleaseSelect = document.querySelector("#pleaseSelect")
 
+let globalInterval = null
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
 const option = {
@@ -115,6 +118,10 @@ function addTuber(event) {
 }
 
 function showInfo(number) {
+    if (globalInterval !== null) {
+        clearInterval(globalInterval)
+    }
+
     infoSubscriber.innerText = ""
     infoChannelName.innerText = ""
     infoProfileImg.src = ""
@@ -125,6 +132,8 @@ function showInfo(number) {
     infoProfileImg.src = info["profileImg"]
     infoChannelName.innerText = info["channelName"]
     option.args = [info["url"], "all"]
+    pleaseSelect.style.display = "none"
+    infoRoot.style.display = "flex"
     PythonShell.run("getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
@@ -199,10 +208,97 @@ function showInfo(number) {
         infoLocation.innerText = about[1]
         infoJoinDate.innerText = about[2]
         infoAboutmore.innerText = about[0]
+        globalInterval = setInterval(autoRefresh, 30000)
+    })
+}
+
+function autoRefresh() {
+    console.log("Refresh!")
+    PythonShell.run("getInfo.py", option, (error, result) => {
+        if (error) {
+            console.log(error)
+        }
+
+        const data = result[0].replace("b'", '').replace("'", '')
+        const buff = Buffer.from(data, "base64")
+        let info = buff.toString("utf-8")
+        info = JSON.parse(info)
+
+        while (infoStreamList.hasChildNodes()) {
+            infoStreamList.removeChild(infoStreamList.firstChild)
+        }
+        while (infoVideosList.hasChildNodes()) {
+            infoVideosList.removeChild(infoVideosList.firstChild)
+        }
+        while (infoCommunityList.hasChildNodes()) {
+            infoCommunityList.removeChild(infoCommunityList.firstChild)
+        }
+        
+        infoSubscriber.innerText = info["subscriber"]
+
+        for (let stream of info["streams"]) {
+            if (stream[1] === undefined) {
+                break
+            }
+            const div = document.createElement("div")
+            const a = document.createElement("a")
+            const img = document.createElement("img")
+            div.setAttribute("id", "stream")
+            a.setAttribute("href", stream[1])
+            a.setAttribute("id", "streamLink")
+            img.setAttribute("src", getThumbnail(stream[1]))
+            img.setAttribute("title", stream[0])
+            img.setAttribute("id", "streamThumbnail")
+            a.appendChild(img)
+            div.appendChild(a)
+            infoStreamList.appendChild(div)
+        }
+
+        for (let video of info["videos"]) {
+            if (video[1] === undefined) {
+                break
+            }
+            const div = document.createElement("div")
+            const a = document.createElement("a")
+            const img = document.createElement("img")
+            div.setAttribute("id", "video")
+            a.setAttribute("href", video[1])
+            img.setAttribute("src", getThumbnail(video[1]))
+            img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)
+            img.setAttribute("id", "videoThumbnail")
+            a.appendChild(img)
+            div.appendChild(a)
+            infoVideosList.appendChild(div)
+        }
+
+        for (let community of info["communitys"]) {
+            if (community[0] === undefined) {
+                break
+            }
+            const div = document.createElement("div")
+            const p = document.createElement("p")
+            div.setAttribute("id", "community")
+            div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
+            p.innerText = community[0]
+            div.appendChild(p)
+            infoCommunityList.appendChild(div)
+        }
+
+        const about = info["about"]
+        infoAbout.innerText = about[0]
+        if (infoAbout.innerText.length > 10) {
+            infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
+        }
+
+        infoTotalView.innerText = about[3]
+        infoLocation.innerText = about[1]
+        infoJoinDate.innerText = about[2]
+        infoAboutmore.innerText = about[0]
     })
 }
 
 function clearInfo() {
+    infoRoot.style.display = "none"
     while (infoStreamList.hasChildNodes()) {
         infoStreamList.removeChild(infoStreamList.firstChild)
     }
@@ -298,4 +394,5 @@ infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.style.display = "none"
 })
 
+clearInfo()
 loadList()
