@@ -216,6 +216,7 @@ function clearInfo() {
     infoLocation.innerText = ""
     infoJoinDate.innerText = ""
     infoAboutmore.innerText = ""
+    infoAbout.innerText = ""
 
     infoAboutImg.style.visibility = "hidden"
     infoTotalViewImg.style.visibility = "hidden"
