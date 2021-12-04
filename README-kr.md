@@ -8,7 +8,7 @@
 4. 직관적이고 깔끔한 디자인
 
 # 요구사양
-OS : Windows 10 64bit 이상, Linux Kernel 4.x.x 64bit 이상
+OS : Windows 10/11 64bit
 
 CPU : 1Ghz 듀얼코어 이상, x64 아키텍처
 
@@ -27,8 +27,17 @@ Python 3.7 이상 권장
 - requests
 - bs4
 
-# QnA
+# 설치법
+1. [다운로드 링크](https://github.com/cottons-kr/YourFavorite/releases)에서 최신 릴리즈를 받아주세요.
+2. 압축파일을 푼후 "YourFavorite Preview Setup 0.0.1.exe"를 실행한뒤 설치해주세요.
+3. Chrome 브라우저를 설치해주세요. (ChromeSetup.exe 실행)
+4. Python-3.10.0-amd64.exe을 실행해주세요.
+5. 밑에 "Add Python 3.10 to PATH"에 체크해주고 설치해주세요.
+6. 윈도우 버튼에서 우클릭을 한뒤 
+7. "C:\Program Files\YourFavorite Preview" 디렉터리를 열어준뒤
+8. "chromedriver.exe", "getInfo.py" 파일을 이동시켜주세요.
 
+# QnA
 - Q : 로딩이 조금밖에 안됐어요.
 - A : 컴퓨터의 사양, 인터넷 환경에 따라 불러오는 양이 달라질 수 있습니다.
 -----
@@ -39,4 +48,4 @@ Python 3.7 이상 권장
 - A : 없으나 Github에서 다운로드 받아야 안전합니다. [다운로드 링크](https://github.com/cottons-kr/YourFavorite/releases)
 -----
 - Q : 버그가 있어요.
-- A : 아직 개발중이기 때문에 많이 있을 수 있습니다. [Issues](https://github.com/cottons-kr/YourFavorite/issues) 탭에 문의해주세요.
+- A : 아직 개발중이기 때문에 많이 있을 수 있습니다. [Issues](https://github.com/cottons-kr/YourFavorite/issues) 탭에 문의해주세요. (로그인 필요)
