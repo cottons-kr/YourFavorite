@@ -1,0 +1,64 @@
+{
+  "name": "yourfavorite",
+  "version": "0.0.1",
+  "description": "Get easier access to your favorite YouTubers",
+  "main": "run.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cottons-kr/YourFavorite.git"
+  },
+  "author": "virtuallab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cottons-kr/YourFavorite/issues"
+  },
+  "homepage": "https://github.com/cottons-kr/YourFavorite#readme",
+  "devDependencies": {
+    "electron": "^16.0.2",
+    "electron-builder": "^22.14.5",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "python-shell": "^3.0.1"
+  },
+  "build": {
+    "productName": "YourFavorite Preview",
+    "appId": "com.virtuallab.yf.electron",
+    "asar": true,
+    "protocols": {
+      "name": "YourFavorite Preview",
+      "schemes": [
+        "YourFavorite Preview"
+      ]
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "zip",
+        "tar.gz"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "buildResources": "resources/installer/",
+      "output": "dist/",
+      "app": "."
+    }
+  }
+}
