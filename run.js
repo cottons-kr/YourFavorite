@@ -18,9 +18,7 @@ server.listen(9999)
 app.on('ready', () => {
     const win = new BrowserWindow({
         width: 1920,
-        minWidth: 800,
         height: 1080,
-        minHeight: 600,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false

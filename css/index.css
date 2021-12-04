@@ -257,6 +257,10 @@ li {
     margin: 2.5%;
 }
 
+#infoAbout {
+    white-space: nowrap;
+}
+
 .infoRoot {
     width: 100%;
     height: 100%;

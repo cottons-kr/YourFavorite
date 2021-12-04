@@ -224,8 +224,8 @@ function showInfo(number) {
 
         const about = info["about"]
         infoAbout.innerText = about[0]
-        if (infoAbout.innerText.length > 10) {
-            infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
+        if (infoAbout.innerText.length > 30) {
+            infoAbout.innerText = `${infoAbout.innerText.substr(0, 30)}...`
         }
         infoJoinDateImg.style.visibility = "visible"
         infoLocationImg.style.visibility = "visible"
