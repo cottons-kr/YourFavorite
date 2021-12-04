@@ -1,6 +1,7 @@
 const { PythonShell } = require("python-shell")
 const os = require('os');
 const { info } = require("console");
+const { app } = require("electron");
 
 const addButton = document.querySelector("#addButtonImg")
 const addTuberPopup = document.querySelector(".addTuberPopup")
@@ -30,6 +31,7 @@ const infoLocationImg = document.querySelector("#infoLocationImg")
 const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
 const infoRoot = document.querySelector(".infoRoot")
 const pleaseSelect = document.querySelector("#pleaseSelect")
+const programExitButton = document.querySelector("#programExitButton")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -419,6 +421,9 @@ addTuberPopupForm.addEventListener("submit", addTuber)
 infoAboutMoreButton.addEventListener("click", showMoreAbout)
 infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.style.display = "none"
+})
+programExitButton.addEventListener("click", () => {
+    window.close()
 })
 
 clearInfo()

@@ -21,12 +21,12 @@ app.on('ready', () => {
         minWidth: 800,
         height: 1080,
         minHeight: 600,
-        show: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
     })
+    win.setMenuBarVisibility(false)
     win.loadURL("http://127.0.0.1:9999")
     win.once("ready-to-show", () => {
         win.show()
