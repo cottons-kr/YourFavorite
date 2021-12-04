@@ -28,7 +28,7 @@ Python 3.7 이상 권장
 - bs4
 
 # 설치법
-1. [다운로드 링크](https://github.com/cottons-kr/YourFavorite/releases)에서 최신 릴리즈를 받아주세요.
+1. [릴리즈](https://github.com/cottons-kr/YourFavorite/releases)에서 최신 릴리즈를 받아주세요.
 2. 압축파일을 푼후 "YourFavorite Preview Setup 0.0.1.exe"를 실행한뒤 설치해주세요.
 3. Chrome 브라우저를 설치해주세요. (ChromeSetup.exe 실행)
 4. Python-3.10.0-amd64.exe을 실행해주세요.
