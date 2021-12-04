@@ -32,6 +32,7 @@ const infoRoot = document.querySelector(".infoRoot")
 const pleaseSelect = document.querySelector("#pleaseSelect")
 
 let globalInterval = null
+let loadingTuber = null
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
 const option = {
@@ -134,6 +135,10 @@ function removeTuber(number) {
 }
 
 function showInfo(number) {
+    if (loadingTuber !== null) {
+        return null
+    }
+    loadingTuber = number
     if (globalInterval !== null) {
         clearInterval(globalInterval)
     }
@@ -153,6 +158,9 @@ function showInfo(number) {
     PythonShell.run("getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
+        }
+        if (loadingTuber !== number) {
+            return null
         }
 
         const data = result[0].replace("b'", '').replace("'", '')
@@ -225,6 +233,7 @@ function showInfo(number) {
         infoJoinDate.innerText = about[2]
         infoAboutmore.innerText = about[0]
         globalInterval = setInterval(autoRefresh, 30000)
+        loadingTuber = null
     })
 }
 
