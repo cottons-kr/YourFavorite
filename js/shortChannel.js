@@ -1,0 +1,21 @@
+{
+    "Gawr Gura Ch. hololive-EN": "Gawr Gura",
+    "Watson Amelia Ch. hololive-EN": "Watson Amelia",
+    "비디오머그 - VIDEOMUG": "비디오머그",
+    "마플 마인크래프트 채널": "마플",
+    "연합뉴스 Yonhapnews": "연합뉴스",
+    "GreatMoonAroma 대월향": "대월향",
+    "hololive ホロライブ - VTuber Group": "hololive ホロライブ",
+    "토미의 도쿄일상툰 トミの東京日常まんが": "토미의 도쿄일상툰",
+    "영국남자 Korean Englishman": "영국남자",
+    "Hoya choe -호야초 Blender3D Channel": "Hoya choe - 호야초",
+    "스브스뉴스 SUBUSU NEWS": "스브스뉴스",
+    "Netflix Korea 넷플릭스 코리아": "넷플릭스 코리아",
+    "엠뚜루마뚜루 : MBC 공식 종합 채널": "엠뚜루마뚜루",
+    "딩가딩가 스튜디오 DGDG Studio": "딩가딩가 스튜디오",
+    "안될공학 - IT 테크 신기술": "안될공학",
+    "무비 다이어리_MOVIE DIARY": "무비 다이어리",
+    "스포츠머그 - SPORTSMUG": "스포츠머그",
+    "DREAM HAUS 드림 하우스": "드림 하우스",
+    "WarLeaks - Military Blog": "WarLeaks"
+}
