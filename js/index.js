@@ -31,6 +31,8 @@ const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
 const infoRoot = document.querySelector(".infoRoot")
 const pleaseSelect = document.querySelector("#pleaseSelect")
 
+/*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
+loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 let globalInterval = null
 let loadingTuber = null
 const userName = os.userInfo().username
