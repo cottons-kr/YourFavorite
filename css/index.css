@@ -50,6 +50,8 @@ button {
 
 #listChannelName {
     width: 50%;
+    margin-top: 9%;
+    font-weight: 70%;
 
     display: inline-block;
 }
@@ -69,7 +71,12 @@ button {
     width: 100%;
     height: 100%;
 
-    border-radius: 20px / 20px;
+    border-radius: 50% / 50%;
+}
+
+#listDeleteButton {
+    position: absolute;
+    margin-top: 8%;
 }
 
 .container {

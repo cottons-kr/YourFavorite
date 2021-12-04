@@ -56,21 +56,29 @@ function addList(number) {
     const channelButton = document.createElement("button")
     const listProfileImg = document.createElement("div")
     const listChannelName = document.createElement("div")
+    const listDeleteButton = document.createElement("button")
+    const deleteButtonImg = document.createElement("img")
     const img = document.createElement("img")
-    const p = document.createElement("p")
+    const h2 = document.createElement("h2")
 
     channel.setAttribute("id", info["channelName"])
     listProfileImg.setAttribute("id", "listProfileImg")
     listChannelName.setAttribute("id", "listChannelName")
+    listDeleteButton.setAttribute("id", "listDeleteButton")
+    deleteButtonImg.setAttribute("id", "deleteButtonImg")
     img.setAttribute("src", info["profileImg"])
     channelButton.setAttribute("id", "channelButton")
+    deleteButtonImg.setAttribute("src", "../resource/x-circle.svg")
     channelButton.addEventListener("click", () => {showInfo(number)})
-    p.innerText = info["channelName"]
+    listDeleteButton.addEventListener("click", () => {removeTuber(number)})
+    h2.innerText = info["channelName"]
 
     listProfileImg.appendChild(img)
-    listChannelName.appendChild(p)
+    listChannelName.appendChild(h2)
+    listDeleteButton.appendChild(deleteButtonImg)
     channel.appendChild(listProfileImg)
     channel.appendChild(listChannelName)
+    channel.appendChild(listDeleteButton)
     channelButton.appendChild(channel)
     tuberListContainer.appendChild(channelButton)
     toggleNoList()
@@ -115,6 +123,14 @@ function addTuber(event) {
         addTuberPopupForm.style.display = "block"
         addTuberLoading.style.display = "none"
     })
+}
+
+function removeTuber(number) {
+    localStorage.removeItem(number)
+    while (tuberListContainer.hasChildNodes()) {
+        tuberListContainer.removeChild(tuberListContainer.firstChild)
+    }
+    loadList()
 }
 
 function showInfo(number) {
@@ -396,3 +412,6 @@ infoAboutMorePopupExitButton.addEventListener("click", () => {
 
 clearInfo()
 loadList()
+if (localStorage.length === 0) {
+    pleaseSelect.style.display = "none"
+}
