@@ -47,7 +47,7 @@ const option = {
     encoding: "utf8"
 }
 
-function loadList(){
+function loadList(callback){
     for(let i = 0; i < localStorage.length; i++){
         addList(i)
      }
@@ -135,7 +135,6 @@ function removeTuber(number) {
     while (tuberListContainer.hasChildNodes()) {
         tuberListContainer.removeChild(tuberListContainer.firstChild)
     }
-    loadList()
 }
 
 function showInfo(number) {
@@ -224,8 +223,8 @@ function showInfo(number) {
 
         const about = info["about"]
         infoAbout.innerText = about[0]
-        if (infoAbout.innerText.length > 30) {
-            infoAbout.innerText = `${infoAbout.innerText.substr(0, 30)}...`
+        if (infoAbout.innerText.length > 10) {
+            infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
         }
         infoJoinDateImg.style.visibility = "visible"
         infoLocationImg.style.visibility = "visible"

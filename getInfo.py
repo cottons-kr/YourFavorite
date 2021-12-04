@@ -7,7 +7,7 @@ import json
 
 waitTime = 2
 
-def main(url, type):
+def main(url, type, debug=False):
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
     driver = webdriver.Chrome(executable_path='chromedriver', options=options)
@@ -55,7 +55,10 @@ def main(url, type):
                 videoLink = video.find_element_by_id("video-title").get_attribute("href")
                 videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
                 videoName = videoInfo.split(" 게시자: ")[0]
-                videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+                try:
+                    videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+                except ValueError:
+                    continue
                 videos.append([videoName, videoLink, videoUpload, videoView])
         
         driver.get(url+"/community")
@@ -115,8 +118,13 @@ def main(url, type):
             "about": about
         }
         jsonString = json.dumps(jsonData, ensure_ascii=False)
-        print(base64.b64encode(jsonString.encode("utf-8")))
-        #print(jsonString)
+        if debug == False:
+            print(base64.b64encode(jsonString.encode("utf-8")))
+        else:
+            print(jsonString)
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    try:
+        main(sys.argv[1], sys.argv[2], sys.argv[3])
+    except IndexError:
+        main(sys.argv[1], sys.argv[2])
