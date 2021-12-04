@@ -47,10 +47,10 @@ const option = {
     encoding: "utf8"
 }
 
-function loadList(callback){
+function loadList(){
     for(let i = 0; i < localStorage.length; i++){
         addList(i)
-     }
+    }
 }
 
 function addList(number) {
@@ -132,9 +132,6 @@ function addTuber(event) {
 
 function removeTuber(number) {
     localStorage.removeItem(number)
-    while (tuberListContainer.hasChildNodes()) {
-        tuberListContainer.removeChild(tuberListContainer.firstChild)
-    }
 }
 
 function showInfo(number) {
@@ -426,7 +423,7 @@ programExitButton.addEventListener("click", () => {
 })
 
 clearInfo()
-loadList()
+loadList(true)
 if (localStorage.length === 0) {
     pleaseSelect.style.display = "none"
 }
