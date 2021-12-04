@@ -33,9 +33,11 @@ Python 3.7 이상 권장
 3. Chrome 브라우저를 설치해주세요. (ChromeSetup.exe 실행)
 4. Python-3.10.0-amd64.exe을 실행해주세요.
 5. 밑에 "Add Python 3.10 to PATH"에 체크해주고 설치해주세요.
-6. 윈도우 버튼에서 우클릭을 한뒤 
-7. "C:\Program Files\YourFavorite Preview" 디렉터리를 열어준뒤
-8. "chromedriver.exe", "getInfo.py" 파일을 이동시켜주세요.
+6. 윈도우 버튼에서 우클릭을 한뒤 "명령 프롬프트 (관리자)" (윈도우11에 경우엔 "Windows 터미널 (관리자)")를 눌러서 실행해주세요.
+7. "pip3 install selenium requests" 를 입력하고 엔터를 눌른 다음 글씨가 안나올때까지 기다려 주세요.
+8. "C:\Program Files\YourFavorite Preview" 디렉터리를 열어준뒤
+9. "chromedriver.exe", "getInfo.py" 파일을 이동시켜주세요.
+10. 그러면 설치완료입니다.
 
 # QnA
 - Q : 로딩이 조금밖에 안됐어요.
