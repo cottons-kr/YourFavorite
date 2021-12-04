@@ -24,6 +24,10 @@ const infoTotalView = document.querySelector("#infoTotalView")
 const infoLocation = document.querySelector("#infoLocation")
 const infoJoinDate = document.querySelector("#infoJoinDate")
 const infoAboutmore = document.querySelector("#infoAboutmore")
+const infoAboutImg = document.querySelector("#infoAboutImg")
+const infoTotalViewImg = document.querySelector("#infoTotalViewImg")
+const infoLocationImg = document.querySelector("#infoLocationImg")
+const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
 
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
@@ -186,6 +190,11 @@ function showInfo(number) {
         if (infoAbout.innerText.length > 10) {
             infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
         }
+        infoJoinDateImg.style.visibility = "visible"
+        infoLocationImg.style.visibility = "visible"
+        infoTotalViewImg.style.visibility = "visible"
+        infoAboutImg.style.visibility = "visible"
+
         infoTotalView.innerText = about[3]
         infoLocation.innerText = about[1]
         infoJoinDate.innerText = about[2]
@@ -207,6 +216,11 @@ function clearInfo() {
     infoLocation.innerText = ""
     infoJoinDate.innerText = ""
     infoAboutmore.innerText = ""
+
+    infoAboutImg.style.visibility = "hidden"
+    infoTotalViewImg.style.visibility = "hidden"
+    infoLocationImg.style.visibility = "hidden"
+    infoJoinDateImg.style.visibility = "hidden"
 }
 
 function toggleNoList() {
