@@ -5,7 +5,7 @@ import time
 import base64
 import json
 
-waitTime = 2
+waitTime = 10
 
 def main(url, type, debug=False):
     options = webdriver.ChromeOptions()
