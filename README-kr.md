@@ -58,4 +58,7 @@ Python 3.7 이상 권장
 # 채널이름 요약 (적용예정)
 Email, Pull Request를 통해 원하는 채널과 요약이름을 보내주세요!
 
+## 읽는법
+"기존이름": "줄인이름"
+
 [리스트 링크](https://github.com/cottons-kr/YourFavorite/blob/main/js/shortChannel.json)
