@@ -21,7 +21,7 @@ Network speed: up to 10Mbps
 Display : up to 1080p
 
 # Installation
-1. Get the latest release from [Releases](https://github.com/cottons-kr/YourFavorite/release).
+1. Get the latest release from [Releases](https://github.com/cottons-kr/YourFavorite/releases).
 2. After extracting the compressed file, run "YourFavorite Preview Setup 0.0.1.exe" and install it.
 3. Please install the Chrome browser. (Run "ChromeSetup.exe")
 4. Please run "Python-3.10.0-amd64.exe".
