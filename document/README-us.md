@@ -1,5 +1,5 @@
 # YourFavorite
-Check your favorite YouTuber's information and live news
+Get easier access to your favorite YouTubers.
 
 # characteristic
 1. You can live-check the YouTuber's number of subscribers, video, and live streaming.
