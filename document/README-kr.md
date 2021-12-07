@@ -53,7 +53,7 @@ Python 3.7 이상 권장
 - A : 아직 개발중이기 때문에 많이 있을 수 있습니다. [Issues](https://github.com/cottons-kr/YourFavorite/issues) 탭에 문의해주세요. (로그인 필요)
 
 # 채널이름 요약 (적용예정)
-Email, Pull Request를 통해 원하는 채널과 요약이름을 보내주세요!
+[Email](kimtaeyoung0205@naver.com), Pull Request를 통해 원하는 채널과 요약이름을 보내주세요!
 
 ## 읽는법
 "기존이름": "줄인이름"
