@@ -146,14 +146,28 @@ function removeTuber() {
         removeTuberPopupList.removeChild(removeTuberPopupList.firstChild)
     }
 
-    for(let i = 0; i < localStorage.length; i++) {
-        const p = document.createElement("p")
-        const button = document.createElement("button")
-        p.innerText = JSON.parse(localStorage[i])["channelName"]
-        button.setAttribute("id", "removeTuberPopupListContent")
-        button.appendChild(p)
-        button.addEventListener("click", () => {localStorage.removeItem(i)})
-        removeTuberPopupList.appendChild(button)
+    loadRemoveList()
+
+    }
+    function loadRemoveList() {
+        for(let i = 0; i < localStorage.length; i++) {
+            const p = document.createElement("p")
+            const button = document.createElement("button")
+            p.innerText = JSON.parse(localStorage[i])["channelName"]
+            button.setAttribute("id", "removeTuberPopupListContent")
+            button.appendChild(p)
+            button.addEventListener("click", () => {
+                localStorage.removeItem(i)
+                while (tuberListContainer.hasChildNodes()) {
+                    tuberListContainer.removeChild(tuberListContainer.firstChild)
+                }
+                while (removeTuberPopupList.hasChildNodes()) {
+                    removeTuberPopupList.removeChild(removeTuberPopupList.firstChild)
+                }
+                loadList()
+                removeTuber()
+            })
+            removeTuberPopupList.appendChild(button)
     }
 }
 
