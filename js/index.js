@@ -36,6 +36,7 @@ const programExitButton = document.querySelector("#programExitButton")
 const removeButtonImg = document.querySelector("#removeButtonImg")
 const removeTuberPopup = document.querySelector(".removeTuberPopup")
 const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
+const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -138,6 +139,22 @@ function addTuber(event) {
         addTuberPopupForm.style.display = "block"
         addTuberLoading.style.display = "none"
     })
+}
+
+function removeTuber() {
+    while (removeTuberPopupList.hasChildNodes()) {
+        removeTuberPopupList.removeChild(removeTuberPopupList.firstChild)
+    }
+
+    for(let i = 0; i < localStorage.length; i++) {
+        const p = document.createElement("p")
+        const button = document.createElement("button")
+        p.innerText = JSON.parse(localStorage[i])["channelName"]
+        button.setAttribute("id", "removeTuberPopupListContent")
+        button.appendChild(p)
+        button.addEventListener("click", () => {localStorage.removeItem(i)})
+        removeTuberPopupList.appendChild(button)
+    }
 }
 
 function showInfo(number) {
@@ -427,6 +444,7 @@ addTuberPopupExit.addEventListener("click", () => {
 })
 removeButtonImg.addEventListener("click", () => {
     removeTuberPopup.style.visibility = "visible"
+    removeTuber()
 })
 removeTuberPopupExit.addEventListener("click", () => {
     removeTuberPopup.style.visibility = "hidden"

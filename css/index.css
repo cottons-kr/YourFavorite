@@ -152,8 +152,7 @@ li {
     position: absolute;
     background-color: white;
 
-    width: 19.8%;
-    height: 75px;
+    min-width: 19.8%;
     margin-left: 3%;
     margin-top: 8%;
 
@@ -175,6 +174,27 @@ li {
     margin-top: 2%;
     margin-left: 54%;
     display: inline-block;
+}
+
+#removeTuberPopupList {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 3%;
+}
+
+#removeTuberPopupListContent {
+    text-align: center;
+    display: block;
+    margin: 3%;
+    min-width: 95%;
+    border-radius: 20px / 20px;
+
+    background-color: rgba(255, 99, 71, 0.25);
+}
+
+#removeTuberPopupListContent p {
+    padding: 2%;
+    font-size: large;
 }
 
 #infoChannelName {
