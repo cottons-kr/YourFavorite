@@ -2,6 +2,7 @@ const { PythonShell } = require("python-shell")
 const os = require('os');
 const { info } = require("console");
 const { app } = require("electron");
+const fs = require("fs")
 
 const addButton = document.querySelector("#addButtonImg")
 const addTuberPopup = document.querySelector(".addTuberPopup")
@@ -38,7 +39,7 @@ loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 let globalInterval = null
 let loadingTuber = null
 const userName = os.userInfo().username
-const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python39\\python.exe`
+const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python3${checkPython()}\\python.exe`
 const option = {
     mode: "text",
     pythonPath: pythonPath,
@@ -47,8 +48,21 @@ const option = {
     encoding: "utf8"
 }
 
-function loadList(){
-    for(let i = 0; i < localStorage.length; i++){
+function checkPython() {
+    for (let i = 6; i < 10; i++) {
+        const python = fs.existsSync(`C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python3${i}\\python.exe`)
+        if (python === true) {
+            console.log(`Python Version : 3.${i}`)
+            return i
+        }
+    }
+    console.log("Cant Find Python")
+    alert("Python 3.6 이상을 설치해주세요!")
+    window.close()
+}
+
+function loadList() {
+    for(let i = 0; i < localStorage.length; i++) {
         addList(i)
     }
 }
@@ -56,6 +70,7 @@ function loadList(){
 function addList(number) {
     let info = localStorage.getItem(localStorage.key(number.toString()))
     info = JSON.parse(info)
+    console.log(info)
 
     const channel = document.createElement("div")
     const channelButton = document.createElement("button")
@@ -91,7 +106,6 @@ function addTuber(event) {
     event.preventDefault()
     const url = addTuberPopupInput.value
     option.args = [url, "simple"]
-    console.log(option)
     let channelName, profileImg;
 
     addTuberPopupInput.value = ""
@@ -105,6 +119,7 @@ function addTuber(event) {
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
         const info = buff.toString("utf-8").split("::")
+        console.log(info)
 
         channelName = info[0]
         profileImg = info[1]
@@ -120,10 +135,6 @@ function addTuber(event) {
         addTuberPopupForm.style.display = "block"
         addTuberLoading.style.display = "none"
     })
-}
-
-function removeTuber(number) {
-    localStorage.removeItem(number)
 }
 
 function showInfo(number) {
