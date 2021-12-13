@@ -42,6 +42,7 @@ const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 let globalInterval = null
 let loadingTuber = null
+let showingTuber = null
 const userName = os.userInfo().username
 const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python3${checkPython()}\\python.exe`
 const option = {
@@ -184,6 +185,7 @@ function showInfo(number) {
     infoChannelName.innerText = ""
     infoProfileImg.src = ""
     clearInfo()
+    showingTuber = number
 
     let info = localStorage.getItem(localStorage.key(number.toString()))
     info = JSON.parse(info)
@@ -275,6 +277,9 @@ function showInfo(number) {
 }
 
 function autoRefresh() {
+    if (showingTuber !== null) {
+        return null
+    }
     console.log("Refresh!")
     PythonShell.run("getInfo.py", option, (error, result) => {
         if (error) {
@@ -380,6 +385,7 @@ function clearInfo() {
     infoTotalViewImg.style.visibility = "hidden"
     infoLocationImg.style.visibility = "hidden"
     infoJoinDateImg.style.visibility = "hidden"
+    showingTuber = null
 }
 
 function toggleNoList() {
