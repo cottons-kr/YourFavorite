@@ -29,9 +29,14 @@
     </div>
 
     <div class="listContainer">
-        <div class="addButton">
-            <li><img id="addButtonImg" src="../resource/plus-circle.svg"></li>
-        </div>
+        <li class="editButtons">
+            <div class="addButton">
+                <img id="addButtonImg" src="../resource/plus-circle.svg">
+            </div>
+            <div class="removeButton">
+                <img id="removeButtonImg" src="../resource/remove.svg">
+            </div>
+        </li>
         <li id="tuberList">
         </li>
     </div>
@@ -107,11 +112,20 @@
             <input type="text" placeholder="채널 URL을 입력하세요">
         </form>
     </div>
+
     <div id="infoAboutMorePopup">
         <button id="infoAboutMorePopupExitButton">
             <img id="infoAboutMorePopupExit" src="../resource/x-circle.svg">
         </button>
         <p id="infoAboutmore"></p>
+    </div>
+
+    <div class="removeTuberPopup">
+        <span>
+            <h4 id="removeTuberPopupText">유튜버 제거하기</h4>
+            <img id="removeTuberPopupExit" src="../resource/x-circle.svg">
+        </span>
+        <li id="removeTuberPopupList"></li>
     </div>
 </body>
 <script type="module" charset="utf-8" src="../js/index.js"></script>

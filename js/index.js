@@ -4,7 +4,7 @@ const { info } = require("console");
 const { app } = require("electron");
 const fs = require("fs")
 
-const addButton = document.querySelector("#addButtonImg")
+const addButtonImg = document.querySelector("#addButtonImg")
 const addTuberPopup = document.querySelector(".addTuberPopup")
 const addTuberPopupForm = document.querySelector("#addTuberPopupForm")
 const addTuberPopupInput = document.querySelector("#addTuberPopupForm input")
@@ -33,6 +33,9 @@ const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
 const infoRoot = document.querySelector(".infoRoot")
 const pleaseSelect = document.querySelector("#pleaseSelect")
 const programExitButton = document.querySelector("#programExitButton")
+const removeButtonImg = document.querySelector("#removeButtonImg")
+const removeTuberPopup = document.querySelector(".removeTuberPopup")
+const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -404,17 +407,29 @@ function showMoreAbout() {
     infoAboutMorePopup.style.display = "block"
 }
 
-addButton.addEventListener("mouseover", () => {
-    addButton.style.opacity = 1
+addButtonImg.addEventListener("mouseover", () => {
+    addButtonImg.style.opacity = 1
 })
-addButton.addEventListener("mouseout", () => {
-    addButton.style.opacity = 0.1
+addButtonImg.addEventListener("mouseout", () => {
+    addButtonImg.style.opacity = 0.1
 })
-addButton.addEventListener("click", () => {
+removeButtonImg.addEventListener("mouseover", () => {
+    removeButtonImg.style.opacity = 1
+})
+removeButtonImg.addEventListener("mouseout", () => {
+    removeButtonImg.style.opacity = 0.1
+})
+addButtonImg.addEventListener("click", () => {
     addTuberPopup.style.visibility = "visible"
 })
 addTuberPopupExit.addEventListener("click", () => {
     addTuberPopup.style.visibility = "hidden"
+})
+removeButtonImg.addEventListener("click", () => {
+    removeTuberPopup.style.visibility = "visible"
+})
+removeTuberPopupExit.addEventListener("click", () => {
+    removeTuberPopup.style.visibility = "hidden"
 })
 addTuberPopupForm.addEventListener("submit", addTuber)
 infoAboutMoreButton.addEventListener("click", showMoreAbout)

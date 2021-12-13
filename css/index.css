@@ -10,13 +10,6 @@ html {
     font-family: Arial;
 }
 
-@font-face {
-    font-family: 'KOTRA_BOLD-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
     background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;
     background-position: 0% 100%;
@@ -107,12 +100,25 @@ button {
     border-radius: 30px / 30px;
 }
 
-.addButton {
+.editButtons {
     text-align: center;
-    padding-top: 30px;
 }
 
-#addButtonImg {
+.addButton, .removeButton {
+    text-align: center;
+    padding-top: 30px;
+    display: inline-flex;
+}
+
+.addButton {
+    margin-right: 10%;
+}
+
+.removeButton {
+    margin-left: 10%;
+}
+
+#addButtonImg, #removeButtonImg {
     opacity: 0.1;
 }
 
@@ -141,7 +147,7 @@ li {
     color: black;
 }
 
-.addTuberPopup {
+.addTuberPopup, .removeTuberPopup {
     visibility: hidden;
     position: absolute;
     background-color: white;
@@ -154,7 +160,7 @@ li {
     border-radius: 10px / 10px
 }
 
-#addTuberPopupText {
+#addTuberPopupText, #removeTuberPopupText {
     display: inline-block;
     margin: 3%;
 }
@@ -165,7 +171,7 @@ li {
     margin-bottom: 5%;
 }
 
-#addTuberPopupExit {
+#addTuberPopupExit, #removeTuberPopupExit {
     margin-top: 2%;
     margin-left: 54%;
     display: inline-block;
