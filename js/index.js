@@ -38,7 +38,7 @@ loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 let globalInterval = null
 let loadingTuber = null
 const userName = os.userInfo().username
-const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python310\\python.exe`
+const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python39\\python.exe`
 const option = {
     mode: "text",
     pythonPath: pythonPath,
@@ -61,29 +61,21 @@ function addList(number) {
     const channelButton = document.createElement("button")
     const listProfileImg = document.createElement("div")
     const listChannelName = document.createElement("div")
-    const listDeleteButton = document.createElement("button")
-    const deleteButtonImg = document.createElement("img")
     const img = document.createElement("img")
     const h2 = document.createElement("h2")
 
     channel.setAttribute("id", info["channelName"])
     listProfileImg.setAttribute("id", "listProfileImg")
     listChannelName.setAttribute("id", "listChannelName")
-    listDeleteButton.setAttribute("id", "listDeleteButton")
-    deleteButtonImg.setAttribute("id", "deleteButtonImg")
     img.setAttribute("src", info["profileImg"])
     channelButton.setAttribute("id", "channelButton")
-    deleteButtonImg.setAttribute("src", "../resource/x-circle.svg")
     channelButton.addEventListener("click", () => {showInfo(number)})
-    listDeleteButton.addEventListener("click", () => {removeTuber(number)})
     h2.innerText = info["channelName"]
 
     listProfileImg.appendChild(img)
     listChannelName.appendChild(h2)
-    listDeleteButton.appendChild(deleteButtonImg)
     channel.appendChild(listProfileImg)
     channel.appendChild(listChannelName)
-    channel.appendChild(listDeleteButton)
     channelButton.appendChild(channel)
     tuberListContainer.appendChild(channelButton)
     toggleNoList()
