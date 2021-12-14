@@ -12,4 +12,4 @@ Get easier access to your favorite YouTubers.
 [한국어 (Korean)](https://github.com/cottons-kr/YourFavorite/blob/main/document/Releasenote-kr.md)
 
 # License
-[MIT License](https://github.com/cottons-kr/YourFavorite/blob/main/document/LICENSE)
+[MIT License](https://github.com/cottons-kr/YourFavorite/blob/main/LICENSE)
