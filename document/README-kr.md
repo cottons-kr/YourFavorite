@@ -10,13 +10,13 @@
 # 요구사양
 OS : Windows 10/11 64bit
 
-CPU : 1Ghz 듀얼코어 이상, x64 아키텍처
+CPU : 2Ghz 쿼드코어 이상, x64 아키텍처
 
 RAM : 4GB 이상
 
-Disk : 1GB 이상의 여유공간
+Disk : 2GB 이상의 여유공간
 
-Network : 10Mbps 이상
+Network : 유효대역폭 100Mbps 이상
 
 Display : 1080p 이상
 
