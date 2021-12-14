@@ -59,6 +59,8 @@ function checkPython() {
             return i
         }
     }
+    alert("Python 3.6 이상을 설치해주세요!")
+    window.close()
 }
 
 function sortList() {
