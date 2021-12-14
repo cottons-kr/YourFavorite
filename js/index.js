@@ -1,7 +1,7 @@
 const { PythonShell } = require("python-shell")
-const os = require('os');
-const { info } = require("console");
-const { app } = require("electron");
+const { info } = require("console")
+const { app } = require("electron")
+const os = require('os')
 const fs = require("fs")
 
 const addButtonImg = document.querySelector("#addButtonImg")
@@ -43,8 +43,7 @@ loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
-const userName = os.userInfo().username
-const pythonPath = `C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python3${checkPython()}\\python.exe`
+const pythonPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\Python\\Python3${checkPython()}\\python.exe`
 const option = {
     mode: "text",
     pythonPath: pythonPath,
@@ -55,15 +54,11 @@ const option = {
 
 function checkPython() {
     for (let i = 6; i < 10; i++) {
-        const python = fs.existsSync(`C:\\Users\\${userName}\\AppData\\Local\\Programs\\Python\\Python3${i}\\python.exe`)
+        const python = fs.existsSync(`C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\Python\\Python3${i}\\python.exe`)
         if (python === true) {
-            console.log(`Python Version : 3.${i}`)
-            return i
+            return null
         }
     }
-    console.log("Cant Find Python")
-    alert("Python 3.6 이상을 설치해주세요!")
-    window.close()
 }
 
 function sortList() {
