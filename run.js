@@ -5,9 +5,10 @@ const server = express()
 
 server.get('/', function(req,res) {
     res.sendFile(__dirname + "/html/index.html")
+})
+
+server.get('/', function(req,res) {
     res.sendFile(__dirname + "/js/index.js")
-    res.sendFile(__dirname + "/js/setting.js")
-    res.sendFile(__dirname + "/getInfo.py")
 })
 
 server.use(express.static(__dirname))

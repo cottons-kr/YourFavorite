@@ -74,9 +74,10 @@ function sortList() {
         if (content === undefined) {continue}
         localStorage[num] = content
     }
-{
+}
 
 function loadList() {
+    sortList()
     for(let i = 0; i < localStorage.length; i++) {
         addList(i)
     }
@@ -153,12 +154,11 @@ function addTuber(event) {
 }
 
 function removeTuber() {
+    sortList()
     while (removeTuberPopupList.hasChildNodes()) {
         removeTuberPopupList.removeChild(removeTuberPopupList.firstChild)
     }
-
     loadRemoveList()
-
     }
     function loadRemoveList() {
         for(let i = 0; i < localStorage.length; i++) {
