@@ -10,10 +10,8 @@ server.get('/', function(req,res) {
     res.sendFile(__dirname + "/js/index.js")
 })
 
-const PORT = Math.floor(Math.random()*(60000-10001)) + 10000
-
 server.use(express.static(__dirname))
-server.listen(PORT)
+server.listen(21112)
 
 app.on("ready", () => {
     const win = new BrowserWindow({
@@ -25,7 +23,7 @@ app.on("ready", () => {
         }
     })
     win.setMenuBarVisibility(false)
-    win.loadURL(`http://127.0.0.1:${PORT}`)
+    win.loadURL("http://127.0.0.1:21112")
     win.once("ready-to-show", () => {
         win.show()
     })
