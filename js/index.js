@@ -66,6 +66,15 @@ function checkPython() {
     window.close()
 }
 
+function sortList() {
+    let num = 0
+    for (let i = 0; i < localStorage.leagth * 2; i++) {
+        const content = localStorage[i]
+        if (content === undefined) {continue}
+        localStorage[num] = content
+    }
+{
+
 function loadList() {
     for(let i = 0; i < localStorage.length; i++) {
         addList(i)
