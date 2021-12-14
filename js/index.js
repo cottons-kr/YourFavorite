@@ -56,7 +56,7 @@ function checkPython() {
     for (let i = 6; i < 10; i++) {
         const python = fs.existsSync(`C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\Python\\Python3${i}\\python.exe`)
         if (python === true) {
-            return null
+            return i
         }
     }
 }
