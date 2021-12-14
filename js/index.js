@@ -70,6 +70,7 @@ function sortList() {
     let num = 0
     for (let i = 0; i < localStorage.leagth * 2; i++) {
         const content = localStorage[i]
+        localStorage.removeItem(i)
         if (content === undefined) {continue}
         localStorage[num] = content
     }
