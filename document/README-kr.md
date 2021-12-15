@@ -24,9 +24,7 @@ x64 아키텍처만 지원합니다.
 5. 밑에 "Add Python 3.10 to PATH"에 체크해주고 설치해주세요.
 6. 윈도우 버튼에서 우클릭을 한뒤 "명령 프롬프트 (관리자)" (윈도우11에 경우엔 "Windows 터미널 (관리자)")를 눌러서 실행해주세요.
 7. "pip3 install selenium requests" 를 입력하고 엔터를 눌른 다음 글씨가 그만나올때까지 기다려 주세요.
-8. "C:\Program Files\YourFavorite Preview" 디렉터리를 열어준뒤
-9. "chromedriver.exe", "getInfo.py" 파일을 이동시켜주세요.
-10. 그러면 설치완료입니다.
+8. 그러면 설치완료입니다.
 
 # QnA
 - Q : 로딩이 조금밖에 안됐어요.
