@@ -65,13 +65,13 @@ function checkPython() {
 
 function sortList() {
     let num = 0
-    for (let i = 0; i > localStorage.leagth * 2; i++) {
+    for (let i = 0; i < localStorage.leagth - 1;) {
         const content = localStorage[i]
         console.log(content)
         localStorage.removeItem(i)
-        if (content === undefined) {console.log("f")}
-        localStorage[num] = content
-        num++
+        if (content === undefined) {num++}
+        localStorage[i] = content
+        i++
     }
     console.log("sorted!")
 }
