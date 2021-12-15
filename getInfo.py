@@ -124,7 +124,7 @@ def main(url, type, debug=False):
             print(jsonString)
 
 if __name__ == "__main__":
-    try:
-        main(sys.argv[1], sys.argv[2], sys.argv[3])
-    except IndexError:
+    if len(sys.argv) == 3:
         main(sys.argv[1], sys.argv[2])
+    else:
+        main(sys.argv[1], sys.argv[2], sys.argv[3])

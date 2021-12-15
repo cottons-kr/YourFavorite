@@ -64,15 +64,16 @@ function checkPython() {
 }
 
 function loadList() {
-    for(let i = 0; i < localStorage.length; i++) {
-        addList(i)
+    if (localStorage["youtuber"] === undefined) {return null}
+    const mainJson = JSON.parse(localStorage["youtuber"])
+    for (let key of Object.keys(mainJson)) {
+        addList(key)
     }
 }
 
-function addList(number) {
-    let info = localStorage.getItem(localStorage.key(number.toString()))
-    info = JSON.parse(info)
-    console.log(info)
+function addList(channelId) {
+    const mainJson = JSON.parse(localStorage["youtuber"])
+    const info = JSON.parse(mainJson[channelId])
 
     const channel = document.createElement("div")
     const channelButton = document.createElement("button")
@@ -86,7 +87,7 @@ function addList(number) {
     listChannelName.setAttribute("id", "listChannelName")
     img.setAttribute("src", info["profileImg"])
     channelButton.setAttribute("id", "channelButton")
-    channelButton.addEventListener("click", () => {showInfo(number)})
+    channelButton.addEventListener("click", () => {showInfo(channelId)})
     h2.innerText = info["channelName"]
 
     listProfileImg.appendChild(img)
@@ -121,7 +122,6 @@ function addTuber(event) {
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
         const info = buff.toString("utf-8").split("::")
-        console.log(info)
 
         channelName = info[0]
         profileImg = info[1]
@@ -130,9 +130,12 @@ function addTuber(event) {
             "profileImg": profileImg,
             "url": url
         }
-        const number = localStorage.length
-        localStorage.setItem(number, JSON.stringify(json))
-        addList(number)
+
+        if (localStorage["youtuber"] === undefined) {localStorage.setItem("youtuber", "{}")}
+        const mainJson = JSON.parse(localStorage["youtuber"])
+        mainJson[channelName] = JSON.stringify(json)
+        localStorage["youtuber"] = JSON.stringify(mainJson)
+        addList(channelName)
 
         addTuberPopupForm.style.display = "block"
         addTuberLoading.style.display = "none"
@@ -144,16 +147,19 @@ function removeTuber() {
         removeTuberPopupList.removeChild(removeTuberPopupList.firstChild)
     }
     loadRemoveList()
-    }
+
     function loadRemoveList() {
-        for(let i = 0; i < localStorage.length; i++) {
+        if (localStorage["youtuber"] === undefined) {return null}
+        const mainJson = JSON.parse(localStorage["youtuber"])
+        for (let key of Object.keys(mainJson)) {
             const p = document.createElement("p")
             const button = document.createElement("button")
-            p.innerText = JSON.parse(localStorage[i])["channelName"]
+            p.innerText = key
             button.setAttribute("id", "removeTuberPopupListContent")
             button.appendChild(p)
             button.addEventListener("click", () => {
-                localStorage.removeItem(i)
+                delete mainJson[key]
+                localStorage["youtuber"] = JSON.stringify(mainJson)
                 while (tuberListContainer.hasChildNodes()) {
                     tuberListContainer.removeChild(tuberListContainer.firstChild)
                 }
@@ -164,14 +170,17 @@ function removeTuber() {
                 removeTuber()
             })
             removeTuberPopupList.appendChild(button)
+            toggleNoList()
+        }
     }
 }
 
-function showInfo(number) {
+function showInfo(channelId) {
     if (loadingTuber !== null) {
         return null
     }
-    loadingTuber = number
+    loadingTuber = channelId
+    showingTuber = channelId
     if (globalInterval !== null) {
         clearInterval(globalInterval)
     }
@@ -180,10 +189,9 @@ function showInfo(number) {
     infoChannelName.innerText = ""
     infoProfileImg.src = ""
     clearInfo()
-    showingTuber = number
 
-    let info = localStorage.getItem(localStorage.key(number.toString()))
-    info = JSON.parse(info)
+    const mainJson = JSON.parse(localStorage["youtuber"])
+    const info = JSON.parse(mainJson[channelId])
     infoProfileImg.src = info["profileImg"]
     infoChannelName.innerText = info["channelName"]
     option.args = [info["url"], "all"]
@@ -193,7 +201,7 @@ function showInfo(number) {
         if (error) {
             console.log(error)
         }
-        if (loadingTuber !== number) {
+        if (loadingTuber !== channelId) {
             return null
         }
 
@@ -384,8 +392,18 @@ function clearInfo() {
 }
 
 function toggleNoList() {
-    if (noList.style.display !== "none" && localStorage.length !== 0) {
+    if (localStorage["youtuber"] === undefined) {localStorage["youtuber"] = "{}"}
+    if (localStorage["youtuber"].length <= 2) { //youtuber JSON이 비어있는지 판단
+        noList.style.display = "block"
+        pleaseSelect.style.display = "none"
+    } else {
         noList.style.display = "none"
+    }
+
+    if (showingTuber !== null && localStorage["youtuber"].length > 2) {
+        pleaseSelect.style.display = "block"
+    } else {
+        pleaseSelect.style.display = "none"
     }
 }
 
@@ -474,7 +492,5 @@ programExitButton.addEventListener("click", () => {
 })
 
 clearInfo()
-loadList(true)
-if (localStorage.length === 0) {
-    pleaseSelect.style.display = "none"
-}
+loadList()
+toggleNoList()
