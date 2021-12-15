@@ -31,6 +31,7 @@
     "productName": "YourFavorite Preview",
     "appId": "com.virtuallab.yf.electron",
     "asar": true,
+    "asarUnpack": [getInfo.py]
     "protocols": {
       "name": "YourFavorite Preview",
       "schemes": [
@@ -41,15 +42,6 @@
       "target": [
         "zip",
         "nsis"
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb",
-        "rpm",
-        "zip",
-        "tar.gz"
       ]
     },
     "nsis": {
