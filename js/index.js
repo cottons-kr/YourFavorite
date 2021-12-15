@@ -63,21 +63,7 @@ function checkPython() {
     window.close()
 }
 
-function sortList() {
-    let num = 0
-    for (let i = 0; i < localStorage.leagth - 1;) {
-        const content = localStorage[i]
-        console.log(content)
-        localStorage.removeItem(i)
-        if (content === undefined) {num++}
-        localStorage[i] = content
-        i++
-    }
-    console.log("sorted!")
-}
-
 function loadList() {
-    sortList()
     for(let i = 0; i < localStorage.length; i++) {
         addList(i)
     }
@@ -160,15 +146,10 @@ function removeTuber() {
     loadRemoveList()
     }
     function loadRemoveList() {
-        sortList()
         for(let i = 0; i < localStorage.length; i++) {
             const p = document.createElement("p")
             const button = document.createElement("button")
-            try {
-                p.innerText = JSON.parse(localStorage[i])["channelName"]
-            } catch {
-                console.log(localStorage[i], i)
-            }
+            p.innerText = JSON.parse(localStorage[i])["channelName"]
             button.setAttribute("id", "removeTuberPopupListContent")
             button.appendChild(p)
             button.addEventListener("click", () => {
