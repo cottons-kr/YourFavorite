@@ -1,24 +1,14 @@
 # YourFavorite
-Get easier access to your favorite YouTubers.
+Get Easier Access to Your Favorite YouTubers.
 
 # characteristic
-1. You can live-check the YouTuber's number of subscribers, video, and live streaming.
-2. It uses Electron.
-3. It changes the theme YouTuber's personality color.
-4. simple & modern design.
+* Live-check the YouTuber's Number of Subscribers, Video, and Live Streaming
+* YouTuber's Personality Color Theme
+* Simple & Modern Design.
 
 # Requirements
-OS : Windows 10/11 64bit
-
-CPU : up to 1Ghz Dual-Core cpu, x64 architecture (not ARM)
-
-RAM : up to 4GB
-
-Disk : Free space up to 1GB
-
-Network speed: up to 10Mbps
-
-Display : up to 1080p
+||OS|Processor|RAM|Free Disk Space|Network Speed|
+|-|-|-|-|-|-|
 
 # Installation
 * ⚠️Attention! This Program support ONLY KOREAN.
