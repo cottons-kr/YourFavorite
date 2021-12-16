@@ -18,7 +18,7 @@ x64 아키텍처만 지원합니다.
 - 아직 정식버전이 아니기때문에 작동하지 않거나 오류가 많을 수 있습니다!
 
 1. [릴리즈](https://github.com/cottons-kr/YourFavorite/releases)에서 최신 릴리즈를 받아주세요.
-2. 압축파일을 푼후 "YourFavorite Preview Setup 0.0.1.exe"를 실행한뒤 설치해주세요.
+2. 압축파일을 푼후 설치 프로그램을 실행한뒤 설치해주세요.
 3. 그러면 설치완료입니다.
 
 # QnA
