@@ -30,8 +30,7 @@
   "build": {
     "productName": "YourFavorite Preview",
     "appId": "com.virtuallab.yf.electron",
-    "asar": true,
-    "asarUnpack": ["getInfo.py", "resource/python-3.9.8.amd64/*.*", "resource/driver/*.exe"],
+    "asar": false,
     "protocols": {
       "name": "YourFavorite Preview",
       "schemes": [
