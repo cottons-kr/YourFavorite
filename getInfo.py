@@ -1,22 +1,44 @@
+from msedge import selenium_tools
+
+
 try:
-    from requests.api import get
+    import msedge.selenium_tools
     from selenium import webdriver
     import sys
     import base64
     import json
     import pip
+    import os
 except ModuleNotFoundError:
     pass
 
 waitTime = 5
 
+programFiles = "C:\\Program Files"
+driverPath = "resource\\driver\\"
+chromePath = f"{programFiles}\\Google\\Chrome\\Application\\chrome.exe"
+edgePath = f"{programFiles} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+firefoxPath = f"{programFiles}\\Mozilla Firefox\\firefox.exe"
+
 def detectBrowser():
-    pass
+    if os.path.exists(chromePath):
+        options = webdriver.ChromeOptions()
+        options.add_argument("headless")
+        driver = webdriver.Chrome(executable_path=f"{driverPath}chromedriver.exe", options=options)
+        return driver
+    elif os.path.exists(edgePath):
+        options = selenium_tools.EdgeOptions()
+        options.add_argument("headless")
+        driver = selenium_tools.Edge(executable_path=f"{driverPath}msedgedriver.exe", options=options)
+    elif os.path.exists(firefoxPath):
+        options = webdriver.FirefoxOptions()
+        options.add_argument("headless")
+        driver = webdriver.Firefox(executable_path=f"{driverPath}geckodriver.exe", options=options)
+    else:
+        raise Exception("No Browser!")
 
 def main(url, type, debug=False):
-    options = webdriver.ChromeOptions()
-    options.add_argument("headless")
-    driver = webdriver.Chrome(executable_path='chromedriver', options=options)
+    options, driver = detectBrowser()
 
     if type == "simple":
         driver.get(url)
