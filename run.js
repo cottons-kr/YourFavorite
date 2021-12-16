@@ -2,13 +2,17 @@ const express = require('express')
 const { app, BrowserWindow } = require('electron')
 const server = express()
 
-server.get('/', function(req,res) {
+server.get('/', (req,res) => {
     res.sendFile(__dirname + "/html/index.html")
 })
-
-server.get('/', function(req,res) {
+server.get('/', (req,res) => {
     res.sendFile(__dirname + "/js/index.js")
 })
+server.get('/', (req,res) => {
+    res.sendFile(__dirname + "/js/setting.js")
+server.get('/', (req,res) => {
+    res.sendFile(__dirname + "/js/shortChannel.json")
+}
 
 server.use(express.static(__dirname))
 server.listen(21112)
