@@ -1,11 +1,17 @@
-from requests.api import get
-from selenium import webdriver
-import sys
-import time
-import base64
-import json
+try:
+    from requests.api import get
+    from selenium import webdriver
+    import sys
+    import base64
+    import json
+    import pip
+except ModuleNotFoundError:
+    pass
 
 waitTime = 5
+
+def detectBrowser():
+    pass
 
 def main(url, type, debug=False):
     options = webdriver.ChromeOptions()

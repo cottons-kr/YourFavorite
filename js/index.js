@@ -43,24 +43,13 @@ loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
-const pythonPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\Python\\Python3${checkPython()}\\python.exe`
+const pythonPath = "resource/python-3.9.8.amd64/python.exe"
 const option = {
     mode: "text",
     pythonPath: pythonPath,
     pythonOptions: ["-u"],
     scriptPath: "",
     encoding: "utf8"
-}
-
-function checkPython() {
-    for (let i = 6; i < 10; i++) {
-        const python = fs.existsSync(`C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\Python\\Python3${i}\\python.exe`)
-        if (python === true) {
-            return i
-        }
-    }
-    alert("Python 3.6 이상을 설치해주세요!")
-    window.close()
 }
 
 function loadList() {
