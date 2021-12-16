@@ -421,14 +421,12 @@ function getAverageRGB(imgEl) {
         length,
         rgb = {r:0,g:0,b:0},
         count = 0;
-
     if (!context) {
         return defaultRGB;
     }
 
     height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
     width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
-
     context.drawImage(imgEl, 0, 0);
 
     try {
@@ -438,7 +436,6 @@ function getAverageRGB(imgEl) {
     }
 
     length = data.data.length;
-
     while ( (i += blockSize * 4) < length ) {
         ++count;
         rgb.r += data.data[i];
@@ -449,7 +446,6 @@ function getAverageRGB(imgEl) {
     rgb.r = ~~(rgb.r/count);
     rgb.g = ~~(rgb.g/count);
     rgb.b = ~~(rgb.b/count);
-
     return rgb;
 }
 
