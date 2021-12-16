@@ -29,7 +29,7 @@ x64 아키텍처만 지원합니다.
 - A : 컴퓨터의 사양, 인터넷 환경에 따라 불러오지 못했을때 표시됩니다. 유튜버를 다시 클릭해서 새로고침할 수 있습니다.
 -----
 - Q : 저작권 문제는 없나요?
-- A : 개인이 비상업적 용도로 사용한다면 문제없습니다. [라이센스](https://github.com/cottons-kr/YourFavorite/blob/main/LICENSE)
+- A : 개인이 비상업적 용도로 사용한다면 문제없습니다.
 -----
 - Q : 바이러스가 있나요?
 - A : 없으나 Github에서 다운로드 받아야 안전합니다. [다운로드 링크](https://github.com/cottons-kr/YourFavorite/releases)
