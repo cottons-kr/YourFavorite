@@ -1,8 +1,5 @@
-from msedge import selenium_tools
-
-
 try:
-    import msedge.selenium_tools
+    from msedge import selenium_tools
     from selenium import webdriver
     import sys
     import base64
