@@ -38,7 +38,7 @@ def detectBrowser():
         raise Exception("No Browser!")
 
 def main(url, type, debug=False):
-    options, driver = detectBrowser()
+    driver = detectBrowser()
 
     if type == "simple":
         driver.get(url)
