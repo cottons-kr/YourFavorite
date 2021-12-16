@@ -170,8 +170,8 @@ function removeTuber() {
                 removeTuber()
             })
             removeTuberPopupList.appendChild(button)
-            toggleNoList()
         }
+        toggleNoList()
     }
 }
 

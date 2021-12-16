@@ -31,7 +31,7 @@
     "productName": "YourFavorite Preview",
     "appId": "com.virtuallab.yf.electron",
     "asar": true,
-    "asarUnpack": ["getInfo.py", "chromedriver.exe"]
+    "asarUnpack": ["getInfo.py", "chromedriver.exe"],
     "protocols": {
       "name": "YourFavorite Preview",
       "schemes": [
