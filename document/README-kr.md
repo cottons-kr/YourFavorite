@@ -7,10 +7,10 @@
 * 직관적이고 깔끔한 디자인
 
 # 요구사양
-||운영체제|프로세서|메모리|디스크 여유공간|인터넷 속도|Python|
-|-|-|-|-|-|-|-|
-|최소|Windows 7 64bit|1GHz 듀얼코어|2GB|1GB|50Mbps|3.6|
-|권장|Windows 10/11 64bit|3GHz 쿼드코어|4GB|1GB|100Mbps|3.9|
+||운영체제|프로세서|메모리|디스크 여유공간|인터넷 속도|
+|-|-|-|-|-|-|
+|권장|Windows 10/11, Linux Kernel 5.x.x|3GHz 쿼드코어|4GB|1GB|100Mbps|
+|최소|Windows 8.1, Linux Kernel 5.x.x|2GHz 듀얼코어|2GB|1GB|50Mbps|
 
 x64 아키텍처만 지원합니다.
 
