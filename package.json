@@ -1,6 +1,6 @@
 {
   "name": "yourfavorite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Get easier access to your favorite YouTubers",
   "main": "run.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/cottons-kr/YourFavorite.git"
   },
-  "author": "virtuallab",
+  "author": "Virtual Lab",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cottons-kr/YourFavorite/issues"
@@ -31,7 +31,7 @@
     "productName": "YourFavorite Preview",
     "appId": "com.virtuallab.yf.electron",
     "asar": true,
-    "asarUnpack": ["getInfo.py", "chromedriver.exe"],
+    "asarUnpack": ["getInfo.py", "resource/python-3.9.8.amd64/*.*", "resource/driver/*.exe"],
     "protocols": {
       "name": "YourFavorite Preview",
       "schemes": [
