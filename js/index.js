@@ -393,14 +393,14 @@ function clearInfo() {
 
 function toggleNoList() {
     if (localStorage["youtuber"] === undefined) {localStorage["youtuber"] = "{}"}
-    if (localStorage["youtuber"].length <= 2) { //youtuber JSON이 비어있는지 판단
+    if (localStorage["youtuber"].length <= 2 && showingTuber === null) { //youtuber JSON이 비어있는지 판단
         noList.style.display = "block"
         pleaseSelect.style.display = "none"
     } else {
         noList.style.display = "none"
     }
 
-    if (showingTuber !== null && localStorage["youtuber"].length > 2) {
+    if (showingTuber === null && noList.style.display === "none") {
         pleaseSelect.style.display = "block"
     } else {
         pleaseSelect.style.display = "none"
