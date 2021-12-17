@@ -1,7 +1,13 @@
 # YourFavorite
-Get easier access to your favorite YouTubers.
+Get easier access to your favorite YouTubers
 
-좋아하는 유튜버에 더 쉽게 접근하세요.
+좋아하는 유튜버에 더 쉽게 접근하세요
+
+**[Linux Repo / 리눅스 레포](https://github.com/cottons-kr/YourFavorite-Linux)**
+-----
+This Repository contains Windows Edition.
+
+이 레포지토리는 윈도우 에디션입니다.
 
 # Readme
 [English (US)](https://github.com/cottons-kr/YourFavorite/blob/main/document/README-us.md)
