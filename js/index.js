@@ -43,7 +43,7 @@ loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
-const pythonPath = "resource/python-3.9.8.amd64/python.exe"
+const pythonPath = "resource\\python-3.9.8.amd64\\python.exe"
 const option = {
     mode: "text",
     pythonPath: pythonPath,
