@@ -14,26 +14,27 @@ while True:
 
 waitTime = 5
 
-programFiles = "C:\\Program Files"
-driverPath = "resource\\driver\\"
-chromePath = f"{programFiles}\\Google\\Chrome\\Application\\chrome.exe"
-edgePath = f"{programFiles} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
-firefoxPath = f"{programFiles}\\Mozilla Firefox\\firefox.exe"
+#rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\driver"
+rootPath = "C:\\Users\\cottons\\Desktop\\YourFavorite\\resource\driver"
+programPath = "C:\\Program Files"
+chromePath = f"{programPath}\\Google\\Chrome\\Application\\chrome.exe"
+edgePath = f"{programPath} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+firefoxPath = f"{programPath}\\Mozilla Firefox\\firefox.exe"
 
 def detectBrowser():
     if os.path.exists(chromePath):
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
-        driver = webdriver.Chrome(executable_path=f"{driverPath}chromedriver.exe", options=options)
+        driver = webdriver.Chrome(executable_path=f"{rootPath}\\chromedriver.exe", options=options)
         return driver
     elif os.path.exists(edgePath):
         options = selenium_tools.EdgeOptions()
         options.add_argument("headless")
-        driver = selenium_tools.Edge(executable_path=f"{driverPath}msedgedriver.exe", options=options)
+        driver = selenium_tools.Edge(executable_path=f"{rootPath}\\msedgedriver.exe", options=options)
     elif os.path.exists(firefoxPath):
         options = webdriver.FirefoxOptions()
         options.add_argument("headless")
-        driver = webdriver.Firefox(executable_path=f"{driverPath}geckodriver.exe", options=options)
+        driver = webdriver.Firefox(executable_path=f"{rootPath}\\geckodriver.exe", options=options)
     else:
         raise Exception("No Browser!")
 

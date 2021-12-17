@@ -40,10 +40,13 @@ const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
+/*const rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\"*/
+const rootPath = "C:\\Users\\cottons\\Desktop\\YourFavorite\\"
 let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
-const pythonPath = "resource\\python-3.9.8.amd64\\python.exe"
+let pythonPath = `${rootPath}resource\\python-3.9.8.amd64\\python.exe`
+
 const option = {
     mode: "text",
     pythonPath: pythonPath,
@@ -103,7 +106,7 @@ function addTuber(event) {
     addTuberPopupInput.value = ""
     addTuberPopupForm.style.display = "none"
     addTuberLoading.style.display = "block"
-    PythonShell.run("getInfo.py", option, (error, result) => {
+    PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
         }
@@ -186,7 +189,7 @@ function showInfo(channelId) {
     option.args = [info["url"], "all"]
     pleaseSelect.style.display = "none"
     infoRoot.style.display = "flex"
-    PythonShell.run("getInfo.py", option, (error, result) => {
+    PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
         }
@@ -273,7 +276,7 @@ function autoRefresh() {
         return null
     }
     console.log("Refresh!")
-    PythonShell.run("getInfo.py", option, (error, result) => {
+    PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
         }
