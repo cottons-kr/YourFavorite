@@ -10,6 +10,7 @@ while True:
     except ModuleNotFoundError:
         from subprocess import run
         run(["powershell", ".\\resource\python-3.9.8.amd64\python -m pip install selenium msedge-selenium-tools"], shell=True)
+        run(["powershell", ".\\resource\python-3.9.8.amd64\python -m pip install --upgrade requests"], shell=True)
         continue
 
 waitTime = 5
