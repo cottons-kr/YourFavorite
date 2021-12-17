@@ -16,7 +16,7 @@ while True:
 waitTime = 5
 
 #rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\driver"
-rootPath = "C:\\Users\\cottons\\Desktop\\YourFavorite\\resource\driver"
+rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
 programPath = "C:\\Program Files"
 chromePath = f"{programPath}\\Google\\Chrome\\Application\\chrome.exe"
 edgePath = f"{programPath} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"

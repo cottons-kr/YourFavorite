@@ -41,7 +41,7 @@ const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 /*const rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\"*/
-const rootPath = "C:\\Users\\cottons\\Desktop\\YourFavorite\\"
+const rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"
 let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
