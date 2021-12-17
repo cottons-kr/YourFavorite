@@ -5,9 +5,9 @@ Get easier access to your favorite YouTubers
 
 **[Linux Repo / 리눅스 레포](https://github.com/cottons-kr/YourFavorite-Linux)**
 -----
-This Repository contains Windows Edition.
+This Repository contains Windows Edition. Windows Edition Update First.
 
-이 레포지토리는 윈도우 에디션입니다.
+이 레포지토리는 윈도우 에디션입니다. 윈도우 에디션이 먼저 업데이트 됩니다.
 
 # Readme
 [English (US)](https://github.com/cottons-kr/YourFavorite/blob/main/document/README-us.md)
