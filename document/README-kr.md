@@ -9,8 +9,8 @@
 # 요구사양
 ||운영체제|프로세서|메모리|디스크 여유공간|인터넷 속도|
 |-|-|-|-|-|-|
-|권장|Windows 10/11, Linux Kernel 5.x.x|3GHz 쿼드코어|4GB|1GB|100Mbps|
-|최소|Windows 8.1, Linux Kernel 5.x.x|2GHz 듀얼코어|2GB|1GB|50Mbps|
+|권장|Windows 10/11, Linux Kernel 5.x.x|3GHz 쿼드코어|8GB|2GB|100Mbps|
+|최소|Windows 8.1, Linux Kernel 5.x.x|2GHz 듀얼코어|4GB|1GB|50Mbps|
 
 x64 아키텍처만 지원합니다.
 
