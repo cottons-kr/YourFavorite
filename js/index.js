@@ -272,7 +272,7 @@ function showInfo(channelId) {
 }
 
 function autoRefresh() {
-    if (showingTuber !== null) {
+    if (showingTuber === null) {
         return null
     }
     console.log("Refresh!")
