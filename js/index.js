@@ -283,10 +283,11 @@ function showInfo(channelId) {
 }
 
 function autoRefresh() {
-    if (showingTuber === null) {
+    if (showingTuber !== null || loadingTuber !== null) {
         return null
     }
     console.log("Refresh!")
+    loadingTuber = "refreshing"
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
@@ -367,6 +368,7 @@ function autoRefresh() {
         infoLocation.innerText = about[1]
         infoJoinDate.innerText = about[2]
         infoAboutmore.innerText = about[0]
+        loadingTuber = null
     })
 }
 
