@@ -198,6 +198,7 @@ li {
 }
 
 #removeTuberPopupListContent {
+    transition-duration: 0.4s;
     text-align: center;
     display: block;
     margin: 3%;
@@ -207,9 +208,15 @@ li {
     background-color: rgba(255, 99, 71, 0.25);
 }
 
+#removeTuberPopupListContent:hover {
+    transition-duration: 0.4s;
+    transform: translateY(-9%);
+}
+
 #removeTuberPopupListContent p {
     padding: 2%;
     font-size: large;
+    font-weight: 10%;
 }
 
 #infoChannelName {
