@@ -180,7 +180,7 @@ function showInfo(channelId) {
     infoSubscriber.innerText = ""
     infoChannelName.innerText = ""
     infoProfileImg.src = ""
-    clearInfo()
+    clearInfo(channelId)
 
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
@@ -359,7 +359,7 @@ function autoRefresh() {
     })
 }
 
-function clearInfo() {
+function clearInfo(channelId = null) {
     infoRoot.style.display = "none"
     while (infoStreamList.hasChildNodes()) {
         infoStreamList.removeChild(infoStreamList.firstChild)
@@ -380,7 +380,7 @@ function clearInfo() {
     infoTotalViewImg.style.visibility = "hidden"
     infoLocationImg.style.visibility = "hidden"
     infoJoinDateImg.style.visibility = "hidden"
-    showingTuber = null
+    showingTuber = channelId
 }
 
 function toggleNoList() {
