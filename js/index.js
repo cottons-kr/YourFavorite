@@ -454,6 +454,7 @@ function getAverageRGB(imgEl) {
 
 function showMoreAbout() {
     infoAboutMorePopup.style.display = "block"
+    infoAboutMorePopup.classList.remove("hidePopup")
     infoAboutMorePopup.classList.add("showPopup")
 }
 
@@ -493,7 +494,9 @@ removeTuberPopupExit.addEventListener("click", () => {
 addTuberPopupForm.addEventListener("submit", addTuber)
 infoAboutMoreButton.addEventListener("click", showMoreAbout)
 infoAboutMorePopupExitButton.addEventListener("click", () => {
-    infoAboutMorePopup.style.display = "none"
+    infoAboutMorePopup.classList.remove("addPopup")
+    infoAboutMorePopup.classList.add("hidePopup")
+    setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 500)
 })
 programExitButton.addEventListener("click", () => {
     window.close()
