@@ -106,8 +106,6 @@ function addTuber(event) {
     let channelName, profileImg;
 
     addTuberPopupInput.value = ""
-    addTuberPopupForm.style.display = "none"
-    addTuberLoading.style.display = "block"
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
@@ -130,9 +128,6 @@ function addTuber(event) {
         mainJson[channelName] = JSON.stringify(json)
         localStorage["youtuber"] = JSON.stringify(mainJson)
         addList(channelName)
-
-        addTuberPopupForm.style.display = "block"
-        addTuberLoading.style.display = "none"
     })
 }
 
@@ -480,7 +475,7 @@ addButtonImg.addEventListener("click", () => {
 addTuberPopupExit.addEventListener("click", () => {
     addTuberPopup.classList.remove("addPopup")
     addTuberPopup.classList.add("hidePopup")
-    setTimeout(() => {addTuberPopup.style.display = "none"}, 500)
+    setTimeout(() => {addTuberPopup.style.display = "none"}, 250)
 })
 removeButtonImg.addEventListener("click", () => {
     removeTuberPopup.style.display = "block"
@@ -491,7 +486,7 @@ removeButtonImg.addEventListener("click", () => {
 removeTuberPopupExit.addEventListener("click", () => {
     removeTuberPopup.classList.remove("addPopup")
     removeTuberPopup.classList.add("hidePopup")
-    setTimeout(() => {removeTuberPopup.style.display = "none"}, 500)
+    setTimeout(() => {removeTuberPopup.style.display = "none"}, 250)
 })
 addTuberPopupForm.addEventListener("submit", addTuber)
 infoAboutMoreButton.addEventListener("click", showMoreAbout)
