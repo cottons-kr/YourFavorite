@@ -38,6 +38,7 @@ const removeButtonImg = document.querySelector("#removeButtonImg")
 const removeTuberPopup = document.querySelector(".removeTuberPopup")
 const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
 const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
+const infoTuberLoading = document.querySelector("#infoTuberLoading")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -174,6 +175,7 @@ function showInfo(channelId) {
     }
     loadingTuber = channelId
     showingTuber = channelId
+    toggleNoList()
     if (globalInterval !== null) {
         clearInterval(globalInterval)
     }
@@ -181,16 +183,17 @@ function showInfo(channelId) {
     infoSubscriber.innerText = ""
     infoChannelName.innerText = ""
     infoProfileImg.src = ""
+    infoProfileImg.style.display = "none"
+    infoChannelName.style.display = "none"
     clearInfo(channelId)
 
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
+    option.args = [info["url"], "all"]
+    infoTuberLoading.style.display = "block"
     infoProfileImg.src = info["profileImg"]
     infoProfileLink.href = info["url"]
     infoChannelName.innerText = info["channelName"]
-    option.args = [info["url"], "all"]
-    pleaseSelect.style.display = "none"
-    infoRoot.style.display = "flex"
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
@@ -270,6 +273,12 @@ function showInfo(channelId) {
         infoAboutmore.innerText = about[0]
         globalInterval = setInterval(autoRefresh, 30000)
         loadingTuber = null
+
+        infoChannelName.style.display = "inline-block"
+        infoTuberLoading.style.display = "none"
+        pleaseSelect.style.display = "none"
+        infoRoot.style.display = "flex"
+        infoProfileImg.style.display = "inline-block"
     })
 }
 

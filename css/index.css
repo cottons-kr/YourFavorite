@@ -320,6 +320,12 @@ li {
     border-radius: 5px;
 }
 
+#infoTuberLoading {
+    display: none;
+    position: absolute;
+    margin-left: 61%;
+    margin-top: 22%;
+}
 
 /*애니메이션*/
 .showPopup {
