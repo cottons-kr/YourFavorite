@@ -49,11 +49,6 @@
     transform: translateY(-2%);
 }
 
-#community:active {
-    transition-duration: 0.4s;
-    transform: scale(95%);
-}
-
 #community p {
     font-size: 120%;
     padding: 4%;
