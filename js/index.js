@@ -256,8 +256,8 @@ function showInfo(channelId) {
 
         const about = info["about"]
         infoAbout.innerText = about[0]
-        if (infoAbout.innerText.length > 10) {
-            infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
+        if (infoAbout.innerText.length > 15) {
+            infoAbout.innerText = `${infoAbout.innerText.substr(0, 15)}...`
         }
         infoJoinDateImg.style.visibility = "visible"
         infoLocationImg.style.visibility = "visible"
@@ -445,6 +445,7 @@ function getAverageRGB(imgEl) {
 
 function showMoreAbout() {
     infoAboutMorePopup.style.display = "block"
+    infoAboutMorePopup.classList.add("showPopup")
 }
 
 addButtonImg.addEventListener("mouseover", () => {
@@ -460,17 +461,25 @@ removeButtonImg.addEventListener("mouseout", () => {
     removeButtonImg.style.opacity = 0.1
 })
 addButtonImg.addEventListener("click", () => {
-    addTuberPopup.style.visibility = "visible"
+    addTuberPopup.style.display = "block"
+    addTuberPopup.classList.remove("hidePopup")
+    addTuberPopup.classList.add("showPopup")
 })
 addTuberPopupExit.addEventListener("click", () => {
-    addTuberPopup.style.visibility = "hidden"
+    addTuberPopup.classList.remove("addPopup")
+    addTuberPopup.classList.add("hidePopup")
+    setTimeout(() => {addTuberPopup.style.display = "none"}, 500)
 })
 removeButtonImg.addEventListener("click", () => {
-    removeTuberPopup.style.visibility = "visible"
+    removeTuberPopup.style.display = "block"
+    removeTuberPopup.classList.remove("hidePopup")
+    removeTuberPopup.classList.add("showPopup")
     removeTuber()
 })
 removeTuberPopupExit.addEventListener("click", () => {
-    removeTuberPopup.style.visibility = "hidden"
+    removeTuberPopup.classList.remove("addPopup")
+    removeTuberPopup.classList.add("hidePopup")
+    setTimeout(() => {removeTuberPopup.style.display = "none"}, 500)
 })
 addTuberPopupForm.addEventListener("submit", addTuber)
 infoAboutMoreButton.addEventListener("click", showMoreAbout)

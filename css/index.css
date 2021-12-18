@@ -159,7 +159,7 @@ li {
 }
 
 .addTuberPopup, .removeTuberPopup {
-    visibility: hidden;
+    display: none;
     position: absolute;
     background-color: white;
 
@@ -318,4 +318,36 @@ li {
 ::-webkit-scrollbar-thumb {
     background: rgba(255, 99 ,71, 0.6);
     border-radius: 5px;
+}
+
+
+/*애니메이션*/
+.showPopup {
+    animation-name: showPopup;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.hidePopup {
+    animation-name: hidePopup;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showPopup {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hidePopup {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
