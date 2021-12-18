@@ -138,7 +138,7 @@ button {
 }
 
 #channelButton {
-    width: 90%;
+    width: 93%;
     background-color: whitesmoke;
     
     border: none;
@@ -150,6 +150,12 @@ button {
     margin-left: 5%;
 
     border-radius: 20px / 20px;
+}
+
+#tuberList {
+    width: 98%;
+    height: 89%;
+    overflow-y: auto;
 }
 
 li {
@@ -166,8 +172,9 @@ li {
     display: none;
     position: absolute;
     background-color: white;
+    text-align: center;
 
-    min-width: 19.8%;
+    min-width: 20%;
     margin-left: 3%;
     margin-top: 8%;
 
@@ -192,6 +199,7 @@ li {
 }
 
 #removeTuberPopupList {
+    width: 98%;
     max-height: 300px;
     overflow-y: auto;
     margin-bottom: 3%;
