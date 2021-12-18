@@ -10,7 +10,8 @@ const addTuberPopupForm = document.querySelector("#addTuberPopupForm")
 const addTuberPopupInput = document.querySelector("#addTuberPopupForm input")
 const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
 const tuberListContainer = document.querySelector("#tuberList")
-const infoProfileImg = document.querySelector("#infoProfileImg img")
+const infoProfileImg = document.querySelector("#infoProfileImg a img")
+const infoProfileLink = document.querySelector("#infoProfileImg a")
 const infoChannelName = document.querySelector("#infoChannelName h1")
 const infoSubscriber = document.querySelector("#infoSubscriber")
 const noList = document.querySelector("#noList")
@@ -185,6 +186,7 @@ function showInfo(channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
     infoProfileImg.src = info["profileImg"]
+    infoProfileLink.href = info["url"]
     infoChannelName.innerText = info["channelName"]
     option.args = [info["url"], "all"]
     pleaseSelect.style.display = "none"

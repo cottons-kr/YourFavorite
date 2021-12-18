@@ -35,8 +35,22 @@
 }
 
 #stream {
+    z-index: 5;
+    transition-duration: 0.4s;
     width: 120%;
-    height: 97%;
+    height: 96%;
+
+    margin-top: 0.6%;
+}
+
+#stream:hover {
+    transition-duration: 0.4s;
+    transform: translateY(-1.5%);
+}
+
+#stream:active {
+    transition-duration: 0.4s;
+    transform: scale(95%);
 }
 
 #infoStreamTitle {

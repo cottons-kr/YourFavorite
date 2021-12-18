@@ -53,13 +53,18 @@ button {
 }
 
 #channelButton {
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     display: block;
 }
 
 #channelButton:hover {
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     transform: translateY(-5%);
+}
+
+#channelButton:active {
+    transition-duration: 0.4s;
+    transform: scale(95%);
 }
 
 #listChannelName {

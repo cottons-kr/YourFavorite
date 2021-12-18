@@ -26,7 +26,7 @@
     margin-top: 2%;
     margin-left: 5%;
     width: 90%;
-    height: 80%;
+    height: 82%;
     overflow-x: auto;
     overflow-y: hidden;
     display: flex;
@@ -34,11 +34,24 @@
 }
 
 #community {
+    transition-duration: 0.4s;
     min-width: 60%;
-    height: 95%;
+    height: 93.5%;
     background-color: rgba(255, 99 ,71, 0.25);
     border-radius: 20px;
     overflow-y: scroll;
+
+    margin-top: 1%;
+}
+
+#community:hover {
+    transition-duration: 0.4s;
+    transform: translateY(-2%);
+}
+
+#community:active {
+    transition-duration: 0.4s;
+    transform: scale(95%);
 }
 
 #community p {

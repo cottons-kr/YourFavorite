@@ -38,15 +38,20 @@
 }
 
 #video {
-    transition-duration: 0.2s;
+    transition-duration: 0.4s;
     margin-top: 1%;
     width: 32.3%;
     height: 25.7%;
 }
 
 #video:hover {
-    transition-duration: 0.2s;
+    transition-duration: 0.4s;
     transform: translateY(-2%);
+}
+
+#video:active {
+    transition-duration: 0.4s;
+    transform: scale(95%);
 }
 
 #video:not(:last-child) {
