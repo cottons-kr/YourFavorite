@@ -53,7 +53,13 @@ button {
 }
 
 #channelButton {
+    transition-duration: 0.5s;
     display: block;
+}
+
+#channelButton:hover {
+    transition-duration: 0.5s;
+    transform: translateY(-5%);
 }
 
 #listChannelName {

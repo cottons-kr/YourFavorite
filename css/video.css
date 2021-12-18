@@ -32,13 +32,21 @@
 }
 
 #videoThumbnail {
+    width: 100%;
     height: 100%;
     border-radius: 10px;
 }
 
 #video {
+    transition-duration: 0.2s;
     margin-top: 1%;
+    width: 32.3%;
     height: 25.7%;
+}
+
+#video:hover {
+    transition-duration: 0.2s;
+    transform: translateY(-2%);
 }
 
 #video:not(:last-child) {
