@@ -39,6 +39,7 @@ const removeTuberPopup = document.querySelector(".removeTuberPopup")
 const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
 const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 const infoTuberLoading = document.querySelector("#infoTuberLoading")
+const infoTuberLoadingName = document.querySelector("#infoTuberLoading h2")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -165,9 +166,6 @@ function removeTuber() {
 }
 
 function showInfo(channelId) {
-    if (loadingTuber !== null) {
-        return null
-    }
     loadingTuber = channelId
     showingTuber = channelId
     toggleNoList()
@@ -186,7 +184,9 @@ function showInfo(channelId) {
     const info = JSON.parse(mainJson[channelId])
     option.args = [info["url"], "all"]
     infoTuberLoading.style.display = "block"
+    infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`
     infoProfileImg.src = info["profileImg"]
+    infoProfileImg.title = `${info["channelName"]}채널로 이동`
     infoProfileLink.href = info["url"]
     infoChannelName.innerText = info["channelName"]
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
@@ -275,6 +275,9 @@ function showInfo(channelId) {
         infoRoot.style.display = "flex"
         infoProfileImg.style.display = "inline-block"
     })
+    if (showingTuber !== channelId) {
+        return null
+    }
 }
 
 function autoRefresh() {
@@ -493,7 +496,7 @@ infoAboutMoreButton.addEventListener("click", showMoreAbout)
 infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.classList.remove("addPopup")
     infoAboutMorePopup.classList.add("hidePopup")
-    setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 500)
+    setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 250)
 })
 programExitButton.addEventListener("click", () => {
     window.close()

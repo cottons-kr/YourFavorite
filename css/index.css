@@ -106,6 +106,7 @@ button {
     height: 80%;
     background-color: rgba(255, 255, 255, 0.4);
     float: left;
+    position: relative;
 
     margin-left: 5%;
     margin-top: 5%;
@@ -232,8 +233,6 @@ li {
 
 #infoSubscriber {
     position: absolute;
-    right: 59.9%;
-    top: 19.5%;
 }
 
 #infoLoading {
@@ -326,8 +325,10 @@ li {
 #infoTuberLoading {
     display: none;
     position: absolute;
-    margin-left: 61%;
-    margin-top: 22%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 /*애니메이션*/
