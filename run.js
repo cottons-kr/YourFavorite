@@ -29,7 +29,7 @@ app.on("ready", () => {
     })
     win.setMenuBarVisibility(false)
     win.loadURL("http://127.0.0.1:21112")
-    win.once("ready-to-show", () => {
+    win.webContents.on("did-finish-load", () => {
         win.show()
     })
 })
