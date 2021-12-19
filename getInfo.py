@@ -6,6 +6,7 @@ while True:
         import base64
         import json
         import os
+        import getpass
         break
     except ModuleNotFoundError:
         from subprocess import run
@@ -15,11 +16,14 @@ while True:
 
 waitTime = 5
 
-rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\driver"
-cachePath = f"C:\\Users\\{format(os.getlogin())}\\YourFavorite Preview\\cache"
+rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
+cachePath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver\\cache"
 
-#rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
-#cachePath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver\\cache"
+#rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\driver"
+if not os.path.exists(rootPath):
+    rootPath = f"C:\\Users\\{getpass.getuser()}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\driver"
+#cachePath = f"C:\\Users\\{getpass.getuser()}\\YourFavorite Preview\\cache"
+
 programPath = "C:\\Program Files"
 chromePath = f"{programPath}\\Google\\Chrome\\Application\\chrome.exe"
 edgePath = f"{programPath} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
@@ -29,6 +33,7 @@ def detectBrowser():
     if os.path.exists(chromePath):
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
+        options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
         options.add_argument("--profile-directory=Default")
         options.add_argument(f"user-data-dir={cachePath}\\chrome")
         driver = webdriver.Chrome(executable_path=f"{rootPath}\\chromedriver.exe", options=options)
@@ -40,7 +45,7 @@ def detectBrowser():
         driver = selenium_tools.Edge(executable_path=f"{rootPath}\\msedgedriver.exe", options=options)
     elif os.path.exists(firefoxPath):
         options = webdriver.FirefoxOptions()
-        options.add_argument("headless")
+        options.headless = "true"
         options.add_argument("--profile-directory=Default")
         options.add_argument(f"user-data-dir={cachePath}\\firefox")
         driver = webdriver.Firefox(executable_path=f"{rootPath}\\geckodriver.exe", options=options)
