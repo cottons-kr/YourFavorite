@@ -459,9 +459,12 @@ function showMoreAbout() {
 
 function showRecentTuber() {
     if (loadingTuber !== null) {return null}
+    const mainJson = JSON.parse(localStorage["youtuber"])
     if (localStorage["recentTuber"] === undefined) {
         if (noList.style.display !== "none") {return null}
-        const mainJson = JSON.parse(localStorage["youtuber"])
+        localStorage["recentTuber"] = Object.keys(mainJson)[0]
+    }
+    if (localStorage["recentTuber"] in Object.keys(mainJson) === false) {
         localStorage["recentTuber"] = Object.keys(mainJson)[0]
     }
     showInfo(localStorage["recentTuber"])
