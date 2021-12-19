@@ -32,7 +32,6 @@ const infoTotalViewImg = document.querySelector("#infoTotalViewImg")
 const infoLocationImg = document.querySelector("#infoLocationImg")
 const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
 const infoRoot = document.querySelector(".infoRoot")
-const pleaseSelect = document.querySelector("#pleaseSelect")
 const removeButtonImg = document.querySelector("#removeButtonImg")
 const removeTuberPopup = document.querySelector(".removeTuberPopup")
 const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
@@ -44,6 +43,7 @@ const infoTuberLoadingName = document.querySelector("#infoTuberLoading h2")
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 
 const rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"
+const driverPath = `${rootPath}resource\\driver`
 /*const rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\"*/
 if (fs.existsSync(rootPath) == false) {
     rootPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\`
@@ -276,9 +276,10 @@ function showInfo(channelId) {
 
         infoChannelName.style.display = "inline-block"
         infoTuberLoading.style.display = "none"
-        pleaseSelect.style.display = "none"
         infoRoot.style.display = "flex"
         infoProfileImg.style.display = "inline-block"
+        localStorage["recentTuber"] = channelId
+        fs.writeFile(`${driverPath}\\loading`, "null", "utf8", (err) => {console.log(err)})
     })
     if (showingTuber !== channelId) {
         return null
@@ -403,15 +404,8 @@ function toggleNoList() {
     if (localStorage["youtuber"] === undefined) {localStorage["youtuber"] = "{}"}
     if (localStorage["youtuber"].length <= 2 && showingTuber === null) { //youtuber JSON이 비어있는지 판단
         noList.style.display = "block"
-        pleaseSelect.style.display = "none"
     } else {
         noList.style.display = "none"
-    }
-
-    if (showingTuber === null && noList.style.display === "none") {
-        pleaseSelect.style.display = "block"
-    } else {
-        pleaseSelect.style.display = "none"
     }
 }
 
@@ -463,6 +457,16 @@ function showMoreAbout() {
     infoAboutMorePopup.classList.add("showPopup")
 }
 
+function showRecentTuber() {
+    if (loadingTuber !== null) {return null}
+    if (localStorage["recentTuber"] === undefined) {
+        if (noList.style.display !== "none") {return null}
+        const mainJson = JSON.parse(localStorage["youtuber"])
+        localStorage["recentTuber"] = Object.keys(mainJson)[0]
+    }
+    showInfo(localStorage["recentTuber"])
+}
+
 addButtonImg.addEventListener("mouseover", () => {
     addButtonImg.style.opacity = 1
 })
@@ -507,3 +511,4 @@ infoAboutMorePopupExitButton.addEventListener("click", () => {
 clearInfo()
 loadList()
 toggleNoList()
+setTimeout(showRecentTuber, 500)

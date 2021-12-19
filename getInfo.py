@@ -127,7 +127,7 @@ def main(url, type, debug=False):
                 communityContent = main.find_element_by_xpath('''.//*[@id="content-text"]''').get_attribute('innerText')
                 communityLikes = main.find_element_by_xpath('''.//*[@id="vote-count-middle"]''').get_attribute("innerText")
                 communitys.append([communityContent, communityLikes, communityUpload])
-        
+
         driver.get(url+"/about")
         driver.execute_script("window.scrollTo(0, 999999999)")
         driver.implicitly_wait(waitTime)
