@@ -4,6 +4,7 @@ const { app } = require("electron")
 const os = require('os')
 const fs = require("fs")
 
+const body = document.querySelector("body")
 const addButtonImg = document.querySelector("#addButtonImg")
 const addTuberPopup = document.querySelector(".addTuberPopup")
 const addTuberPopupForm = document.querySelector("#addTuberPopupForm")
@@ -194,6 +195,7 @@ function showInfo(channelId) {
     infoProfileImg.title = `${info["channelName"]}채널로 이동`
     infoProfileLink.href = info["url"]
     infoChannelName.innerText = info["channelName"]
+    /*body.style.background = `linear-gradient(45deg, whitesmoke, ${"black"}) no-repeat fixed`*/
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
@@ -278,8 +280,8 @@ function showInfo(channelId) {
         infoTuberLoading.style.display = "none"
         infoRoot.style.display = "flex"
         infoProfileImg.style.display = "inline-block"
+        console.log(getAverageRGB(infoProfileImg.crossOrigin = "Anonymous"))
         localStorage["recentTuber"] = channelId
-        fs.writeFile(`${driverPath}\\loading`, "null", "utf8", (err) => {console.log(err)})
     })
     if (showingTuber !== channelId) {
         return null
@@ -423,19 +425,20 @@ function getAverageRGB(imgEl) {
         length,
         rgb = {r:0,g:0,b:0},
         count = 0;
-    if (!context) {
+    /*if (!context) {
         return defaultRGB;
-    }
+    }*/
 
     height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
     width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
     context.drawImage(imgEl, 0, 0);
 
-    try {
+    data = context.getImageData(0, 0, width, height);
+    /*try {
         data = context.getImageData(0, 0, width, height);
     } catch(e) {
         return defaultRGB;
-    }
+    }*/
 
     length = data.data.length;
     while ( (i += blockSize * 4) < length ) {
