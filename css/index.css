@@ -168,6 +168,7 @@ li {
 
 #addTuberPopupText, #removeTuberPopupText {
     display: inline-block;
+    float: left;
     margin: 3%;
 }
 
@@ -179,7 +180,7 @@ li {
 
 #addTuberPopupExit, #removeTuberPopupExit {
     margin-top: 2%;
-    margin-left: 54%;
+    float: right;
     display: inline-block;
 }
 

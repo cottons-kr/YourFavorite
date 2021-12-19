@@ -133,6 +133,7 @@ function addTuber(event) {
         mainJson[channelName] = JSON.stringify(json)
         localStorage["youtuber"] = JSON.stringify(mainJson)
         addList(channelName)
+        removeTuber()
     })
 }
 
