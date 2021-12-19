@@ -132,7 +132,7 @@ function addTuber(event) {
         if (localStorage["youtuber"] === undefined) {localStorage.setItem("youtuber", "{}")}
         const mainJson = JSON.parse(localStorage["youtuber"])
         mainJson[channelName] = JSON.stringify(json)
-        localStorage["youtuber"] = JSON.stringify(mainJson)
+        localStorage["youtuber"] = JSON.parse(mainJson)
         addList(channelName)
         removeTuber()
     })
@@ -155,7 +155,7 @@ function removeTuber() {
             button.appendChild(p)
             button.addEventListener("click", () => {
                 delete mainJson[key]
-                localStorage["youtuber"] = JSON.stringify(mainJson)
+                localStorage["youtuber"] = JSON.parse(mainJson)
                 while (tuberListContainer.hasChildNodes()) {
                     tuberListContainer.removeChild(tuberListContainer.firstChild)
                 }
