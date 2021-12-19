@@ -33,7 +33,6 @@ const infoLocationImg = document.querySelector("#infoLocationImg")
 const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
 const infoRoot = document.querySelector(".infoRoot")
 const pleaseSelect = document.querySelector("#pleaseSelect")
-const programExitButton = document.querySelector("#programExitButton")
 const removeButtonImg = document.querySelector("#removeButtonImg")
 const removeTuberPopup = document.querySelector(".removeTuberPopup")
 const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
@@ -502,9 +501,6 @@ infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.classList.remove("addPopup")
     infoAboutMorePopup.classList.add("hidePopup")
     setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 250)
-})
-programExitButton.addEventListener("click", () => {
-    window.close()
 })
 
 clearInfo()

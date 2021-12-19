@@ -29,22 +29,27 @@ chromePath = f"{programPath}\\Google\\Chrome\\Application\\chrome.exe"
 edgePath = f"{programPath} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
 firefoxPath = f"{programPath}\\Mozilla Firefox\\firefox.exe"
 
-def detectBrowser():
+def detectBrowser(type):
     if os.path.exists(chromePath):
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
-        options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
+        if type == "simple":
+            options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
         options.add_argument("--profile-directory=Default")
         options.add_argument(f"user-data-dir={cachePath}\\chrome")
         driver = webdriver.Chrome(executable_path=f"{rootPath}\\chromedriver.exe", options=options)
     elif os.path.exists(edgePath):
         options = selenium_tools.EdgeOptions()
+        if type == "simple":
+            options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
         options.add_argument("headless")
         options.add_argument("--profile-directory=Default")
         options.add_argument(f"user-data-dir={cachePath}\\msedge")
         driver = selenium_tools.Edge(executable_path=f"{rootPath}\\msedgedriver.exe", options=options)
     elif os.path.exists(firefoxPath):
         options = webdriver.FirefoxOptions()
+        if type == "simple":
+            options.set_capability("deviceName", "iPhone X")
         options.headless = "true"
         options.add_argument("--profile-directory=Default")
         options.add_argument(f"user-data-dir={cachePath}\\firefox")
@@ -54,13 +59,13 @@ def detectBrowser():
     return driver
 
 def main(url, type, debug=False):
-    driver = detectBrowser()
+    driver = detectBrowser(type)
 
     if type == "simple":
         driver.get(url)
         driver.implicitly_wait(waitTime)
-        channelName = driver.find_element_by_xpath('''//*[@id="channel-name"]''').get_attribute('innerText')
-        profileImg = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/yt-img-shadow/img''').get_attribute("src")
+        channelName = driver.find_element_by_xpath('''/html/body/ytm-app/div[1]/ytm-browse/ytm-c4-tabbed-header-renderer/div[2]/div/h1''').get_attribute('innerText')
+        profileImg = driver.find_element_by_xpath('''/html/body/ytm-app/div[1]/ytm-browse/ytm-c4-tabbed-header-renderer/div[2]/ytm-profile-icon/img''').get_attribute("src")
         print(base64.b64encode(f"{channelName}::{profileImg}".encode("utf-8")))
         driver.quit()
 
