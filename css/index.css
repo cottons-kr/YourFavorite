@@ -5,6 +5,7 @@ html {
     overflow: hidden;
     -webkit-touch-callout: none;
     user-select: none;
+    -webkit-overflow-scrolling : touch;
 }
 
 * {
