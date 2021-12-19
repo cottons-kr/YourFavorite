@@ -10,7 +10,7 @@ html {
 
 * {
     margin: 0;
-    font-family: Arial;
+    font-family: 'NanumSquareAcb';
     -webkit-user-drag: none;
 }
 
@@ -174,8 +174,16 @@ li {
 }
 
 #addTuberPopupForm input {
+    width: 130%;
+    margin-left: 5%;
+}
+
+#addTuberPopupForm input:focus {
+    outline: none;
+}
+
+#addTuberPopupForm {
     width: 60%;
-    margin-left: 2%;
     margin-bottom: 5%;
 }
 
