@@ -42,6 +42,7 @@ def detectBrowser(type):
         options = selenium_tools.EdgeOptions()
         if type == "simple":
             options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
+        options.use_chromium = True
         options.add_argument("headless")
         options.add_argument("--profile-directory=Default")
         options.add_argument(f"user-data-dir={cachePath}\\msedge")
