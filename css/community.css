@@ -58,3 +58,7 @@
 #community:not(:last-child) {
     margin-right: 4%;
 }
+
+#noCommunity {
+    margin-top: 5%;
+}

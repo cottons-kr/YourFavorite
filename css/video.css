@@ -57,3 +57,22 @@
 #video:not(:last-child) {
     margin-right: 1%;
 }
+
+.onlyVideos {
+    width: 95%;
+    margin-left: 2.5%;
+}
+
+.onlyVideo {
+    width: 15.66%;
+    height: 24%;
+}
+
+.onlyVideosList {
+    width: 97%;
+    margin-left: 1.5%;
+}
+
+.onlyVideosTitle {
+    margin-left: 2.5%;
+}

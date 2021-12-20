@@ -3,6 +3,7 @@ const { info } = require("console")
 const { app } = require("electron")
 const os = require('os')
 const fs = require("fs")
+const e = require("express")
 
 const body = document.querySelector("body")
 const addButtonImg = document.querySelector("#addButtonImg")
@@ -28,10 +29,6 @@ const infoTotalView = document.querySelector("#infoTotalView")
 const infoLocation = document.querySelector("#infoLocation")
 const infoJoinDate = document.querySelector("#infoJoinDate")
 const infoAboutmore = document.querySelector("#infoAboutmore")
-const infoAboutImg = document.querySelector("#infoAboutImg")
-const infoTotalViewImg = document.querySelector("#infoTotalViewImg")
-const infoLocationImg = document.querySelector("#infoLocationImg")
-const infoJoinDateImg = document.querySelector("#infoJoinDateImg")
 const infoRoot = document.querySelector(".infoRoot")
 const removeButtonImg = document.querySelector("#removeButtonImg")
 const removeTuberPopup = document.querySelector(".removeTuberPopup")
@@ -39,9 +36,12 @@ const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
 const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 const infoTuberLoading = document.querySelector("#infoTuberLoading")
 const infoTuberLoadingName = document.querySelector("#infoTuberLoading h2")
-const infoAboutRoot = document.querySelector("#infoAboutRoot")
+const infoStream = document.querySelector(".infoStream")
+const infoCommunity = document.querySelector(".infoCommunity")
+const infoVideos = document.querySelector(".infoVideos")
 const infoAboutClass = document.querySelector(".infoAbout")
 const infoLocationRoot = document.querySelector("#infoLocationRoot")
+const infoVideosTitle = document.querySelector("#infoVideosTitle")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -172,6 +172,7 @@ function removeTuber() {
 
 function showInfo(info, channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
+    let noContent = []
     console.log(`Showing : ${channelId}`)
     const baseInfo = JSON.parse(mainJson[channelId])
     infoSubscriber.innerText = info["subscriber"]
@@ -182,6 +183,11 @@ function showInfo(info, channelId) {
 
     for (let stream of info["streams"]) {
         if (stream[1] === undefined) {
+            const h1 = document.createElement("h1")
+            h1.innerText = "스트리밍을 하고있지 않아요"
+            h1.setAttribute("id", "noStream")
+            infoStreamList.appendChild(h1)
+            noContent.push("stream")
             break
         }
         const div = document.createElement("div")
@@ -200,6 +206,11 @@ function showInfo(info, channelId) {
 
     for (let video of info["videos"]) {
         if (video[1] === undefined) {
+            const h1 = document.createElement("h1")
+            h1.innerText = "올린 영상이 없어요"
+            h1.setAttribute("id", "noVideo")
+            infoVideosList.appendChild(h1)
+            noContent.push("video")
             break
         }
         const div = document.createElement("div")
@@ -215,10 +226,14 @@ function showInfo(info, channelId) {
         infoVideosList.appendChild(div)
     }
 
+    if (info["communitys"].length == 0) {
+        const h1 = document.createElement("h1")
+        h1.innerText = "커뮤니티 게시글이 없어요"
+        h1.setAttribute("id", "noCommunity")
+        infoCommunityList.appendChild(h1)
+        noContent.push("community")
+    }
     for (let community of info["communitys"]) {
-        if (community[0] === undefined) {
-            break
-        }
         const div = document.createElement("div")
         const p = document.createElement("p")
         div.setAttribute("id", "community")
@@ -247,6 +262,23 @@ function showInfo(info, channelId) {
     infoTuberLoading.style.display = "none"
     infoRoot.style.display = "flex"
     infoProfileImg.style.display = "inline-block"
+
+    if (noContent.includes("stream") && noContent.includes("community")) {
+        console.log("sd")
+        infoCommunity.style.display = "none"
+        infoStream.style.display = "none"
+        infoVideos.classList.add("onlyVideos")
+        infoVideosList.classList.add("onlyVideosList")
+        infoVideosTitle.classList.add("onlyVideosTitle")
+        document.qu
+        /*
+        infoVideos.style.width = "95%"
+        infoVideos.style.marginLeft = "2.5%"
+        infoVideosList.style.width = "97%"
+        infoVideosList.style.marginLeft = "1.5%"
+        infoVideosTitle.style.marginLeft = "2.5%"
+        for (let video of document.querySelectorAll("#video")) {video.style.width = "15.66%"; video.style.height = "24%"}*/
+    }
 
     globalInterval = setInterval(autoRefresh, 10000, channelId)
     loadingTuber = null
@@ -329,6 +361,9 @@ function autoRefresh(channelId) {
 
         for (let stream of info["streams"]) {
             if (stream[1] === undefined) {
+                const h1 = document.createElement("h1")
+                h1.innerText = "스트리밍을 하고있지 않아요"
+                infoStreamList.appendChild(h1)
                 break
             }
             const div = document.createElement("div")
@@ -347,6 +382,9 @@ function autoRefresh(channelId) {
 
         for (let video of info["videos"]) {
             if (video[1] === undefined) {
+                const h1 = document.createElement("h1")
+                h1.innerText = "올린 영상이 없어요"
+                infoStreamList.appendChild(h1)
                 break
             }
             const div = document.createElement("div")
