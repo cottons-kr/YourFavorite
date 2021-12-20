@@ -18,7 +18,7 @@ server.get('/', (req,res) => {
 server.use(express.static(__dirname))
 server.listen(21112)
 
-app.on("ready", () => {
+function show() {
     const win = new BrowserWindow({
         width: 1920,
         height: 1080,
@@ -29,7 +29,9 @@ app.on("ready", () => {
     })
     win.setMenuBarVisibility(false)
     win.loadURL("http://127.0.0.1:21112")
-    win.webContents.on("did-finish-load", () => {
-        win.show()
-    })
+    win.show()
+}
+
+app.on("ready", () => {
+    setTimeout(show, 3000)
 })
