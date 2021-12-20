@@ -302,6 +302,20 @@ li {
     vertical-align: middle;
 }
 
+#infoAboutImg {
+    transition-duration: 0.4s;
+}
+
+#infoAboutImg:hover {
+    transition-duration: 0.4s;
+    transform: translateY(-10%);
+}
+
+#infoAboutImg:active {
+    transition-duration: 0.4s;
+    transform: scale(80%);
+}
+
 #infoAbout, #infoTotalView, #infoLocation, #infoJoinDate {
     margin: 2.5%;
 }
