@@ -172,6 +172,7 @@ def main(url, type, debug=False):
             print(base64.b64encode(jsonString.encode("utf-8")))
         else:
             print(jsonString)
+        driver.quit()
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:

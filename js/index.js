@@ -99,12 +99,6 @@ function addList(channelId) {
     toggleNoList()
 }
 
-/*
-subscriber = info[0]
-channelName = info[1]
-profileImg = info[2]
-*/
-
 function addTuber(event) {
     event.preventDefault()
     const url = addTuberPopupInput.value
@@ -174,6 +168,7 @@ function removeTuber() {
 function showInfo(info, channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
     console.log(mainJson)
+    console.log(info, channelId)
     const baseInfo = JSON.parse(mainJson[channelId])
     infoSubscriber.innerText = info["subscriber"]
     infoProfileLink.href = baseInfo["url"]
@@ -251,6 +246,12 @@ function showInfo(info, channelId) {
     infoTuberLoading.style.display = "none"
     infoRoot.style.display = "flex"
     infoProfileImg.style.display = "inline-block"
+
+    globalInterval = setInterval(autoRefresh, 10000, channelId)
+    console.log(globalInterval)
+    loadingTuber = null
+    showingTuber = channelId
+    localStorage["recentTuber"] = channelId
 }
 
 function loadInfo(channelId) {
@@ -282,11 +283,8 @@ function loadInfo(channelId) {
         info = JSON.parse(info)
         localStorage[channelId] = JSON.stringify(info)
 
-        showInfo(info)
+        showInfo(info, channelId)
 
-        globalInterval = setInterval(autoRefresh, 30000)
-        loadingTuber = null
-        localStorage["recentTuber"] = channelId
     })
     if (showingTuber !== channelId) {
         return null
@@ -294,8 +292,8 @@ function loadInfo(channelId) {
     if (localStorage[channelId] !== undefined) {showInfo(JSON.parse(localStorage[channelId]), channelId)}
 }
 
-function autoRefresh() {
-    if (showingTuber !== null || loadingTuber !== null) {
+function autoRefresh(channelId) {
+    if (showingTuber !== channelId || loadingTuber !== null) {
         return null
     }
     console.log("Refresh!")
@@ -407,7 +405,7 @@ function clearInfo(channelId = null) {
     infoJoinDateImg.style.visibility = "hidden"
     infoChannelName.style.visibility = "hidden"
     infoSubscriber.style.visibility = "hidden"
-    showingTuber = channelId
+    infoProfileImg.style.visibility = "hidden"
 }
 
 function toggleNoList() {

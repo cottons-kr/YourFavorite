@@ -123,6 +123,11 @@ button {
     opacity: 0.1;
 }
 
+#addButtonImg:active, #removeButtonImg:active {
+    transition-duration: 0.4s;
+    transform: scale(70%);
+}
+
 #channelButton {
     width: 93%;
     background-color: whitesmoke;
@@ -191,6 +196,12 @@ li {
     margin-top: 2%;
     float: right;
     display: inline-block;
+    
+}
+
+#addTuberPopupExit:active, #removeTuberPopupExit:active {
+    transition-duration: 0.4s;
+    transform: scale(80%);
 }
 
 #removeTuberPopupList {
@@ -289,8 +300,14 @@ li {
 }
 
 #infoAboutMorePopupExitButton {
+    transition-duration: 0.4s;
     margin-left: 3%;
     margin-top: 3%;
+}
+
+#infoAboutMorePopupExitButton:active {
+    transition-duration: 0.4s;
+    transform: scale(80%);
 }
 
 #infoAboutmore {
