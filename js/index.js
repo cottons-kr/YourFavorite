@@ -101,6 +101,7 @@ function addList(channelId) {
 
 function addTuber(event) {
     event.preventDefault()
+    console.log(`Adding Tuber...`)
     const url = addTuberPopupInput.value
     option.args = [url, "simple"]
     let channelName, profileImg;
@@ -128,6 +129,7 @@ function addTuber(event) {
         mainJson[channelName] = JSON.stringify(json)
         localStorage["youtuber"] = JSON.stringify(mainJson)
         addList(channelName)
+        console.log(`New Tuber : ${channelName}`)
         removeTuber()
     })
 }
@@ -389,21 +391,23 @@ function autoRefresh(channelId) {
 }
 
 function clearInfo() {
+    infoAboutImg.style.visibility = "hidden"
+    infoTotalViewImg.style.visibility = "hidden"
+    infoLocationImg.style.visibility = "hidden"
+    infoJoinDateImg.style.visibility = "hidden"
+
     infoTotalView.innerText = ""
     infoLocation.innerText = ""
     infoJoinDate.innerText = ""
     infoAboutmore.innerText = ""
     infoAbout.innerText = ""
 
-    infoAboutImg.style.visibility = "hidden"
-    infoTotalViewImg.style.visibility = "hidden"
-    infoLocationImg.style.visibility = "hidden"
-    infoJoinDateImg.style.visibility = "hidden"
     infoChannelName.style.visibility = "hidden"
     infoSubscriber.style.visibility = "hidden"
     infoProfileImg.style.visibility = "hidden"
 
     infoRoot.style.display = "none"
+
     while (infoStreamList.hasChildNodes()) {
         infoStreamList.removeChild(infoStreamList.firstChild)
     }
