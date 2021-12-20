@@ -167,8 +167,7 @@ function removeTuber() {
 
 function showInfo(info, channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
-    console.log(mainJson)
-    console.log(info, channelId)
+    console.log(`Showing : ${channelId}`)
     const baseInfo = JSON.parse(mainJson[channelId])
     infoSubscriber.innerText = info["subscriber"]
     infoProfileLink.href = baseInfo["url"]
@@ -248,7 +247,6 @@ function showInfo(info, channelId) {
     infoProfileImg.style.display = "inline-block"
 
     globalInterval = setInterval(autoRefresh, 10000, channelId)
-    console.log(globalInterval)
     loadingTuber = null
     showingTuber = channelId
 }
@@ -256,7 +254,7 @@ function showInfo(info, channelId) {
 function loadInfo(channelId) {
     localStorage["recentTuber"] = channelId
     loadingTuber = channelId
-    console.log(loadingTuber)
+    console.log(`Loading : ${channelId}`)
     showingTuber = channelId
     toggleNoList()
     clearInfo()
@@ -275,8 +273,7 @@ function loadInfo(channelId) {
             console.log(error)
         }
         if (loadingTuber !== channelId) {
-            console.log(loadingTuber, channelId)
-            console.log("Load Cancel")
+            console.log(`Load Canceled : [다른게 로딩중 : ${loadingTuber}]`)
             return null
         }
 
@@ -297,17 +294,17 @@ function loadInfo(channelId) {
 
 function autoRefresh(channelId) {
     if (showingTuber !== channelId || loadingTuber !== null) {
-        console.log("Refresh Cancel", showingTuber, loadingTuber)
+        console.log(`${channelId} : Refresh Canceled [다른 유튜버 로딩중 : ${loadingTuber}]`)
         return null
     }
-    console.log("Refresh!")
-    loadingTuber = `refreshing ${channelId}`
+    console.log(`${channelId} : Refresh!`)
+    loadingTuber = `Refreshing : ${channelId}`
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
         }
-        if (loadingTuber !== `refreshing ${channelId}`) {
-            console.log("Refresh Cancel", showingTuber, loadingTuber)
+        if (loadingTuber !== `Refreshing : ${channelId}`) {
+            console.log(`${channelId} : Refresh Canceled [이미 다른게 로딩중 : ${loadingTuber}]`)
             return null
         }
 
@@ -387,7 +384,7 @@ function autoRefresh(channelId) {
         infoJoinDate.innerText = about[2]
         infoAboutmore.innerText = about[0]
         loadingTuber = null
-        console.log("Refreshed!")
+        console.log(`${channelId} : Refreshed!`)
     })
 }
 
