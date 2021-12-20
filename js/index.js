@@ -251,18 +251,19 @@ function showInfo(info, channelId) {
     console.log(globalInterval)
     loadingTuber = null
     showingTuber = channelId
-    localStorage["recentTuber"] = channelId
 }
 
 function loadInfo(channelId) {
+    localStorage["recentTuber"] = channelId
     loadingTuber = channelId
+    console.log(loadingTuber)
     showingTuber = channelId
     toggleNoList()
+    clearInfo()
     if (globalInterval !== null) {
         clearInterval(globalInterval)
+        globalInterval = null
     }
-
-    clearInfo(channelId)
 
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
@@ -274,6 +275,8 @@ function loadInfo(channelId) {
             console.log(error)
         }
         if (loadingTuber !== channelId) {
+            console.log(loadingTuber, channelId)
+            console.log("Load Cancel")
             return null
         }
 
@@ -294,13 +297,18 @@ function loadInfo(channelId) {
 
 function autoRefresh(channelId) {
     if (showingTuber !== channelId || loadingTuber !== null) {
+        console.log("Refresh Cancel", showingTuber, loadingTuber)
         return null
     }
     console.log("Refresh!")
-    loadingTuber = "refreshing"
+    loadingTuber = `refreshing ${channelId}`
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
+        }
+        if (loadingTuber !== `refreshing ${channelId}`) {
+            console.log("Refresh Cancel", showingTuber, loadingTuber)
+            return null
         }
 
         const data = result[0].replace("b'", '').replace("'", '')
@@ -379,20 +387,11 @@ function autoRefresh(channelId) {
         infoJoinDate.innerText = about[2]
         infoAboutmore.innerText = about[0]
         loadingTuber = null
+        console.log("Refreshed!")
     })
 }
 
-function clearInfo(channelId = null) {
-    infoRoot.style.display = "none"
-    while (infoStreamList.hasChildNodes()) {
-        infoStreamList.removeChild(infoStreamList.firstChild)
-    }
-    while (infoVideosList.hasChildNodes()) {
-        infoVideosList.removeChild(infoVideosList.firstChild)
-    }
-    while (infoCommunityList.hasChildNodes()) {
-        infoCommunityList.removeChild(infoCommunityList.firstChild)
-    }
+function clearInfo() {
     infoTotalView.innerText = ""
     infoLocation.innerText = ""
     infoJoinDate.innerText = ""
@@ -406,6 +405,17 @@ function clearInfo(channelId = null) {
     infoChannelName.style.visibility = "hidden"
     infoSubscriber.style.visibility = "hidden"
     infoProfileImg.style.visibility = "hidden"
+
+    infoRoot.style.display = "none"
+    while (infoStreamList.hasChildNodes()) {
+        infoStreamList.removeChild(infoStreamList.firstChild)
+    }
+    while (infoVideosList.hasChildNodes()) {
+        infoVideosList.removeChild(infoVideosList.firstChild)
+    }
+    while (infoCommunityList.hasChildNodes()) {
+        infoCommunityList.removeChild(infoCommunityList.firstChild)
+    }
 }
 
 function toggleNoList() {

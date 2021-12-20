@@ -33,5 +33,5 @@ function show() {
 }
 
 app.on("ready", () => {
-    setTimeout(show, 3000)
+    setTimeout(show, 1000)
 })
