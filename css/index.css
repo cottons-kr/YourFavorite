@@ -319,10 +319,6 @@ li {
     vertical-align: middle;
 }
 
-#infoAboutImg, #infoTotalViewImg, #infoLocationImg, #infoJoinDateImg {
-    visibility: hidden;
-}
-
 #infoAboutImg {
     transition-duration: 0.4s;
 }

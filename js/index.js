@@ -39,6 +39,8 @@ const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
 const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 const infoTuberLoading = document.querySelector("#infoTuberLoading")
 const infoTuberLoadingName = document.querySelector("#infoTuberLoading h2")
+const infoAboutRoot = document.querySelector("#infoAboutRoot")
+const infoAboutClass = document.querySelector(".infoAbout")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -231,10 +233,7 @@ function showInfo(info, channelId) {
         infoAbout.innerText = `${infoAbout.innerText.substr(0, 15)}...`
     }
 
-    infoJoinDateImg.style.visibility = "visible"
-    infoLocationImg.style.visibility = "visible"
-    infoTotalViewImg.style.visibility = "visible"
-    infoAboutImg.style.visibility = "visible"
+    infoAboutClass.style.display = "inline-block"
     infoSubscriber.style.visibility = "visible"
     infoChannelName.style.visibility = "visible"
     infoProfileImg.style.visibility = "visible"
@@ -391,11 +390,7 @@ function autoRefresh(channelId) {
 }
 
 function clearInfo() {
-    infoAboutImg.style.visibility = "hidden"
-    infoTotalViewImg.style.visibility = "hidden"
-    infoLocationImg.style.visibility = "hidden"
-    infoJoinDateImg.style.visibility = "hidden"
-
+    infoAboutClass.style.display = "none"
     infoTotalView.innerText = ""
     infoLocation.innerText = ""
     infoJoinDate.innerText = ""
