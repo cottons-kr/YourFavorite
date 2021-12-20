@@ -41,6 +41,7 @@ const infoTuberLoading = document.querySelector("#infoTuberLoading")
 const infoTuberLoadingName = document.querySelector("#infoTuberLoading h2")
 const infoAboutRoot = document.querySelector("#infoAboutRoot")
 const infoAboutClass = document.querySelector(".infoAbout")
+const infoLocationRoot = document.querySelector("#infoLocationRoot")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -238,7 +239,7 @@ function showInfo(info, channelId) {
     infoChannelName.style.visibility = "visible"
     infoProfileImg.style.visibility = "visible"
     infoTotalView.innerText = about[3]
-    infoLocation.innerText = about[1]
+    infoLocation.innerText = locationFilter(about)
     infoJoinDate.innerText = about[2]
     infoAboutmore.innerText = about[0]
 
@@ -379,9 +380,8 @@ function autoRefresh(channelId) {
         if (infoAbout.innerText.length > 10) {
             infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
         }
-
         infoTotalView.innerText = about[3]
-        infoLocation.innerText = about[1]
+        infoLocation.innerText = locationFilter(about)
         infoJoinDate.innerText = about[2]
         infoAboutmore.innerText = about[0]
         loadingTuber = null
@@ -444,6 +444,12 @@ function showRecentTuber() {
         localStorage["recentTuber"] = Object.keys(mainJson)[0]
     }
     loadInfo(localStorage["recentTuber"])
+}
+
+function locationFilter(about) {
+    if (about[1] === "") {infoLocationRoot.style.display = "none"; return "none"}
+    infoLocationRoot.style.display = "block"
+    return about[1]
 }
 
 addButtonImg.addEventListener("mouseover", () => {
