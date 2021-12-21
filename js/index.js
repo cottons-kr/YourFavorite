@@ -1,10 +1,6 @@
 const { PythonShell } = require("python-shell")
-const { info } = require("console")
-const { app } = require("electron")
 const os = require('os')
 const fs = require("fs")
-const e = require("express")
-const { json } = require("express/lib/response")
 
 const body = document.querySelector("body")
 const addButtonImg = document.querySelector("#addButtonImg")
@@ -134,6 +130,7 @@ function addTuber(event) {
         localStorage["youtuber"] = JSON.stringify(mainJson)
         addList(channelName)
         console.log(`New Tuber : ${channelName}`)
+        loadInfo(channelName)
         removeTuber()
     })
 }
@@ -164,6 +161,7 @@ function removeTuber() {
                 }
                 loadList()
                 removeTuber()
+                localStorage.removeItem(key)
             })
             removeTuberPopupList.appendChild(button)
         }
