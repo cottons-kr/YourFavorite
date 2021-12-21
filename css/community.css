@@ -62,3 +62,22 @@
 #noCommunity {
     margin-top: 5%;
 }
+
+.showCommunity {
+    animation: showCommunity;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    transition-duration: 0.4s;
+}
+
+/*애니메이션*/
+@keyframes showCommunity {
+    0% {
+        opacity: 0;
+        transform: translateY(5%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}

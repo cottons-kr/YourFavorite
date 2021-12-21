@@ -4,6 +4,7 @@ const { app } = require("electron")
 const os = require('os')
 const fs = require("fs")
 const e = require("express")
+const { json } = require("express/lib/response")
 
 const body = document.querySelector("body")
 const addButtonImg = document.querySelector("#addButtonImg")
@@ -182,7 +183,7 @@ function showInfo(info, channelId) {
     infoProfileImg.src = baseInfo["profileImg"]
 
     for (let stream of info["streams"]) {
-        if (stream[1] === undefined) {
+        if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
             h1.innerText = "스트리밍을 하고있지 않아요"
             h1.setAttribute("id", "noStream")
@@ -201,11 +202,13 @@ function showInfo(info, channelId) {
         img.setAttribute("id", "streamThumbnail")
         a.appendChild(img)
         div.appendChild(a)
+        div.classList.add("showStream")
+        setTimeout(() => {div.classList.remove("showStream")}, 400)
         infoStreamList.appendChild(div)
     }
 
     for (let video of info["videos"]) {
-        if (video[1] === undefined) {
+        if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
             h1.innerText = "올린 영상이 없어요"
             h1.setAttribute("id", "noVideo")
@@ -228,7 +231,7 @@ function showInfo(info, channelId) {
         infoVideosList.appendChild(div)
     }
 
-    if (info["communitys"].length == 0) {
+    if (info["communitys"].length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
         h1.innerText = "커뮤니티 게시글이 없어요"
         h1.setAttribute("id", "noCommunity")
@@ -242,6 +245,8 @@ function showInfo(info, channelId) {
         div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
         p.innerText = community[0]
         div.appendChild(p)
+        div.classList.add("showCommunity")
+        setTimeout(() => {div.classList.remove("showCommunity")}, 400)
         infoCommunityList.appendChild(div)
     }
 
@@ -308,18 +313,20 @@ function loadInfo(channelId) {
         if (error) {
             console.log(error)
         }
-        if (loadingTuber !== channelId) {
-            console.log(`Load Canceled : [다른게 로딩중 : ${loadingTuber}]`)
-            return null
-        }
 
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
+        if (loadingTuber !== channelId) {
+            console.log(`${channelId} : Load Saved [${loadingTuber}]`)
+            localStorage[channelId] = JSON.stringify(info)
+            return null
+        }
         localStorage[channelId] = JSON.stringify(info)
 
         showInfo(info, channelId)
+        localStorage[channelId] = JSON.stringify(info)
 
     })
     if (showingTuber !== channelId) {
@@ -339,35 +346,32 @@ function autoRefresh(channelId) {
         if (error) {
             console.log(error)
         }
-        if (loadingTuber !== `Refreshing : ${channelId}`) {
-            console.log(`${channelId} : Refresh Canceled [이미 다른게 로딩중 : ${loadingTuber}]`)
-            return null
-        }
 
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
-        const oldinfo = JSON.parse(localStorage[channelId])
+        let oldinfo = JSON.parse(localStorage[channelId])
+        if (oldinfo === undefined) {Object.assign(oldinfo, info)}
+        let noContent = []
 
-        /*
-        while (infoStreamList.hasChildNodes()) {
-            infoStreamList.removeChild(infoStreamList.firstChild)
+        if (loadingTuber !== `Refreshing : ${channelId}`) {
+            console.log(`${channelId} : Refresh Saved [${loadingTuber}]`)
+            localStorage[channelId] = JSON.stringify(info)
+            return null
         }
-        while (infoVideosList.hasChildNodes()) {
-            infoVideosList.removeChild(infoVideosList.firstChild)
-        }
-        while (infoCommunityList.hasChildNodes()) {
-            infoCommunityList.removeChild(infoCommunityList.firstChild)
-        }*/
-        
+
         infoSubscriber.innerText = info["subscriber"]
 
-        for (let stream of info["streams"]) {
+        for (let stream of info["streams"].filter(x => {!oldinfo["streams"].includes(x)})) {
             if (stream[1] === undefined) {
+                while (infoStreamList.hasChildNodes()) {
+                    infoStreamList.removeChild(infoStreamList.firstChild)
+                }
                 const h1 = document.createElement("h1")
                 h1.innerText = "스트리밍을 하고있지 않아요"
                 infoStreamList.appendChild(h1)
+                noContent.push("stream")
                 break
             }
             const div = document.createElement("div")
@@ -384,14 +388,17 @@ function autoRefresh(channelId) {
             infoStreamList.appendChild(div)
         }
 
-        for (let video of info["videos"]) {
+        for (let video of info["videos"].filter(x => {!oldinfo["videos"].includes(x)})) {
             if (video[1] === undefined) {
+                while (infoVideosList.hasChildNodes()) {
+                    infoVideosList.removeChild(infoVideosList.firstChild)
+                }
                 const h1 = document.createElement("h1")
                 h1.innerText = "올린 영상이 없어요"
-                infoStreamList.appendChild(h1)
+                infoVideosList.appendChild(h1)
+                noContent.push("video")
                 break
             }
-            if (video in oldinfo[channelId]) {continue}
             const div = document.createElement("div")
             const a = document.createElement("a")
             const img = document.createElement("img")
@@ -405,8 +412,16 @@ function autoRefresh(channelId) {
             infoVideosList.appendChild(div)
         }
 
-        for (let community of info["communitys"]) {
+        for (let community of info["communitys"].filter(x => {!oldinfo["communitys"].includes(x)})) {
             if (community[0] === undefined) {
+                while (infoCommunityList.hasChildNodes()) {
+                    infoCommunityList.removeChild(infoCommunityList.firstChild)
+                }
+                const h1 = document.createElement("h1")
+                h1.innerText = "커뮤니티 게시글이 없어요"
+                h1.setAttribute("id", "noCommunity")
+                infoCommunityList.appendChild(h1)
+                noContent.push("community")
                 break
             }
             const div = document.createElement("div")
@@ -428,6 +443,25 @@ function autoRefresh(channelId) {
         infoJoinDate.innerText = about[2]
         infoAboutmore.innerText = about[0]
         loadingTuber = null
+
+        if (noContent.includes("stream") && noContent.includes("community")) {
+            console.log(`${channelId} : Only Videos`)
+            infoCommunity.style.display = "none"
+            infoStream.style.display = "none"
+            infoVideos.classList.add("onlyVideos")
+            infoVideosList.classList.add("onlyVideosList")
+            infoVideosTitle.classList.add("onlyVideosTitle")
+            for (let video of document.querySelectorAll("#video")) {video.classList.add("onlyVideo")}
+        } else {
+            infoCommunity.style.display = "block"
+            infoStream.style.display = "block"
+            infoVideos.classList.remove("onlyVideos")
+            infoVideosList.classList.remove("onlyVideosList")
+            infoVideosTitle.classList.remove("onlyVideosTitle")
+            for (let video of document.querySelectorAll("#video")) {video.classList.remove("onlyVideo")}
+        }
+        
+        localStorage[channelId] = JSON.stringify(info)
         console.log(`${channelId} : Refreshed!`)
     })
 }

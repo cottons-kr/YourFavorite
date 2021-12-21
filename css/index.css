@@ -227,6 +227,11 @@ li {
     transform: translateY(-9%);
 }
 
+#removeTuberPopupListContent:active {
+    transition-duration: 0.4s;
+    transform: scale(90%);
+}
+
 #removeTuberPopupListContent p {
     padding: 2%;
     font-size: large;
