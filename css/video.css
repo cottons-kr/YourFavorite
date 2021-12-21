@@ -77,3 +77,22 @@
     font-size: large;
     margin-left: 2.5%;
 }
+
+.showVideo {
+    animation: showVideo;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    transition-duration: 0.4s;
+}
+
+/*애니메이션*/
+@keyframes showVideo {
+    0% {
+        opacity: 0;
+        transform: translateY(5%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}

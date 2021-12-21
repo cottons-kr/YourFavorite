@@ -223,6 +223,8 @@ function showInfo(info, channelId) {
         img.setAttribute("id", "videoThumbnail")
         a.appendChild(img)
         div.appendChild(a)
+        div.classList.add("showVideo")
+        setTimeout(() => {div.classList.remove("showVideo")}, 400)
         infoVideosList.appendChild(div)
     }
 
@@ -346,7 +348,9 @@ function autoRefresh(channelId) {
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
+        const oldinfo = JSON.parse(localStorage[channelId])
 
+        /*
         while (infoStreamList.hasChildNodes()) {
             infoStreamList.removeChild(infoStreamList.firstChild)
         }
@@ -355,7 +359,7 @@ function autoRefresh(channelId) {
         }
         while (infoCommunityList.hasChildNodes()) {
             infoCommunityList.removeChild(infoCommunityList.firstChild)
-        }
+        }*/
         
         infoSubscriber.innerText = info["subscriber"]
 
@@ -387,6 +391,7 @@ function autoRefresh(channelId) {
                 infoStreamList.appendChild(h1)
                 break
             }
+            if (video in oldinfo[channelId]) {continue}
             const div = document.createElement("div")
             const a = document.createElement("a")
             const img = document.createElement("img")
