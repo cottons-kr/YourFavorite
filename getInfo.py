@@ -14,7 +14,7 @@ while True:
         run(["powershell", ".\\resource\python-3.9.8.amd64\python -m pip install --upgrade requests"], shell=True)
         continue
 
-waitTime = 5
+waitTime = 10
 
 rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
 cachePath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver\\cache"
@@ -91,7 +91,7 @@ def main(url, type, debug=False):
                 streams.append([name, link])
 
         driver.get(url+"/videos")
-        driver.execute_script("window.scrollTo(0, 999999999)")
+        driver.execute_script(f"window.scrollTo(0, {str(999999999 * 3)})")
         videos = []
         driver.implicitly_wait(waitTime)
         try:

@@ -64,8 +64,8 @@
 }
 
 .onlyVideo {
-    width: 15.66%;
-    height: 24%;
+    width: 15.66% !important;
+    height: 23% !important;
 }
 
 .onlyVideosList {
@@ -74,5 +74,6 @@
 }
 
 .onlyVideosTitle {
+    font-size: large;
     margin-left: 2.5%;
 }

@@ -264,20 +264,20 @@ function showInfo(info, channelId) {
     infoProfileImg.style.display = "inline-block"
 
     if (noContent.includes("stream") && noContent.includes("community")) {
-        console.log("sd")
+        console.log(`${channelId} : Only Videos`)
         infoCommunity.style.display = "none"
         infoStream.style.display = "none"
         infoVideos.classList.add("onlyVideos")
         infoVideosList.classList.add("onlyVideosList")
         infoVideosTitle.classList.add("onlyVideosTitle")
-        document.qu
-        /*
-        infoVideos.style.width = "95%"
-        infoVideos.style.marginLeft = "2.5%"
-        infoVideosList.style.width = "97%"
-        infoVideosList.style.marginLeft = "1.5%"
-        infoVideosTitle.style.marginLeft = "2.5%"
-        for (let video of document.querySelectorAll("#video")) {video.style.width = "15.66%"; video.style.height = "24%"}*/
+        for (let video of document.querySelectorAll("#video")) {video.classList.add("onlyVideo")}
+    } else {
+        infoCommunity.style.display = "block"
+        infoStream.style.display = "block"
+        infoVideos.classList.remove("onlyVideos")
+        infoVideosList.classList.remove("onlyVideosList")
+        infoVideosTitle.classList.remove("onlyVideosTitle")
+        for (let video of document.querySelectorAll("#video")) {video.classList.remove("onlyVideo")}
     }
 
     globalInterval = setInterval(autoRefresh, 10000, channelId)
