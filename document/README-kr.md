@@ -13,8 +13,8 @@
 |-|-|-|-|-|-|
 |권장(Windows)|Windows 10/11|3GHz 쿼드코어|8GB|2GB|100Mbps|
 |권장(Linux)|Debian 11, Kernel 5.x.x|2GHz 쿼드코어|4GB|2GB|100Mbps|
-|최소(Windows)|Windows 8.1|2GHz 듀얼코어|4GB|1GB|50Mbps|
-|최소(Linux)|Debian 9, Kernel 5.x.x|2GHz 듀얼코어|2GB|1GB|50Mbps|
+|최소(Windows)|Windows 8.1|2GHz 쿼드코어|4GB|1GB|50Mbps|
+|최소(Linux)|Debian 9, Kernel 5.x.x|2GHz 쿼드코어|2GB|1GB|50Mbps|
 
 x64 아키텍처만 지원합니다.
 
