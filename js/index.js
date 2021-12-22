@@ -15,7 +15,7 @@ const infoChannelName = document.querySelector("#infoChannelName h1")
 const infoSubscriber = document.querySelector("#infoSubscriber")
 const noList = document.querySelector("#noList")
 const addTuberLoading = document.querySelector("#addTuberLoading")
-const infoAboutMoreButton = document.querySelector("#infoAboutMoreButton")
+const infoAboutMoreButton = document.querySelector("#infoAboutMoreButton img")
 const infoAboutMorePopup = document.querySelector("#infoAboutMorePopup")
 const infoAboutMorePopupExitButton = document.querySelector("#infoAboutMorePopupExitButton")
 const infoStreamList = document.querySelector("#infoStreamList")
@@ -150,7 +150,7 @@ function removeTuber() {
             p.innerText = key
             button.setAttribute("id", "removeTuberPopupListContent")
             button.appendChild(p)
-            button.addEventListener("click", () => {
+            button.addEventListener("click", () => {setTimeout(() => {
                 delete mainJson[key]
                 localStorage["youtuber"] = JSON.stringify(mainJson)
                 while (tuberListContainer.hasChildNodes()) {
@@ -162,7 +162,7 @@ function removeTuber() {
                 loadList()
                 removeTuber()
                 localStorage.removeItem(key)
-            })
+            }, 50)})
             removeTuberPopupList.appendChild(button)
         }
         toggleNoList()
@@ -350,7 +350,7 @@ function autoRefresh(channelId) {
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
         let oldinfo = JSON.parse(localStorage[channelId])
-        if (oldinfo === undefined) {Object.assign(oldinfo, info)}
+        if (oldinfo === undefined) {oldinfo = JSON.parse(JSON.stringify(info))}
         let noContent = []
 
         if (loadingTuber !== `Refreshing : ${channelId}`) {
@@ -511,7 +511,8 @@ function showMoreAbout() {
 function showRecentTuber() {
     if (loadingTuber !== null) {return null}
     const mainJson = JSON.parse(localStorage["youtuber"])
-    if (localStorage["recentTuber"] === undefined) {
+    if (localStorage["recentTuber"] === undefined || localStorage["recentTuber"] === "undefined") {
+        if (Object.keys(mainJson) === "{}") {localStorage.removeItem("recentTuber"); return null}
         if (noList.style.display !== "none") {return null}
         localStorage["recentTuber"] = Object.keys(mainJson)[0]
     }
