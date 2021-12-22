@@ -45,7 +45,7 @@
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": false
     },
     "directories": {
       "buildResources": "resources/installer/",
