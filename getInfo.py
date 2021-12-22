@@ -17,13 +17,12 @@ while True:
 
 waitTime = 10
 
-rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
-cachePath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver\\cache"
+#rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
+#cachePath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver\\cache"
 
-#rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\driver"
+rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\driver"
 if not os.path.exists(rootPath):
     rootPath = f"C:\\Users\\{getpass.getuser()}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\driver"
-#cachePath = f"C:\\Users\\{getpass.getuser()}\\YourFavorite Preview\\cache"
 
 programPath = "C:\\Program Files"
 chromePath = f"{programPath}\\Google\\Chrome\\Application\\chrome.exe"
