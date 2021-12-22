@@ -170,7 +170,7 @@ function removeTuber() {
 }
 
 function loadVideos(info, noContent) {
-    for (let video of info["videos"]) {
+    for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
             h1.innerText = "올린 영상이 없어요"
@@ -199,7 +199,7 @@ function loadVideos(info, noContent) {
 }
 
 function loadStreams(info, noContent) {
-    for (let stream of info["streams"]) {
+    for (let stream of info) {
         if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
             h1.innerText = "스트리밍을 하고있지 않아요"
@@ -228,7 +228,7 @@ function loadStreams(info, noContent) {
 }
 
 function loadCommunitys(info, noContent) {
-    if (info["communitys"].length == 0 && infoCommunityList.hasChildNodes() === false) {
+    if (info.length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
         h1.innerText = "커뮤니티 게시글이 없어요"
         h1.setAttribute("id", "noCommunity")
@@ -237,7 +237,7 @@ function loadCommunitys(info, noContent) {
         infoCommunityList.appendChild(h1)
         noContent.push("community")
     }
-    for (let community of info["communitys"]) {
+    for (let community of info) {
         const div = document.createElement("div")
         const p = document.createElement("p")
         div.setAttribute("id", "community")
@@ -261,9 +261,9 @@ function showInfo(info, channelId) {
     infoProfileImg.title = `${baseInfo["channelName"]}채널로 이동`
     infoProfileImg.src = baseInfo["profileImg"]
 
-    loadStreams(info, noContent)
-    loadVideos(info, noContent)
-    loadCommunitys(info, noContent)
+    loadStreams(info["streams"], noContent)
+    loadVideos(info["videos"], noContent)
+    loadCommunitys(info["communitys"], noContent)
 
     const about = info["about"]
     infoAbout.innerText = about[0]
@@ -383,11 +383,11 @@ function autoRefresh(channelId) {
         }
 
         if (info["videos"] !== "CantLoad") {
-            loadVideos(info, noContent)
+            loadVideos(info["videos"].filter(x => {oldinfo["videos"].includes(x)}), noContent)
         }
 
         if (info["communitys"] !== "CantLoad") {
-            loadCommunitys(info, noContent)
+            loadCommunitys(info["communitys"].filter(x => {oldinfo["communitys"].includes(x)}), noContent)
         }
 
         const about = info["about"]
