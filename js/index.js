@@ -175,6 +175,8 @@ function loadVideos(info, noContent) {
             const h1 = document.createElement("h1")
             h1.innerText = "올린 영상이 없어요"
             h1.setAttribute("id", "noVideo")
+            h1.classList.add("showVideo")
+            setTimeout(() => {h1.classList.remove("showVideo")}, 400)
             infoVideosList.appendChild(h1)
             noContent.push("video")
             break
@@ -202,6 +204,8 @@ function loadStreams(info, noContent) {
             const h1 = document.createElement("h1")
             h1.innerText = "스트리밍을 하고있지 않아요"
             h1.setAttribute("id", "noStream")
+            h1.classList.add("showStream")
+            setTimeout(() => {h1.classList.remove("showStream")}, 400)
             infoStreamList.appendChild(h1)
             noContent.push("stream")
             break
@@ -228,6 +232,8 @@ function loadCommunitys(info, noContent) {
         const h1 = document.createElement("h1")
         h1.innerText = "커뮤니티 게시글이 없어요"
         h1.setAttribute("id", "noCommunity")
+        h1.classList.add("showCommunity")
+        setTimeout(() => {h1.classList.remove("showCommunity")}, 400)
         infoCommunityList.appendChild(h1)
         noContent.push("community")
     }
