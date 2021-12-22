@@ -361,74 +361,80 @@ function autoRefresh(channelId) {
 
         infoSubscriber.innerText = info["subscriber"]
 
-        for (let stream of info["streams"].filter(x => {!oldinfo["streams"].includes(x)})) {
-            if (stream[1] === undefined) {
-                while (infoStreamList.hasChildNodes()) {
-                    infoStreamList.removeChild(infoStreamList.firstChild)
+        if (info["streams"] !== "CantLoad") {
+            for (let stream of info["streams"].filter(x => {!oldinfo["streams"].includes(x)})) {
+                if (stream[1] === undefined) {
+                    while (infoStreamList.hasChildNodes()) {
+                        infoStreamList.removeChild(infoStreamList.firstChild)
+                    }
+                    const h1 = document.createElement("h1")
+                    h1.innerText = "스트리밍을 하고있지 않아요"
+                    infoStreamList.appendChild(h1)
+                    noContent.push("stream")
+                    break
                 }
-                const h1 = document.createElement("h1")
-                h1.innerText = "스트리밍을 하고있지 않아요"
-                infoStreamList.appendChild(h1)
-                noContent.push("stream")
-                break
+                const div = document.createElement("div")
+                const a = document.createElement("a")
+                const img = document.createElement("img")
+                div.setAttribute("id", "stream")
+                a.setAttribute("href", stream[1])
+                a.setAttribute("id", "streamLink")
+                img.setAttribute("src", getThumbnail(stream[1]))
+                img.setAttribute("title", stream[0])
+                img.setAttribute("id", "streamThumbnail")
+                a.appendChild(img)
+                div.appendChild(a)
+                infoStreamList.appendChild(div)
             }
-            const div = document.createElement("div")
-            const a = document.createElement("a")
-            const img = document.createElement("img")
-            div.setAttribute("id", "stream")
-            a.setAttribute("href", stream[1])
-            a.setAttribute("id", "streamLink")
-            img.setAttribute("src", getThumbnail(stream[1]))
-            img.setAttribute("title", stream[0])
-            img.setAttribute("id", "streamThumbnail")
-            a.appendChild(img)
-            div.appendChild(a)
-            infoStreamList.appendChild(div)
         }
 
-        for (let video of info["videos"].filter(x => {!oldinfo["videos"].includes(x)})) {
-            if (video[1] === undefined) {
-                while (infoVideosList.hasChildNodes()) {
-                    infoVideosList.removeChild(infoVideosList.firstChild)
+        if (info["videos"] !== "CantLoad") {
+            for (let video of info["videos"].filter(x => {!oldinfo["videos"].includes(x)})) {
+                if (video[1] === undefined) {
+                    while (infoVideosList.hasChildNodes()) {
+                        infoVideosList.removeChild(infoVideosList.firstChild)
+                    }
+                    const h1 = document.createElement("h1")
+                    h1.innerText = "올린 영상이 없어요"
+                    infoVideosList.appendChild(h1)
+                    noContent.push("video")
+                    break
                 }
-                const h1 = document.createElement("h1")
-                h1.innerText = "올린 영상이 없어요"
-                infoVideosList.appendChild(h1)
-                noContent.push("video")
-                break
+                const div = document.createElement("div")
+                const a = document.createElement("a")
+                const img = document.createElement("img")
+                div.setAttribute("id", "video")
+                a.setAttribute("href", video[1])
+                img.setAttribute("src", getThumbnail(video[1]))
+                img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)
+                img.setAttribute("id", "videoThumbnail")
+                a.appendChild(img)
+                div.appendChild(a)
+                infoVideosList.appendChild(div)
             }
-            const div = document.createElement("div")
-            const a = document.createElement("a")
-            const img = document.createElement("img")
-            div.setAttribute("id", "video")
-            a.setAttribute("href", video[1])
-            img.setAttribute("src", getThumbnail(video[1]))
-            img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)
-            img.setAttribute("id", "videoThumbnail")
-            a.appendChild(img)
-            div.appendChild(a)
-            infoVideosList.appendChild(div)
         }
 
-        for (let community of info["communitys"].filter(x => {!oldinfo["communitys"].includes(x)})) {
-            if (community[0] === undefined) {
-                while (infoCommunityList.hasChildNodes()) {
-                    infoCommunityList.removeChild(infoCommunityList.firstChild)
+        if (info["communitys"] !== "CantLoad") {
+            for (let community of info["communitys"].filter(x => {!oldinfo["communitys"].includes(x)})) {
+                if (community[0] === undefined) {
+                    while (infoCommunityList.hasChildNodes()) {
+                        infoCommunityList.removeChild(infoCommunityList.firstChild)
+                    }
+                    const h1 = document.createElement("h1")
+                    h1.innerText = "커뮤니티 게시글이 없어요"
+                    h1.setAttribute("id", "noCommunity")
+                    infoCommunityList.appendChild(h1)
+                    noContent.push("community")
+                    break
                 }
-                const h1 = document.createElement("h1")
-                h1.innerText = "커뮤니티 게시글이 없어요"
-                h1.setAttribute("id", "noCommunity")
-                infoCommunityList.appendChild(h1)
-                noContent.push("community")
-                break
+                const div = document.createElement("div")
+                const p = document.createElement("p")
+                div.setAttribute("id", "community")
+                div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
+                p.innerText = community[0]
+                div.appendChild(p)
+                infoCommunityList.appendChild(div)
             }
-            const div = document.createElement("div")
-            const p = document.createElement("p")
-            div.setAttribute("id", "community")
-            div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
-            p.innerText = community[0]
-            div.appendChild(p)
-            infoCommunityList.appendChild(div)
         }
 
         const about = info["about"]
