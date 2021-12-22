@@ -169,42 +169,7 @@ function removeTuber() {
     }
 }
 
-function showInfo(info, channelId) {
-    const mainJson = JSON.parse(localStorage["youtuber"])
-    let noContent = []
-    console.log(`Showing : ${channelId}`)
-    const baseInfo = JSON.parse(mainJson[channelId])
-    infoSubscriber.innerText = info["subscriber"]
-    infoProfileLink.href = baseInfo["url"]
-    infoChannelName.innerText = baseInfo["channelName"]
-    infoProfileImg.title = `${baseInfo["channelName"]}채널로 이동`
-    infoProfileImg.src = baseInfo["profileImg"]
-
-    for (let stream of info["streams"]) {
-        if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
-            const h1 = document.createElement("h1")
-            h1.innerText = "스트리밍을 하고있지 않아요"
-            h1.setAttribute("id", "noStream")
-            infoStreamList.appendChild(h1)
-            noContent.push("stream")
-            break
-        }
-        const div = document.createElement("div")
-        const a = document.createElement("a")
-        const img = document.createElement("img")
-        div.setAttribute("id", "stream")
-        a.setAttribute("href", stream[1])
-        a.setAttribute("id", "streamLink")
-        img.setAttribute("src", getThumbnail(stream[1]))
-        img.setAttribute("title", stream[0])
-        img.setAttribute("id", "streamThumbnail")
-        a.appendChild(img)
-        div.appendChild(a)
-        div.classList.add("showStream")
-        setTimeout(() => {div.classList.remove("showStream")}, 400)
-        infoStreamList.appendChild(div)
-    }
-
+function loadVideos(info, noContent) {
     for (let video of info["videos"]) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
@@ -229,6 +194,36 @@ function showInfo(info, channelId) {
         infoVideosList.appendChild(div)
     }
 
+}
+
+function loadStreams(info, noContent) {
+    for (let stream of info["streams"]) {
+        if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
+            const h1 = document.createElement("h1")
+            h1.innerText = "스트리밍을 하고있지 않아요"
+            h1.setAttribute("id", "noStream")
+            infoStreamList.appendChild(h1)
+            noContent.push("stream")
+            break
+        }
+        const div = document.createElement("div")
+        const a = document.createElement("a")
+        const img = document.createElement("img")
+        div.setAttribute("id", "stream")
+        a.setAttribute("href", stream[1])
+        a.setAttribute("id", "streamLink")
+        img.setAttribute("src", getThumbnail(stream[1]))
+        img.setAttribute("title", stream[0])
+        img.setAttribute("id", "streamThumbnail")
+        a.appendChild(img)
+        div.appendChild(a)
+        div.classList.add("showStream")
+        setTimeout(() => {div.classList.remove("showStream")}, 400)
+        infoStreamList.appendChild(div)
+    }
+}
+
+function loadCommunitys(info, noContent) {
     if (info["communitys"].length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
         h1.innerText = "커뮤니티 게시글이 없어요"
@@ -247,6 +242,22 @@ function showInfo(info, channelId) {
         setTimeout(() => {div.classList.remove("showCommunity")}, 400)
         infoCommunityList.appendChild(div)
     }
+}
+
+function showInfo(info, channelId) {
+    const mainJson = JSON.parse(localStorage["youtuber"])
+    let noContent = []
+    console.log(`Showing : ${channelId}`)
+    const baseInfo = JSON.parse(mainJson[channelId])
+    infoSubscriber.innerText = info["subscriber"]
+    infoProfileLink.href = baseInfo["url"]
+    infoChannelName.innerText = baseInfo["channelName"]
+    infoProfileImg.title = `${baseInfo["channelName"]}채널로 이동`
+    infoProfileImg.src = baseInfo["profileImg"]
+
+    loadStreams(info, noContent)
+    loadVideos(info, noContent)
+    loadCommunitys(info, noContent)
 
     const about = info["about"]
     infoAbout.innerText = about[0]
@@ -362,79 +373,15 @@ function autoRefresh(channelId) {
         infoSubscriber.innerText = info["subscriber"]
 
         if (info["streams"] !== "CantLoad") {
-            for (let stream of info["streams"].filter(x => {!oldinfo["streams"].includes(x)})) {
-                if (stream[1] === undefined) {
-                    while (infoStreamList.hasChildNodes()) {
-                        infoStreamList.removeChild(infoStreamList.firstChild)
-                    }
-                    const h1 = document.createElement("h1")
-                    h1.innerText = "스트리밍을 하고있지 않아요"
-                    infoStreamList.appendChild(h1)
-                    noContent.push("stream")
-                    break
-                }
-                const div = document.createElement("div")
-                const a = document.createElement("a")
-                const img = document.createElement("img")
-                div.setAttribute("id", "stream")
-                a.setAttribute("href", stream[1])
-                a.setAttribute("id", "streamLink")
-                img.setAttribute("src", getThumbnail(stream[1]))
-                img.setAttribute("title", stream[0])
-                img.setAttribute("id", "streamThumbnail")
-                a.appendChild(img)
-                div.appendChild(a)
-                infoStreamList.appendChild(div)
-            }
+            loadStreams(info, noContent)
         }
 
         if (info["videos"] !== "CantLoad") {
-            for (let video of info["videos"].filter(x => {!oldinfo["videos"].includes(x)})) {
-                if (video[1] === undefined) {
-                    while (infoVideosList.hasChildNodes()) {
-                        infoVideosList.removeChild(infoVideosList.firstChild)
-                    }
-                    const h1 = document.createElement("h1")
-                    h1.innerText = "올린 영상이 없어요"
-                    infoVideosList.appendChild(h1)
-                    noContent.push("video")
-                    break
-                }
-                const div = document.createElement("div")
-                const a = document.createElement("a")
-                const img = document.createElement("img")
-                div.setAttribute("id", "video")
-                a.setAttribute("href", video[1])
-                img.setAttribute("src", getThumbnail(video[1]))
-                img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)
-                img.setAttribute("id", "videoThumbnail")
-                a.appendChild(img)
-                div.appendChild(a)
-                infoVideosList.appendChild(div)
-            }
+            loadVideos(info, noContent)
         }
 
         if (info["communitys"] !== "CantLoad") {
-            for (let community of info["communitys"].filter(x => {!oldinfo["communitys"].includes(x)})) {
-                if (community[0] === undefined) {
-                    while (infoCommunityList.hasChildNodes()) {
-                        infoCommunityList.removeChild(infoCommunityList.firstChild)
-                    }
-                    const h1 = document.createElement("h1")
-                    h1.innerText = "커뮤니티 게시글이 없어요"
-                    h1.setAttribute("id", "noCommunity")
-                    infoCommunityList.appendChild(h1)
-                    noContent.push("community")
-                    break
-                }
-                const div = document.createElement("div")
-                const p = document.createElement("p")
-                div.setAttribute("id", "community")
-                div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
-                p.innerText = community[0]
-                div.appendChild(p)
-                infoCommunityList.appendChild(div)
-            }
+            loadCommunitys(info, noContent)
         }
 
         const about = info["about"]
