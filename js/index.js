@@ -379,7 +379,7 @@ function autoRefresh(channelId) {
         infoSubscriber.innerText = info["subscriber"]
 
         if (info["streams"] !== "CantLoad") {
-            loadStreams(info, noContent)
+            loadStreams(info["streams"].filter(x => {oldinfo["streams"].includes(x)}), noContent)
         }
 
         if (info["videos"] !== "CantLoad") {
