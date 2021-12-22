@@ -44,11 +44,11 @@ const infoVideosTitle = document.querySelector("#infoVideosTitle")
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 
 /*const rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"*/
-const driverPath = `${rootPath}resource\\driver`
 const rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\"
 if (fs.existsSync(rootPath) == false) {
     rootPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\`
 }
+const driverPath = `${rootPath}resource\\driver`
 
 let globalInterval = null
 let loadingTuber = null
