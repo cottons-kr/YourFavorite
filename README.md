@@ -20,3 +20,6 @@ This Repository contains Windows Edition. Windows Edition Update First.
 
 # License
 [MIT License](https://github.com/cottons-kr/YourFavorite/blob/main/LICENSE)
+
+
+https://github.com/lokesh/color-thief
