@@ -487,6 +487,12 @@ function locationFilter(about) {
     return about[1]
 }
 
+function autoPreload() {
+    for (let tuber of Object.keys(JSON.parse(localStorage["youtuber"]))) {
+        loadInfo(tuber)
+    }
+}
+
 addButtonImg.addEventListener("mouseover", () => {
     addButtonImg.style.opacity = 1
 })
