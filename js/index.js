@@ -251,6 +251,7 @@ function loadCommunitys(info, noContent) {
 }
 
 function showInfo(info, channelId) {
+    showingTuber = channelId
     const mainJson = JSON.parse(localStorage["youtuber"])
     let noContent = []
     console.log(`Showing : ${channelId}`)
@@ -304,7 +305,6 @@ function showInfo(info, channelId) {
 
     globalInterval = setInterval(autoRefresh, 10000, channelId)
     loadingTuber = null
-    showingTuber = channelId
 }
 
 function loadInfo(channelId) {
@@ -488,8 +488,22 @@ function locationFilter(about) {
 }
 
 function autoPreload() {
-    for (let tuber of Object.keys(JSON.parse(localStorage["youtuber"]))) {
-        loadInfo(tuber)
+    for (let channelName of Object.keys(JSON.parse(localStorage["youtuber"]))) {
+        if (showingTuber === channelName) {continue}
+        option.args = [JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"], "all"]
+        console.log(`Preloading : ${channelName}`)
+        PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
+            if (error) {
+                console.log(error)
+            }
+    
+            const data = result[0].replace("b'", '').replace("'", '')
+            const buff = Buffer.from(data, "base64")
+            let info = buff.toString("utf-8")
+            info = JSON.parse(info)
+            localStorage[channelName] = JSON.stringify(info)
+            console.log(`Preloaded : ${channelName}`)
+        })
     }
 }
 
@@ -538,3 +552,5 @@ clearInfo()
 loadList()
 toggleNoList()
 setTimeout(showRecentTuber, 500)
+setTimeout(autoPreload, 1500)
+setInterval(autoPreload, 30000)
