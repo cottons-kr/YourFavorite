@@ -341,8 +341,6 @@ function loadInfo(channelId) {
         localStorage[channelId] = JSON.stringify(info)
 
         showInfo(info, channelId)
-        localStorage[channelId] = JSON.stringify(info)
-
     })
     if (showingTuber !== channelId) {
         return null
@@ -450,7 +448,7 @@ function clearInfo() {
 
 function toggleNoList() {
     if (localStorage["youtuber"] === undefined) {localStorage["youtuber"] = "{}"}
-    if (localStorage["youtuber"].length <= 2 && showingTuber === null) { //youtuber JSON이 비어있는지 판단
+    if (localStorage["youtuber"].length <= 2 && showingTuber === null) {
         noList.style.display = "block"
     } else {
         noList.style.display = "none"
@@ -553,4 +551,4 @@ loadList()
 toggleNoList()
 setTimeout(showRecentTuber, 500)
 setTimeout(autoPreload, 1500)
-setInterval(autoPreload, 30000)
+setInterval(autoPreload, 60000)
