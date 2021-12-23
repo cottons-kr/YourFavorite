@@ -1,6 +1,6 @@
 {
   "name": "YourFavorite",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "description": "Get easier access to your favorite YouTubers",
   "main": "run.js",
   "scripts": {
@@ -28,13 +28,13 @@
     "python-shell": "^3.0.1"
   },
   "build": {
-    "productName": "YourFavorite Preview",
+    "productName": "YourFavorite",
     "appId": "com.virtuallab.yf.electron",
     "asar": false,
     "protocols": {
-      "name": "YourFavorite Preview",
+      "name": "YourFavorite",
       "schemes": [
-        "YourFavorite Preview"
+        "YourFavorite"
       ]
     },
     "win": {
