@@ -355,6 +355,9 @@ function autoRefresh(channelId) {
     }
     console.log(`${channelId} : Refresh!`)
     loadingTuber = `Refreshing : ${channelId}`
+    const mainJson = JSON.parse(localStorage["youtuber"])
+    const info = JSON.parse(mainJson[channelId])
+    option.args = [info["url"], "all"]
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
