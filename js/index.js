@@ -319,6 +319,7 @@ function loadInfo(channelId) {
         globalInterval = null
     }
 
+    if (localStorage[channelId] !== undefined) {showInfo(JSON.parse(localStorage[channelId]), channelId); return null}
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
     option.args = [info["url"], "all"]
@@ -345,7 +346,6 @@ function loadInfo(channelId) {
     if (showingTuber !== channelId) {
         return null
     }
-    if (localStorage[channelId] !== undefined) {showInfo(JSON.parse(localStorage[channelId]), channelId)}
 }
 
 function autoRefresh(channelId) {
