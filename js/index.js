@@ -39,7 +39,6 @@ const infoVideos = document.querySelector(".infoVideos")
 const infoAboutClass = document.querySelector(".infoAbout")
 const infoLocationRoot = document.querySelector("#infoLocationRoot")
 const infoVideosTitle = document.querySelector("#infoVideosTitle")
-const settingButtonImg = document.querySelector("#settingButtonImg")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -519,12 +518,6 @@ removeButtonImg.addEventListener("mouseover", () => {
 })
 removeButtonImg.addEventListener("mouseout", () => {
     removeButtonImg.style.opacity = 0.1
-})
-settingButtonImg.addEventListener("mouseover", () => {
-    settingButtonImg.style.opacity = 1
-})
-settingButtonImg.addEventListener("mouseout", () => {
-    settingButtonImg.style.opacity = 0.1
 })
 addButtonImg.addEventListener("click", () => {
     addTuberPopup.style.display = "block"
