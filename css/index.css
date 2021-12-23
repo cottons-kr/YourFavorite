@@ -105,7 +105,7 @@ button {
     text-align: center;
 }
 
-.addButton, .removeButton {
+.addButton, .removeButton, .settingButton {
     text-align: center;
     padding-top: 30px;
     display: inline-flex;
@@ -116,15 +116,20 @@ button {
 }
 
 .removeButton {
+    margin-right: 10%;
     margin-left: 10%;
 }
 
-#addButtonImg, #removeButtonImg {
+.settingButton {
+    margin-left: 10%;
+}
+
+#addButtonImg, #removeButtonImg, #settingButtonImg {
     transition-duration: 0.4s;
     opacity: 0.1;
 }
 
-#addButtonImg:active, #removeButtonImg:active {
+#addButtonImg:active, #removeButtonImg:active, #settingButtonImg:active {
     transition-duration: 0.4s;
     transform: scale(70%);
 }
