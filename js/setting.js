@@ -37,8 +37,8 @@ function showSetting() {
         input.setAttribute("type", info[3])
         input.setAttribute("placeholder", `단위는 ${info[2]} 입니다`)
         input.value = info[0]
-        div1.setAttribute("title", info[1])
-        div2.innerText = setting
+        div1.setAttribute("title", setting)
+        div2.innerText = info[1]
         form.addEventListener("input", (event) => {
             event.preventDefault()
             if (input.value === "") {return null}
