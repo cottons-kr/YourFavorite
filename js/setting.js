@@ -13,8 +13,6 @@ const settingPopup = document.querySelector(".settingPopup")
 let setting = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 
-
-
 settingButtonImg.addEventListener("mouseover", () => {
     settingButtonImg.style.opacity = 1
 })

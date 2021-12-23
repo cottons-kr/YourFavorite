@@ -1,1 +1,28 @@
-/*Temp File*/
+.settingPopup {
+    text-align: left;
+}
+
+#settingPopupList {
+    width: 98%;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 3%;
+}
+
+#settingPopupExit {
+    margin-top: 1%;
+}
+
+#setting {
+    margin-bottom: 3%;
+}
+
+#settingTitle, #settingInput {
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 3%;
+}
+
+#settingInput {
+    float: right;
+}
