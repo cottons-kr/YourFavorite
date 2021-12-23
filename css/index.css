@@ -120,6 +120,7 @@ button {
 }
 
 #addButtonImg, #removeButtonImg {
+    transition-duration: 0.4s;
     opacity: 0.1;
 }
 
@@ -193,6 +194,7 @@ li {
 }
 
 #addTuberPopupExit, #removeTuberPopupExit {
+    transition-duration: 0.4s;
     margin-top: 2%;
     float: right;
     display: inline-block;
@@ -320,6 +322,7 @@ li {
 }
 
 #infoAboutImg, #infoAbout, #infoTotalViewImg, #infoTotalView, #infoLocationImg, #infoLocation, #infoJoinDateImg, #infoJoinDate {
+    transition-duration: 0.4s;
     display: inline-block;
     vertical-align: middle;
 }
