@@ -19,7 +19,7 @@ function show() {
         }
     })
     win.setMenuBarVisibility(false)
-    win.loadURL(`${__dirname}\\html\\index.html`)
+    win.loadURL("http://127.0.0.1:21112")
     win.show()
 }
 

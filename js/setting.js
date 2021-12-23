@@ -1,4 +1,3 @@
-const { app } = require("electron")
 const fs = require("fs")
 const os = require('os')
 
@@ -57,7 +56,6 @@ function saveSetting() {
 function resetSetting() {
     fs.writeFileSync(settingPath, fs.readFileSync(defaultSetttingPath, "utf8"))
     console.log("Setting Reseted")
-    app.relaunch()
 }
 
 settingButtonImg.addEventListener("mouseover", () => {
