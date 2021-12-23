@@ -27,20 +27,21 @@
     float: right;
 }
 
-#resetSetting {
+#resetSetting, #resetAll {
+    display: inline-block;
     margin: 2%;
 }
 
-#resetSettingImg {
+#resetSettingImg, #resetAllImg {
     transition-duration: 0.4s;
 }
 
-#resetSettingImg:hover {
+#resetSettingImg:hover, #resetAllImg:hover {
     transition-duration: 0.4s;
     transform: translateY(-10%);
 }
 
-#resetSettingImg:active {
+#resetSettingImg:active, #resetAllImg:active {
     transition-duration: 0.4s;
     transform: scale(80%);
 }

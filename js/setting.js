@@ -14,6 +14,7 @@ const settingPopupExit = document.querySelector("#settingPopupExit")
 const settingPopup = document.querySelector(".settingPopup")
 const settingPopupList = document.querySelector("#settingPopupList")
 const resetSettingImg = document.querySelector("#resetSettingImg")
+const resetAllImg = document.querySelector("#resetAllImg")
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 function showSetting() {
@@ -84,3 +85,4 @@ settingPopupExit.addEventListener("click", () => {
     setTimeout(() => {settingPopup.style.display = "none"}, 250)
 })
 resetSettingImg.addEventListener("click", resetSetting)
+resetAllImg.addEventListener("click", resetAll)
