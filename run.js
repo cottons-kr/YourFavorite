@@ -1,6 +1,15 @@
 const express = require('express')
 const { app, BrowserWindow } = require('electron')
+const fs = require("fs")
+const os = require('os')
 const server = express()
+
+let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
+//let settingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\setting.json"
+if (fs.existsSync(settingPath) == false) {
+    settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\setting.json`
+}
+const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 server.get('/', (req,res) => {
     res.sendFile(__dirname + "/html/index.html")
@@ -17,8 +26,8 @@ server.listen(21112)
 
 function show() {
     const win = new BrowserWindow({
-        width: 1920,
-        height: 1080,
+        width: settings["windowWidth"][0],
+        height: settings["windowHeight"][0],
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false

@@ -44,10 +44,17 @@ const infoVideosTitle = document.querySelector("#infoVideosTitle")
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 
 let rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"
+let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
+
 //let rootPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\"
+//let settingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\setting.json"
 if (fs.existsSync(rootPath) == false) {
     rootPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\`
 }
+if (fs.existsSync(settingPath) == false) {
+    settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\setting.json`
+}
+let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 let globalInterval = null
 let loadingTuber = null
@@ -302,7 +309,7 @@ function showInfo(info, channelId) {
         for (let video of document.querySelectorAll("#video")) {video.classList.remove("onlyVideo")}
     }
 
-    globalInterval = setInterval(autoRefresh, 10000, channelId)
+    globalInterval = setInterval(autoRefresh, settings["autoReloadDelay"][0], channelId)
     loadingTuber = null
 }
 
@@ -553,4 +560,4 @@ loadList()
 toggleNoList()
 setTimeout(showRecentTuber, 500)
 setTimeout(autoPreload, 1500)
-setInterval(autoPreload, 60000)
+setInterval(autoPreload, settings["preloadDelay"][0])

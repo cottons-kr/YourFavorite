@@ -26,3 +26,7 @@
 #settingInput {
     float: right;
 }
+
+#resetSetting {
+    margin: 2%;
+}
