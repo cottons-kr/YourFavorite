@@ -11,9 +11,6 @@ server.get('/', (req,res) => {
 server.get('/', (req,res) => {
     res.sendFile(__dirname + "/js/setting.js")
 })
-server.get('/', (req,res) => {
-    res.sendFile(__dirname + "/js/shortChannel.json")
-})
 
 server.use(express.static(__dirname))
 server.listen(21112)

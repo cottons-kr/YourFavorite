@@ -49,7 +49,6 @@ let rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"
 if (fs.existsSync(rootPath) == false) {
     rootPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\`
 }
-const driverPath = `${rootPath}resource\\driver`
 
 let globalInterval = null
 let loadingTuber = null
