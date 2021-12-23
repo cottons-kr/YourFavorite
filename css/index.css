@@ -165,7 +165,7 @@ li {
     color: black;
 }
 
-.addTuberPopup, .removeTuberPopup, .settingPopup {
+.addTuberPopup, .removeTuberPopup, .settingPopup, .checkResetAllPopup {
     display: none;
     position: absolute;
     background-color: white;

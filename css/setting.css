@@ -45,3 +45,38 @@
     transition-duration: 0.4s;
     transform: scale(80%);
 }
+
+.checkResetAllPopup {
+    margin-top: 20%;
+    vertical-align: middle;
+}
+
+#checkResetAllPopupYes, #checkResetAllPopupNo {
+    transition-duration: 0.4s;
+    display: inline-block;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+#checkResetAllPopupText {
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+#checkResetAllPopupYes {
+    margin-right: 10%;
+}
+
+#checkResetAllPopupNo {
+    margin-left: 10%;
+}
+
+#checkResetAllPopupYes:hover, #checkResetAllPopupNo:hover {
+    transition-duration: 0.4s;
+    transform: translateY(-6%);
+}
+
+#checkResetAllPopupYes:active, #checkResetAllPopupNo:active {
+    transition-duration: 0.4s;
+    transform: scale(80%);
+}

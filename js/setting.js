@@ -15,6 +15,9 @@ const settingPopup = document.querySelector(".settingPopup")
 const settingPopupList = document.querySelector("#settingPopupList")
 const resetSettingImg = document.querySelector("#resetSettingImg")
 const resetAllImg = document.querySelector("#resetAllImg")
+const checkResetAllPopup = document.querySelector(".checkResetAllPopup")
+const checkResetAllPopupYes = document.querySelector("#checkResetAllPopupYes")
+const checkResetAllPopupNo = document.querySelector("#checkResetAllPopupNo")
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 function showSetting() {
@@ -81,8 +84,21 @@ settingButtonImg.addEventListener("click", () => {
 })
 settingPopupExit.addEventListener("click", () => {
     settingPopup.classList.remove("addPopup")
+    checkResetAllPopup.classList.remove("addPopup")
     settingPopup.classList.add("hidePopup")
+    checkResetAllPopup.classList.add("hidePopup")
     setTimeout(() => {settingPopup.style.display = "none"}, 250)
+    setTimeout(() => {checkResetAllPopup.style.display = "none"}, 250)
 })
 resetSettingImg.addEventListener("click", resetSetting)
-resetAllImg.addEventListener("click", resetAll)
+resetAllImg.addEventListener("click", () => {
+    checkResetAllPopup.style.display = "block"
+    checkResetAllPopup.classList.remove("hidePopup")
+    checkResetAllPopup.classList.add("showPopup")
+})
+checkResetAllPopupYes.addEventListener("click", resetAll)
+checkResetAllPopupNo.addEventListener("click", () => {
+    checkResetAllPopup.classList.remove("addPopup")
+    checkResetAllPopup.classList.add("hidePopup")
+    setTimeout(() => {checkResetAllPopup.style.display = "none"}, 250)
+})
