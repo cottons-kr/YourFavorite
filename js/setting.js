@@ -56,6 +56,14 @@ function saveSetting() {
 function resetSetting() {
     fs.writeFileSync(settingPath, fs.readFileSync(defaultSetttingPath, "utf8"))
     console.log("Setting Reseted")
+    setTimeout(() => {location.reload()}, 500)
+}
+
+function resetAll() {
+    localStorage.clear()
+    fs.writeFileSync(settingPath, fs.readFileSync(defaultSetttingPath, "utf8"))
+    console.log("All REEST!")
+    setTimeout(() => {location.reload()}, 500)
 }
 
 settingButtonImg.addEventListener("mouseover", () => {
