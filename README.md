@@ -1,5 +1,6 @@
 # YourFavorite
-## v1.0.0 - 2022/01/01
+**v1.0.0 - 2022/01/01**
+
 Get easier access to your favorite YouTubers
 
 좋아하는 유튜버에 더 쉽게 접근하세요
