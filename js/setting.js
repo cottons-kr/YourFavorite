@@ -1,16 +1,20 @@
+const { app } = require("electron")
 const fs = require("fs")
 const os = require('os')
 
 let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
+let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
 //let settingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\setting.json"
 if (fs.existsSync(settingPath) == false) {
     settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\setting.json`
+    defaultSetttingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\defaultSetting.json`
 }
 
 const settingButtonImg = document.querySelector("#settingButtonImg")
 const settingPopupExit = document.querySelector("#settingPopupExit")
 const settingPopup = document.querySelector(".settingPopup")
 const settingPopupList = document.querySelector("#settingPopupList")
+const resetSettingImg = document.querySelector("#resetSettingImg")
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 function showSetting() {
@@ -48,8 +52,12 @@ function showSetting() {
 
 function saveSetting() {
     fs.writeFileSync(settingPath, JSON.stringify(settings))
-    console.log("Setting Saved")
-    console.log(settings)
+}
+
+function resetSetting() {
+    fs.writeFileSync(settingPath, fs.readFileSync(defaultSetttingPath, "utf8"))
+    console.log("Setting Reseted")
+    app.relaunch()
 }
 
 settingButtonImg.addEventListener("mouseover", () => {
@@ -69,3 +77,4 @@ settingPopupExit.addEventListener("click", () => {
     settingPopup.classList.add("hidePopup")
     setTimeout(() => {settingPopup.style.display = "none"}, 250)
 })
+resetSettingImg.addEventListener("click", resetSetting)

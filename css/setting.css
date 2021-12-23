@@ -1,5 +1,5 @@
 .settingPopup {
-    text-align: left;
+    text-align: center;
 }
 
 #settingPopupList {
@@ -29,4 +29,18 @@
 
 #resetSetting {
     margin: 2%;
+}
+
+#resetSettingImg {
+    transition-duration: 0.4s;
+}
+
+#resetSettingImg:hover {
+    transition-duration: 0.4s;
+    transform: translateY(-10%);
+}
+
+#resetSettingImg:active {
+    transition-duration: 0.4s;
+    transform: scale(80%);
 }
