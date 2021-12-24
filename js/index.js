@@ -295,8 +295,7 @@ function showInfo(info, channelId) {
 
     colorThief.getColor(infoProfileImg.src)
     .then(color => {document.body.style.background = `linear-gradient(45deg, whitesmoke, rgb(${color[0]}, ${color[1]}, ${color[2]})) no-repeat fixed`})
-    .catch(err => {console.log(err)})
-    colorThief.getPalette(infoProfileImg.src).then(palette => {console.log(palette)})
+    .catch(err => {console.log(`Color-Thief Error : ${err}`)})
 
     if (noContent.includes("stream") && noContent.includes("community")) {
         console.log(`${channelId} : Only Videos`)
