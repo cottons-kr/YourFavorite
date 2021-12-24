@@ -49,7 +49,7 @@ function showSetting() {
         form.addEventListener("input", (event) => {
             event.preventDefault()
             if (input.value === "") {return null}
-            settings[setting][0] = parseInt(input.value)
+            settings[setting][0] = input.value
             saveSetting()
         })
         form.appendChild(input)

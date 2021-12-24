@@ -1,1 +1,1 @@
-{"autoReloadDelay":[5000,"새로고침 간격","ms","number"],"preloadDelay":[60000,"미리 불러오는 간격","ms","number"],"windowWidth":[1920,"창의 가로크기","px","number"],"windowHeight":[1080,"창의 세로크기","px","number"],"defaultBackground":[null,"기본 배경색","boolean","boolean"]}
+{"autoReloadDelay":[5000,"새로고침 간격","ms","number"],"preloadDelay":[60000,"미리 불러오는 간격","ms","number"],"windowWidth":[1920,"창의 가로크기","px","number"],"windowHeight":[1080,"창의 세로크기","px","number"],"defaultBackground":["true","기본 배경색","boolean","boolean"]}

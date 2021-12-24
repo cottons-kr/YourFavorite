@@ -4,9 +4,12 @@
 
 #settingPopupList {
     width: 98%;
+    height: 20%;
     max-height: 300px;
     overflow-y: auto;
     margin-bottom: 3%;
+
+    overflow-y: scroll;
 }
 
 #settingPopupExit {
@@ -53,6 +56,7 @@
 .checkResetAllPopup {
     margin-top: 20%;
     vertical-align: middle;
+    overflow-y: auto;
 }
 
 #checkResetAllPopupYes, #checkResetAllPopupNo {
