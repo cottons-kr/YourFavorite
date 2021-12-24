@@ -1,4 +1,5 @@
 const { PythonShell } = require("python-shell")
+const colorThief = require("colorthief")
 const os = require('os')
 const fs = require("fs")
 
@@ -291,6 +292,11 @@ function showInfo(info, channelId) {
     infoTuberLoading.style.display = "none"
     infoRoot.style.display = "flex"
     infoProfileImg.style.display = "inline-block"
+
+    colorThief.getColor(infoProfileImg.src)
+    .then(color => {document.body.style.background = `linear-gradient(45deg, whitesmoke, rgb(${color[0]}, ${color[1]}, ${color[2]})) no-repeat fixed`})
+    .catch(err => {console.log(err)})
+    colorThief.getPalette(infoProfileImg.src).then(palette => {console.log(palette)})
 
     if (noContent.includes("stream") && noContent.includes("community")) {
         console.log(`${channelId} : Only Videos`)

@@ -16,7 +16,7 @@ html {
 
 body {
     background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;
-    background-position: 0% 100%;
+    /*background-position: 0% 100%;*/
     height: 100%;
 }
 
