@@ -76,6 +76,16 @@ function resetAll() {
     setTimeout(() => {location.reload()}, 500)
 }
 
+function backup() {
+    const localStorageJson = localStorage["youtuber"]
+    const json = {
+        "localStorage": localStorageJson,
+        "setting": JSON.stringify(settings)
+    }
+    fs.writeFileSync(backupPath, JSON.stringify(json))
+    console.log("ALL BACKUP!")
+}
+
 settingButtonImg.addEventListener("mouseover", () => {
     settingButtonImg.style.opacity = 1
 })
@@ -108,3 +118,4 @@ checkResetAllPopupNo.addEventListener("click", () => {
     checkResetAllPopup.classList.add("hidePopup")
     setTimeout(() => {checkResetAllPopup.style.display = "none"}, 250)
 })
+backupAllImg.addEventListener("click", backup)
