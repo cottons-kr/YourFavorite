@@ -3,7 +3,7 @@ const os = require('os')
 
 let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
 let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
-let backupPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\backup.json"
+let backupPath = `${os.homedir()}\\YourFavoriteBackup.json`
 
 //let settingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\setting.json"
 //let defaultSettingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\defaultSetting.json"
@@ -11,7 +11,6 @@ let backupPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\backup.jso
 if (fs.existsSync(settingPath) == false) {
     settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\setting.json`
     defaultSetttingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\defaultSetting.json`
-    backupPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\backup.json`
 }
 
 const settingButtonImg = document.querySelector("#settingButtonImg")
@@ -24,6 +23,8 @@ const checkResetAllPopup = document.querySelector(".checkResetAllPopup")
 const checkResetAllPopupYes = document.querySelector("#checkResetAllPopupYes")
 const checkResetAllPopupNo = document.querySelector("#checkResetAllPopupNo")
 const backupAllImg = document.querySelector("#backupAllImg")
+const backupCompletePopup = document.querySelector(".backupCompletePopup")
+const backupCompletePopupPath = document.querySelector("#backupCompletePopupPath")
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 function showSetting() {
@@ -83,7 +84,17 @@ function backup() {
         "setting": JSON.stringify(settings)
     }
     fs.writeFileSync(backupPath, JSON.stringify(json))
+    backupCompletePopupPath.innerText = backupPath
     console.log("ALL BACKUP!")
+
+    backupCompletePopup.style.display = "block"
+    backupCompletePopup.classList.remove("hidePopup")
+    backupCompletePopup.classList.add("showPopup")
+    setTimeout(() => {
+        backupCompletePopup.classList.remove("addPopup")
+        backupCompletePopup.classList.add("hidePopup")
+        setTimeout(() => {backupCompletePopup.style.display = "none"}, 250)
+    }, 2000)
 }
 
 settingButtonImg.addEventListener("mouseover", () => {

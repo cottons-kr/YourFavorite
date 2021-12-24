@@ -84,3 +84,17 @@
     transition-duration: 0.4s;
     transform: scale(80%);
 }
+
+.backupCompletePopup {
+    margin-top: 20%;
+}
+
+#backupCompletePopupText {
+    margin: 2%;
+}
+
+#backupCompletePopupPath {
+    width: auto;
+    margin: 2%;
+    white-space: nowrap;
+}
