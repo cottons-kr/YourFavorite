@@ -73,7 +73,7 @@ function resetSetting() {
 function resetAll() {
     localStorage.clear()
     fs.writeFileSync(settingPath, fs.readFileSync(defaultSetttingPath, "utf8"))
-    console.log("All REEST!")
+    console.log("All RESET!")
     setTimeout(() => {location.reload()}, 500)
 }
 
