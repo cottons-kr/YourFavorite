@@ -3,10 +3,15 @@ const os = require('os')
 
 let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
 let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
+let backupPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\backup.json"
+
 //let settingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\setting.json"
+//let defaultSettingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\defaultSetting.json"
+//let backupPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\backup.json"
 if (fs.existsSync(settingPath) == false) {
     settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\setting.json`
     defaultSetttingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\defaultSetting.json`
+    backupPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\backup.json`
 }
 
 const settingButtonImg = document.querySelector("#settingButtonImg")
@@ -18,6 +23,7 @@ const resetAllImg = document.querySelector("#resetAllImg")
 const checkResetAllPopup = document.querySelector(".checkResetAllPopup")
 const checkResetAllPopupYes = document.querySelector("#checkResetAllPopupYes")
 const checkResetAllPopupNo = document.querySelector("#checkResetAllPopupNo")
+const backupAllImg = document.querySelector("#backupAllImg")
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 function showSetting() {
