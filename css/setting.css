@@ -31,21 +31,21 @@
     outline: none;
 }
 
-#resetSetting, #resetAll {
+#resetSetting, #resetAll, #backupAll {
     display: inline-block;
     margin: 2%;
 }
 
-#resetSettingImg, #resetAllImg {
+#resetSettingImg, #resetAllImg, #backupAllImg {
     transition-duration: 0.4s;
 }
 
-#resetSettingImg:hover, #resetAllImg:hover {
+#resetSettingImg:hover, #resetAllImg:hover, #backupAllImg:hover {
     transition-duration: 0.4s;
     transform: translateY(-10%);
 }
 
-#resetSettingImg:active, #resetAllImg:active {
+#resetSettingImg:active, #resetAllImg:active, #backupAllImg:active {
     transition-duration: 0.4s;
     transform: scale(80%);
 }
