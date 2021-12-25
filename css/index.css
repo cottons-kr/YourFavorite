@@ -397,12 +397,6 @@ li {
     animation-fill-mode: forwards;
 }
 
-.changeBackground {
-    animation-name: changeBackground;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
-
 @keyframes showPopup {
     0% {
         opacity: 0;
@@ -418,14 +412,5 @@ li {
     }
     100% {
         opacity: 0;
-    }
-}
-
-@keyframes changeBackground {
-    0% {
-        background-position: 0% 50%
-    }
-    100% {
-        background-position: 75% 75%
     }
 }

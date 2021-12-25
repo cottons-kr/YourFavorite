@@ -295,7 +295,11 @@ function showInfo(info, channelId) {
 
     colorThief.getPalette(infoProfileImg.src)
     .then(color => {
-        document.body.style.backgroundColor = `rgb(${color[3][0]}, ${color[3][1]}, ${color[3][2]})`
+        body.style.backgroundColor = `rgba(${color[3][0]}, ${color[3][1]}, ${color[3][2]}, 0)`
+        for (let opacity = 0; opacity <= 1; opacity += 0.1) {
+            sleep(1000)
+            console.log(opacity)
+        }
     })
     .catch(err => {console.log(`Color-Thief Error : ${err}`)})
 
@@ -519,6 +523,10 @@ function autoPreload() {
             console.log(`Preloaded : ${channelName}`)
         })
     }
+}
+
+function sleep(waitTimeInMs) {
+    new Promise(resolve => setTimeout(resolve, waitTimeInMs))
 }
 
 addButtonImg.addEventListener("mouseover", () => {
