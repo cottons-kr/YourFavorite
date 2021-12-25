@@ -293,8 +293,8 @@ function showInfo(info, channelId) {
     infoRoot.style.display = "flex"
     infoProfileImg.style.display = "inline-block"
 
-    colorThief.getColor(infoProfileImg.src)
-    .then(color => {document.body.style.background = `linear-gradient(45deg, whitesmoke, rgb(${color[0]}, ${color[1]}, ${color[2]})) no-repeat fixed`})
+    colorThief.getPalette(infoProfileImg.src)
+    .then(color => {document.body.style.background = `linear-gradient(45deg, rgb(${color[1][0]}, ${color[1][1]}, ${color[1][2]}), rgb(${color[3][0]}, ${color[3][1]}, ${color[3][2]})) no-repeat fixed`})
     .catch(err => {console.log(`Color-Thief Error : ${err}`)})
 
     if (noContent.includes("stream") && noContent.includes("community")) {
