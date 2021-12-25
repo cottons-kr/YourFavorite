@@ -294,7 +294,9 @@ function showInfo(info, channelId) {
     infoProfileImg.style.display = "inline-block"
 
     colorThief.getPalette(infoProfileImg.src)
-    .then(color => {document.body.style.background = `linear-gradient(45deg, rgb(${color[1][0]}, ${color[1][1]}, ${color[1][2]}), rgb(${color[3][0]}, ${color[3][1]}, ${color[3][2]})) no-repeat fixed`})
+    .then(color => {
+        document.body.style.backgroundColor = `rgb(${color[3][0]}, ${color[3][1]}, ${color[3][2]})`
+    })
     .catch(err => {console.log(`Color-Thief Error : ${err}`)})
 
     if (noContent.includes("stream") && noContent.includes("community")) {
