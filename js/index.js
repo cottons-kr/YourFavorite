@@ -294,13 +294,7 @@ function showInfo(info, channelId) {
     infoProfileImg.style.display = "inline-block"
 
     colorThief.getPalette(infoProfileImg.src)
-    .then(color => {
-        body.style.backgroundColor = `rgba(${color[3][0]}, ${color[3][1]}, ${color[3][2]}, 0)`
-        for (let opacity = 0; opacity <= 1; opacity += 0.1) {
-            sleep(1000)
-            console.log(opacity)
-        }
-    })
+    .then(color => {})
     .catch(err => {console.log(`Color-Thief Error : ${err}`)})
 
     if (noContent.includes("stream") && noContent.includes("community")) {
