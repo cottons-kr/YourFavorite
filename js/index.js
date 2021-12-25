@@ -111,7 +111,7 @@ function addTuber(event) {
     console.log(`Adding Tuber...`)
     const url = addTuberPopupInput.value
     option.args = [url, "simple"]
-    let channelName, profileImg;
+    let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = ""
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
@@ -125,20 +125,26 @@ function addTuber(event) {
 
         channelName = info[0]
         profileImg = info[1]
-        const json = {
-            "channelName": channelName,
-            "profileImg": profileImg,
-            "url": url
-        }
+        colorThief.getPalette(profileImg)
+        .then(color => {
+            backgroundRgb = color[3]
+            const json = {
+                "channelName": channelName,
+                "profileImg": profileImg,
+                "backgroundRgb": backgroundRgb,
+                "url": url
+            }
 
-        if (localStorage["youtuber"] === undefined) {localStorage.setItem("youtuber", "{}")}
-        const mainJson = JSON.parse(localStorage["youtuber"])
-        mainJson[channelName] = JSON.stringify(json)
-        localStorage["youtuber"] = JSON.stringify(mainJson)
-        addList(channelName)
-        console.log(`New Tuber : ${channelName}`)
-        loadInfo(channelName)
-        removeTuber()
+            if (localStorage["youtuber"] === undefined) {localStorage.setItem("youtuber", "{}")}
+            const mainJson = JSON.parse(localStorage["youtuber"])
+            mainJson[channelName] = JSON.stringify(json)
+            localStorage["youtuber"] = JSON.stringify(mainJson)
+            addList(channelName)
+            console.log(`New Tuber : ${channelName}`)
+            loadInfo(channelName)
+            removeTuber()
+        })
+        .catch(err => {console.log(`Color-Thief Error : ${err}`)})
     })
 }
 
@@ -292,10 +298,6 @@ function showInfo(info, channelId) {
     infoTuberLoading.style.display = "none"
     infoRoot.style.display = "flex"
     infoProfileImg.style.display = "inline-block"
-
-    colorThief.getPalette(infoProfileImg.src)
-    .then(color => {})
-    .catch(err => {console.log(`Color-Thief Error : ${err}`)})
 
     if (noContent.includes("stream") && noContent.includes("community")) {
         console.log(`${channelId} : Only Videos`)
@@ -517,10 +519,6 @@ function autoPreload() {
             console.log(`Preloaded : ${channelName}`)
         })
     }
-}
-
-function sleep(waitTimeInMs) {
-    new Promise(resolve => setTimeout(resolve, waitTimeInMs))
 }
 
 addButtonImg.addEventListener("mouseover", () => {
