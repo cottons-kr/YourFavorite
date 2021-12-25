@@ -370,6 +370,7 @@ function autoRefresh(channelId) {
     loadingTuber = `Refreshing : ${channelId}`
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
+    let noContent = []
     option.args = [info["url"], "all"]
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
@@ -380,9 +381,9 @@ function autoRefresh(channelId) {
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
+        if (localStorage[channelId] == undefined) {console.log(`Refresh Canceled : 삭제된 유튜버`); return null}
         let oldinfo = JSON.parse(localStorage[channelId])
         if (oldinfo === undefined) {oldinfo = JSON.parse(JSON.stringify(info))}
-        let noContent = []
 
         if (loadingTuber !== `Refreshing : ${channelId}`) {
             console.log(`${channelId} : Refresh Saved [${loadingTuber}]`)
@@ -394,15 +395,15 @@ function autoRefresh(channelId) {
 
         if (info["streams"] !== "CantLoad") {
             loadStreams(info["streams"].filter(x => {oldinfo["streams"].includes(x)}), noContent)
-        }
+        } else {noContent.push("stream")}
 
         if (info["videos"] !== "CantLoad") {
             loadVideos(info["videos"].filter(x => {oldinfo["videos"].includes(x)}), noContent)
-        }
+        } else {noContent.push("video")}
 
-        if (info["communitys"] !== "CantLoad") {
+        if (info["communitys"].length !== 0) {
             loadCommunitys(info["communitys"].filter(x => {oldinfo["communitys"].includes(x)}), noContent)
-        }
+        } else {noContent.push("community")}
 
         const about = info["about"]
         infoAbout.innerText = about[0]
