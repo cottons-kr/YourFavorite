@@ -59,6 +59,7 @@ let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
+let mainColor = null
 let pythonPath = `${rootPath}resource\\python-3.9.8.amd64\\python.exe`
 
 const option = {
@@ -526,8 +527,10 @@ function autoPreload() {
 function changeBgColor(rgb = null) {
     if (settings["defaultBackground"][0] !== "true") {
         body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`)
+        mainColor = rgb
     } else {
         body.setAttribute("style", "background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;")
+        mainColor = [255, 99, 71]
     }
 }
 
