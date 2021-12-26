@@ -162,6 +162,7 @@ function removeTuber() {
             const button = document.createElement("button")
             p.innerText = key
             button.setAttribute("id", "removeTuberPopupListContent")
+            button.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.5)`
             button.appendChild(p)
             button.addEventListener("click", () => {setTimeout(() => {
                 delete mainJson[key]
