@@ -38,7 +38,7 @@ const infoCommunity = document.querySelector(".infoCommunity")
 const infoVideos = document.querySelector(".infoVideos")
 const infoAboutClass = document.querySelector(".infoAbout")
 const infoLocationRoot = document.querySelector("#infoLocationRoot")
-const infoVideoTitle = document.querySelector("#infoVideoTitle h2")
+const infoVideoTitle = document.querySelector("#infoVideoTitle")
 const infoCommunityTitle = document.querySelector("#infoCommunityTitle h2")
 const infoStreamTitle = document.querySelector("#infoStreamTitle h2")
 
@@ -186,7 +186,7 @@ function removeTuber() {
 }
 
 function loadVideos(info, noContent) {
-    infoVideoTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
+    infoVideoTitle.querySelector("h2").style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
     for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")

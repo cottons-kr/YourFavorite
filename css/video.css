@@ -11,11 +11,11 @@
     height: 90%;
 }
 
-#infoVideosTitle {
+#infoVideoTitle {
     margin-left: 5%;
 }
 
-#infoVideosTitle h2 {
+#infoVideoTitle h2 {
     color: rgba(255, 99 ,71, 0.8);
     text-align: left;
 }
