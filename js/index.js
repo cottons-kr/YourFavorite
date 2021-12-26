@@ -15,7 +15,6 @@ const infoProfileLink = document.querySelector("#infoProfileImg a")
 const infoChannelName = document.querySelector("#infoChannelName h1")
 const infoSubscriber = document.querySelector("#infoSubscriber")
 const noList = document.querySelector("#noList")
-const backgroundLayer = document.querySelector("#backgorundLayer")
 const infoAboutMoreButton = document.querySelector("#infoAboutMoreButton img")
 const infoAboutMorePopup = document.querySelector("#infoAboutMorePopup")
 const infoAboutMorePopupExitButton = document.querySelector("#infoAboutMorePopupExitButton")
@@ -60,7 +59,6 @@ let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
-let backgroundColor = []
 let pythonPath = `${rootPath}resource\\python-3.9.8.amd64\\python.exe`
 
 const option = {
@@ -276,7 +274,7 @@ function showInfo(info, channelId) {
     infoProfileImg.title = `${baseInfo["channelName"]}채널로 이동`
     infoProfileImg.src = baseInfo["profileImg"]
     const rgb = baseInfo["backgroundRgb"]
-    if (settings["defaultBackground"][0] !== "true") {changeBgColor(rgb)}
+    changeBgColor(rgb)
 
     loadStreams(info["streams"], noContent)
     loadVideos(info["videos"], noContent)
@@ -525,10 +523,12 @@ function autoPreload() {
     }
 }
 
-function changeBgColor(rgb) {
-    console.log(body.style.cssText)
-    backgroundLayer.style.backgroundColor = body.style.cssText
-    body.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
+function changeBgColor(rgb = null) {
+    if (settings["defaultBackground"][0] !== "true") {
+        body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`)
+    } else {
+        body.setAttribute("style", "background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;")
+    }
 }
 
 addButtonImg.addEventListener("mouseover", () => {
@@ -578,3 +578,4 @@ toggleNoList()
 setTimeout(showRecentTuber, 500)
 setTimeout(autoPreload, 1500)
 setInterval(autoPreload, settings["preloadDelay"][0])
+changeBgColor()

@@ -15,8 +15,8 @@ html {
 }
 
 body {
-    background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;
     height: 100%;
+    transition: background 0.7s linear;
 }
 
 button {
@@ -24,14 +24,6 @@ button {
     outline: none;
     padding: 0;
     margin: 0;
-}
-
-#backgorundLayer {
-    width: 100%;
-    height: 100%;
-
-    position: absolute;
-    z-index: -99;
 }
 
 .listContainer {
@@ -405,12 +397,6 @@ li {
     animation-fill-mode: forwards;
 }
 
-.changeBgColor {
-    animation-name: changeBgColor;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
-
 @keyframes showPopup {
     0% {
         opacity: 0;
@@ -426,14 +412,5 @@ li {
     }
     100% {
         opacity: 0;
-    }
-}
-
-@keyframes changeBgColor {
-    0% {
-        background-position: left;
-    }
-    100% {
-        background-position: right;
     }
 }
