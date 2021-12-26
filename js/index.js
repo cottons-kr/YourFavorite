@@ -274,6 +274,8 @@ function showInfo(info, channelId) {
     infoChannelName.innerText = baseInfo["channelName"]
     infoProfileImg.title = `${baseInfo["channelName"]}채널로 이동`
     infoProfileImg.src = baseInfo["profileImg"]
+    const rgb = baseInfo["backgroundRgb"]
+    if (settings["defaultBackground"][0] !== "true") {body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`)}
 
     loadStreams(info["streams"], noContent)
     loadVideos(info["videos"], noContent)

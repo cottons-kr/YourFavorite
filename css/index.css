@@ -397,6 +397,12 @@ li {
     animation-fill-mode: forwards;
 }
 
+.changeBgColor {
+    animation-name: changeBgColor;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
 @keyframes showPopup {
     0% {
         opacity: 0;
@@ -412,5 +418,14 @@ li {
     }
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes changeBgColor {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
     }
 }
