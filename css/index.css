@@ -374,9 +374,6 @@ li {
     border-radius: 5px;
 }
 
-.scrollbarColor {
-    background-color: white;
-}
 
 #infoTuberLoading {
     display: none;
