@@ -38,7 +38,9 @@ const infoCommunity = document.querySelector(".infoCommunity")
 const infoVideos = document.querySelector(".infoVideos")
 const infoAboutClass = document.querySelector(".infoAbout")
 const infoLocationRoot = document.querySelector("#infoLocationRoot")
-const infoVideosTitle = document.querySelector("#infoVideosTitle")
+const infoVideoTitle = document.querySelector("#infoVideoTitle h2")
+const infoCommunityTitle = document.querySelector("#infoCommunityTitle h2")
+const infoStreamTitle = document.querySelector("#infoStreamTitle h2")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -184,6 +186,7 @@ function removeTuber() {
 }
 
 function loadVideos(info, noContent) {
+    infoVideoTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
     for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
@@ -213,6 +216,7 @@ function loadVideos(info, noContent) {
 }
 
 function loadStreams(info, noContent) {
+    infoStreamTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
     for (let stream of info) {
         if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
@@ -242,6 +246,7 @@ function loadStreams(info, noContent) {
 }
 
 function loadCommunitys(info, noContent) {
+    infoCommunityTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
     if (info.length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
         h1.innerText = "커뮤니티 게시글이 없어요"
@@ -308,14 +313,14 @@ function showInfo(info, channelId) {
         infoStream.style.display = "none"
         infoVideos.classList.add("onlyVideos")
         infoVideosList.classList.add("onlyVideosList")
-        infoVideosTitle.classList.add("onlyVideosTitle")
+        infoVideoTitle.classList.add("onlyVideosTitle")
         for (let video of document.querySelectorAll("#video")) {video.classList.add("onlyVideo")}
     } else {
         infoCommunity.style.display = "block"
         infoStream.style.display = "block"
         infoVideos.classList.remove("onlyVideos")
         infoVideosList.classList.remove("onlyVideosList")
-        infoVideosTitle.classList.remove("onlyVideosTitle")
+        infoVideoTitle.classList.remove("onlyVideosTitle")
         for (let video of document.querySelectorAll("#video")) {video.classList.remove("onlyVideo")}
     }
 
@@ -425,14 +430,14 @@ function autoRefresh(channelId) {
             infoStream.style.display = "none"
             infoVideos.classList.add("onlyVideos")
             infoVideosList.classList.add("onlyVideosList")
-            infoVideosTitle.classList.add("onlyVideosTitle")
+            infoVideoTitle.classList.add("onlyVideosTitle")
             for (let video of document.querySelectorAll("#video")) {video.classList.add("onlyVideo")}
         } else {
             infoCommunity.style.display = "block"
             infoStream.style.display = "block"
             infoVideos.classList.remove("onlyVideos")
             infoVideosList.classList.remove("onlyVideosList")
-            infoVideosTitle.classList.remove("onlyVideosTitle")
+            infoVideoTitle.classList.remove("onlyVideosTitle")
             for (let video of document.querySelectorAll("#video")) {video.classList.remove("onlyVideo")}
         }
         
