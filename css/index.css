@@ -372,7 +372,10 @@ li {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: gray;
+}
+
+.scrollbarColor {
+    background-color: white;
 }
 
 #infoTuberLoading {

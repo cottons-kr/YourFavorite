@@ -532,6 +532,7 @@ function autoPreload() {
 
 function changeBgColor(rgb = null) {
     if (settings["defaultBackground"][0] !== "true") {
+        if (rgb === null) {return null}
         body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`)
         mainColor = rgb
     } else {
