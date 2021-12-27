@@ -575,10 +575,10 @@ infoAboutMorePopupExitButton.addEventListener("click", () => {
     setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 250)
 })
 
+changeBgColor()
 clearInfo()
 loadList()
 toggleNoList()
 setTimeout(showRecentTuber, 500)
 setTimeout(autoPreload, 1500)
 setInterval(autoPreload, settings["preloadDelay"][0])
-changeBgColor()
