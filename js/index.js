@@ -507,8 +507,9 @@ function locationFilter(about) {
 
 function autoPreload() {
     const mainJson = JSON.parse(localStorage["youtuber"])
-    console.log(Object.keys(mainJson).splice(0, 1))
-    if (JSON.stringify(Object.keys(mainJson).splice(Object.keys(mainJson).indexOf(showingTuber), 1)) == JSON.stringify(loadedTuberList)) {loadedTuberList = []}
+    let mainJsonExceptShowingTuber = Object.keys(mainJson)
+    mainJsonExceptShowingTuber.splice(Object.keys(mainJson).indexOf(showingTuber), 1)
+    if (JSON.stringify(mainJsonExceptShowingTuber) == JSON.stringify(loadedTuberList)) {loadedTuberList = []}
     for (let channelName of Object.keys(JSON.parse(localStorage["youtuber"]))) {
         if (showingTuber === channelName) {continue}
         if (loadedTuberList.includes(channelName)) {continue}
