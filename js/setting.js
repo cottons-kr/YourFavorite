@@ -42,7 +42,7 @@ function showSetting() {
         div2.setAttribute("id", "settingTitle")
         div3.setAttribute("id", "settingInput")
         input.setAttribute("type", info[3])
-        input.setAttribute("placeholder", `단위는 ${info[2]} 입니다`)
+        input.setAttribute("placeholder", info[2])
         input.value = info[0]
         div1.setAttribute("title", setting)
         div2.innerText = info[1]

@@ -4,12 +4,9 @@
 
 #settingPopupList {
     width: 98%;
-    height: 20%;
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: 3%;
-
+    height: 1%;
     overflow-y: scroll;
+    margin-bottom: 3%;
 }
 
 #settingPopupExit {
