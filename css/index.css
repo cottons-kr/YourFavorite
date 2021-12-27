@@ -294,8 +294,8 @@ li {
 
 #infoAboutMoreButton {
     margin: 0%;
+    margin-left: 10%;
     padding: 0%;
-    margin-right: 20%;
     background: rgba(255, 99 ,71, 0);
 }
 
@@ -372,6 +372,7 @@ li {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
+    background-color: rgba(169, 169, 169, 0.4);
 }
 
 

@@ -288,10 +288,7 @@ function showInfo(info, channelId) {
     loadCommunitys(info["communitys"], noContent)
 
     const about = info["about"]
-    infoAbout.innerText = about[0]
-    if (infoAbout.innerText.length > 15) {
-        infoAbout.innerText = `${infoAbout.innerText.substr(0, 15)}...`
-    }
+    infoAbout.innerText = "채널 설명"
 
     infoAboutClass.style.display = "inline-block"
     infoSubscriber.style.visibility = "visible"
@@ -414,10 +411,6 @@ function autoRefresh(channelId) {
         } else {noContent.push("community")}
 
         const about = info["about"]
-        infoAbout.innerText = about[0]
-        if (infoAbout.innerText.length > 10) {
-            infoAbout.innerText = `${infoAbout.innerText.substr(0, 10)}...`
-        }
         infoTotalView.innerText = about[3]
         infoLocation.innerText = locationFilter(about)
         infoJoinDate.innerText = about[2]
