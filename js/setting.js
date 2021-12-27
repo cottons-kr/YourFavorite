@@ -112,10 +112,15 @@ settingButtonImg.addEventListener("click", () => {
 settingPopupExit.addEventListener("click", () => {
     settingPopup.classList.remove("addPopup")
     checkResetAllPopup.classList.remove("addPopup")
+    backupCompletePopup.classList.remove("addPopup")
     settingPopup.classList.add("hidePopup")
     checkResetAllPopup.classList.add("hidePopup")
-    setTimeout(() => {settingPopup.style.display = "none"}, 250)
-    setTimeout(() => {checkResetAllPopup.style.display = "none"}, 250)
+    backupCompletePopup.classList.add("hidePopup")
+    setTimeout(() => {
+        settingPopup.style.display = "none"
+        checkResetAllPopup.style.display = "none"
+        backupCompletePopup.style.display = "none"
+    }, 250)
 })
 resetSettingImg.addEventListener("click", resetSetting)
 resetAllImg.addEventListener("click", () => {

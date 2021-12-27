@@ -4,7 +4,6 @@
 
 #settingPopupList {
     width: 98%;
-    height: 1%;
     overflow-y: scroll;
     margin-bottom: 3%;
 }
@@ -51,7 +50,7 @@
 }
 
 .checkResetAllPopup {
-    margin-top: 21.2%;
+    margin-top: 22.7%;
     vertical-align: middle;
     overflow-y: auto;
 }
@@ -87,7 +86,7 @@
 }
 
 .backupCompletePopup {
-    margin-top: 21.2%;
+    margin-top: 22.7%;
 }
 
 #backupCompletePopupText {
