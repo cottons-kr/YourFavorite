@@ -129,9 +129,9 @@ function addTuber(event) {
 
         channelName = info[0]
         profileImg = info[1]
-        colorThief.getPalette(profileImg)
+        colorThief.getColor(profileImg)
         .then(color => {
-            backgroundRgb = color[3]
+            backgroundRgb = color
             const json = {
                 "channelName": channelName,
                 "profileImg": profileImg,
