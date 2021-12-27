@@ -262,6 +262,7 @@ function loadCommunitys(info, noContent) {
         const div = document.createElement("div")
         const p = document.createElement("p")
         div.setAttribute("id", "community")
+        div.setAttribute("style", `background-color: rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.2);`)
         div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
         p.innerText = community[0]
         div.appendChild(p)
