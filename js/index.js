@@ -62,6 +62,8 @@ let globalInterval = null
 let loadingTuber = null
 let showingTuber = null
 let mainColor = null
+let loadedTuberList = []
+let loadingTuberList = []
 let pythonPath = `${rootPath}resource\\python-3.9.8.amd64\\python.exe`
 
 const option = {
@@ -504,8 +506,14 @@ function locationFilter(about) {
 }
 
 function autoPreload() {
+    const mainJson = JSON.parse(localStorage["youtuber"])
+    console.log(Object.keys(mainJson).splice(Object.keys(mainJson).indexOf(showingTuber), 1))
+    if (JSON.stringify(Object.keys(mainJson).splice(Object.keys(mainJson).indexOf(showingTuber), 1)) == JSON.stringify(loadedTuberList)) {loadedTuberList = []}
     for (let channelName of Object.keys(JSON.parse(localStorage["youtuber"]))) {
         if (showingTuber === channelName) {continue}
+        if (loadedTuberList.includes(channelName)) {continue}
+        if (loadingTuberList.length >= parseInt(settings["simultaneousLoadNumber"][0])) {break}
+        loadingTuberList.push(channelName)
         option.args = [JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"], "all"]
         console.log(`Preloading : ${channelName}`)
         PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
@@ -518,6 +526,8 @@ function autoPreload() {
             let info = buff.toString("utf-8")
             info = JSON.parse(info)
             localStorage[channelName] = JSON.stringify(info)
+            loadedTuberList.push(channelName)
+            loadingTuberList.splice(loadingTuberList.indexOf(channelName), 1)
             console.log(`Preloaded : ${channelName}`)
         })
     }
