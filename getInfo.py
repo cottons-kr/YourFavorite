@@ -59,7 +59,7 @@ def getBase(url, lang, returns):
     driver.execute_script("window.scrollTo(0, 999999999)")
     driver.implicitly_wait(waitTime)
     try:
-        subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label")
+        subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')
         if lang == "ko_KR":
             subscriber = subscriber[1].replace('명', '')
         else:
@@ -100,7 +100,7 @@ def getVideos(url, lang, returns):
                 videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
             else:
                 videoView = videoInfo.split("seconds ")[1].replace(" views", '')
-                videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+                videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
             videoName = video.find_element_by_id("video-title").get_attribute("title")
             videos.append([videoName, videoLink, videoUpload, videoView])
     returns[2] = videos
@@ -143,7 +143,11 @@ def getAbout(url, lang, returns):
     except:
         joinDate = "CantLoad"
     try:
-        totalViews = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[3]''').get_attribute("innerText").replace("조회수 ", '').replace("회", "")
+        totalViews = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[3]''').get_attribute("innerText")
+        if lang == "ko_KR":
+            totalViews = totalViews.replace("조회수 ", '').replace("회", "")
+        else:
+            totalViews = totalViews.split(' ')[0]
     except:
         totalViews = "CantLoad"
     links = []
@@ -184,7 +188,7 @@ if __name__ == "__main__":
     elif type == "all":
         procs.append(Process(target=getBase, args=(url, lang, returns)))
         procs.append(Process(target=getVideos, args=(url, lang, returns)))
-        procs.append(Process(target=getCommunity, args=(url, lang, returns)))
+        procs.append(Process(target=getCommunity, args=(url, returns)))
         procs.append(Process(target=getAbout, args=(url, lang, returns)))
         for proc in procs:
             proc.start()
