@@ -7,6 +7,7 @@ while True:
         import json
         import os
         import getpass
+        import locale
         from multiprocessing import Process, freeze_support, Manager
         break
     except ModuleNotFoundError:
@@ -52,13 +53,17 @@ def detectBrowser(type):
         raise Exception("No Browser!")
     return driver
 
-def getBase(url, returns):
+def getBase(url, lang, returns):
     driver = detectBrowser("all")
     driver.get(url)
     driver.execute_script("window.scrollTo(0, 999999999)")
     driver.implicitly_wait(waitTime)
     try:
-        subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')[1].replace('명', '')
+        subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label")
+        if lang == "ko_KR":
+            subscriber = subscriber[1].replace('명', '')
+        else:
+            subscriber = subscriber[0]
     except:
         subscriber = "CantLoad"
     streams = []
@@ -75,7 +80,7 @@ def getBase(url, returns):
     returns[0] = subscriber
     returns[1] = streams
 
-def getVideos(url, returns):
+def getVideos(url, lang, returns):
     driver = detectBrowser("all")
     driver.get(url+"/videos")
     driver.execute_script(f"window.scrollTo(0, {str(999999999 * 3)})")
@@ -90,12 +95,13 @@ def getVideos(url, returns):
         for video in recentVideos:
             videoInfo = video.find_element_by_id("video-title").get_attribute("aria-label")
             videoLink = video.find_element_by_id("video-title").get_attribute("href")
-            videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
-            videoName = videoInfo.split(" 게시자: ")[0]
-            try:
+            if lang == "ko_KR":
+                videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
                 videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
-            except ValueError:
-                continue
+            else:
+                videoView = videoInfo.split("seconds ")[1].replace(" views", '')
+                videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+            videoName = video.find_element_by_id("video-title").get_attribute("title")
             videos.append([videoName, videoLink, videoUpload, videoView])
     returns[2] = videos
 
@@ -119,7 +125,7 @@ def getCommunity(url, returns):
             communitys.append([communityContent, communityLikes, communityUpload])
     returns[3] = communitys
 
-def getAbout(url, returns):
+def getAbout(url, lang, returns):
     driver = detectBrowser("all")
     driver.get(url+"/about")
     driver.execute_script("window.scrollTo(0, 999999999)")
@@ -159,6 +165,7 @@ if __name__ == "__main__":
     freeze_support()
     url = sys.argv[1]
     type = sys.argv[2]
+    lang = locale.getdefaultlocale()[0]
     procs = []
     manager = Manager()
     returns = manager.dict()
@@ -175,10 +182,10 @@ if __name__ == "__main__":
         print(base64.b64encode(f"{channelName}::{profileImg}".encode("utf-8")))
         driver.quit()
     elif type == "all":
-        procs.append(Process(target=getBase, args=(url, returns)))
-        procs.append(Process(target=getVideos, args=(url, returns)))
-        procs.append(Process(target=getCommunity, args=(url, returns)))
-        procs.append(Process(target=getAbout, args=(url, returns)))
+        procs.append(Process(target=getBase, args=(url, lang, returns)))
+        procs.append(Process(target=getVideos, args=(url, lang, returns)))
+        procs.append(Process(target=getCommunity, args=(url, lang, returns)))
+        procs.append(Process(target=getAbout, args=(url, lang, returns)))
         for proc in procs:
             proc.start()
         for proc in procs:
