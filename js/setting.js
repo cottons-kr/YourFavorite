@@ -1,16 +1,15 @@
 const fs = require("fs")
 const os = require('os')
 
-let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
-let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
-let backupPath = `${os.homedir()}\\YourFavoriteBackup.json`
+//let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
+//let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
 
-//let settingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\setting.json"
-//let defaultSettingPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\defaultSetting.json"
-//let backupPath = "C:\\Program Files\\YourFavorite Preview\\resources\\app\\resource\\backup.json"
+let settingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\setting.json"
+let defaultSettingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\defaultSetting.json"
+let backupPath = `${os.homedir()}\\YourFavoriteBackup.json`
 if (fs.existsSync(settingPath) == false) {
-    settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\setting.json`
-    defaultSetttingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite Preview\\resources\\app\\resource\\defaultSetting.json`
+    settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\setting.json`
+    defaultSettingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\defaultSetting.json`
 }
 
 const settingButtonImg = document.querySelector("#settingButtonImg")
@@ -72,7 +71,7 @@ function resetSetting() {
 
 function resetAll() {
     localStorage.clear()
-    fs.writeFileSync(settingPath, fs.readFileSync(defaultSetttingPath, "utf8"))
+    fs.writeFileSync(settingPath, fs.readFileSync(defaultSettingPath, "utf8"))
     console.log("ALL RESET!")
     setTimeout(() => {location.reload()}, 500)
 }
