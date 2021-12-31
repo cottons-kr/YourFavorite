@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/stream.css">
+    <link rel="stylesheet" href="../css/community.css">
+    <link rel="stylesheet" href="../css/video.css">
+    <link rel="stylesheet" href="../css/setting.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <title>YourFavorite</title>
+</head>
+<body>
+    <div class="listContainer">
+        <li class="editButtons">
+            <div class="addButton">
+                <img id="addButtonImg" src="../resource/plus-circle.svg">
+            </div>
+            <div class="removeButton">
+                <img id="removeButtonImg" src="../resource/remove.svg">
+            </div>
+            <div class="settingButton">
+                <img id="settingButtonImg" src="../resource/setting.svg">
+            </div>
+        </li>
+        <div id="tuberList">
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 id="noList">등록한 유튜버가 없습니다. 옆에 있는 버튼으로 등록해보세요!</h1>
+        <div id="infoProfileImg"><a><img></a></div>
+        <div id="infoChannelName">
+            <h1></h1>
+            <h4 id="infoSubscriber"></h4>
+        </div>
+
+        <div class="infoAbout">
+            <button id="infoAboutMoreButton" title="채널 설명">
+                <div id="infoAboutRoot">
+                    <img id="infoAboutImg" src="../resource/about.svg">
+                    <div id="infoAbout"></div>
+                </div>
+            </button>
+            <div id="infoTotalViewRoot" title="총합 조회수">
+                <img id="infoTotalViewImg" src="../resource/view.svg">
+                <h3 id="infoTotalView"></h3>
+            </div>
+            <div id="infoLocationRoot" title="국가">
+                <img id="infoLocationImg" src="../resource/world.svg">
+                <h3 id="infoLocation"></h3>
+            </div>
+            <div id="infoJoinDateRoot" title="가입일">
+                <img id="infoJoinDateImg" src="../resource/join.svg">
+                <h3 id="infoJoinDate"></h3>
+            </div>
+        </div>
+
+        <div class="infoRoot">
+        <button class="infoStream">
+            <div id="infoStreamRoot">
+            <div id="infoStreamTitle">
+                 <h2>Streaming</h2>
+            </div>
+            <div id="infoStreamList">
+            </div>
+        </button>
+
+        <button class="infoCommunity">
+            <div id="infoCommunityRoot">
+            <div id="infoCommunityTitle">
+                <h2>Community</h2>
+            </div>
+            <div id="infoCommunityList">
+            </div>
+            </div>
+        </button>
+
+        <button class="infoVideos">
+            <div id="infoVideosRoot">
+            <div id="infoVideoTitle">
+                <h2>Video</h2>
+            </div>
+            <div id="infoVideosList">
+            </div>
+        </button>
+        </div>
+    
+        <div id="infoTuberLoading">
+            <img title="Please Wait!" src="../resource/loading.svg">
+            <h2></h2>
+        </div>
+    </div>
+
+    <div class="addTuberPopup">
+        <span>
+            <h4 id="addTuberPopupText">Register YouTuber</h4>
+            <img id="addTuberPopupExit" src="../resource/x-circle.svg">
+        </span>
+        <form id="addTuberPopupForm">
+            <input type="text" placeholder="Paste URL Here">
+        </form>
+    </div>
+
+    <div id="infoAboutMorePopup">
+        <button id="infoAboutMorePopupExitButton">
+            <img id="infoAboutMorePopupExit" src="../resource/x-circle.svg">
+        </button>
+        <p id="infoAboutmore"></p>
+    </div>
+
+    <div class="removeTuberPopup">
+        <span>
+            <h4 id="removeTuberPopupText">Unregister YouTuber</h4>
+            <img id="removeTuberPopupExit" src="../resource/x-circle.svg">
+        </span>
+        <div id="removeTuberPopupList"></div>
+    </div>
+
+    <div class="settingPopup">
+        <span>
+            <h4 id="settingPopupText">Settings</h4>
+            <img id="settingPopupExit" src="../resource/x-circle.svg">
+        </span>
+        <div id="settingPopupList">
+        </div>
+        <div id="resetSetting">
+            <img id="resetSettingImg" src="../resource/resetSetting.svg" title="Restart After Initializing Settings">
+        </div>
+        <div id="resetAll">
+            <img id="resetAllImg" src="../resource/resetAll.svg" title="Restart After Resetting EVERYTHING">
+        </div>
+        <div id="backupAll">
+            <img id="backupAllImg" src="../resource/backup.svg" title="YouTuber, Settings Backup">
+        </div>
+    </div>
+
+    <div class="checkResetAllPopup">
+        <h3 id="checkResetAllPopupText">Are you Sure you want to RESET EVERYTHING?</h3>
+        <div id="checkResetAllPopupYes"><img id="checkResetAllPopupYesImg" src="../resource/check.svg" title="Yes"></div>
+        <div id="checkResetAllPopupNo"><img id="checkResetAllPopupNoImg" src="../resource/x-circle.svg" title="Give me Time to Think"></div>
+    </div>
+
+    <div class="backupCompletePopup">
+        <h3 id="backupCompletePopupText">Backup Complete!</h3>
+        <p id="backupCompletePopupPath"></p>
+    </div>
+</body>
+<script type="module" charset="utf-8" src="../js/index.js"></script>
+<script type="module" charset="utf-8" src="../js/setting.js"></script>
+<script type="text/javascript" src="http://www.shawnolson.net/scripts/public_smo_scripts.js"></script>
+</html>
