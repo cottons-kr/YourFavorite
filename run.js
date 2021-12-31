@@ -19,7 +19,11 @@ function show() {
         }
     })
     win.setMenuBarVisibility(false)
-    win.loadURL(`${__dirname}\\html\\index.html`)
+    if (Intl.DateTimeFormat().resolvedOptions().locale == "ko-KR") {
+        win.loadURL(`${__dirname}\\html\\index.html`)
+    } else {
+        win.loadURL(`${__dirname}\\html\\index-en.html`)
+    }
     win.show()
 }
 
