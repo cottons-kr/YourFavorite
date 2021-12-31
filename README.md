@@ -19,8 +19,8 @@ This Repository contains Windows Edition. Windows Edition Update First.
 # ReleaseNote
 [한국어 (Korean)](https://github.com/cottons-kr/YourFavorite/blob/main/document/Releasenote-kr.md)
 
+#Used Project / Code
+https://github.com/lokesh/color-thief
+
 # License
 [MIT License](https://github.com/cottons-kr/YourFavorite/blob/main/LICENSE)
-
-
-https://github.com/lokesh/color-thief
