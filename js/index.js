@@ -57,6 +57,7 @@ if (fs.existsSync(settingPath) == false) {
     settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\setting.json`
 }
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
+const lang = Intl.DateTimeFormat().resolvedOptions().locale
 
 let globalInterval = null
 let loadingTuber = null
@@ -192,7 +193,8 @@ function loadVideos(info, noContent) {
     for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
-            h1.innerText = "올린 영상이 없어요"
+            if (lang == "ko-KR") {h1.innerText = "올린 영상이 없어요"}
+            else {h1.innerText = "No Videos :("}
             h1.setAttribute("id", "noVideo")
             h1.classList.add("showVideo")
             setTimeout(() => {h1.classList.remove("showVideo")}, 400)
@@ -206,7 +208,8 @@ function loadVideos(info, noContent) {
         div.setAttribute("id", "video")
         a.setAttribute("href", video[1])
         img.setAttribute("src", getThumbnail(video[1]))
-        img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)
+        if (lang == "ko-KR") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
+        else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
         img.setAttribute("id", "videoThumbnail")
         a.appendChild(img)
         div.appendChild(a)
@@ -222,7 +225,8 @@ function loadStreams(info, noContent) {
     for (let stream of info) {
         if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
-            h1.innerText = "스트리밍을 하고있지 않아요"
+            if (lang == "ko-KR") {h1.innerText = "스트리밍을 하고있지 않아요"}
+            else {h1.innerText = "No Stream :("}
             h1.setAttribute("id", "noStream")
             h1.classList.add("showStream")
             setTimeout(() => {h1.classList.remove("showStream")}, 400)
@@ -251,7 +255,8 @@ function loadCommunitys(info, noContent) {
     infoCommunityTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
     if (info.length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
-        h1.innerText = "커뮤니티 게시글이 없어요"
+        if (lang == "ko-KR") {h1.innerText = "커뮤니티 게시글이 없어요"}
+        else {h1.innerText = "No Community :("}
         h1.setAttribute("id", "noCommunity")
         h1.classList.add("showCommunity")
         setTimeout(() => {h1.classList.remove("showCommunity")}, 400)

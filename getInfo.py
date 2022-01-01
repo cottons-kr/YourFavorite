@@ -52,7 +52,15 @@ def detectBrowser(type):
     else:
         raise Exception("No Browser!")
     return driver
-
+'''
+def detectBrowser(type):
+    options = webdriver.FirefoxOptions()
+    if type == "simple":
+        options.set_capability("deviceName", "iPhone X")
+    options.headless = "true"
+    driver = webdriver.Firefox(executable_path=f"{rootPath}\\geckodriver.exe", options=options)
+    return driver
+'''
 def getBase(url, lang, returns):
     driver = detectBrowser("all")
     driver.get(url)
