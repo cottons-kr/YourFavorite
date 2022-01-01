@@ -268,7 +268,8 @@ function loadCommunitys(info, noContent) {
         const p = document.createElement("p")
         div.setAttribute("id", "community")
         div.setAttribute("style", `background-color: rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.2);`)
-        div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
+        if (lang == "ko-KR") {div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)}
+        else {div.setAttribute("title", `Likes : ${community[1]} / ${community[2]}`)}
         p.innerText = community[0]
         div.appendChild(p)
         div.classList.add("showCommunity")
@@ -286,7 +287,8 @@ function showInfo(info, channelId) {
     infoSubscriber.innerText = info["subscriber"]
     infoProfileLink.href = baseInfo["url"]
     infoChannelName.innerText = baseInfo["channelName"]
-    infoProfileImg.title = `${baseInfo["channelName"]}채널로 이동`
+    if (lang == "ko-KR") {infoProfileImg.title = `${baseInfo["channelName"]} 채널로 이동`}
+    else {infoProfileImg.title = `Go to ${baseInfo["channelName"]}'s Channel`}
     infoProfileImg.src = baseInfo["profileImg"]
     const rgb = baseInfo["backgroundRgb"]
     changeBgColor(rgb)
@@ -296,7 +298,8 @@ function showInfo(info, channelId) {
     loadCommunitys(info["communitys"], noContent)
 
     const about = info["about"]
-    infoAbout.innerText = "채널 설명"
+    if (lang == "ko-KR") {infoAbout.innerText = "채널 설명"}
+    else {infoAbout.innerText = "About Description"}
 
     infoAboutClass.style.display = "inline-block"
     infoSubscriber.style.visibility = "visible"
@@ -350,7 +353,8 @@ function loadInfo(channelId) {
     const info = JSON.parse(mainJson[channelId])
     option.args = [info["url"], "all"]
     infoTuberLoading.style.display = "block"
-    infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`
+    if (lang == "ko-KR") {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
+    else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
