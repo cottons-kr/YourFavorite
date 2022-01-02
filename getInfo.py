@@ -18,9 +18,9 @@ while True:
 
 waitTime = 10
 
-#rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
+rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
 
-rootPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\driver"
+#rootPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\driver"
 if not os.path.exists(rootPath):
     rootPath = f"C:\\Users\\{getpass.getuser()}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\driver"
 

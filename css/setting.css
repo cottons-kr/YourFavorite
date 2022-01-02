@@ -93,7 +93,7 @@
     margin: 2%;
 }
 
-#backupCompletePopupPath {
+.backupCompletePopup p {
     width: auto;
     margin: 2%;
     white-space: nowrap;

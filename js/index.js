@@ -45,11 +45,11 @@ const infoStreamTitle = document.querySelector("#infoStreamTitle h2")
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 
-//let rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"
-//let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
+let rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"
+let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
 
-let rootPath = "C:\\Program Files\\YourFavorite\\resources\\app\\"
-let settingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\setting.json"
+//let rootPath = "C:\\Program Files\\YourFavorite\\resources\\app\\"
+//let settingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\setting.json"
 if (fs.existsSync(rootPath) == false) {
     rootPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\`
 }
@@ -193,7 +193,7 @@ function loadVideos(info, noContent) {
     for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
-            if (lang == "ko-KR") {h1.innerText = "올린 영상이 없어요"}
+            if (lang == "ko") {h1.innerText = "올린 영상이 없어요"}
             else {h1.innerText = "No Videos :("}
             h1.setAttribute("id", "noVideo")
             h1.classList.add("showVideo")
@@ -208,7 +208,7 @@ function loadVideos(info, noContent) {
         div.setAttribute("id", "video")
         a.setAttribute("href", video[1])
         img.setAttribute("src", getThumbnail(video[1]))
-        if (lang == "ko-KR") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
+        if (lang == "ko") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
         else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
         img.setAttribute("id", "videoThumbnail")
         a.appendChild(img)
@@ -225,7 +225,7 @@ function loadStreams(info, noContent) {
     for (let stream of info) {
         if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
-            if (lang == "ko-KR") {h1.innerText = "스트리밍을 하고있지 않아요"}
+            if (lang == "ko") {h1.innerText = "스트리밍을 하고있지 않아요"}
             else {h1.innerText = "No Stream :("}
             h1.setAttribute("id", "noStream")
             h1.classList.add("showStream")
@@ -255,7 +255,7 @@ function loadCommunitys(info, noContent) {
     infoCommunityTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
     if (info.length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
-        if (lang == "ko-KR") {h1.innerText = "커뮤니티 게시글이 없어요"}
+        if (lang == "ko") {h1.innerText = "커뮤니티 게시글이 없어요"}
         else {h1.innerText = "No Community :("}
         h1.setAttribute("id", "noCommunity")
         h1.classList.add("showCommunity")
@@ -268,7 +268,7 @@ function loadCommunitys(info, noContent) {
         const p = document.createElement("p")
         div.setAttribute("id", "community")
         div.setAttribute("style", `background-color: rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.2);`)
-        if (lang == "ko-KR") {div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)}
+        if (lang == "ko") {div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)}
         else {div.setAttribute("title", `Likes : ${community[1]} / ${community[2]}`)}
         p.innerText = community[0]
         div.appendChild(p)
@@ -287,7 +287,7 @@ function showInfo(info, channelId) {
     infoSubscriber.innerText = info["subscriber"]
     infoProfileLink.href = baseInfo["url"]
     infoChannelName.innerText = baseInfo["channelName"]
-    if (lang == "ko-KR") {infoProfileImg.title = `${baseInfo["channelName"]} 채널로 이동`}
+    if (lang == "ko") {infoProfileImg.title = `${baseInfo["channelName"]} 채널로 이동`}
     else {infoProfileImg.title = `Go to ${baseInfo["channelName"]}'s Channel`}
     infoProfileImg.src = baseInfo["profileImg"]
     const rgb = baseInfo["backgroundRgb"]
@@ -298,7 +298,7 @@ function showInfo(info, channelId) {
     loadCommunitys(info["communitys"], noContent)
 
     const about = info["about"]
-    if (lang == "ko-KR") {infoAbout.innerText = "채널 설명"}
+    if (lang == "ko") {infoAbout.innerText = "채널 설명"}
     else {infoAbout.innerText = "About Description"}
 
     infoAboutClass.style.display = "inline-block"
@@ -353,7 +353,7 @@ function loadInfo(channelId) {
     const info = JSON.parse(mainJson[channelId])
     option.args = [info["url"], "all"]
     infoTuberLoading.style.display = "block"
-    if (lang == "ko-KR") {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
+    if (lang == "ko") {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
     PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
         if (error) {

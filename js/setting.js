@@ -1,12 +1,12 @@
 const fs = require("fs")
 const os = require('os')
 
-//let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
-//let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
+let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
+let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
 
-let settingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\setting.json"
-let defaultSettingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\defaultSetting.json"
-let backupPath = `${os.homedir()}\\YourFavoriteBackup.json`
+//let settingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\setting.json"
+//let defaultSettingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\defaultSetting.json"
+let backupPath = `${os.homedir()}\\Desktop\\YourFavoriteBackup.json`
 if (fs.existsSync(settingPath) == false) {
     settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\setting.json`
     defaultSettingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\defaultSetting.json`
@@ -23,7 +23,6 @@ const checkResetAllPopupYes = document.querySelector("#checkResetAllPopupYes")
 const checkResetAllPopupNo = document.querySelector("#checkResetAllPopupNo")
 const backupAllImg = document.querySelector("#backupAllImg")
 const backupCompletePopup = document.querySelector(".backupCompletePopup")
-const backupCompletePopupPath = document.querySelector("#backupCompletePopupPath")
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 function showSetting() {
@@ -83,7 +82,6 @@ function backup() {
         "setting": JSON.stringify(settings)
     }
     fs.writeFileSync(backupPath, JSON.stringify(json))
-    backupCompletePopupPath.innerText = backupPath
     console.log("ALL BACKUP!")
 
     backupCompletePopup.style.display = "block"
