@@ -183,18 +183,28 @@ li {
     margin: 3%;
 }
 
-#addTuberPopupForm input {
-    width: 130%;
+#addTuberPopupFormUrl input {
+    width: 100%;
     margin-left: 5%;
 }
 
-#addTuberPopupForm input:focus {
+#addTuberPopupFormUrl input:focus {
     outline: none;
 }
 
-#addTuberPopupForm {
+#addTuberPopupFormUrl, #addTuberPopupFormFile {
     width: 60%;
     margin-bottom: 5%;
+}
+
+#addTuberPopupFormFileInput {
+    margin-top: 2%;
+    margin-left: 5%;
+}
+
+.addTuberPopup p {
+    margin-left: 3%;
+    text-align: left;
 }
 
 #addTuberPopupExit, #removeTuberPopupExit, #settingPopupExit {
@@ -386,6 +396,46 @@ li {
     text-align: center;
 }
 
+.errorPopup {
+    position: absolute;
+    background-color: whitesmoke;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    min-width: 20%;
+    max-width: 30%;
+    max-height: 40%;
+    border-radius: 20px / 20px;
+}
+
+#errorPopupText {
+    margin-top: 2%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+    text-align: center;
+}
+
+#errorPopupContentRoot {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#errorPopupContent {
+    margin-bottom: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#errorPopupBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.7);
+}
+
 /*애니메이션*/
 .showPopup {
     animation-name: showPopup;
@@ -397,6 +447,10 @@ li {
     animation-name: hidePopup;
     animation-duration: 0.25s;
     animation-fill-mode: forwards;
+}
+
+#errorPopupContent {
+
 }
 
 @keyframes showPopup {

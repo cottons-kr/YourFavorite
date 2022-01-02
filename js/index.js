@@ -6,7 +6,7 @@ const fs = require("fs")
 const body = document.querySelector("body")
 const addButtonImg = document.querySelector("#addButtonImg")
 const addTuberPopup = document.querySelector(".addTuberPopup")
-const addTuberPopupForm = document.querySelector("#addTuberPopupForm")
+const addTuberPopupFormUrl = document.querySelector("#addTuberPopupFormUrl")
 const addTuberPopupInput = document.querySelector("#addTuberPopupForm input")
 const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
 const tuberListContainer = document.querySelector("#tuberList")
@@ -41,6 +41,7 @@ const infoLocationRoot = document.querySelector("#infoLocationRoot")
 const infoVideoTitle = document.querySelector("#infoVideoTitle")
 const infoCommunityTitle = document.querySelector("#infoCommunityTitle h2")
 const infoStreamTitle = document.querySelector("#infoStreamTitle h2")
+const addTuberPopupFormFileInput = document.querySelector("#addTuberPopupFormFileInput")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -151,6 +152,20 @@ function addTuber(event) {
         })
         .catch(err => {console.log(`Color-Thief Error : ${err}`)})
     })
+}
+
+function addPackage(event) {
+    event.preventDefault()
+    const reader = new FileReader
+    reader.onload = () => {
+        try {
+            const pack = JSON.parse(reader.result)   
+        } catch (error) {
+            console.log(error)
+        }
+        setTimeout(() => {addTuberPopupFormFileInput.value = ""}, 2000)
+    }
+    reader.readAsText(addTuberPopupFormFileInput.files[0], "utf-8")
 }
 
 function removeTuber() {
@@ -588,7 +603,8 @@ removeTuberPopupExit.addEventListener("click", () => {
     removeTuberPopup.classList.add("hidePopup")
     setTimeout(() => {removeTuberPopup.style.display = "none"}, 250)
 })
-addTuberPopupForm.addEventListener("submit", addTuber)
+addTuberPopupFormUrl.addEventListener("submit", addTuber)
+addTuberPopupFormFileInput.addEventListener("change", addPackage)
 infoAboutMoreButton.addEventListener("click", showMoreAbout)
 infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.classList.remove("addPopup")
