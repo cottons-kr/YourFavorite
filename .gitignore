@@ -1,6 +1,0 @@
-node_modules/
-chromedriver.exe
-dist/
-resource/python-3.9.8.amd64/
-resource/driver/
-resource/backup.json
