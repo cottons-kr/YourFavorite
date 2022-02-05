@@ -66,7 +66,7 @@ let showingTuber = null
 let mainColor = null
 let loadedTuberList = []
 let loadingTuberList = []
-let pythonPath = `${rootPath}resource\\python-3.9.8.amd64\\python.exe`
+let pythonPath = `${rootPath}resource\\python-3.9.10.amd64\\python.exe`
 
 const option = {
     mode: "text",
