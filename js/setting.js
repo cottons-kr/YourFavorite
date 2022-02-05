@@ -1,16 +1,10 @@
 const fs = require("fs")
 const os = require('os')
 
-let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
-let defaultSetttingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\defaultSetting.json"
-
-//let settingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\setting.json"
-//let defaultSettingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\defaultSetting.json"
+const rootPath = fs.readFileSync(`${__dirname}/../js/path`, "utf8")
+let settingPath = `${rootPath}/resource/setting.json`
+let defaultSetttingPath = `${rootPath}/resource/defaultSetting.json`
 let backupPath = `${os.homedir()}\\Desktop\\YourFavoriteBackup.json`
-if (fs.existsSync(settingPath) == false) {
-    settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\setting.json`
-    defaultSettingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\defaultSetting.json`
-}
 
 const settingButtonImg = document.querySelector("#settingButtonImg")
 const settingPopupExit = document.querySelector("#settingPopupExit")

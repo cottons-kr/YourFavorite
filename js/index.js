@@ -1,5 +1,5 @@
 const { PythonShell } = require("python-shell")
-const colorThief = require("colorthief")
+import colorThief from "./color-thief.mjs"
 const os = require('os')
 const fs = require("fs")
 
@@ -46,17 +46,8 @@ const addTuberPopupFormFileInput = document.querySelector("#addTuberPopupFormFil
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 
-let rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\"
-let settingPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\\setting.json"
-
-//let rootPath = "C:\\Program Files\\YourFavorite\\resources\\app\\"
-//let settingPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\setting.json"
-if (fs.existsSync(rootPath) == false) {
-    rootPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\`
-}
-if (fs.existsSync(settingPath) == false) {
-    settingPath = `C:\\Users\\${os.userInfo().username}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\setting.json`
-}
+let rootPath = fs.readFileSync(`${__dirname}/../js/path`, "utf8")
+let settingPath = `${rootPath}/resource/setting.json`
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 const lang = Intl.DateTimeFormat().resolvedOptions().locale
 
