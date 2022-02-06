@@ -13,15 +13,15 @@
 
 ||운영체제|프로세서|메모리|디스크 여유공간|인터넷 속도|
 |-|-|-|-|-|-|
-|권장(Windows)|Windows 10/11|4GHz 헥사코어|16GB|1GB|100Mbps|
-|권장(Linux)|Debian 11, Kernel 5.x.x|4GHz 쿼드코어|8GB|1GB|100Mbps|
-|최소(Windows)|Windows 8.1|3GHz 쿼드코어|8GB|500MB|50Mbps|
-|최소(Linux)|Debian 9, Kernel 5.x.x|3GHz 쿼드코어|6GB|500MB|50Mbps|
+|권장(Windows)|Windows 10 or higher|4GHz 헥사코어|16GB|1GB|100Mbps|
+|권장(Linux)|Kernel 5 or higher|4GHz 쿼드코어|8GB|1GB|100Mbps|
+|최소(Windows)|Windows 7 or higher|3GHz 쿼드코어|8GB|500MB|50Mbps|
+|최소(Linux)|Kernel 5 or higher|3GHz 쿼드코어|6GB|500MB|50Mbps|
 
 x64 아키텍처만 지원합니다.
 
 # 설치법
-- 아직 정식버전이 아니기때문에 작동하지 않거나 오류가 많을 수 있습니다!
+**최신버전을 강력히 권장합니다!**
 
 1. [릴리즈](https://github.com/cottons-kr/YourFavorite/releases)에서 최신 릴리즈를 받아주세요.
 2. 압축파일을 푼후 설치 프로그램을 실행한뒤 설치해주세요.
@@ -38,12 +38,17 @@ x64 아키텍처만 지원합니다.
 ## 패키지 만들기
 패키지는 JSON 문법으로 작성해야 됩니다. 내용은 다음과 같습니다.
 ```json
-[
-    "채널명": {
-        "url": "채널 url",
-        "color": ["R", "G", "B"]
-    }
-]
+{
+    "title": "패키지 이름",
+    "about": "패키지 설명",
+    "madeby": "만든 사람",
+    "content": [
+        "채널명": {
+            "url": "채널 url",
+            "color": ["R", "G", "B"]
+        }
+    ]
+}
 ```
 패키지는 **"유튜버 등록하기"** 팝업에서 등록할 수 있습니다.
 
