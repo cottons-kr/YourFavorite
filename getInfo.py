@@ -6,7 +6,7 @@ while True:
         import base64
         import json
         import os
-        import getpass
+        import platform
         import locale
         from multiprocessing import Process, freeze_support, Manager
         break
@@ -14,49 +14,24 @@ while True:
         from subprocess import run
         run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install selenium msedge-selenium-tools"], shell=True)
         run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade requests"], shell=True)
+        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade selenium"], shell=True)
+        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade pip"], shell=True)
         continue
 
 waitTime = 10
 rootPath = open("path", "r").read()
-programPath = "C:\\Program Files"
-chromePath = f"{programPath}\\Google\\Chrome\\Application\\chrome.exe"
-edgePath = f"{programPath} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
-firefoxPath = f"{programPath}\\Mozilla Firefox\\firefox.exe"
 
-def detectBrowser(type):
-    if os.path.exists(chromePath):
-        options = webdriver.ChromeOptions()
-        options.add_argument("headless")
-        if type == "simple":
-            options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
-        driver = webdriver.Chrome(executable_path=f"{rootPath}\\resource\driver\chromedriver.exe", options=options)
-    elif os.path.exists(edgePath):
-        options = selenium_tools.EdgeOptions()
-        if type == "simple":
-            options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
-        options.use_chromium = True
-        options.add_argument("headless")
-        driver = selenium_tools.Edge(executable_path=f"{rootPath}\\msedgedriver.exe", options=options)
-    elif os.path.exists(firefoxPath):
-        options = webdriver.FirefoxOptions()
-        if type == "simple":
-            options.set_capability("deviceName", "iPhone X")
-        options.headless = "true"
-        driver = webdriver.Firefox(executable_path=f"{rootPath}\\geckodriver.exe", options=options)
-    else:
-        raise Exception("No Browser!")
-    return driver
-'''
-def detectBrowser(type):
-    options = webdriver.FirefoxOptions()
+def getBrowser(type):
+    options = selenium_tools.EdgeOptions()
     if type == "simple":
-        options.set_capability("deviceName", "iPhone X")
-    options.headless = "true"
-    driver = webdriver.Firefox(executable_path=f"{rootPath}\\geckodriver.exe", options=options)
+        options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
+    options.use_chromium = True
+    options.add_argument("headless")
+    driver = selenium_tools.Edge(executable_path=f"{rootPath}\\resource\\driver\\msedgedriver.exe", options=options)
     return driver
-'''
+
 def getBase(url, lang, returns):
-    driver = detectBrowser("all")
+    driver = getBrowser("all")
     driver.get(url)
     driver.execute_script("window.scrollTo(0, 999999999)")
     driver.implicitly_wait(waitTime)
@@ -83,7 +58,7 @@ def getBase(url, lang, returns):
     returns[1] = streams
 
 def getVideos(url, lang, returns):
-    driver = detectBrowser("all")
+    driver = getBrowser("all")
     driver.get(url+"/videos")
     driver.execute_script(f"window.scrollTo(0, {str(999999999 * 3)})")
     videos = []
@@ -108,7 +83,7 @@ def getVideos(url, lang, returns):
     returns[2] = videos
 
 def getCommunity(url, returns):
-    driver = detectBrowser("all")
+    driver = getBrowser("all")
     driver.get(url+"/community")
     driver.execute_script("window.scrollTo(0, 999999999)")
     communitys = []
@@ -128,7 +103,7 @@ def getCommunity(url, returns):
     returns[3] = communitys
 
 def getAbout(url, lang, returns):
-    driver = detectBrowser("all")
+    driver = getBrowser("all")
     driver.get(url+"/about")
     driver.execute_script("window.scrollTo(0, 999999999)")
     driver.implicitly_wait(waitTime)
@@ -180,7 +155,7 @@ if __name__ == "__main__":
     except IndexError:
         debug = False
     if type == "simple":
-        driver  = detectBrowser(type)
+        driver  = getBrowser(type)
         driver.get(url)
         driver.implicitly_wait(waitTime)
         channelName = driver.find_element_by_xpath('''/html/body/ytm-app/div[1]/ytm-browse/ytm-c4-tabbed-header-renderer/div[2]/div/h1''').get_attribute('innerText')
