@@ -26,6 +26,30 @@ button {
     margin: 0;
 }
 
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.33rem;
+}
+
+h4 {
+    font-size: 1.17rem;
+}
+
+h5 {
+    font-size: 0.83rem;
+}
+
+h6 {
+    font-size: 0.67rem;
+}
+
 .listContainer {
     width: 20%;
     height: 80%;
@@ -255,9 +279,12 @@ li {
 }
 
 #infoChannelName {
-    font-size: 150%;
     margin-top: 3%;
     display: inline-block;
+}
+
+#infoChannelName h1 {
+    font-size: calc(2rem * 1.5) !important;
 }
 
 #infoProfileImg {

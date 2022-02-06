@@ -1,5 +1,5 @@
 const { PythonShell } = require("python-shell")
-import colorThief from "./color-thief.mjs"
+const ColorThief = require('colorthief');
 const os = require('os')
 const fs = require("fs")
 
@@ -123,7 +123,7 @@ function addTuber(event) {
 
         channelName = info[0]
         profileImg = info[1]
-        colorThief.getColor(profileImg)
+        ColorThief.getColor(profileImg)
         .then(color => {
             backgroundRgb = color
             const json = {
@@ -602,6 +602,10 @@ infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.classList.remove("addPopup")
     infoAboutMorePopup.classList.add("hidePopup")
     setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 250)
+})
+window.addEventListener("resize", () => {
+    document.querySelector("html").style.fontSize = `${16 * (window.innerHeight/1080)}px`
+    console.log(document.querySelector("html").style.fontSize)
 })
 
 clearInfo()

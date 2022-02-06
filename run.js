@@ -12,12 +12,15 @@ function show() {
     const win = new BrowserWindow({
         width: settings["windowWidth"][0],
         height: settings["windowHeight"][0],
+        minWidth: 1461,
+        minHeight: 792,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
     })
     win.setMenuBarVisibility(false)
+    win.setAspectRatio(16/9)
     if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {
         win.loadURL(`${root}/html/index.html`)
     } else {
@@ -29,4 +32,7 @@ function show() {
 
 app.on("ready", () => {
     setTimeout(show, 1000)
+})
+app.on("window-all-closed", () => {
+    app.exit()
 })
