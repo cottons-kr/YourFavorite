@@ -7,7 +7,7 @@ const body = document.querySelector("body")
 const addButtonImg = document.querySelector("#addButtonImg")
 const addTuberPopup = document.querySelector(".addTuberPopup")
 const addTuberPopupFormUrl = document.querySelector("#addTuberPopupFormUrl")
-const addTuberPopupInput = document.querySelector("#addTuberPopupForm input")
+const addTuberPopupInput = document.querySelector("#addTuberPopupFormUrl input")
 const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
 const tuberListContainer = document.querySelector("#tuberList")
 const infoProfileImg = document.querySelector("#infoProfileImg a img")
@@ -57,7 +57,7 @@ let showingTuber = null
 let mainColor = null
 let loadedTuberList = []
 let loadingTuberList = []
-let pythonPath = `${rootPath}resource\\python-3.9.10.amd64\\python.exe`
+let pythonPath = `${rootPath}/resource/python-3.9.10.amd64/python.exe`
 
 const option = {
     mode: "text",
@@ -111,10 +111,11 @@ function addTuber(event) {
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = ""
-    PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
+    PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
         }
+        console.log(result)
 
         const data = result[0].replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
@@ -361,7 +362,7 @@ function loadInfo(channelId) {
     infoTuberLoading.style.display = "block"
     if (lang == "ko") {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
-    PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
+    PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
         }
@@ -395,7 +396,7 @@ function autoRefresh(channelId) {
     const info = JSON.parse(mainJson[channelId])
     let noContent = []
     option.args = [info["url"], "all"]
-    PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
+    PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
         }
@@ -533,7 +534,7 @@ function autoPreload() {
         loadingTuberList.push(channelName)
         option.args = [JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"], "all"]
         console.log(`Preloading : ${channelName}`)
-        PythonShell.run(rootPath+"getInfo.py", option, (error, result) => {
+        PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
             if (error) {
                 console.log(error)
             }
@@ -552,8 +553,8 @@ function autoPreload() {
 
 function changeBgColor(rgb = null) {
     if (settings["defaultBackground"][0] !== "true") {
-        if (rgb === null) {return null}
-        body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`)
+        if (rgb === null) {body.setAttribute("style", `background-color: tomato !important;`)}
+        else {body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`)}
         mainColor = rgb
     } else {
         body.setAttribute("style", "background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;")

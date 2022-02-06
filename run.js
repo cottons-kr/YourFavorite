@@ -4,6 +4,7 @@ const os = require('os')
 
 const root = app.getAppPath("exe")
 fs.writeFileSync(`${root}/js/path`, root)
+fs.writeFileSync(`${root}/path`, root)
 let settingPath = `${root}/resource/setting.json`
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 

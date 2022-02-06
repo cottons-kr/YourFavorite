@@ -12,18 +12,12 @@ while True:
         break
     except ModuleNotFoundError:
         from subprocess import run
-        run(["powershell", ".\\resource\python-3.9.8.amd64\python -m pip install selenium msedge-selenium-tools"], shell=True)
-        run(["powershell", ".\\resource\python-3.9.8.amd64\python -m pip install --upgrade requests"], shell=True)
+        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install selenium msedge-selenium-tools"], shell=True)
+        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade requests"], shell=True)
         continue
 
 waitTime = 10
-
-rootPath = "C:\\Users\\태영\\Desktop\\YourFavorite\\resource\driver"
-
-#rootPath = "C:\\Program Files\\YourFavorite\\resources\\app\\resource\\driver"
-if not os.path.exists(rootPath):
-    rootPath = f"C:\\Users\\{getpass.getuser()}\\AppData\\Local\\Programs\\YourFavorite\\resources\\app\\resource\\driver"
-
+rootPath = open("path", "r").read()
 programPath = "C:\\Program Files"
 chromePath = f"{programPath}\\Google\\Chrome\\Application\\chrome.exe"
 edgePath = f"{programPath} (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
@@ -35,7 +29,7 @@ def detectBrowser(type):
         options.add_argument("headless")
         if type == "simple":
             options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
-        driver = webdriver.Chrome(executable_path=f"{rootPath}\\chromedriver.exe", options=options)
+        driver = webdriver.Chrome(executable_path=f"{rootPath}\\resource\driver\chromedriver.exe", options=options)
     elif os.path.exists(edgePath):
         options = selenium_tools.EdgeOptions()
         if type == "simple":
