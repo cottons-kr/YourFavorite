@@ -8,7 +8,7 @@ fs.writeFileSync(`${root}/path`, root)
 let settingPath = `${root}/resource/setting.json`
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
-function show() {
+app.on("ready", () => {
     const win = new BrowserWindow({
         width: settings["windowWidth"][0],
         height: settings["windowHeight"][0],
@@ -27,12 +27,10 @@ function show() {
         console.log(Intl.DateTimeFormat().resolvedOptions().locale)
         win.loadURL(`${root}/html/index-en.html`)
     }
-    win.show()
-}
-
-app.on("ready", () => {
-    setTimeout(show, 1000)
+    win.once("ready-to-show", () => {
+        win.show()
+    })
 })
 app.on("window-all-closed", () => {
-    app.exit()
+    process.exit()
 })

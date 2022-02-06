@@ -423,6 +423,13 @@ li {
     text-align: center;
 }
 
+.loading {
+    position: absolute;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+}
+
 /*애니메이션*/
 .showPopup {
     animation-name: showPopup;
@@ -433,6 +440,12 @@ li {
 .hidePopup {
     animation-name: hidePopup;
     animation-duration: 0.25s;
+    animation-fill-mode: forwards;
+}
+
+.hideLoading {
+    animation-name: hidePopup;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 

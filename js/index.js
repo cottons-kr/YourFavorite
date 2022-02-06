@@ -608,10 +608,17 @@ window.addEventListener("resize", () => {
     console.log(document.querySelector("html").style.fontSize)
 })
 
-clearInfo()
-loadList()
-toggleNoList()
-setTimeout(showRecentTuber, 500)
-setTimeout(autoPreload, 1500)
-setInterval(autoPreload, settings["preloadDelay"][0])
-changeBgColor()
+const loading = document.querySelector(".loading")
+window.onload = () => {
+    clearInfo()
+    loadList()
+    toggleNoList()
+    setTimeout(showRecentTuber, 500)
+    setTimeout(autoPreload, 1500)
+    setInterval(autoPreload, settings["preloadDelay"][0])
+    changeBgColor()
+    setTimeout(() => {
+        loading.classList.add("hideLoading")
+        setTimeout(() => {loading.style.display = "none"}, 1000)
+    }, 1500)
+}
