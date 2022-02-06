@@ -1,3 +1,18 @@
+import platform, sys
+osType = platform.platform()
+if "Windows" in osType:
+    if not int(platform.release()) >= 10:
+        print("Error: OS 버전이 너무 낮습니다")
+        sys.exit()
+elif "Linux" in osType:
+    if platform.platform().split(".")[0] != 5:
+        print("Error: OS 버전이 너무 낮습니다")
+        sys.exit()
+elif "macOS" in osType:
+    if platform.release().split(".")[0] != 21:
+        print("Error: OS 버전이 너무 낮습니다")
+        sys.exit()
+
 while True:
     try:
         from msedge import selenium_tools
@@ -6,28 +21,38 @@ while True:
         import base64
         import json
         import os
-        import platform
         import locale
         from multiprocessing import Process, freeze_support, Manager
         break
     except ModuleNotFoundError:
         from subprocess import run
-        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install selenium msedge-selenium-tools"], shell=True)
-        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade requests"], shell=True)
-        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade selenium"], shell=True)
-        run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade pip"], shell=True)
+        if "Windows" in osType:
+            run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install selenium msedge-selenium-tools"], shell=True)
+            run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade requests"], shell=True)
+            run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade selenium"], shell=True)
+            run(["powershell", ".\\resource\python-3.9.10.amd64\python -m pip install --upgrade pip"], shell=True)
+        elif "Linux" in osType or "macOS" in osType:
+            run(["pip3 install selenium msedge-selenium-tools"], shell=True)
+            run(["pip3 install --upgrade requests"], shell=True)
+            run(["pip3 install --upgrade selenium"], shell=True)
+            run(["pip3 install --upgrade pip"], shell=True)
         continue
 
 waitTime = 10
 rootPath = open("path", "r").read()
 
 def getBrowser(type):
-    options = selenium_tools.EdgeOptions()
-    if type == "simple":
-        options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
-    options.use_chromium = True
-    options.add_argument("headless")
-    driver = selenium_tools.Edge(executable_path=f"{rootPath}\\resource\\driver\\msedgedriver.exe", options=options)
+    if "Windows" in osType:
+        options = selenium_tools.EdgeOptions()
+        if type == "simple":
+            options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
+        options.use_chromium = True
+        options.add_argument("headless")
+        driver = selenium_tools.Edge(executable_path=f"{rootPath}\\resource\\driver\\msedgedriver.exe", options=options)
+    elif "Linux" in osType:
+        pass #Firefox 지원
+    elif "macOS" in osType:
+        pass #Safari 지원
     return driver
 
 def getBase(url, lang, returns):
@@ -141,7 +166,7 @@ def getAbout(url, lang, returns):
     about = [about, location, joinDate, totalViews, links]
     returns[4] = about
 
-#=====Main=====
+#=====Main=====#
 if __name__ == "__main__":
     freeze_support()
     url = sys.argv[1]
@@ -189,3 +214,4 @@ if __name__ == "__main__":
             print(base64.b64encode(jsonString.encode("utf-8")))
         else:
             print(jsonString)
+    sys.exit()
