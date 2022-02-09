@@ -1,3 +1,5 @@
+import getInfo from "./collector.js";
+
 const { PythonShell } = require("python-shell")
 const ColorThief = require('colorthief');
 const os = require('os')
@@ -621,4 +623,5 @@ window.onload = () => {
         loading.classList.add("hideLoading")
         setTimeout(() => {loading.style.display = "none"}, 1000)
     }, 1500)
+    getInfo()
 }
