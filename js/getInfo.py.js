@@ -1,3 +1,4 @@
+const fileContent = `
 while True:
     try:
         from msedge import selenium_tools
@@ -203,3 +204,6 @@ if __name__ == "__main__":
         else:
             print(jsonString)
     sys.exit()
+`
+
+export default fileContent

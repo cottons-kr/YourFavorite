@@ -28,6 +28,7 @@
   "dependencies": {
     "@types/puppeteer": "^5.4.4",
     "colorthief": "^2.3.2",
+    "node-gzip": "^1.1.2",
     "puppeteer": "^13.2.0",
     "python-shell": "^3.0.1"
   },

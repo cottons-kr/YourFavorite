@@ -2,7 +2,7 @@ const { PythonShell } = require("python-shell")
 const ColorThief = require('colorthief');
 const os = require('os')
 const fs = require("fs")
-const puppeteer = require("puppeteer")
+const path = require("path")
 
 const body = document.querySelector("body"),
       addButtonImg = document.querySelector("#addButtonImg"),
@@ -47,9 +47,9 @@ const body = document.querySelector("body"),
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 
-let rootPath = fs.readFileSync(`${__dirname}/../js/path`, "utf8")
-let settingPath = `${rootPath}/resource/setting.json`
-let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
+const rootPath = os.homedir()
+const settingPath = path.resolve(rootPath, ".yf/setting.json")
+const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 const lang = Intl.DateTimeFormat().resolvedOptions().locale
 
 let globalInterval = null
