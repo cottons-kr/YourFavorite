@@ -1,0 +1,61 @@
+{
+  "name": "YourFavorite",
+  "version": "1.1.0",
+  "description": "Get easier access to your favorite YouTubers",
+  "main": "run.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "deploy": "electron-builder --windows nsis"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cottons-kr/YourFavorite.git"
+  },
+  "author": "cottons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cottons-kr/YourFavorite/issues"
+  },
+  "homepage": "https://github.com/cottons-kr/YourFavorite#readme",
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
+    "electron": "^17.0.0",
+    "electron-builder": "^22.14.5",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@types/puppeteer": "^5.4.4",
+    "colorthief": "^2.3.2",
+    "puppeteer": "^13.2.0",
+    "python-shell": "^3.0.1"
+  },
+  "build": {
+    "productName": "YourFavorite",
+    "appId": "app.yf.vlab",
+    "asar": true,
+    "protocols": {
+      "name": "YourFavorite",
+      "schemes": [
+        "yourfavorite"
+      ]
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "./resources/installer/Icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
+    }
+  }
+}

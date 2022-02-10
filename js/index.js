@@ -1,49 +1,48 @@
-import getInfo from "./collector.js";
-
 const { PythonShell } = require("python-shell")
 const ColorThief = require('colorthief');
 const os = require('os')
 const fs = require("fs")
+const puppeteer = require("puppeteer")
 
-const body = document.querySelector("body")
-const addButtonImg = document.querySelector("#addButtonImg")
-const addTuberPopup = document.querySelector(".addTuberPopup")
-const addTuberPopupFormUrl = document.querySelector("#addTuberPopupFormUrl")
-const addTuberPopupInput = document.querySelector("#addTuberPopupFormUrl input")
-const addTuberPopupExit = document.querySelector("#addTuberPopupExit")
-const tuberListContainer = document.querySelector("#tuberList")
-const infoProfileImg = document.querySelector("#infoProfileImg a img")
-const infoProfileLink = document.querySelector("#infoProfileImg a")
-const infoChannelName = document.querySelector("#infoChannelName h1")
-const infoSubscriber = document.querySelector("#infoSubscriber")
-const noList = document.querySelector("#noList")
-const infoAboutMoreButton = document.querySelector("#infoAboutMoreButton img")
-const infoAboutMorePopup = document.querySelector("#infoAboutMorePopup")
-const infoAboutMorePopupExitButton = document.querySelector("#infoAboutMorePopupExitButton")
-const infoStreamList = document.querySelector("#infoStreamList")
-const infoVideosList = document.querySelector("#infoVideosList")
-const infoCommunityList = document.querySelector("#infoCommunityList")
-const infoAbout = document.querySelector("#infoAbout")
-const infoTotalView = document.querySelector("#infoTotalView")
-const infoLocation = document.querySelector("#infoLocation")
-const infoJoinDate = document.querySelector("#infoJoinDate")
-const infoAboutmore = document.querySelector("#infoAboutmore")
-const infoRoot = document.querySelector(".infoRoot")
-const removeButtonImg = document.querySelector("#removeButtonImg")
-const removeTuberPopup = document.querySelector(".removeTuberPopup")
-const removeTuberPopupExit = document.querySelector("#removeTuberPopupExit")
-const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
-const infoTuberLoading = document.querySelector("#infoTuberLoading")
-const infoTuberLoadingName = document.querySelector("#infoTuberLoading h2")
-const infoStream = document.querySelector(".infoStream")
-const infoCommunity = document.querySelector(".infoCommunity")
-const infoVideos = document.querySelector(".infoVideos")
-const infoAboutClass = document.querySelector(".infoAbout")
-const infoLocationRoot = document.querySelector("#infoLocationRoot")
-const infoVideoTitle = document.querySelector("#infoVideoTitle")
-const infoCommunityTitle = document.querySelector("#infoCommunityTitle h2")
-const infoStreamTitle = document.querySelector("#infoStreamTitle h2")
-const addTuberPopupFormFileInput = document.querySelector("#addTuberPopupFormFileInput")
+const body = document.querySelector("body"),
+      addButtonImg = document.querySelector("#addButtonImg"),
+      addTuberPopup = document.querySelector(".addTuberPopup"),
+      addTuberPopupFormUrl = document.querySelector("#addTuberPopupFormUrl"),
+      addTuberPopupInput = document.querySelector("#addTuberPopupFormUrl input"),
+      addTuberPopupExit = document.querySelector("#addTuberPopupExit"),
+      tuberListContainer = document.querySelector("#tuberList"),
+      infoProfileImg = document.querySelector("#infoProfileImg a img"),
+      infoProfileLink = document.querySelector("#infoProfileImg a"),
+      infoChannelName = document.querySelector("#infoChannelName h1"),
+      infoSubscriber = document.querySelector("#infoSubscriber"),
+      noList = document.querySelector("#noList"),
+      infoAboutMoreButton = document.querySelector("#infoAboutMoreButton img"),
+      infoAboutMorePopup = document.querySelector("#infoAboutMorePopup"),
+      infoAboutMorePopupExitButton = document.querySelector("#infoAboutMorePopupExitButton"),
+      infoStreamList = document.querySelector("#infoStreamList"),
+      infoVideosList = document.querySelector("#infoVideosList"),
+      infoCommunityList = document.querySelector("#infoCommunityList"),
+      infoAbout = document.querySelector("#infoAbout"),
+      infoTotalView = document.querySelector("#infoTotalView"),
+      infoLocation = document.querySelector("#infoLocation"),
+      infoJoinDate = document.querySelector("#infoJoinDate"),
+      infoAboutmore = document.querySelector("#infoAboutmore"),
+      infoRoot = document.querySelector(".infoRoot"),
+      removeButtonImg = document.querySelector("#removeButtonImg"),
+      removeTuberPopup = document.querySelector(".removeTuberPopup"),
+      removeTuberPopupExit = document.querySelector("#removeTuberPopupExit"),
+      removeTuberPopupList = document.querySelector("#removeTuberPopupList"),
+      infoTuberLoading = document.querySelector("#infoTuberLoading"),
+      infoTuberLoadingName = document.querySelector("#infoTuberLoading h2"),
+      infoStream = document.querySelector(".infoStream"),
+      infoCommunity = document.querySelector(".infoCommunity"),
+      infoVideos = document.querySelector(".infoVideos"),
+      infoAboutClass = document.querySelector(".infoAbout"),
+      infoLocationRoot = document.querySelector("#infoLocationRoot"),
+      infoVideoTitle = document.querySelector("#infoVideoTitle"),
+      infoCommunityTitle = document.querySelector("#infoCommunityTitle h2"),
+      infoStreamTitle = document.querySelector("#infoStreamTitle h2"),
+      addTuberPopupFormFileInput = document.querySelector("#addTuberPopupFormFileInput")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -59,11 +58,10 @@ let showingTuber = null
 let mainColor = null
 let loadedTuberList = []
 let loadingTuberList = []
-let pythonPath = `${rootPath}/resource/python-3.9.10.amd64/python.exe`
 
 const option = {
     mode: "text",
-    pythonPath: pythonPath,
+    pythonPath: "",
     pythonOptions: ["-u"],
     scriptPath: "",
     encoding: "utf8"
@@ -112,7 +110,7 @@ function addTuber(event) {
     option.args = [url, "simple"]
     let channelName, profileImg, backgroundRgb;
 
-    addTuberPopupInput.value = ""
+    addTuberPopupInput.value = "";
     PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
         if (error) {
             console.log(error)
@@ -623,5 +621,4 @@ window.onload = () => {
         loading.classList.add("hideLoading")
         setTimeout(() => {loading.style.display = "none"}, 1000)
     }, 1500)
-    getInfo()
 }
