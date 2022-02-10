@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/stream.css">
-    <link rel="stylesheet" href="../css/community.css">
-    <link rel="stylesheet" href="../css/video.css">
-    <link rel="stylesheet" href="../css/setting.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/stream.css">
+    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="css/video.css">
+    <link rel="stylesheet" href="css/setting.css">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <title>YourFavorite</title>
 </head>
@@ -17,13 +17,13 @@
     <div class="listContainer">
         <li class="editButtons">
             <div class="addButton">
-                <img id="addButtonImg" src="../resource/plus-circle.svg">
+                <img id="addButtonImg" src="resource/plus-circle.svg">
             </div>
             <div class="removeButton">
-                <img id="removeButtonImg" src="../resource/remove.svg">
+                <img id="removeButtonImg" src="resource/remove.svg">
             </div>
             <div class="settingButton">
-                <img id="settingButtonImg" src="../resource/setting.svg">
+                <img id="settingButtonImg" src="resource/setting.svg">
             </div>
         </li>
         <div id="tuberList">
@@ -41,20 +41,20 @@
         <div class="infoAbout">
             <button id="infoAboutMoreButton" title="채널 설명">
                 <div id="infoAboutRoot">
-                    <img id="infoAboutImg" src="../resource/about.svg">
+                    <img id="infoAboutImg" src="resource/about.svg">
                     <div id="infoAbout"></div>
                 </div>
             </button>
             <div id="infoTotalViewRoot" title="총합 조회수">
-                <img id="infoTotalViewImg" src="../resource/view.svg">
+                <img id="infoTotalViewImg" src="resource/view.svg">
                 <h3 id="infoTotalView"></h3>
             </div>
             <div id="infoLocationRoot" title="국가">
-                <img id="infoLocationImg" src="../resource/world.svg">
+                <img id="infoLocationImg" src="resource/world.svg">
                 <h3 id="infoLocation"></h3>
             </div>
             <div id="infoJoinDateRoot" title="가입일">
-                <img id="infoJoinDateImg" src="../resource/join.svg">
+                <img id="infoJoinDateImg" src="resource/join.svg">
                 <h3 id="infoJoinDate"></h3>
             </div>
         </div>
@@ -90,7 +90,7 @@
         </div>
     
         <div id="infoTuberLoading">
-            <img title="조금만 참으세요!" src="../resource/loading.svg">
+            <img title="조금만 참으세요!" src="resource/loading.svg">
             <h2></h2>
         </div>
     </div>
@@ -98,7 +98,7 @@
     <div class="addTuberPopup">
         <span>
             <h4 id="addTuberPopupText">유튜버 등록하기</h4>
-            <img id="addTuberPopupExit" src="../resource/x-circle.svg">
+            <img id="addTuberPopupExit" src="resource/x-circle.svg">
         </span>
         <form id="addTuberPopupFormUrl">
             <input type="text" placeholder="채널 URL을 입력하세요">
@@ -111,7 +111,7 @@
 
     <div id="infoAboutMorePopup">
         <button id="infoAboutMorePopupExitButton">
-            <img id="infoAboutMorePopupExit" src="../resource/x-circle.svg">
+            <img id="infoAboutMorePopupExit" src="resource/x-circle.svg">
         </button>
         <p id="infoAboutmore"></p>
     </div>
@@ -119,7 +119,7 @@
     <div class="removeTuberPopup">
         <span>
             <h4 id="removeTuberPopupText">유튜버 삭제하기</h4>
-            <img id="removeTuberPopupExit" src="../resource/x-circle.svg">
+            <img id="removeTuberPopupExit" src="resource/x-circle.svg">
         </span>
         <div id="removeTuberPopupList"></div>
     </div>
@@ -127,25 +127,25 @@
     <div class="settingPopup">
         <span>
             <h4 id="settingPopupText">설정</h4>
-            <img id="settingPopupExit" src="../resource/x-circle.svg">
+            <img id="settingPopupExit" src="resource/x-circle.svg">
         </span>
         <div id="settingPopupList">
         </div>
         <div id="resetSetting">
-            <img id="resetSettingImg" src="../resource/resetSetting.svg" title="설정 초기화후 재시작">
+            <img id="resetSettingImg" src="resource/resetSetting.svg" title="설정 초기화후 재시작">
         </div>
         <div id="resetAll">
-            <img id="resetAllImg" src="../resource/resetAll.svg" title="모두 초기화후 재시작">
+            <img id="resetAllImg" src="resource/resetAll.svg" title="모두 초기화후 재시작">
         </div>
         <div id="backupAll">
-            <img id="backupAllImg" src="../resource/backup.svg" title="유튜버, 설정 백업">
+            <img id="backupAllImg" src="resource/backup.svg" title="유튜버, 설정 백업">
         </div>
     </div>
 
     <div class="checkResetAllPopup">
         <h3 id="checkResetAllPopupText">정말로 모두 초기화 하시겠어요?</h3>
-        <div id="checkResetAllPopupYes"><img id="checkResetAllPopupYesImg" src="../resource/check.svg" title="네"></div>
-        <div id="checkResetAllPopupNo"><img id="checkResetAllPopupNoImg" src="../resource/x-circle.svg" title="생각할 시간을 주세요"></div>
+        <div id="checkResetAllPopupYes"><img id="checkResetAllPopupYesImg" src="resource/check.svg" title="네"></div>
+        <div id="checkResetAllPopupNo"><img id="checkResetAllPopupNoImg" src="resource/x-circle.svg" title="생각할 시간을 주세요"></div>
     </div>
 
     <div class="backupCompletePopup">
@@ -154,8 +154,8 @@
     </div>
     <div class="loading"></div>
 </body>
-<script type="module" charset="utf-8" src="../js/index.js"></script>
-<script type="module" charset="utf-8" src="../js/setting.js"></script>
-<script type="module" charset="utf-8" src="../js/getInfo.py.js"></script>
+<script type="module" charset="utf-8" src="js/index.js"></script>
+<script type="module" charset="utf-8" src="js/setting.js"></script>
+<script type="module" charset="utf-8" src="js/getInfo.py.js"></script>
 <script type="text/javascript" src="http://www.shawnolson.net/scripts/public_smo_scripts.js"></script>
 </html>

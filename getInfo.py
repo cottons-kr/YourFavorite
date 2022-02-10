@@ -7,6 +7,7 @@ while True:
         import json
         import os
         import platform
+        import urllib
         import locale
         from multiprocessing import Process, freeze_support, Manager
         break
@@ -37,6 +38,10 @@ def getBrowser(type):
         options.use_chromium = True
         options.add_argument("headless")
         driver = selenium_tools.Edge(executable_path=f"{rootPath}\\resource\\driver\\msedgedriver.exe", options=options)
+        if not os.path.exists(f"{rootPath}\\resource\\driver\\msedgedriver.exe"):
+            url = urllib.request.urlopen("https://msedgedriver.azureedge.net/98.0.1108.43/edgedriver_win64.zip")
+            with open("driver.zip", "rb") as output:
+                output.write(url.read())
     elif "Linux" in osType:
         pass #Firefox 지원
     elif "macOS" in osType:

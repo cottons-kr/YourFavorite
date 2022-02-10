@@ -18,6 +18,7 @@ if (!fs.existsSync(settingPath)) {
     fs.mkdirSync(path.resolve(homeDir, ".yf"))
     fs.writeFileSync(settingPath, JSON.stringify(defaultSetting), "utf8")
     fs.writeFileSync(path.resolve(homeDir, ".yf/defaultSetting.json"), JSON.stringify(defaultSetting), "utf8")
+    fs.writeFileSync(path.resolve(homeDir, ".yf/path"), homeDir, "utf8")
 }
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
@@ -35,14 +36,12 @@ app.on("ready", () => {
     win.setMenuBarVisibility(false)
     win.setAspectRatio(16/9)
     if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {
-        win.loadURL(`index.html`)
+        win.loadFile("index.html")
     } else {
         console.log(Intl.DateTimeFormat().resolvedOptions().locale)
-        win.loadURL(`index-en.html`)
+        win.loadFile(`index-en.html`)
     }
-    win.once("ready-to-show", () => {
-        win.show()
-    })
+    win.show()
 })
 app.on("window-all-closed", () => {
     process.exit()

@@ -3,6 +3,7 @@ const ColorThief = require('colorthief');
 const os = require('os')
 const fs = require("fs")
 const path = require("path")
+import fileContent from "./getInfo.py.js"
 
 const body = document.querySelector("body"),
       addButtonImg = document.querySelector("#addButtonImg"),
@@ -51,6 +52,7 @@ const rootPath = os.homedir()
 const settingPath = path.resolve(rootPath, ".yf/setting.json")
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 const lang = Intl.DateTimeFormat().resolvedOptions().locale
+const scriptPath = path.resolve(rootPath, ".yf/getInfo.py")
 
 let globalInterval = null
 let loadingTuber = null
@@ -65,6 +67,10 @@ const option = {
     pythonOptions: ["-u"],
     scriptPath: "",
     encoding: "utf8"
+}
+
+if (!fs.existsSync(scriptPath)) {
+    fs.writeFileSync(scriptPath, fileContent, "utf8")
 }
 
 function loadList() {
@@ -111,7 +117,7 @@ function addTuber(event) {
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = "";
-    PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
+    PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
             console.log(error)
         }
@@ -362,7 +368,7 @@ function loadInfo(channelId) {
     infoTuberLoading.style.display = "block"
     if (lang == "ko") {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
-    PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
+    PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
             console.log(error)
         }
@@ -396,7 +402,7 @@ function autoRefresh(channelId) {
     const info = JSON.parse(mainJson[channelId])
     let noContent = []
     option.args = [info["url"], "all"]
-    PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
+    PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
             console.log(error)
         }
@@ -534,7 +540,7 @@ function autoPreload() {
         loadingTuberList.push(channelName)
         option.args = [JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"], "all"]
         console.log(`Preloading : ${channelName}`)
-        PythonShell.run(rootPath+"/getInfo.py", option, (error, result) => {
+        PythonShell.run(scriptPath, option, (error, result) => {
             if (error) {
                 console.log(error)
             }
