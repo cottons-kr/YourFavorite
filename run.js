@@ -1,7 +1,8 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, dialog } = require('electron')
 const fs = require("fs")
 const os = require('os')
 const path = require("path")
+const commandExist = require("command-exists")
 
 const defaultSetting = {
     "autoReloadDelay":[5000,"새로고침 간격","ms","number"],
@@ -26,6 +27,19 @@ if (fs.existsSync("getInfo.py")) {
     const data = `const fileContent = \`${fs.readFileSync("getInfo.py", "utf8")}\`; export default fileContent`
     fs.writeFileSync("js/getInfo.py.js", data, "utf8")
 }
+
+commandExist("python", (err, result) => {
+    if (!result) {
+        dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")
+        process.exit()
+    }
+})
+commandExist("pip3", (err, result) => {
+    if (!result) {
+        dialog.showErrorBox("PIP3가 감지되지 않았습니다!", "혹은 PIP가 PATH에 등록되지 않은걸수도 있어요")
+        process.exit()
+    }
+})
 app.on("ready", () => {
     const win = new BrowserWindow({
         width: settings["windowWidth"][0],

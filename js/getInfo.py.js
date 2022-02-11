@@ -28,7 +28,7 @@ const fileContent = `while True:
 
 osType = platform.platform()
 waitTime = 10
-rootPath = open("path", "r").read()
+rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r").read()
 
 def getBrowser(type):
     if "Windows" in osType:

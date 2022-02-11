@@ -71,6 +71,11 @@ const option = {
 
 fs.writeFileSync(scriptPath, fileContent, "utf8")
 
+function handleError(msg) {
+    alert(`오류가 발생했어요!\nGithub Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`)
+    window.close()
+}
+
 function loadList() {
     if (localStorage["youtuber"] === undefined) {return null}
     const mainJson = JSON.parse(localStorage["youtuber"])
@@ -117,7 +122,7 @@ function addTuber(event) {
     addTuberPopupInput.value = "";
     PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
-            console.log(error)
+            handleError(error)
         }
         console.log(result)
 
@@ -146,7 +151,7 @@ function addTuber(event) {
             loadInfo(channelName)
             removeTuber()
         })
-        .catch(err => {console.log(`Color-Thief Error : ${err}`)})
+        .catch(err => {handleError(err)})
     })
 }
 
@@ -368,7 +373,7 @@ function loadInfo(channelId) {
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
     PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
-            console.log(error)
+            handleError(error)
         }
 
         const data = result[0].replace("b'", '').replace("'", '')
@@ -402,7 +407,7 @@ function autoRefresh(channelId) {
     option.args = [info["url"], "all"]
     PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
-            console.log(error)
+            handleError(error)
         }
 
         const data = result[0].replace("b'", '').replace("'", '')
@@ -540,7 +545,7 @@ function autoPreload() {
         console.log(`Preloading : ${channelName}`)
         PythonShell.run(scriptPath, option, (error, result) => {
             if (error) {
-                console.log(error)
+                handleError(error)
             }
     
             const data = result[0].replace("b'", '').replace("'", '')
