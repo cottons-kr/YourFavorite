@@ -1,7 +1,12 @@
 while True:
     try:
-        from msedge import selenium_tools
+        from multiprocessing import Process, freeze_support, Manager
+        from selenium.webdriver.edge.service import Service
+        from selenium.webdriver.edge.options import Options
+        from selenium.webdriver.common.by import By
+        from webdriver_manager.microsoft import EdgeChromiumDriverManager
         from selenium import webdriver
+        from subprocess import run
         import sys
         import base64
         import json
@@ -9,7 +14,6 @@ while True:
         import platform
         import urllib
         import locale
-        from multiprocessing import Process, freeze_support, Manager
         break
     except ModuleNotFoundError:
         from subprocess import run
@@ -19,11 +23,13 @@ while True:
             run(["powershell", "pip3 install --user --upgrade requests"], shell=True)
             run(["powershell", "pip3 install --user --upgrade selenium"], shell=True)
             run(["powershell", "pip3 install --user --upgrade pip"], shell=True)
+            run(["powershell", "pip3 install --user webdriver-manager"], shell=True)
         else:
             run(["pip3 install --user selenium msedge-selenium-tools"], shell=True)
             run(["pip3 install --user --upgrade requests"], shell=True)
             run(["pip3 install --user --upgrade selenium"], shell=True)
             run(["pip3 install --user --upgrade pip"], shell=True)
+            run(["pip3 install --user webdriver-manager"], shell=True)
         continue
 
 osType = platform.platform()
@@ -32,16 +38,12 @@ rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) 
 
 def getBrowser(type):
     if "Windows" in osType:
-        options = selenium_tools.EdgeOptions()
+        options = Options()
         if type == "simple":
             options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
-        options.use_chromium = True
         options.add_argument("headless")
-        driver = selenium_tools.Edge(executable_path=f"{rootPath}\\resource\\driver\\msedgedriver.exe", options=options)
-        if not os.path.exists(f"{rootPath}\\resource\\driver\\msedgedriver.exe"):
-            url = urllib.request.urlopen("https://msedgedriver.azureedge.net/98.0.1108.43/edgedriver_win64.zip")
-            with open("driver.zip", "rb") as output:
-                output.write(url.read())
+        EdgeChromiumDriverManager(log_level=20)
+        driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()), options=options)
     elif "Linux" in osType:
         pass #Firefox 지원
     elif "macOS" in osType:
