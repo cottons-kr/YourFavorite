@@ -30,21 +30,21 @@
     outline: none;
 }
 
-#resetSetting, #resetAll, #backupAll {
+#resetSetting, #resetAll, #backupAll, #showInfo {
     display: inline-block;
     margin: 2%;
 }
 
-#resetSettingImg, #resetAllImg, #backupAllImg {
+#resetSettingImg, #resetAllImg, #backupAllImg, #showInfoImg {
     transition-duration: 0.4s;
 }
 
-#resetSettingImg:hover, #resetAllImg:hover, #backupAllImg:hover {
+#resetSettingImg:hover, #resetAllImg:hover, #backupAllImg:hover, #showInfoImg:hover {
     transition-duration: 0.4s;
     transform: translateY(-10%);
 }
 
-#resetSettingImg:active, #resetAllImg:active, #backupAllImg:active {
+#resetSettingImg:active, #resetAllImg:active, #backupAllImg:active, #showInfoImg:active {
     transition-duration: 0.4s;
     transform: scale(80%);
 }

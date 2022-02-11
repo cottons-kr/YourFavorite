@@ -466,3 +466,8 @@ li {
         opacity: 0;
     }
 }
+
+/*임시*/
+.addTuberPopup p, #addTuberPopupFormFile {
+    display: none;
+}

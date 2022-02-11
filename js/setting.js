@@ -1,6 +1,7 @@
 const fs = require("fs")
 const os = require('os')
 const path = require("path")
+const { ipcRenderer } = require("electron")
 
 const homeDir = os.homedir()
 const rootPath = fs.readFileSync(path.resolve(homeDir, ".yf/path"), "utf8")
@@ -19,6 +20,7 @@ const checkResetAllPopupYes = document.querySelector("#checkResetAllPopupYes")
 const checkResetAllPopupNo = document.querySelector("#checkResetAllPopupNo")
 const backupAllImg = document.querySelector("#backupAllImg")
 const backupCompletePopup = document.querySelector(".backupCompletePopup")
+const showInfoImg = document.querySelector("#showInfoImg")
 let settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
 function showSetting() {
@@ -90,6 +92,10 @@ function backup() {
     }, 2000)
 }
 
+function showInfo() {
+    ipcRenderer.invoke("showInfo")
+}
+
 settingButtonImg.addEventListener("mouseover", () => {
     settingButtonImg.style.opacity = 1
 })
@@ -128,3 +134,4 @@ checkResetAllPopupNo.addEventListener("click", () => {
     setTimeout(() => {checkResetAllPopup.style.display = "none"}, 250)
 })
 backupAllImg.addEventListener("click", backup)
+showInfoImg.addEventListener("click", showInfo)

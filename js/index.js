@@ -3,6 +3,7 @@ const ColorThief = require('colorthief');
 const os = require('os')
 const fs = require("fs")
 const path = require("path")
+const { ipcRenderer } = require("electron")
 import fileContent from "./getInfo.py.js"
 
 const body = document.querySelector("body"),
@@ -72,8 +73,7 @@ const option = {
 fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 function handleError(msg) {
-    alert(`오류가 발생했어요!\nGithub Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`)
-    window.close()
+    ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error").then(window.close)
 }
 
 function loadList() {
@@ -120,7 +120,7 @@ function addTuber(event) {
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = "";
-    PythonShell.run(scriptPath, option, (error, result) => {
+    PythonShell.run("scriptPath", option, (error, result) => {
         if (error) {
             handleError(error)
         }

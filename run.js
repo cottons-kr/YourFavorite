@@ -1,8 +1,15 @@
-const { app, BrowserWindow, dialog } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const fs = require("fs")
 const os = require('os')
 const path = require("path")
 const commandExist = require("command-exists")
+
+const PROGRAM_VERSION  = "1.1.0",
+      NODE_VERSION     = process.versions.node,
+      ELECTRON_VERSION = process.versions.electron,
+      V8_VERSION       = process.versions.v8,
+      CHROME_VERSION   = process.versions.chrome,
+      OS_VERSION       = `${os.type()} ${os.release()}`
 
 const defaultSetting = {
     "autoReloadDelay":[5000,"새로고침 간격","ms","number"],
@@ -59,6 +66,26 @@ app.on("ready", () => {
         console.log(Intl.DateTimeFormat().resolvedOptions().locale)
         win.loadFile(`index-en.html`)
     }
+    ipcMain.handle("showMessage", (err, title, msg, type="info") => {
+        if (type == "error") {
+            dialog.showErrorBox(title, msg)
+        }
+        else {
+            dialog.showMessageBox(win, { type: type, message: title, detail: msg, buttons: ["ok"]})
+        }
+    })
+    ipcMain.handle("showInfo", (err) => {
+        const text = `
+YourFavorite ${PROGRAM_VERSION}
+nodejs : ${NODE_VERSION}
+Electron : ${ELECTRON_VERSION}
+V8 : ${V8_VERSION}
+Chromium : ${CHROME_VERSION}
+OS : ${OS_VERSION}
+
+오류 발생시 이 창을 캡처해 올려주세요 :)`
+        dialog.showMessageBox(win, { type: "info", message: "YourFavorite 정보", detail: text, buttons: ["ok"]})
+    })
     win.show()
 })
 app.on("window-all-closed", () => {
