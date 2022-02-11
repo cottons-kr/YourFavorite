@@ -1,8 +1,8 @@
-## v1.0.1
-2022/02/06 출시됨
-- 반응형 레이아웃 적용 / Apply Dynamic Layout
+## v1.1.0
+2022/02/11 출시됨
+- 반응형 레이아웃 적용 / Applied Dynamic Layout
 - 코드 안정성 강화 / Improved Code Stability
-- **윈도우 전용** / Windows Only
+- 정보 팝업 추가 / Added Infomation Popup
 
 ## v1.0.0
 2022/01/01 출시됨

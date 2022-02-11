@@ -8,8 +8,7 @@ Get easier access to your favorite YouTubers
 
 [한국어 (Edit First)](https://github.com/cottons-kr/YourFavorite/blob/main/document/README-kr.md)
 
-# ReleaseNote
-[한국어](https://github.com/cottons-kr/YourFavorite/blob/main/document/Releasenote-kr.md)
+# [Releasenote](https://github.com/cottons-kr/YourFavorite/blob/main/document/Releasenote.md)
 
 # Used Project / Code
 https://github.com/lokesh/color-thief
