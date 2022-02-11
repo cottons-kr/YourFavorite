@@ -6,13 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "deploy": "electron-builder --windows nsis"
+    "deploy": "electron-builder --linux"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cottons-kr/YourFavorite.git"
   },
-  "author": "cottons",
+  "author": {
+    "name": "SerenDev",
+    "email": "kimtaeyoung0205@naver.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cottons-kr/YourFavorite/issues"
@@ -51,6 +54,19 @@
         "nsis"
       ],
       "icon": "./resources/installer/Icon.ico"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "tar.gz"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "pkg"
+      ]
     },
     "nsis": {
       "oneClick": false,
