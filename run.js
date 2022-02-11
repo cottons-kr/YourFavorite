@@ -16,12 +16,16 @@ const homeDir = os.homedir()
 const settingPath = path.resolve(homeDir, ".yf/setting.json")
 if (!fs.existsSync(settingPath)) {
     fs.mkdirSync(path.resolve(homeDir, ".yf"))
-    fs.writeFileSync(settingPath, JSON.stringify(defaultSetting), "utf8")
-    fs.writeFileSync(path.resolve(homeDir, ".yf/defaultSetting.json"), JSON.stringify(defaultSetting), "utf8")
-    fs.writeFileSync(path.resolve(homeDir, ".yf/path"), homeDir, "utf8")
 }
+fs.writeFileSync(settingPath, JSON.stringify(defaultSetting), "utf8")
+fs.writeFileSync(path.resolve(homeDir, ".yf/defaultSetting.json"), JSON.stringify(defaultSetting), "utf8")
+fs.writeFileSync(path.resolve(homeDir, ".yf/path"), homeDir, "utf8")
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
+if (fs.existsSync("getInfo.py")) {
+    const data = `const fileContent = \`${fs.readFileSync("getInfo.py", "utf8")}\`; export default fileContent`
+    fs.writeFileSync("js/getInfo.py.js", data, "utf8")
+}
 app.on("ready", () => {
     const win = new BrowserWindow({
         width: settings["windowWidth"][0],

@@ -69,9 +69,7 @@ const option = {
     encoding: "utf8"
 }
 
-if (!fs.existsSync(scriptPath)) {
-    fs.writeFileSync(scriptPath, fileContent, "utf8")
-}
+fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 function loadList() {
     if (localStorage["youtuber"] === undefined) {return null}
