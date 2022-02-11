@@ -13,9 +13,9 @@
 
 ||운영체제|프로세서|메모리|디스크 여유공간|인터넷 속도|
 |-|-|-|-|-|-|
-|권장(Windows)|Windows 10 or higher|4GHz 헥사코어|16GB|1GB|100Mbps|
+|권장(Windows)|Windows 11 or higher|4GHz 헥사코어|16GB|1GB|100Mbps|
 |권장(Linux)|Kernel 5 or higher|4GHz 쿼드코어|8GB|1GB|100Mbps|
-|최소(Windows)|Windows 7 or higher|3GHz 쿼드코어|8GB|500MB|50Mbps|
+|최소(Windows)|Windows 10 or higher|3GHz 쿼드코어|8GB|500MB|50Mbps|
 |최소(Linux)|Kernel 5 or higher|3GHz 쿼드코어|6GB|500MB|50Mbps|
 
 x64 아키텍처만 지원합니다.
