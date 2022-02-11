@@ -1,5 +1,5 @@
 ## v1.1.0
-2022/02/06 출시됨
+2022/02/11 출시됨
 - 반응형 레이아웃 적용 / Applied Dynamic Layout
 - 코드 안정성 강화 / Improved Code Stability
 - 정보 팝업 추가 / Added Infomation Popup
