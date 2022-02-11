@@ -28,6 +28,18 @@ x64 아키텍처만 지원합니다.
 2. 압축파일을 푼후 설치 프로그램을 실행한뒤 설치해주세요.
 3. 그러면 설치완료입니다.
 
+# Python 설치법
+## Windows
+1. [여기](https://www.python.org/ftp/python/3.9.8/python-3.9.8-amd64.exe)를 눌러 Python을 다운로드 해주세요
+2. **Add Python to PATH에 체크를 해주신뒤 설치를 진행해주세요**
+
+## Linux
+밑에 명령어를 패키지 관리자에 맞게 실행해주세요
+
+|APT|RPM|
+|-|-|
+|```sudo apt update && sudo apt upgrade -y && sudo apt install python3 python3-pip```|```rpm -Uvh python3 python3-pip```|
+
 # 패키지
 패키지(Package)는 특정 계열의 유튜버를 포함한 파일입니다.
 
