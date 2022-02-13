@@ -12,6 +12,7 @@ html {
     margin: 0;
     font-family: 'NanumSquareAcb';
     -webkit-user-drag: none;
+    text-overflow: ellipsis;
 }
 
 body {
@@ -196,7 +197,7 @@ li {
 
     min-width: 20%;
     margin-left: 3%;
-    margin-top: 8%;
+    margin-top: 16vh;
 
     border-radius: 10px / 10px
 }
@@ -467,9 +468,4 @@ li {
     100% {
         opacity: 0;
     }
-}
-
-/*임시*/
-.addTuberPopup p, #addTuberPopupFormFile {
-    display: none;
 }

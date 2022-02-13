@@ -4,6 +4,8 @@ const os = require('os')
 const fs = require("fs")
 const path = require("path")
 const { ipcRenderer } = require("electron")
+
+import addPackageFile from "./package.js";
 import fileContent from "./getInfo.py.js"
 
 const body = document.querySelector("body"),
@@ -74,7 +76,7 @@ fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 function handleError(msg) {
     console.log(msg)
-    ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error").then(window.close)
+    ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")//.then(window.close)
 }
 
 function loadList() {
@@ -128,6 +130,11 @@ function addTuber(event) {
     addTuberPopupInput.value = "";
     PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
+            console.log(error.message)
+            if (error.message.includes("InvalidArgumentException")) {
+                ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")
+                return 0
+            }
             handleError(error)
         }
         console.log(result)
@@ -159,20 +166,6 @@ function addTuber(event) {
         })
         .catch(err => {handleError(err)})
     })
-}
-
-function addPackage(event) {
-    event.preventDefault()
-    const reader = new FileReader
-    reader.onload = () => {
-        try {
-            const pack = JSON.parse(reader.result)   
-        } catch (error) {
-            console.log(error)
-        }
-        setTimeout(() => {addTuberPopupFormFileInput.value = ""}, 2000)
-    }
-    reader.readAsText(addTuberPopupFormFileInput.files[0], "utf-8")
 }
 
 function removeTuber() {
@@ -580,44 +573,59 @@ function changeBgColor(rgb = null) {
 addButtonImg.addEventListener("mouseover", () => {
     addButtonImg.style.opacity = 1
 })
+
 addButtonImg.addEventListener("mouseout", () => {
     addButtonImg.style.opacity = 0.1
 })
+
 removeButtonImg.addEventListener("mouseover", () => {
     removeButtonImg.style.opacity = 1
 })
+
 removeButtonImg.addEventListener("mouseout", () => {
     removeButtonImg.style.opacity = 0.1
 })
+
+const showPackagePopup = document.querySelector(".showPackagePopup")
 addButtonImg.addEventListener("click", () => {
     addTuberPopup.style.display = "block"
+    showPackagePopup.style.display = "block"
     addTuberPopup.classList.remove("hidePopup")
+    showPackagePopup.classList.remove("hidePopup")
     addTuberPopup.classList.add("showPopup")
+    showPackagePopup.classList.add("showPopup")
 })
+
 addTuberPopupExit.addEventListener("click", () => {
-    addTuberPopup.classList.remove("addPopup")
+    addTuberPopup.classList.remove("showPopup")
+    showPackagePopup.classList.remove("showPopup")
     addTuberPopup.classList.add("hidePopup")
-    setTimeout(() => {addTuberPopup.style.display = "none"}, 250)
+    showPackagePopup.classList.add("hidePopup")
+    setTimeout(() => {addTuberPopup.style.display = "none"; showPackagePopup.style.display = "none"}, 250)
 })
+
 removeButtonImg.addEventListener("click", () => {
     removeTuberPopup.style.display = "block"
     removeTuberPopup.classList.remove("hidePopup")
     removeTuberPopup.classList.add("showPopup")
     removeTuber()
 })
+
 removeTuberPopupExit.addEventListener("click", () => {
     removeTuberPopup.classList.remove("addPopup")
     removeTuberPopup.classList.add("hidePopup")
     setTimeout(() => {removeTuberPopup.style.display = "none"}, 250)
 })
+
 addTuberPopupFormUrl.addEventListener("submit", addTuber)
-addTuberPopupFormFileInput.addEventListener("change", addPackage)
+addTuberPopupFormFileInput.addEventListener("change", addPackageFile)
 infoAboutMoreButton.addEventListener("click", showMoreAbout)
 infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.classList.remove("addPopup")
     infoAboutMorePopup.classList.add("hidePopup")
     setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 250)
 })
+
 window.addEventListener("resize", setDefaultFontSize)
 
 const loading = document.querySelector(".loading")
