@@ -5,11 +5,11 @@ const path = require("path")
 const commandExist = require("command-exists")
 
 const PROGRAM_VERSION  = "1.1.0",
-      NODE_VERSION     = process.versions.node,
-      ELECTRON_VERSION = process.versions.electron,
-      V8_VERSION       = process.versions.v8,
-      CHROME_VERSION   = process.versions.chrome,
-      OS_VERSION       = `${os.type()} ${os.release()}`
+            NODE_VERSION     = process.versions.node,
+            ELECTRON_VERSION = process.versions.electron,
+            V8_VERSION       = process.versions.v8,
+            CHROME_VERSION   = process.versions.chrome,
+            OS_VERSION       = `${os.type()} ${os.release()}`
 
 const defaultSetting = {
     "autoReloadDelay":[5000,"새로고침 간격","ms","number"],
@@ -35,7 +35,7 @@ if (fs.existsSync("getInfo.py")) {
     fs.writeFileSync("js/getInfo.py.js", data, "utf8")
 }
 
-if (OS_VERSION.includes("NT")) {
+if (OS_VERSION.includes("Windows")) {
     commandExist("python", (err, result) => {
         if (!result) {
             dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")
