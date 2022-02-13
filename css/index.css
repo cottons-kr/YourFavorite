@@ -301,6 +301,7 @@ li {
 }
 
 #infoSubscriber {
+    font-size: calc(1rem * 1.7) !important;
     position: absolute;
 }
 
@@ -424,6 +425,7 @@ li {
 }
 
 .loading {
+    z-index:  9999;
     position: absolute;
     background-color: white;
     width: 100vw;

@@ -96,7 +96,8 @@ def getVideos(url, lang, returns):
                     videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
             else:
                 videoView = videoInfo.split(" ")[videoInfo.split(" ").index("views")-1]
-                videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
+                if "ago" in videoInfo:
+                    videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
             videoName = video.find_element_by_id("video-title").get_attribute("title")
             videos.append([videoName, videoLink, videoUpload, videoView])
     returns[2] = videos
