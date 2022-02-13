@@ -12,7 +12,6 @@ const fileContent = `while True:
         import json
         import os
         import platform
-        import urllib
         import locale
         break
     except ModuleNotFoundError:

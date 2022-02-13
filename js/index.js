@@ -85,6 +85,11 @@ function loadList() {
     }
 }
 
+function setDefaultFontSize() {
+    document.querySelector("html").style.fontSize = `${16 * (window.innerHeight/1080)}px`
+    console.log(`Default Font Size has been set to ${document.querySelector("html").style.fontSize}`)
+}
+
 function addList(channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
@@ -613,16 +618,14 @@ infoAboutMorePopupExitButton.addEventListener("click", () => {
     infoAboutMorePopup.classList.add("hidePopup")
     setTimeout(() => {infoAboutMorePopup.style.display = "none"}, 250)
 })
-window.addEventListener("resize", () => {
-    document.querySelector("html").style.fontSize = `${16 * (window.innerHeight/1080)}px`
-    console.log(document.querySelector("html").style.fontSize)
-})
+window.addEventListener("resize", setDefaultFontSize)
 
 const loading = document.querySelector(".loading")
 window.onload = () => {
     clearInfo()
     loadList()
     toggleNoList()
+    setDefaultFontSize()
     setTimeout(showRecentTuber, 500)
     setTimeout(autoPreload, 1500)
     setInterval(autoPreload, settings["preloadDelay"][0])
