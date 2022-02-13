@@ -17,24 +17,33 @@ function showPackageInfo(name) {
         packageInfoPopupContentList.removeChild(packageInfoPopupContentList.firstChild)
     }
 
-    fetch(url+name.replaceAll(" ", "%20")+"/package.json").then(res => res.json())
+    fetch(url+name.replaceAll(" ", "%20")+"/package.json")
+    .then(res => res.json()).catch((err) => {
+        packageInfoPopup.style.display = "none"
+        packageInfoPopup.className = ""
+        handleError(err)
+        return 0
+    })
     .then(data => {
         packageInfoPopupTitle.innerText = data["title"]
-        packageInfoPopupMadeby.innerText = data["madeby"]
+        packageInfoPopupMadeby.innerText = `Made By ${data["madeby"]}`
         packageInfoPopupAbout.innerText = data["about"]
-        for (let name of Object.keys(data["content"])) {
-            const div = document.querySelector("div")
+        const content = data["content"]
+        for (let name of Object.keys(content)) {
+            const div = document.createElement("div")
             div.innerText = name
             div.setAttribute("id", "packageInfoPopupContent")
+            const color = content[name]["color"]
+            div.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
             packageInfoPopupContentList.appendChild(div)
         }
-    })
 
-    if (packageInfoPopup.style.display == "none") {
-        packageInfoPopup.style.display = "block"
-        packageInfoPopup.classList.remove("hidePopup")
-        packageInfoPopup.classList.add("showPopup")
-    }
+        if (packageInfoPopup.style.display == "none" || packageInfoPopup.style.display == "") {
+            packageInfoPopup.style.display = "block"
+            packageInfoPopup.classList.remove("hidePopup")
+            packageInfoPopup.classList.add("showPopup")
+        }
+    })
 }
 
 export  default function addPackageFile(event) {
