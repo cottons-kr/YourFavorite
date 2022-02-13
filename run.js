@@ -35,12 +35,21 @@ if (fs.existsSync("getInfo.py")) {
     fs.writeFileSync("js/getInfo.py.js", data, "utf8")
 }
 
-commandExist("python", (err, result) => {
-    if (!result) {
-        dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")
-        process.exit()
-    }
-})
+if (OS_VERSION.includes("NT")) {
+    commandExist("python", (err, result) => {
+        if (!result) {
+            dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")
+            process.exit()
+        }
+    })
+} else {
+    commandExist("python3", (err, result) => {
+        if (!result) {
+            dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")
+            process.exit()
+        }
+    })
+}
 commandExist("pip3", (err, result) => {
     if (!result) {
         dialog.showErrorBox("PIP3가 감지되지 않았습니다!", "혹은 PIP가 PATH에 등록되지 않은걸수도 있어요")
