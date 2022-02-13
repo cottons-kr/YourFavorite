@@ -5,7 +5,7 @@ const fs = require("fs")
 const path = require("path")
 const { ipcRenderer } = require("electron")
 
-import addPackageFile from "./package.js";
+import addPackageFile, { showPackage } from "./package.js";
 import fileContent from "./getInfo.py.js"
 
 const body = document.querySelector("body"),
@@ -588,6 +588,7 @@ removeButtonImg.addEventListener("mouseout", () => {
 
 const showPackagePopup = document.querySelector(".showPackagePopup")
 addButtonImg.addEventListener("click", () => {
+    showPackage()
     addTuberPopup.style.display = "block"
     showPackagePopup.style.display = "block"
     addTuberPopup.classList.remove("hidePopup")
@@ -596,12 +597,19 @@ addButtonImg.addEventListener("click", () => {
     showPackagePopup.classList.add("showPopup")
 })
 
+const packageInfoPopup = document.querySelector(".packageInfoPopup")
 addTuberPopupExit.addEventListener("click", () => {
     addTuberPopup.classList.remove("showPopup")
+    packageInfoPopup.classList.remove("showPopup")
     showPackagePopup.classList.remove("showPopup")
     addTuberPopup.classList.add("hidePopup")
+    packageInfoPopup.classList.add("hidePopup")
     showPackagePopup.classList.add("hidePopup")
-    setTimeout(() => {addTuberPopup.style.display = "none"; showPackagePopup.style.display = "none"}, 250)
+    setTimeout(() => {
+        addTuberPopup.style.display = "none"
+        showPackagePopup.style.display = "none"
+        packageInfoPopup.style.display = "none"
+    }, 250)
 })
 
 removeButtonImg.addEventListener("click", () => {
