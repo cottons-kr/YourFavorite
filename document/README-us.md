@@ -18,7 +18,7 @@ Check the news and information of your favorite YouTubers at a glance
 |Minimum(Windows)|Windows 10 or higher|3GHz quad-core|8GB|500MB|50Mbps|
 |Minimum (Linux)|Kernel 5 or higher|3GHz quad-core|6GB|500MB|50Mbps|
 
-**Windows requires MS Edge, Linux requires FireFox installed**<br>
+**You must install Chrome Browser**<br>
 Only x64 architectures are supported.
 
 # How to install

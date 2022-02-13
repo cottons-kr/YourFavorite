@@ -18,7 +18,7 @@
 |최소(Windows)|Windows 10 or higher|3GHz 쿼드코어|8GB|500MB|50Mbps|
 |최소(Linux)|Kernel 5 or higher|3GHz 쿼드코어|6GB|500MB|50Mbps|
 
-**Windows는 MS Edge, Linux는 FireFox가 설치되어 있어야 합니다**<br>
+**Chrome 브라우저가 설치되있어야 **<br>
 x64 아키텍처만 지원합니다.
 
 # 설치법
@@ -64,6 +64,14 @@ x64 아키텍처만 지원합니다.
 }
 ```
 패키지는 **"유튜버 등록하기"** 팝업에서 등록할 수 있습니다.
+
+# 트러블슈팅
+
+1. 권한에러
+
+![img](https://github.com/cottons-kr/YourFavorite/raw/main/document/asd.png)
+
+해결법 : 백신 프로그램에서 YourFavorite을 예외로 설정해주세요
 
 # QnA
 - Q : 로딩이 조금밖에 안됐어요.
