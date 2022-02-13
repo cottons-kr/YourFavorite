@@ -18,7 +18,7 @@
 |최소(Windows)|Windows 10 or higher|3GHz 쿼드코어|8GB|500MB|50Mbps|
 |최소(Linux)|Kernel 5 or higher|3GHz 쿼드코어|6GB|500MB|50Mbps|
 
-**Windows는 MS Edge, Linux는 FireFox가 설치되어 있어야 합니다**<br>
+**Chrome 브라우저가 설치되있어야 **<br>
 x64 아키텍처만 지원합니다.
 
 # 설치법
