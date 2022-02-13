@@ -6,6 +6,8 @@
     width: 98%;
     overflow-y: scroll;
     margin-bottom: 3%;
+    display: flex;
+    flex-direction: column;
 }
 
 #settingPopupExit {
@@ -13,13 +15,19 @@
 }
 
 #setting {
+    white-space: nowrap;
     margin-bottom: 3%;
+    width: 100%;
+    height: 5%;
+}
+
+#settingTitle {
+    margin-left: 3%;
 }
 
 #settingTitle, #settingInput {
     vertical-align: middle;
-    display: inline-block;
-    margin-left: 3%;
+    float: left;
 }
 
 #settingInput {

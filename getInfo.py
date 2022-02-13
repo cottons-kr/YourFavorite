@@ -35,15 +35,8 @@ osType = platform.platform()
 waitTime = 10
 rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r").read()
 
-mobileProfile= {
-    "deviceMetrics": { "width": 375, "height": 812, "pixelRatio": 3.0 },
-    "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"
-}
-
 def getBrowser(type):
     options = Options()
-    if type == "simple":
-        options.add_experimental_option("mobileEmulation",  mobileProfile)
     options.add_argument("headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return driver
