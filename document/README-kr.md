@@ -69,7 +69,7 @@ x64 아키텍처만 지원합니다.
 
 1. 권한에러
 
-![img](https://github.com/cottons-kr/YourFavorite/blob/main/document/Error_2022-02-13_3_58_17.png)
+![img](https://github.com/cottons-kr/YourFavorite/raw/main/document/asd.png)
 
 해결법 : 백신 프로그램에서 YourFavorite을 예외로 설정해주세요
 
