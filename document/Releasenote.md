@@ -1,5 +1,13 @@
+## v1.1.1
+2022/02/13 출시됨
+
+- 설정 CSS 수정 / Fixed Setting CSS
+- 동영상 로딩 오류 수정 / Fixed Video loading Error
+- 버그 수정 / Fixed Bugs
+
 ## v1.1.0
 2022/02/11 출시됨
+
 - 반응형 레이아웃 적용 / Applied Dynamic Layout
 - 코드 안정성 강화 / Improved Code Stability
 - 정보 팝업 추가 / Added Infomation Popup
