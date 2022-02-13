@@ -73,7 +73,8 @@ const option = {
 fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 function handleError(msg) {
-    ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error").then(window.close)
+    console.log(msg)
+    ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")//.then(window.close)
 }
 
 function loadList() {
@@ -120,7 +121,7 @@ function addTuber(event) {
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = "";
-    PythonShell.run("scriptPath", option, (error, result) => {
+    PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
             handleError(error)
         }

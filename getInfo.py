@@ -1,10 +1,10 @@
 while True:
     try:
         from multiprocessing import Process, freeze_support, Manager
-        from selenium.webdriver.edge.service import Service
-        from selenium.webdriver.edge.options import Options
+        from selenium.webdriver.chrome.service import Service
+        from selenium.webdriver.chrome.options import Options
         from selenium.webdriver.common.by import By
-        from webdriver_manager.microsoft import EdgeChromiumDriverManager
+        from webdriver_manager.chrome import ChromeDriverManager
         from selenium import webdriver
         from subprocess import run
         import sys
@@ -36,18 +36,17 @@ osType = platform.platform()
 waitTime = 10
 rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r").read()
 
+mobileProfile= {
+    "deviceMetrics": { "width": 375, "height": 812, "pixelRatio": 3.0 },
+    "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"
+}
+
 def getBrowser(type):
-    if "Windows" in osType:
-        options = Options()
-        if type == "simple":
-            options.add_experimental_option("mobileEmulation", { "deviceName": "iPhone X" })
-        options.add_argument("headless")
-        EdgeChromiumDriverManager(log_level=20)
-        driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()), options=options)
-    elif "Linux" in osType:
-        pass #Firefox 지원
-    elif "macOS" in osType:
-        pass #Safari 지원
+    options = Options()
+    if type == "simple":
+        options.add_experimental_option("mobileEmulation",  mobileProfile)
+    options.add_argument("headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return driver
 
 def getBase(url, lang, returns):
@@ -94,7 +93,8 @@ def getVideos(url, lang, returns):
             videoLink = video.find_element_by_id("video-title").get_attribute("href")
             if lang == "ko_KR":
                 videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
-                videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+                if "전" in videoInfo:
+                    videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
             else:
                 videoView = videoInfo.split(" ")[videoInfo.split(" ").index("views")-1]
                 videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
@@ -175,11 +175,11 @@ if __name__ == "__main__":
     except IndexError:
         debug = False
     if type == "simple":
-        driver  = getBrowser(type)
+        driver  = getBrowser("simple")
         driver.get(url)
         driver.implicitly_wait(waitTime)
-        channelName = driver.find_element_by_xpath('''/html/body/ytm-app/div[1]/ytm-browse/ytm-c4-tabbed-header-renderer/div[2]/div/h1''').get_attribute('innerText')
-        profileImg = driver.find_element_by_xpath('''/html/body/ytm-app/div[1]/ytm-browse/ytm-c4-tabbed-header-renderer/div[2]/ytm-profile-icon/img''').get_attribute("src")
+        channelName = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/div/div[1]/ytd-channel-name/div/div/yt-formatted-string''').get_attribute('innerText')
+        profileImg = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/yt-img-shadow/img''').get_attribute("src")
         print(base64.b64encode(f"{channelName}::{profileImg}".encode("utf-8")))
         driver.quit()
     elif type == "all":
