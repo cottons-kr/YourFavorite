@@ -18,7 +18,7 @@ while True:
         from subprocess import run
         import platform
         if platform.system() == "Windows":
-            run(["powershell", "pip3 install --user selenium msedge-selenium-tools"], shell=True)
+            run(["powershell", "pip3 install --user selenium"], shell=True)
             run(["powershell", "pip3 install --user --upgrade requests"], shell=True)
             run(["powershell", "pip3 install --user --upgrade selenium"], shell=True)
             run(["powershell", "pip3 install --user --upgrade pip"], shell=True)

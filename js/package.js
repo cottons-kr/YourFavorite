@@ -20,7 +20,6 @@ function showPackageInfo(name) {
     fetch(url+name.replaceAll(" ", "%20")+"/package.json")
     .then(res => res.json()).catch((err) => {
         packageInfoPopup.style.display = "none"
-        packageInfoPopup.className = ""
         handleError(err)
         return 0
     })

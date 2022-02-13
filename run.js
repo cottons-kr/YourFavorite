@@ -1,4 +1,6 @@
 const { app, BrowserWindow, dialog, ipcMain } = require('electron')
+const { execSync } = require("child_process")
+const powerShell = require("powershell")
 const fs = require("fs")
 const os = require('os')
 const path = require("path")
@@ -16,7 +18,7 @@ const defaultSetting = {
     "preloadDelay":[5000,"미리 불러오는 간격","ms","number"],
     "windowWidth":[1920,"창의 가로크기","숫자","number"],
     "windowHeight":[1080,"창의 세로크기","숫자","number"],
-    "defaultBackground":["true","기본 배경색","true/false","boolean"],
+    "defaultBackground":["false","기본 배경색","true/false","boolean"],
     "simultaneousLoadNumber":["3","동시로딩갯수","숫자","number"]
 }
 
@@ -24,6 +26,15 @@ const homeDir = os.homedir()
 const settingPath = path.resolve(homeDir, ".yf/setting.json")
 if (!fs.existsSync(settingPath)) {
     fs.mkdirSync(path.resolve(homeDir, ".yf"))
+    if (OS_VERSION.includes("Windows")) {
+        const cmd = powerShell("pip3 install selenium==4.1.0 webdriver-manager")
+        cmd.on("end", () => {
+            powerShell("pip3 install --upgrade pip requests ")
+         })
+    } else {
+        execSync("pip3 install selenium==4.1.0 webdriver-manager")
+        execSync("pip3 install --upgrade pip requests")
+    }
 }
 fs.writeFileSync(settingPath, JSON.stringify(defaultSetting), "utf8")
 fs.writeFileSync(path.resolve(homeDir, ".yf/defaultSetting.json"), JSON.stringify(defaultSetting), "utf8")
