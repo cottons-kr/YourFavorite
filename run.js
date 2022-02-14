@@ -25,10 +25,10 @@ const homeDir = os.homedir()
 const settingPath = path.resolve(homeDir, ".yf/setting.json")
 if (!fs.existsSync(settingPath)) {
     fs.mkdirSync(path.resolve(homeDir, ".yf"))
+    fs.writeFileSync(settingPath, JSON.stringify(defaultSetting), "utf8")
     execSync("pip3 install selenium==4.1.0 webdriver-manager")
     execSync("pip3 install --upgrade pip requests")
 }
-fs.writeFileSync(settingPath, JSON.stringify(defaultSetting), "utf8")
 fs.writeFileSync(path.resolve(homeDir, ".yf/defaultSetting.json"), JSON.stringify(defaultSetting), "utf8")
 fs.writeFileSync(path.resolve(homeDir, ".yf/path"), homeDir, "utf8")
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))

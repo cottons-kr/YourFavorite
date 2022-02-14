@@ -125,10 +125,12 @@ function addList(channelId) {
     toggleNoList()
 }
 
-function addTuber(event) {
-    event.preventDefault()
+function addTuber(event=null, url=null, callback=null) {
+    if (event != null) {event.preventDefault()}
     console.log(`Adding Tuber...`)
-    const url = addTuberPopupInput.value
+    if (url == null) {
+        url = addTuberPopupInput.value
+    }
     option.args = [url, "simple"]
     let channelName, profileImg, backgroundRgb;
 
@@ -169,6 +171,7 @@ function addTuber(event) {
             console.log(`New Tuber : ${channelName}`)
             loadInfo(channelName)
             removeTuber()
+            if (callback != null) {callback()}
         })
         .catch(err => {handleError(err)})
     })
@@ -247,7 +250,7 @@ function loadVideos(info, noContent) {
 }
 
 function loadStreams(info, noContent) {
-    infoStreamTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
+    infoStreamTitle.style.color = `rgb(${mainColor[0]-30}, ${mainColor[1]-30}, ${mainColor[2]-30})`
     for (let stream of info) {
         if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
@@ -278,7 +281,7 @@ function loadStreams(info, noContent) {
 }
 
 function loadCommunitys(info, noContent) {
-    infoCommunityTitle.style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
+    infoCommunityTitle.style.color = `rgb(${mainColor[0]-30}, ${mainColor[1]-30}, ${mainColor[2]-30})`
     if (info.length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
         if (lang == "ko") {h1.innerText = "커뮤니티 게시글이 없어요"}
@@ -665,3 +668,5 @@ window.onload = () => {
         setTimeout(() => {loading.style.display = "none"}, 1000)
     }, 1500)
 }
+
+export default addTuber

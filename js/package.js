@@ -7,6 +7,10 @@ function handleError(msg) {
     ipcRenderer.invoke("showMessage", "패키지 오류!", "올바른 형식의 패키지가 아니에요", "warning")
 }
 
+const packageInfoPopupAddBtn = document.querySelector("#packageInfoPopupAddBtn")
+packageInfoPopupAddBtn.addEventListener("click", addPackage)
+
+let selectedPackage
 const packageInfoPopup = document.querySelector(".packageInfoPopup")
 const packageInfoPopupTitle = document.querySelector("#packageInfoPopupTitle")
 const packageInfoPopupMadeby = document.querySelector("#packageInfoPopupMadeby")
@@ -24,6 +28,7 @@ function showPackageInfo(name) {
         return 0
     })
     .then(data => {
+        selectedPackage = data
         packageInfoPopupTitle.innerText = data["title"]
         packageInfoPopupMadeby.innerText = `Made By ${data["madeby"]}`
         packageInfoPopupAbout.innerText = data["about"]
@@ -33,6 +38,9 @@ function showPackageInfo(name) {
             div.innerText = name
             div.setAttribute("id", "packageInfoPopupContent")
             const color = content[name]["color"]
+            let textColor = content[name]["text"]
+            if (textColor == undefined) {textColor = [0, 0, 0]}
+            div.style.color = `rgb(${textColor[0]}, ${textColor[1]}, ${textColor[2]})`
             div.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
             packageInfoPopupContentList.appendChild(div)
         }
@@ -43,6 +51,22 @@ function showPackageInfo(name) {
             packageInfoPopup.classList.add("showPopup")
         }
     })
+}
+
+import addTuber  from "./index.js"
+function addPackage() {
+    const data = selectedPackage
+    const list = Object.keys(data["content"])
+    for (let i=0, pending = Promise.resolve(); i<list.length; i++) {
+        pending = pending.then(() => {
+            return new Promise(resolve => {
+                addTuber(null, data["content"][list[i]]["url"], resolve)
+                //setTimeout(() => {resolve(data["content"][list[i]]["url"])}, 1000)
+            })
+        }).then(() => {
+            ;
+        })
+    }
 }
 
 export  default function addPackageFile(event) {

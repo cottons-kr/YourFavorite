@@ -87,11 +87,13 @@ def getVideos(url, lang, returns):
             if lang == "ko_KR":
                 videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
                 if "전" in videoInfo:
-                    videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+                    try: videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+                    except: videoUpload = ""
             else:
                 videoView = videoInfo.split(" ")[videoInfo.split(" ").index("views")-1]
                 if "ago" in videoInfo:
-                    videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
+                    try: videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
+                    except: videoUpload = ""
             videoName = video.find_element_by_id("video-title").get_attribute("title")
             videos.append([videoName, videoLink, videoUpload, videoView])
     returns[2] = videos
