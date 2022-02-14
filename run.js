@@ -1,6 +1,5 @@
 const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const { execSync } = require("child_process")
-const powerShell = require("powershell")
 const fs = require("fs")
 const os = require('os')
 const path = require("path")
@@ -26,15 +25,8 @@ const homeDir = os.homedir()
 const settingPath = path.resolve(homeDir, ".yf/setting.json")
 if (!fs.existsSync(settingPath)) {
     fs.mkdirSync(path.resolve(homeDir, ".yf"))
-    if (OS_VERSION.includes("Windows")) {
-        const cmd = powerShell("pip3 install selenium==4.1.0 webdriver-manager")
-        cmd.on("end", () => {
-            powerShell("pip3 install --upgrade pip requests ")
-         })
-    } else {
-        execSync("pip3 install selenium==4.1.0 webdriver-manager")
-        execSync("pip3 install --upgrade pip requests")
-    }
+    execSync("pip3 install selenium==4.1.0 webdriver-manager")
+    execSync("pip3 install --upgrade pip requests")
 }
 fs.writeFileSync(settingPath, JSON.stringify(defaultSetting), "utf8")
 fs.writeFileSync(path.resolve(homeDir, ".yf/defaultSetting.json"), JSON.stringify(defaultSetting), "utf8")
