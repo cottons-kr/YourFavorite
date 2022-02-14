@@ -61,7 +61,6 @@ function addPackage() {
         pending = pending.then(() => {
             return new Promise(resolve => {
                 addTuber(null, data["content"][list[i]]["url"], resolve)
-                //setTimeout(() => {resolve(data["content"][list[i]]["url"])}, 1000)
             })
         }).then(() => {
             ;

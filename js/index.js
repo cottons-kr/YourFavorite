@@ -77,10 +77,10 @@ fs.writeFileSync(scriptPath, fileContent, "utf8")
 function handleError(msg) {
     console.log(msg)
     if (lang.includes("ko")) {
-        ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")//.then(window.close)
+        ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")
     }
     else {
-        ipcRenderer.invoke("showMessage", "An Error Occurred!", `Please let us know this error on Github Issue :)\n\n${msg}`, "error")//.then(window.close)
+        ipcRenderer.invoke("showMessage", "An Error Occurred!", `Please let us know this error on Github Issue :)\n\n${msg}`, "error")
     }
 }
 
@@ -387,6 +387,7 @@ function loadInfo(channelId) {
     PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
             handleError(error)
+            return 0
         }
 
         const data = result[0].replace("b'", '').replace("'", '')
@@ -424,6 +425,7 @@ function autoRefresh(channelId) {
     PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {
             handleError(error)
+            return 0
         }
 
         const data = result[0].replace("b'", '').replace("'", '')
@@ -562,6 +564,7 @@ function autoPreload() {
         PythonShell.run(scriptPath, option, (error, result) => {
             if (error) {
                 handleError(error)
+                return 0
             }
     
             const data = result[0].replace("b'", '').replace("'", '')
