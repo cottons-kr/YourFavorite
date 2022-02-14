@@ -73,7 +73,8 @@ export  default function addPackageFile(event) {
     const reader = new FileReader
     reader.onload = () => {
         try {
-            const pack = JSON.parse(reader.result)   
+            selectedPackage = JSON.parse(reader.result)
+            addPackage()
         } catch (error) {
             handleError(error)
         }

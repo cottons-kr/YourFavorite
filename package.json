@@ -1,12 +1,12 @@
 {
   "name": "YourFavorite",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Get easier access to your favorite YouTubers",
   "main": "run.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "deploy": "electron-builder --windows"
+    "deploy": "electron-builder --linux"
   },
   "repository": {
     "type": "git",
@@ -30,13 +30,9 @@
   },
   "dependencies": {
     "@electron/remote": "^2.0.4",
-    "@types/puppeteer": "^5.4.4",
     "colorthief": "^2.3.2",
     "command-exists": "^1.2.9",
-    "electron-version": "^2.0.1",
     "node-gzip": "^1.1.2",
-    "powershell": "^2.3.2",
-    "puppeteer": "^13.2.0",
     "python-shell": "^3.0.1"
   },
   "build": {
