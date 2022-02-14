@@ -229,9 +229,10 @@ function loadVideos(info, noContent) {
         div.setAttribute("id", "video")
         a.setAttribute("href", video[1])
         img.setAttribute("src", getThumbnail(video[1]))
-        if (lang == "ko") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
-        else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
         if (video[2] == "") {
+            if (lang == "ko") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
+            else {img.setAttribute("title", `${video[0]} / Views : ${video[3]}`)}
+        } else {
             if (lang == "ko") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
             else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
         }

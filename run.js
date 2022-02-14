@@ -13,12 +13,12 @@ const PROGRAM_VERSION  = "1.2.0",
             OS_VERSION       = `${os.type()} ${os.release()}`
 
 const defaultSetting = {
-    "autoReloadDelay":[5000,"새로고침 간격","ms","number"],
-    "preloadDelay":[5000,"미리 불러오는 간격","ms","number"],
+    "autoReloadDelay":[20000,"새로고침 간격","ms","number"],
+    "preloadDelay":[120000,"미리 불러오는 간격","ms","number"],
     "windowWidth":[1920,"창의 가로크기","숫자","number"],
     "windowHeight":[1080,"창의 세로크기","숫자","number"],
-    "defaultBackground":["false","기본 배경색","true/false","boolean"],
-    "simultaneousLoadNumber":["3","동시로딩갯수","숫자","number"]
+    "defaultBackground":[false,"기본 배경색","true/false","boolean"],
+    "simultaneousLoadNumber":[3,"동시로딩갯수","숫자","number"]
 }
 
 const homeDir = os.homedir()
