@@ -18,7 +18,7 @@ const fileContent = `while True:
         from subprocess import run
         import platform
         if platform.system() == "Windows":
-            run(["powershell", "pip3 install --user selenium msedge-selenium-tools"], shell=True)
+            run(["powershell", "pip3 install --user selenium"], shell=True)
             run(["powershell", "pip3 install --user --upgrade requests"], shell=True)
             run(["powershell", "pip3 install --user --upgrade selenium"], shell=True)
             run(["powershell", "pip3 install --user --upgrade pip"], shell=True)
@@ -83,6 +83,7 @@ def getVideos(url, lang, returns):
         for video in recentVideos:
             videoInfo = video.find_element_by_id("video-title").get_attribute("aria-label")
             videoLink = video.find_element_by_id("video-title").get_attribute("href")
+            videoUpload = ""
             if lang == "ko_KR":
                 videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
                 if "전" in videoInfo:

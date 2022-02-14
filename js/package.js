@@ -76,7 +76,7 @@ export  function showPackage() {
             div.setAttribute("id", "package")
             name.innerText = p
             name.setAttribute("id", "packageName")
-            madeby.innerText = data[p]
+            madeby.innerText = `Made by ${data[p]}`
             madeby.setAttribute("id", "packageMadeby")
             div.appendChild(name)
             div.appendChild(madeby)

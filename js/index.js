@@ -76,7 +76,12 @@ fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 function handleError(msg) {
     console.log(msg)
-    ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")//.then(window.close)
+    if (lang.includes("ko")) {
+        ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")//.then(window.close)
+    }
+    else {
+        ipcRenderer.invoke("showMessage", "An Error Occurred!", `Please let us know this error on Github Issue :)\n\n${msg}`, "error")//.then(window.close)
+    }
 }
 
 function loadList() {
@@ -132,7 +137,8 @@ function addTuber(event) {
         if (error) {
             console.log(error.message)
             if (error.message.includes("InvalidArgumentException")) {
-                ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")
+                if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")}
+                else { ipcRenderer.invoke("showMessage", "URL Error!", "It seem the URL is wrong.", "warning")}
                 return 0
             }
             handleError(error)
@@ -204,7 +210,7 @@ function removeTuber() {
 }
 
 function loadVideos(info, noContent) {
-    infoVideoTitle.querySelector("h2").style.color = `rgb(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]})`
+    infoVideoTitle.querySelector("h2").style.color = `rgb(${mainColor[0]-30}, ${mainColor[1]-30}, ${mainColor[2]-30})`
     for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
@@ -225,6 +231,10 @@ function loadVideos(info, noContent) {
         img.setAttribute("src", getThumbnail(video[1]))
         if (lang == "ko") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
         else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
+        if (video[2] == "") {
+            if (lang == "ko") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
+            else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
+        }
         img.setAttribute("id", "videoThumbnail")
         a.appendChild(img)
         div.appendChild(a)
@@ -394,8 +404,11 @@ function loadInfo(channelId) {
 }
 
 function autoRefresh(channelId) {
+    if (loadingTuberList.length >= parseInt(settings["simultaneousLoadNumber"])) {
+        console.log(`${channelId} : Refresh Canceled [simultaneousLoadNumber Limit]`)
+    }
     if (showingTuber !== channelId || loadingTuber !== null) {
-        console.log(`${channelId} : Refresh Canceled [다른 유튜버 로딩중 : ${loadingTuber}]`)
+        console.log(`${channelId} : Refresh Canceled [Loading another Tuber: ${loadingTuber}]`)
         return null
     }
     console.log(`${channelId} : Refresh!`)
@@ -413,7 +426,7 @@ function autoRefresh(channelId) {
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
-        if (localStorage[channelId] == undefined) {console.log(`Refresh Canceled : 삭제된 유튜버`); return null}
+        if (localStorage[channelId] == undefined) {console.log(`Refresh Canceled : Removed Tuber`); return null}
         let oldinfo = JSON.parse(localStorage[channelId])
         if (oldinfo === undefined) {oldinfo = JSON.parse(JSON.stringify(info))}
 

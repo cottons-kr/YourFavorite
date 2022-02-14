@@ -83,6 +83,7 @@ def getVideos(url, lang, returns):
         for video in recentVideos:
             videoInfo = video.find_element_by_id("video-title").get_attribute("aria-label")
             videoLink = video.find_element_by_id("video-title").get_attribute("href")
+            videoUpload = ""
             if lang == "ko_KR":
                 videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
                 if "전" in videoInfo:
