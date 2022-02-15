@@ -676,4 +676,5 @@ window.onload = () => {
     }, 1500)
 }
 
+export { removeTuber }
 export default addTuber

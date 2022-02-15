@@ -8,7 +8,6 @@ function handleError(msg) {
 }
 
 const packageInfoPopupAddBtn = document.querySelector("#packageInfoPopupAddBtn")
-packageInfoPopupAddBtn.addEventListener("click", addPackage)
 
 let selectedPackage
 const packageInfoPopup = document.querySelector(".packageInfoPopup")
@@ -17,6 +16,7 @@ const packageInfoPopupMadeby = document.querySelector("#packageInfoPopupMadeby")
 const packageInfoPopupAbout = document.querySelector("#packageInfoPopupAbout")
 const packageInfoPopupContentList = document.querySelector("#packageInfoPopupContentList")
 function showPackageInfo(name) {
+    if (localStorage["packages"] == undefined) {localStorage["packages"] = "[]"}
     while (packageInfoPopupContentList.hasChildNodes()) {
         packageInfoPopupContentList.removeChild(packageInfoPopupContentList.firstChild)
     }
@@ -45,6 +45,15 @@ function showPackageInfo(name) {
             packageInfoPopupContentList.appendChild(div)
         }
 
+        packageInfoPopupAddBtn.removeEventListener("click", addPackage)
+        packageInfoPopupAddBtn.removeEventListener("click", removePackage)
+        if (JSON.parse(localStorage["packages"]).includes(selectedPackage["name"])) {
+            packageInfoPopupAddBtn.innerText = "삭제하기"
+            packageInfoPopupAddBtn.addEventListener("click", removePackage)
+        } else {
+            packageInfoPopupAddBtn.addEventListener("click", addPackage)
+        }
+
         if (packageInfoPopup.style.display == "none" || packageInfoPopup.style.display == "") {
             packageInfoPopup.style.display = "block"
             packageInfoPopup.classList.remove("hidePopup")
@@ -53,9 +62,39 @@ function showPackageInfo(name) {
     })
 }
 
+import { removeTuber } from "./index.js"
+function removePackage() {
+    const data = selectedPackage
+    const list = Object.keys(data["content"])
+    const mainJson = JSON.parse(localStorage["youtuber"])
+    const packageJson = JSON.parse(localStorage["packages"])
+    for (let key of list) {
+        delete mainJson[key]
+        localStorage["youtuber"] = JSON.stringify(mainJson)
+        while (tuberListContainer.hasChildNodes()) {
+            tuberListContainer.removeChild(tuberListContainer.firstChild)
+        }
+        while (removeTuberPopupList.hasChildNodes()) {
+            removeTuberPopupList.removeChild(removeTuberPopupList.firstChild)
+        }
+        loadList()
+        removeTuber()
+        localStorage.removeItem(key)
+    }
+    delete packageJson[data["title"]]
+    localStorage["packages"] = packageJson
+}
+
 import addTuber  from "./index.js"
 function addPackage() {
     const data = selectedPackage
+    if (localStorage["packages"] == undefined) {localStorage["packages"] = "[]"}
+    const packageJson = JSON.parse(localStorage["packages"])
+    if (JSON.parse(localStorage["packages"]).includes(selectedPackage["name"])) {
+        ipcRenderer.invoke("showMessage", "중복 패키지", "이미 등록된 패키지에요")
+        selectedPackage = null
+        return 0
+    }
     const list = Object.keys(data["content"])
     for (let i=0, pending = Promise.resolve(); i<list.length; i++) {
         pending = pending.then(() => {
@@ -66,6 +105,8 @@ function addPackage() {
             ;
         })
     }
+    packageJson.push(data["title"])
+    localStorage["packages"] = JSON.stringify(packageJson)
 }
 
 export  default function addPackageFile(event) {
@@ -74,6 +115,11 @@ export  default function addPackageFile(event) {
     reader.onload = () => {
         try {
             selectedPackage = JSON.parse(reader.result)
+            if (JSON.parse(localStorage["packages"]).includes(selectedPackage["name"])) {
+                ipcRenderer.invoke("showMessage", "중복 패키지", "이미 등록된 패키지에요")
+                selectedPackage = null
+                return 0
+            }
             addPackage()
         } catch (error) {
             handleError(error)
