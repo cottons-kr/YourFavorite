@@ -22,17 +22,13 @@
   },
   "homepage": "https://github.com/cottons-kr/YourFavorite#readme",
   "devDependencies": {
-    "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "electron": "^17.0.0",
-    "electron-builder": "^22.14.13",
-    "typescript": "^4.5.5"
+    "electron-builder": "^22.14.13"
   },
   "dependencies": {
-    "@electron/remote": "^2.0.4",
     "colorthief": "^2.3.2",
     "command-exists": "^1.2.9",
-    "node-gzip": "^1.1.2",
     "python-shell": "^3.0.1"
   },
   "build": {

@@ -195,7 +195,7 @@ function removeTuber() {
             const button = document.createElement("button")
             p.innerText = key
             button.setAttribute("id", "removeTuberPopupListContent")
-            button.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.5)`
+            button.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.25)`
             button.appendChild(p)
             button.addEventListener("click", () => {setTimeout(() => {
                 delete mainJson[key]
@@ -312,7 +312,6 @@ function loadCommunitys(info, noContent) {
 }
 
 function showInfo(info, channelId) {
-    showingTuber = channelId
     const mainJson = JSON.parse(localStorage["youtuber"])
     let noContent = []
     console.log(`Showing : ${channelId}`)
@@ -373,6 +372,7 @@ function loadInfo(channelId) {
     localStorage["recentTuber"] = channelId
     loadingTuber = channelId
     console.log(`Loading : ${channelId}`)
+    if (showingTuber == channelId) {return 0}
     showingTuber = channelId
     toggleNoList()
     clearInfo()
