@@ -195,7 +195,7 @@ li {
     background-color: white;
     text-align: center;
 
-    min-width: 20%;
+    width: 20%;
     margin-left: 3%;
     margin-top: 16vh;
 
@@ -206,6 +206,10 @@ li {
     display: inline-block;
     float: left;
     margin: 3%;
+}
+
+#settingInput {
+    width: 20%;
 }
 
 #addTuberPopupFormUrl input {

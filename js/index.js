@@ -54,7 +54,7 @@ loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 const rootPath = os.homedir()
 const settingPath = path.resolve(rootPath, ".yf/setting.json")
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
-const lang = Intl.DateTimeFormat().resolvedOptions().locale
+let lang = Intl.DateTimeFormat().resolvedOptions().locale
 const scriptPath = path.resolve(rootPath, ".yf/getInfo.py")
 
 let globalInterval = null
@@ -73,6 +73,10 @@ const option = {
 }
 
 fs.writeFileSync(scriptPath, fileContent, "utf8")
+
+const url = location.href
+if (url.includes("en")) {lang = "en"}
+else {lang = "ko"}
 
 function handleError(msg) {
     console.log(msg)
@@ -537,7 +541,7 @@ function showRecentTuber() {
         if (noList.style.display !== "none") {return null}
         localStorage["recentTuber"] = Object.keys(mainJson)[0]
     }
-    if (localStorage["recentTuber"] in Object.keys(mainJson) === false) {
+    if (!localStorage["recentTuber"] in Object.keys(mainJson)) {
         localStorage["recentTuber"] = Object.keys(mainJson)[0]
     }
     loadInfo(localStorage["recentTuber"])

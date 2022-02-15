@@ -60,7 +60,7 @@ function addPackage() {
     for (let i=0, pending = Promise.resolve(); i<list.length; i++) {
         pending = pending.then(() => {
             return new Promise(resolve => {
-                addTuber(null, data["content"][list[i]]["url"], resolve)
+                addTuber(null, data["content"][list[i]]["url"], () => {setTimeout(resolve, 15000)})
             })
         }).then(() => {
             ;

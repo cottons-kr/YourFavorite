@@ -5,7 +5,7 @@ const os = require('os')
 const path = require("path")
 const commandExist = require("command-exists")
 
-const PROGRAM_VERSION  = "1.2.1",
+const PROGRAM_VERSION  = "1.2.1-stable",
             NODE_VERSION     = process.versions.node,
             ELECTRON_VERSION = process.versions.electron,
             V8_VERSION       = process.versions.v8,
@@ -72,11 +72,18 @@ app.on("ready", () => {
     })
     win.setMenuBarVisibility(false)
     win.setAspectRatio(16/9)
-    if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {
-        win.loadFile("index.html")
+
+    const argLang = app.commandLine.getSwitchValue("lang")
+    if (argLang != "") {
+        if (argLang == "ko") {win.loadFile("index.html")}
+        else {win.loadFile(`index-en.html`)}
     } else {
-        console.log(Intl.DateTimeFormat().resolvedOptions().locale)
-        win.loadFile(`index-en.html`)
+        if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {
+            win.loadFile("index.html")
+        } else {
+            console.log(Intl.DateTimeFormat().resolvedOptions().locale)
+            win.loadFile(`index-en.html`)
+        }
     }
     ipcMain.handle("showMessage", (err, title, msg, type="info") => {
         if (type == "error") {
@@ -93,10 +100,8 @@ nodejs : ${NODE_VERSION}
 Electron : ${ELECTRON_VERSION}
 V8 : ${V8_VERSION}
 Chromium : ${CHROME_VERSION}
-OS : ${OS_VERSION}
-
-오류 발생시 이 창을 캡처해 올려주세요 :)`
-        dialog.showMessageBox(win, { type: "info", message: "YourFavorite 정보", detail: text, buttons: ["ok"]})
+OS : ${OS_VERSION}`
+        dialog.showMessageBox(win, { type: "info", message: "YourFavorite By SerenDev", detail: text, buttons: ["ok"]})
     })
     win.show()
 })

@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/stream.css">
-    <link rel="stylesheet" href="../css/community.css">
-    <link rel="stylesheet" href="../css/video.css">
-    <link rel="stylesheet" href="../css/setting.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/stream.css">
+    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="css/video.css">
+    <link rel="stylesheet" href="css/setting.css">
+    <link rel="stylesheet" href="css/package.css">
     <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css">
     <title>YourFavorite</title>
 </head>
@@ -17,13 +18,13 @@
     <div class="listContainer">
         <li class="editButtons">
             <div class="addButton">
-                <img id="addButtonImg" src="../resource/plus-circle.svg">
+                <img id="addButtonImg" src="resource/plus-circle.svg">
             </div>
             <div class="removeButton">
-                <img id="removeButtonImg" src="../resource/remove.svg">
+                <img id="removeButtonImg" src="resource/remove.svg">
             </div>
             <div class="settingButton">
-                <img id="settingButtonImg" src="../resource/setting.svg">
+                <img id="settingButtonImg" src="resource/setting.svg">
             </div>
         </li>
         <div id="tuberList">
@@ -41,20 +42,20 @@
         <div class="infoAbout">
             <button id="infoAboutMoreButton" title="About">
                 <div id="infoAboutRoot">
-                    <img id="infoAboutImg" src="../resource/about.svg">
+                    <img id="infoAboutImg" src="resource/about.svg">
                     <div id="infoAbout"></div>
                 </div>
             </button>
             <div id="infoTotalViewRoot" title="Total Views">
-                <img id="infoTotalViewImg" src="../resource/view.svg">
+                <img id="infoTotalViewImg" src="resource/view.svg">
                 <h3 id="infoTotalView"></h3>
             </div>
             <div id="infoLocationRoot" title="Country">
-                <img id="infoLocationImg" src="../resource/world.svg">
+                <img id="infoLocationImg" src="resource/world.svg">
                 <h3 id="infoLocation"></h3>
             </div>
             <div id="infoJoinDateRoot" title="Join Date">
-                <img id="infoJoinDateImg" src="../resource/join.svg">
+                <img id="infoJoinDateImg" src="resource/join.svg">
                 <h3 id="infoJoinDate"></h3>
             </div>
         </div>
@@ -90,7 +91,7 @@
         </div>
     
         <div id="infoTuberLoading">
-            <img title="Please Wait!" src="../resource/loading.svg">
+            <img title="Please Wait!" src="resource/loading.svg">
             <h2></h2>
         </div>
     </div>
@@ -98,9 +99,9 @@
     <div class="addTuberPopup">
         <span>
             <h4 id="addTuberPopupText">Register YouTuber</h4>
-            <img id="addTuberPopupExit" src="../resource/x-circle.svg">
+            <img id="addTuberPopupExit" src="resource/x-circle.svg">
         </span>
-        <form id="addTuberPopupForm">
+        <form id="addTuberPopupFormUrl">
             <input type="text" placeholder="Paste URL Here">
         </form>
         <p>Register Package</p>
@@ -131,7 +132,7 @@
 
     <div id="infoAboutMorePopup">
         <button id="infoAboutMorePopupExitButton">
-            <img id="infoAboutMorePopupExit" src="../resource/x-circle.svg">
+            <img id="infoAboutMorePopupExit" src="resource/x-circle.svg">
         </button>
         <p id="infoAboutmore"></p>
     </div>
@@ -139,7 +140,7 @@
     <div class="removeTuberPopup">
         <span>
             <h4 id="removeTuberPopupText">Unregister YouTuber</h4>
-            <img id="removeTuberPopupExit" src="../resource/x-circle.svg">
+            <img id="removeTuberPopupExit" src="resource/x-circle.svg">
         </span>
         <div id="removeTuberPopupList"></div>
     </div>
@@ -147,33 +148,39 @@
     <div class="settingPopup">
         <span>
             <h4 id="settingPopupText">Settings</h4>
-            <img id="settingPopupExit" src="../resource/x-circle.svg">
+            <img id="settingPopupExit" src="resource/x-circle.svg">
         </span>
         <div id="settingPopupList">
         </div>
         <div id="resetSetting">
-            <img id="resetSettingImg" src="../resource/resetSetting.svg" title="Restart After Initializing Settings">
+            <img id="resetSettingImg" src="resource/resetSetting.svg" title="Restart After Initializing Settings">
         </div>
         <div id="resetAll">
-            <img id="resetAllImg" src="../resource/resetAll.svg" title="Restart After Resetting EVERYTHING">
+            <img id="resetAllImg" src="resource/resetAll.svg" title="Restart After Resetting EVERYTHING">
         </div>
         <div id="backupAll">
-            <img id="backupAllImg" src="../resource/backup.svg" title="YouTuber, Settings Backup">
+            <img id="backupAllImg" src="resource/backup.svg" title="YouTuber, Settings Backup">
+        </div>
+        <div id="showInfo">
+            <img id="showInfoImg" src="resource/info.svg" title="Infomation">
         </div>
     </div>
 
     <div class="checkResetAllPopup">
         <h3 id="checkResetAllPopupText">Are you Sure?</h3>
-        <div id="checkResetAllPopupYes"><img id="checkResetAllPopupYesImg" src="../resource/check.svg" title="Yes"></div>
-        <div id="checkResetAllPopupNo"><img id="checkResetAllPopupNoImg" src="../resource/x-circle.svg" title="Give me Time to Think"></div>
+        <div id="checkResetAllPopupYes"><img id="checkResetAllPopupYesImg" src="resource/check.svg" title="Yes"></div>
+        <div id="checkResetAllPopupNo"><img id="checkResetAllPopupNoImg" src="resource/x-circle.svg" title="Give me Time to Think"></div>
     </div>
 
     <div class="backupCompletePopup">
         <h3 id="backupCompletePopupText">Backup Complete!</h3>
         <p id="backupCompletePopupPath"></p>
     </div>
+    <div class="loading"></div>
 </body>
-<script type="module" charset="utf-8" src="../js/index.js"></script>
-<script type="module" charset="utf-8" src="../js/setting.js"></script>
+<script type="module" charset="utf-8" src="js/index.js"></script>
+<script type="module" charset="utf-8" src="js/setting.js"></script>
+<script type="module" charset="utf-8" src="js/getInfo.py.js"></script>
+<script type="module" charset="utf-8" src="js/package.js"></script>
 <script type="text/javascript" src="http://www.shawnolson.net/scripts/public_smo_scripts.js"></script>
 </html>
