@@ -53,6 +53,7 @@ function showPackageInfo(name) {
             packageInfoPopupAddBtn.addEventListener("click", removePackage)
         } else {
             console.log(selectedPackage["title"])
+            packageInfoPopupAddBtn.innerText = "등록하기"
             packageInfoPopupAddBtn.addEventListener("click", addPackage)
         }
 
@@ -85,8 +86,9 @@ function removePackage() {
         removeTuber()
         localStorage.removeItem(key)
     }
-    delete packageJson[data["title"]]
-    localStorage["packages"] = JSON.parse(packageJson)
+    packageJson.splice(packageJson.indexOf(data["title"]), packageJson.indexOf(data["title"]))
+    console.log(packageJson)
+    localStorage["packages"] = JSON.stringify(packageJson)
 }
 
 import addTuber  from "./index.js"
@@ -111,7 +113,13 @@ function addPackage() {
             })
         }).then((res) => {
             console.log(res)
-            if (res == "end") {loadingPackage = null; packageInfoPopupAddBtn.innerText = "등록하기"}
+            if (res == "end") {
+                loadingPackage = null
+                if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
+                    packageInfoPopupAddBtn.innerText = "삭제하기"
+                    packageInfoPopupAddBtn.addEventListener("click", removePackage)
+                }
+            }
         })
     }
     packageJson.push(data["title"])

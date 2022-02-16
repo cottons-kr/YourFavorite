@@ -537,12 +537,14 @@ function showMoreAbout() {
 function showRecentTuber() {
     if (loadingTuber !== null) {return null}
     const mainJson = JSON.parse(localStorage["youtuber"])
-    if (localStorage["recentTuber"] === undefined || localStorage["recentTuber"] === "undefined") {
-        if (Object.keys(mainJson) === "{}") {localStorage.removeItem("recentTuber"); return null}
-        if (noList.style.display !== "none") {return null}
+    if (!localStorage["recentTuber"] in Object.keys(mainJson)) {
         localStorage["recentTuber"] = Object.keys(mainJson)[0]
     }
-    if (!localStorage["recentTuber"] in Object.keys(mainJson)) {
+    if (!Object.keys(JSON.parse(localStorage["youtuber"])).includes(localStorage["recentTuber"])) {localStorage["recentTuber"] = Object.keys(mainJson)[0]}
+
+    if (localStorage["recentTuber"] === undefined || localStorage["recentTuber"] === "undefined") {
+        if (Object.keys(mainJson) === "[]") {localStorage.removeItem("recentTuber"); return null}
+        if (noList.style.display !== "none") {return null}
         localStorage["recentTuber"] = Object.keys(mainJson)[0]
     }
     loadInfo(localStorage["recentTuber"])
