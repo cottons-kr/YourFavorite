@@ -106,10 +106,11 @@ function addPackage() {
     for (let i=0, pending = Promise.resolve(); i<list.length; i++) {
         pending = pending.then(() => {
             return new Promise(resolve => {
-                if (list[i] == list[-1]) {addTuber(null, data["content"][list[i]]["url"], () => {setTimeout(() => {resolve("end")}, 15000)})}
+                if (list[i] == list.slice(-1)[0]) {addTuber(null, data["content"][list[i]]["url"], () => {setTimeout(() => {resolve("end")}, 15000)})}
                 else {addTuber(null, data["content"][list[i]]["url"], () => {setTimeout(() => {resolve("yet")}, 15000)})}
             })
         }).then((res) => {
+            console.log(res)
             if (res == "end") {loadingPackage = null; packageInfoPopupAddBtn.innerText = "등록하기"}
         })
     }

@@ -10,6 +10,12 @@ Get easier access to your favorite YouTubers
 
 [한국어 (Edit First)](https://github.com/cottons-kr/YourFavorite/blob/main/document/README-kr.md)
 
+# Download
+- Windows(.exe) : [Ready]("https://github.com/cottons-kr/YourFavorite")
+- Linux(.deb) : [Ready]("https://github.com/cottons-kr/YourFavorite")
+- Linux(.rpm) : [Ready]("https://github.com/cottons-kr/YourFavorite")
+- tar.gz : [Ready]("https://github.com/cottons-kr/YourFavorite")
+
 # [Releasenote](https://github.com/cottons-kr/YourFavorite/blob/main/document/Releasenote.md)
 
 # Used Project / Code
