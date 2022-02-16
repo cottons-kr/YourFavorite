@@ -15,54 +15,62 @@ const packageInfoPopupTitle = document.querySelector("#packageInfoPopupTitle")
 const packageInfoPopupMadeby = document.querySelector("#packageInfoPopupMadeby")
 const packageInfoPopupAbout = document.querySelector("#packageInfoPopupAbout")
 const packageInfoPopupContentList = document.querySelector("#packageInfoPopupContentList")
-function showPackageInfo(name) {
+function loadPackageInfo(data) {
+    selectedPackage = data
+    packageInfoPopupTitle.innerText = data["title"]
+    packageInfoPopupMadeby.innerText = `Made By ${data["madeby"]}`
+    packageInfoPopupAbout.innerText = data["about"]
+    const content = data["content"]
+    for (let name of Object.keys(content)) {
+        const div = document.createElement("div")
+        div.innerText = name
+        div.setAttribute("id", "packageInfoPopupContent")
+        const color = content[name]["color"]
+        let textColor = content[name]["text"]
+        if (textColor == undefined) {textColor = [0, 0, 0]}
+        div.style.color = `rgb(${textColor[0]}, ${textColor[1]}, ${textColor[2]})`
+        div.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+        packageInfoPopupContentList.appendChild(div)
+     }
+
+    packageInfoPopupAddBtn.removeEventListener("click", addPackage)
+    packageInfoPopupAddBtn.removeEventListener("click", removePackage)
+    if (loadingPackage == selectedPackage["title"]) {packageInfoPopupAddBtn.innerText = "등록중"}
+    else if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
+        packageInfoPopupAddBtn.innerText = "삭제하기"
+        packageInfoPopupAddBtn.addEventListener("click", removePackage)
+    } else {
+        console.log(selectedPackage["title"])
+        packageInfoPopupAddBtn.innerText = "등록하기"
+        packageInfoPopupAddBtn.addEventListener("click", addPackage)
+    }
+
+    if (packageInfoPopup.style.display == "none" || packageInfoPopup.style.display == "") {
+        packageInfoPopup.style.display = "block"
+        packageInfoPopup.classList.remove("hidePopup")
+        packageInfoPopup.classList.add("showPopup")
+    }
+}
+
+function showPackageInfo(name, file=false) {
     if (localStorage["packages"] == undefined) {localStorage["packages"] = "[]"}
     while (packageInfoPopupContentList.hasChildNodes()) {
         packageInfoPopupContentList.removeChild(packageInfoPopupContentList.firstChild)
     }
 
-    fetch(url+name.replaceAll(" ", "%20")+"/package.json")
-    .then(res => res.json()).catch((err) => {
-        packageInfoPopup.style.display = "none"
-        handleError(err)
-        return 0
-    })
-    .then(data => {
-        selectedPackage = data
-        packageInfoPopupTitle.innerText = data["title"]
-        packageInfoPopupMadeby.innerText = `Made By ${data["madeby"]}`
-        packageInfoPopupAbout.innerText = data["about"]
-        const content = data["content"]
-        for (let name of Object.keys(content)) {
-            const div = document.createElement("div")
-            div.innerText = name
-            div.setAttribute("id", "packageInfoPopupContent")
-            const color = content[name]["color"]
-            let textColor = content[name]["text"]
-            if (textColor == undefined) {textColor = [0, 0, 0]}
-            div.style.color = `rgb(${textColor[0]}, ${textColor[1]}, ${textColor[2]})`
-            div.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-            packageInfoPopupContentList.appendChild(div)
-        }
-
-        packageInfoPopupAddBtn.removeEventListener("click", addPackage)
-        packageInfoPopupAddBtn.removeEventListener("click", removePackage)
-        if (loadingPackage == selectedPackage["title"]) {packageInfoPopupAddBtn.innerText = "등록중"}
-        else if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
-            packageInfoPopupAddBtn.innerText = "삭제하기"
-            packageInfoPopupAddBtn.addEventListener("click", removePackage)
-        } else {
-            console.log(selectedPackage["title"])
-            packageInfoPopupAddBtn.innerText = "등록하기"
-            packageInfoPopupAddBtn.addEventListener("click", addPackage)
-        }
-
-        if (packageInfoPopup.style.display == "none" || packageInfoPopup.style.display == "") {
-            packageInfoPopup.style.display = "block"
-            packageInfoPopup.classList.remove("hidePopup")
-            packageInfoPopup.classList.add("showPopup")
-        }
-    })
+    if (!file) {
+        fetch(url+name.replaceAll(" ", "%20")+"/package.json")
+        .then(res => res.json()).catch((err) => {
+            packageInfoPopup.style.display = "none"
+            handleError(err)
+            return 0
+        })
+        .then(data => {
+            loadPackageInfo(data)
+        })
+    } else {
+        loadPackageInfo(selectedPackage)
+    }
 }
 
 import { removeTuber, loadList } from "./index.js"
@@ -131,17 +139,13 @@ export  default function addPackageFile(event) {
     const reader = new FileReader
     reader.onload = () => {
         try {
+            setTimeout(() => {addTuberPopupFormFileInput.value = ""}, 2000)
             selectedPackage = JSON.parse(reader.result)
-            if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
-                ipcRenderer.invoke("showMessage", "중복 패키지", "이미 등록된 패키지에요")
-                selectedPackage = null
-                return 0
-            }
-            addPackage()
+            if (localStorage["packages"] == undefined) {localStorage["packages"] = "[]"}
+            showPackageInfo(null, true)
         } catch (error) {
             handleError(error)
         }
-        setTimeout(() => {addTuberPopupFormFileInput.value = ""}, 2000)
     }
     reader.readAsText(addTuberPopupFormFileInput.files[0], "utf-8")
 }
