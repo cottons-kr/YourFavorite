@@ -86,9 +86,9 @@ function removePackage() {
         removeTuber()
         localStorage.removeItem(key)
     }
-    packageJson.splice(packageJson.indexOf(data["title"]), packageJson.indexOf(data["title"]))
-    console.log(packageJson)
+    delete packageJson[packageJson.indexOf(data["title"])]
     localStorage["packages"] = JSON.stringify(packageJson)
+    setTimeout(() => {location.reload()}, 1000)
 }
 
 import addTuber  from "./index.js"
