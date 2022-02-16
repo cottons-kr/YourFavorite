@@ -9,7 +9,7 @@ function handleError(msg) {
 
 const packageInfoPopupAddBtn = document.querySelector("#packageInfoPopupAddBtn")
 
-let selectedPackage
+let selectedPackage, loadingPackage
 const packageInfoPopup = document.querySelector(".packageInfoPopup")
 const packageInfoPopupTitle = document.querySelector("#packageInfoPopupTitle")
 const packageInfoPopupMadeby = document.querySelector("#packageInfoPopupMadeby")
@@ -47,10 +47,12 @@ function showPackageInfo(name) {
 
         packageInfoPopupAddBtn.removeEventListener("click", addPackage)
         packageInfoPopupAddBtn.removeEventListener("click", removePackage)
-        if (JSON.parse(localStorage["packages"]).includes(selectedPackage["name"])) {
+        if (loadingPackage == selectedPackage["title"]) {packageInfoPopupAddBtn.innerText = "등록중"}
+        else if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
             packageInfoPopupAddBtn.innerText = "삭제하기"
             packageInfoPopupAddBtn.addEventListener("click", removePackage)
         } else {
+            console.log(selectedPackage["title"])
             packageInfoPopupAddBtn.addEventListener("click", addPackage)
         }
 
@@ -62,7 +64,9 @@ function showPackageInfo(name) {
     })
 }
 
-import { removeTuber } from "./index.js"
+import { removeTuber, loadList } from "./index.js"
+const tuberListContainer = document.querySelector("#tuberList")
+const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 function removePackage() {
     const data = selectedPackage
     const list = Object.keys(data["content"])
@@ -82,7 +86,7 @@ function removePackage() {
         localStorage.removeItem(key)
     }
     delete packageJson[data["title"]]
-    localStorage["packages"] = packageJson
+    localStorage["packages"] = JSON.parse(packageJson)
 }
 
 import addTuber  from "./index.js"
@@ -90,19 +94,23 @@ function addPackage() {
     const data = selectedPackage
     if (localStorage["packages"] == undefined) {localStorage["packages"] = "[]"}
     const packageJson = JSON.parse(localStorage["packages"])
-    if (JSON.parse(localStorage["packages"]).includes(selectedPackage["name"])) {
+    if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
         ipcRenderer.invoke("showMessage", "중복 패키지", "이미 등록된 패키지에요")
         selectedPackage = null
         return 0
     }
+    packageInfoPopupAddBtn.innerText = "등록중"
+    packageInfoPopupAddBtn.removeEventListener("click", addPackage)
     const list = Object.keys(data["content"])
+    loadingPackage = selectedPackage["title"]
     for (let i=0, pending = Promise.resolve(); i<list.length; i++) {
         pending = pending.then(() => {
             return new Promise(resolve => {
-                addTuber(null, data["content"][list[i]]["url"], () => {setTimeout(resolve, 15000)})
+                if (list[i] == list[-1]) {addTuber(null, data["content"][list[i]]["url"], () => {setTimeout(() => {resolve("end")}, 15000)})}
+                else {addTuber(null, data["content"][list[i]]["url"], () => {setTimeout(() => {resolve("yet")}, 15000)})}
             })
-        }).then(() => {
-            ;
+        }).then((res) => {
+            if (res == "end") {loadingPackage = null; packageInfoPopupAddBtn.innerText = "등록하기"}
         })
     }
     packageJson.push(data["title"])
@@ -115,7 +123,7 @@ export  default function addPackageFile(event) {
     reader.onload = () => {
         try {
             selectedPackage = JSON.parse(reader.result)
-            if (JSON.parse(localStorage["packages"]).includes(selectedPackage["name"])) {
+            if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
                 ipcRenderer.invoke("showMessage", "중복 패키지", "이미 등록된 패키지에요")
                 selectedPackage = null
                 return 0

@@ -174,6 +174,7 @@ function addTuber(event=null, url=null, callback=null) {
             addList(channelName)
             console.log(`New Tuber : ${channelName}`)
             loadInfo(channelName)
+            mainColor = backgroundRgb
             removeTuber()
             if (callback != null) {callback()}
         })
@@ -676,5 +677,5 @@ window.onload = () => {
     }, 1500)
 }
 
-export { removeTuber }
+export { removeTuber, loadList }
 export default addTuber

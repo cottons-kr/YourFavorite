@@ -3,6 +3,8 @@ Get easier access to your favorite YouTubers
 
 좋아하는 유튜버에 더 쉽게 접근하세요
 
+![img](https://github.com/cottons-kr/YourFavorite/raw/main/document/example.png)
+
 # Readme
 [English (US)](https://github.com/cottons-kr/YourFavorite/blob/main/document/README-us.md)
 
