@@ -12,13 +12,35 @@ const PROGRAM_VERSION  = "1.2.1-stable",
             CHROME_VERSION   = process.versions.chrome,
             OS_VERSION       = `${os.type()} ${os.release()}`
 
-const defaultSetting = {
+const argLang = app.commandLine.getSwitchValue("lang")
+const lang  = Intl.DateTimeFormat().resolvedOptions().locale
+const defaultSettingKr = {
     "autoReloadDelay":[60000,"새로고침 간격","ms","number"],
     "preloadDelay":[180000,"미리 불러오는 간격","ms","number"],
     "windowWidth":[1920,"창의 가로크기","숫자","number"],
     "windowHeight":[1080,"창의 세로크기","숫자","number"],
     "defaultBackground":[false,"기본 배경색","true/false","boolean"],
     "simultaneousLoadNumber":[3,"동시로딩갯수","숫자","number"]
+}
+const defaultSettingEn = {
+    "autoReloadDelay":[60000,"Refresh Delay","ms","number"],
+    "preloadDelay":[180000,"Preload Delay","ms","number"],
+    "windowWidth":[1920,"Window Width","숫자","number"],
+    "windowHeight":[1080,"Window Height","숫자","number"],
+    "defaultBackground":[false,"Default Background Color","true/false","boolean"],
+    "simultaneousLoadNumber":[3,"Concurrent Loads","숫자","number"]
+}
+let defaultSetting
+if (argLang != "") {
+    if (argLang == "ko") {defaultSetting = defaultSettingKr}
+    else {defaultSetting = defaultSettingEn}
+} else {
+    if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {
+        defaultSetting = defaultSettingKr
+    } else {
+        console.log(Intl.DateTimeFormat().resolvedOptions().locale)
+        defaultSetting = defaultSettingEn
+    }
 }
 
 const homeDir = os.homedir()
@@ -73,7 +95,6 @@ app.on("ready", () => {
     win.setMenuBarVisibility(false)
     win.setAspectRatio(16/9)
 
-    const argLang = app.commandLine.getSwitchValue("lang")
     if (argLang != "") {
         if (argLang == "ko") {win.loadFile("index.html")}
         else {win.loadFile(`index-en.html`)}

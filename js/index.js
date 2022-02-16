@@ -679,5 +679,5 @@ window.onload = () => {
     }, 1500)
 }
 
-export { removeTuber, loadList }
+export { removeTuber, loadList, lang }
 export default addTuber

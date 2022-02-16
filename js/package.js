@@ -1,10 +1,12 @@
 const { ipcRenderer } = require("electron")
 
 const url  = "https://raw.githubusercontent.com/cottons-kr/yf-archive/main/"
+import { lang } from "./index.js"
 
 function handleError(msg) {
     console.log(msg)
-    ipcRenderer.invoke("showMessage", "패키지 오류!", "올바른 형식의 패키지가 아니에요", "warning")
+    if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "패키지 오류!", "올바른 형식의 패키지가 아니에요", "warning")}
+    else {ipcRenderer.invoke("showMessage", "Package Error!", "This Package is not in the correct format", "warning")}
 }
 
 const packageInfoPopupAddBtn = document.querySelector("#packageInfoPopupAddBtn")
@@ -35,13 +37,18 @@ function loadPackageInfo(data) {
 
     packageInfoPopupAddBtn.removeEventListener("click", addPackage)
     packageInfoPopupAddBtn.removeEventListener("click", removePackage)
-    if (loadingPackage == selectedPackage["title"]) {packageInfoPopupAddBtn.innerText = "등록중"}
+    if (loadingPackage == selectedPackage["title"]) {
+        if (lang.includes("ko")) {packageInfoPopupAddBtn.innerText = "등록중"}
+        else {packageInfoPopupAddBtn.innerText = "Registering"}
+    }
     else if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
-        packageInfoPopupAddBtn.innerText = "삭제하기"
+        if (lang.includes("ko")) {packageInfoPopupAddBtn.innerText = "삭제하기"}
+        else {packageInfoPopupAddBtn.innerText = "Remove"}
         packageInfoPopupAddBtn.addEventListener("click", removePackage)
     } else {
         console.log(selectedPackage["title"])
-        packageInfoPopupAddBtn.innerText = "등록하기"
+        if (lang.includes("ko")) {packageInfoPopupAddBtn.innerText = "등록하기"}
+        else {packageInfoPopupAddBtn.innerText = "Register"}
         packageInfoPopupAddBtn.addEventListener("click", addPackage)
     }
 
@@ -105,11 +112,13 @@ function addPackage() {
     if (localStorage["packages"] == undefined) {localStorage["packages"] = "[]"}
     const packageJson = JSON.parse(localStorage["packages"])
     if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
-        ipcRenderer.invoke("showMessage", "중복 패키지", "이미 등록된 패키지에요")
+        if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "중복 패키지", "이미 등록된 패키지에요")}
+        else {ipcRenderer.invoke("showMessage", "Duplicate Package", "This Package is already registered.")}
         selectedPackage = null
         return 0
     }
-    packageInfoPopupAddBtn.innerText = "등록중"
+    if (lang.includes("ko")) {packageInfoPopupAddBtn.innerText = "등록중"}
+    else {packageInfoPopupAddBtn.innerText = "Registering"}
     packageInfoPopupAddBtn.removeEventListener("click", addPackage)
     const list = Object.keys(data["content"])
     loadingPackage = selectedPackage["title"]
@@ -124,7 +133,8 @@ function addPackage() {
             if (res == "end") {
                 loadingPackage = null
                 if (JSON.parse(localStorage["packages"]).includes(selectedPackage["title"])) {
-                    packageInfoPopupAddBtn.innerText = "삭제하기"
+                    if (lang.includes("ko")) {packageInfoPopupAddBtn.innerText = "삭제하기"}
+                    else {packageInfoPopupAddBtn.innerText = "Remove"}
                     packageInfoPopupAddBtn.addEventListener("click", removePackage)
                 }
             }
