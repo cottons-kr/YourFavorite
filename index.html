@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/video.css">
     <link rel="stylesheet" href="css/setting.css">
     <link rel="stylesheet" href="css/package.css">
+    <link rel="stylesheet" href="css/ytplayer.css">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <title>YourFavorite</title>
 </head>
@@ -176,11 +177,18 @@
         <h3 id="backupCompletePopupText">백업 완료!</h3>
         <p>바탕화면에 저장했어요!</p>
     </div>
+
+    <div class="youtubePlayer">
+        <div id="youtubePlayerExit"><img src="resource/x-circle.svg"></div>
+        <iframe id="player" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>></iframe>
+    </div>
+
     <div class="loading"></div>
 </body>
 <script type="module" charset="utf-8" src="js/index.js"></script>
 <script type="module" charset="utf-8" src="js/setting.js"></script>
 <script type="module" charset="utf-8" src="js/getInfo.py.js"></script>
 <script type="module" charset="utf-8" src="js/package.js"></script>
+<script type="module" charset="utf-8" src="js/ytplayer.js"></script>
 <script type="text/javascript" src="http://www.shawnolson.net/scripts/public_smo_scripts.js"></script>
 </html>

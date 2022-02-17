@@ -1,0 +1,41 @@
+.youtubePlayer {
+    display: none;
+    z-index: 9999;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px / 15px;
+
+    width: 75vw;
+    height: 75vh;
+    padding-left: 5vw;
+    padding-bottom: 5vh;
+    margin-top: 5%;
+    margin-left: 10vw;
+}
+
+#youtubePlayerExit {
+    float: right;
+    margin: 0.6%;
+    width: auto;
+    height: 2rem;
+    transition-duration: 0.4s;
+}
+
+#youtubePlayerExit img {
+    width: auto;
+    height: 100%;
+}
+
+#youtubePlayerExit:active {
+    transition-duration: 0.4s;
+    transform: scale(90%);
+}
+
+#player {
+    background-color: black;
+    width: 70vw;
+    height: 70vh;
+
+    margin-right: 5vw;
+    border-radius: 20px / 20px;
+}

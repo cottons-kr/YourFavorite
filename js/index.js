@@ -7,6 +7,7 @@ const { ipcRenderer } = require("electron")
 
 import addPackageFile, { showPackage } from "./package.js";
 import fileContent from "./getInfo.py.js"
+import loadPlayer from "./ytplayer.js";
 
 const body = document.querySelector("body"),
       addButtonImg = document.querySelector("#addButtonImg"),
@@ -232,10 +233,8 @@ function loadVideos(info, noContent) {
             break
         }
         const div = document.createElement("div")
-        const a = document.createElement("a")
         const img = document.createElement("img")
         div.setAttribute("id", "video")
-        a.setAttribute("href", video[1])
         img.setAttribute("src", getThumbnail(video[1]))
         if (video[2] == "") {
             if (lang == "ko") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
@@ -245,9 +244,10 @@ function loadVideos(info, noContent) {
             else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
         }
         img.setAttribute("id", "videoThumbnail")
-        a.appendChild(img)
-        div.appendChild(a)
+        div.appendChild(img)
         div.classList.add("showVideo")
+        div.addEventListener("click", () => {loadPlayer(video[1].split("?v=")[1])})
+
         setTimeout(() => {div.classList.remove("showVideo")}, 400)
         infoVideosList.appendChild(div)
     }
@@ -272,13 +272,11 @@ function loadStreams(info, noContent) {
         const a = document.createElement("a")
         const img = document.createElement("img")
         div.setAttribute("id", "stream")
-        a.setAttribute("href", stream[1])
-        a.setAttribute("id", "streamLink")
         img.setAttribute("src", getThumbnail(stream[1]))
         img.setAttribute("title", stream[0])
         img.setAttribute("id", "streamThumbnail")
-        a.appendChild(img)
-        div.appendChild(a)
+        div.appendChild(img)
+        div.addEventListener("click", () => {loadPlayer(stream[1].split("?v=")[1])})
         div.classList.add("showStream")
         setTimeout(() => {div.classList.remove("showStream")}, 400)
         infoStreamList.appendChild(div)
