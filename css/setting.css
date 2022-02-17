@@ -119,3 +119,40 @@
     margin: 2%;
     white-space: nowrap;
 }
+
+.UpdateCheckPopup {
+    position: absolute;
+    background-color: white;
+    text-align: center;
+
+    width: 20%;
+    padding: 0.5%;
+    margin-left: 24vw;
+    margin-top: 16vh;
+
+    border-radius: 10px / 10px
+}
+
+#UpdateCheckPopupTitle, #UpdateCheckPopupContent {
+    margin-bottom: 2%;
+}
+
+#UpdateCheckPopupLink {
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+}
+
+#UpdateCheckPopupLink a {
+    transition-duration: 0.4s;
+}
+
+#UpdateCheckPopupLink a:hover {
+    transition-duration: 0.4s;
+    transform: translateY(-9%);
+}
+
+#UpdateCheckPopupLink a:active {
+    transition-duration: 0.4s;
+    transform: scale(90%);
+}
