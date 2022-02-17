@@ -1,3 +1,16 @@
+## v1.2.1-stable
+2022/02/17 출시됨
+
+- 거의 모든 버그 수정 / Fixed almost all bugs
+- 패키지 삭제기능 추가 / Added Remove Package
+- 영어 완벽지원 / Support English Perfectly
+
+## v1.2.0
+2022/02/14 출시됨
+
+-패키지 기능 추가 / Added Package
+- 버그 수정 / Fixed Bug
+
 ## v1.1.1
 2022/02/13 출시됨
 

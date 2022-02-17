@@ -11,10 +11,10 @@ Get easier access to your favorite YouTubers
 [한국어 (Edit First)](https://github.com/cottons-kr/YourFavorite/blob/main/document/README-kr.md)
 
 # Download
-- Windows(.exe) : [Ready]("https://github.com/cottons-kr/YourFavorite")
-- Linux(.deb) : [Ready]("https://github.com/cottons-kr/YourFavorite")
-- Linux(.rpm) : [Ready]("https://github.com/cottons-kr/YourFavorite")
-- tar.gz : [Ready]("https://github.com/cottons-kr/YourFavorite")
+- Windows(.exe) : [v1.2.1-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.2.1-stable/YourFavorite.Setup.1.2.1-stable.exe)
+- Linux(.deb) : [v1.2.1-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.2.1-stable/YourFavorite_1.2.1-stable_amd64.deb)
+- Linux(.rpm) : [v1.2.1-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.2.1-stable/YourFavorite-1.2.1-stable.x86_64.rpm)
+- tar.gz : [v1.2.1-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.2.1-stable/YourFavorite-1.2.1-stable.tar.gz)
 
 # [Releasenote](https://github.com/cottons-kr/YourFavorite/blob/main/document/Releasenote.md)
 
