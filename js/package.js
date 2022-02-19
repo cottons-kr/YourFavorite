@@ -1,7 +1,7 @@
 const { ipcRenderer } = require("electron")
 
 const url  = "https://raw.githubusercontent.com/cottons-kr/yf-archive/main/"
-import { lang } from "./index.js"
+import { lang, mainColor } from "./index.js"
 
 function handleError(msg) {
     console.log(msg)
@@ -175,6 +175,7 @@ export  function showPackage() {
             const madeby = document.createElement("div")
 
             div.setAttribute("id", "package")
+            div.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.25)`
             name.innerText = p
             name.setAttribute("id", "packageName")
             madeby.innerText = `Made by ${data[p]}`

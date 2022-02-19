@@ -121,9 +121,11 @@
 }
 
 .UpdateCheckPopup {
+    display: none;
     position: absolute;
     background-color: white;
     text-align: center;
+    align-content: center;
 
     width: 20%;
     padding: 0.5%;
@@ -137,22 +139,23 @@
     margin-bottom: 2%;
 }
 
-#UpdateCheckPopupLink {
+a {
     text-decoration: none;
     color: black;
-    font-size: larger;
+}
+
+#UpdateCheckPopupLink {
+    padding: 2%;
+    border-radius: 10px / 10px;
+    transition-duration: 0.4s;
 }
 
 #UpdateCheckPopupLink a {
-    transition-duration: 0.4s;
+    text-decoration: none;
+    color: black;
 }
 
-#UpdateCheckPopupLink a:hover {
-    transition-duration: 0.4s;
-    transform: translateY(-9%);
-}
-
-#UpdateCheckPopupLink a:active {
+#UpdateCheckPopupLink:active {
     transition-duration: 0.4s;
     transform: scale(90%);
 }

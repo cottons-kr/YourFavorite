@@ -95,6 +95,30 @@ function backup() {
 function showInfo() {
     ipcRenderer.invoke("showInfo")
 }
+import { mainColor } from "./index.js"
+const UpdateCheckPopup = document.querySelector(".UpdateCheckPopup")
+const UpdateCheckPopupTitle = document.querySelector("#UpdateCheckPopupTitle")
+const UpdateCheckPopupContent = document.querySelector("#UpdateCheckPopupContent")
+const UpdateCheckPopupLink = document.querySelector("#UpdateCheckPopupLink")
+const PROGRAM_VERSION = "1.3.0-beta1"
+function checkUpdate() {
+    fetch("https://raw.githubusercontent.com/cottons-kr/YourFavorite/main/package.json").then(res => res.json())
+    .then(data => {
+        if (data["version"] == PROGRAM_VERSION) {
+            UpdateCheckPopupTitle.innerText = "최신버전을 쓰고있어요"
+            UpdateCheckPopupLink.style.display = "none"
+        } else {
+            UpdateCheckPopupTitle.innerText = "새로운 버전이 있어요"
+            UpdateCheckPopupLink.style.display = "block"
+        }
+        UpdateCheckPopupContent.innerHTML = `현재 버전 : ${PROGRAM_VERSION }<br>최신 버전 : ${data["version"]}`
+
+        UpdateCheckPopupLink.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.25)`
+        UpdateCheckPopup.style.display = "block"
+        UpdateCheckPopup.classList.remove("hidePopup")
+        UpdateCheckPopup.classList.add("showPopup")
+    })
+}
 
 settingButtonImg.addEventListener("mouseover", () => {
     settingButtonImg.style.opacity = 1
@@ -107,11 +131,14 @@ settingButtonImg.addEventListener("click", () => {
     settingPopup.classList.remove("hidePopup")
     settingPopup.classList.add("showPopup")
     showSetting()
+    checkUpdate()
 })
 settingPopupExit.addEventListener("click", () => {
     settingPopup.classList.remove("addPopup")
     checkResetAllPopup.classList.remove("addPopup")
     backupCompletePopup.classList.remove("addPopup")
+    UpdateCheckPopup.classList.remove("addPopup")
+    UpdateCheckPopup.classList.add("hidePopup")
     settingPopup.classList.add("hidePopup")
     checkResetAllPopup.classList.add("hidePopup")
     backupCompletePopup.classList.add("hidePopup")
@@ -119,6 +146,7 @@ settingPopupExit.addEventListener("click", () => {
         settingPopup.style.display = "none"
         checkResetAllPopup.style.display = "none"
         backupCompletePopup.style.display = "none"
+        UpdateCheckPopup.style.display = "none"
     }, 250)
 })
 resetSettingImg.addEventListener("click", resetSetting)

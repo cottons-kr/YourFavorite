@@ -269,7 +269,6 @@ function loadStreams(info, noContent) {
             break
         }
         const div = document.createElement("div")
-        const a = document.createElement("a")
         const img = document.createElement("img")
         div.setAttribute("id", "stream")
         img.setAttribute("src", getThumbnail(stream[1]))
@@ -677,5 +676,5 @@ window.onload = () => {
     }, 1500)
 }
 
-export { removeTuber, loadList, lang }
+export { removeTuber, loadList, lang, mainColor }
 export default addTuber
