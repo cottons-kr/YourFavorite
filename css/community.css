@@ -19,6 +19,7 @@
 }
 
 #infoCommunityTitle h2 {
+    transition-duration: 0.7s;
     color: rgba(255, 99 ,71, 0.8);
     text-align: left;
 }

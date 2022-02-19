@@ -111,18 +111,17 @@ function addList(channelId) {
     const listProfileImg = document.createElement("div")
     const listChannelName = document.createElement("div")
     const img = document.createElement("img")
-    const h2 = document.createElement("h2")
 
     channel.setAttribute("id", info["channelName"])
+    channel.setAttribute("title", info["channelName"])
     listProfileImg.setAttribute("id", "listProfileImg")
     listChannelName.setAttribute("id", "listChannelName")
     img.setAttribute("src", info["profileImg"])
     channelButton.setAttribute("id", "channelButton")
     channelButton.addEventListener("click", () => {loadInfo(channelId)})
-    h2.innerText = info["channelName"]
+    listChannelName.innerText = info["channelName"]
 
     listProfileImg.appendChild(img)
-    listChannelName.appendChild(h2)
     channel.appendChild(listProfileImg)
     channel.appendChild(listChannelName)
     channelButton.appendChild(channel)
@@ -339,6 +338,10 @@ function showInfo(info, channelId) {
     infoLocation.innerText = locationFilter(about)
     infoJoinDate.innerText = about[2]
     infoAboutmore.innerText = about[0]
+    if (infoAboutmore.innerText == "") {
+        if (lang.includes("ko")) {infoAboutmore.innerText = "채널 설명이 없어요"}
+        else {infoAboutmore.innerText = "There is no Channel Description"}
+    }
 
     infoChannelName.style.display = "inline-block"
     infoTuberLoading.style.display = "none"

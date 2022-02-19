@@ -60,7 +60,7 @@
 
 #infoStreamTitle h2 {
     color: rgba(255, 99 ,71, 0.8);
-
+    transition-duration: 0.7s;
     text-align: left;
 }
 

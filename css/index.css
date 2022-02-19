@@ -82,10 +82,14 @@ h6 {
 
 #listChannelName {
     width: 50%;
-    margin-top: 9%;
-    font-weight: 70%;
-
+    height: 100%;
+    margin-left: 4%;
+    line-height: 9vh;
     display: inline-block;
+    font-size: 1.4rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 #listProfileImg {
