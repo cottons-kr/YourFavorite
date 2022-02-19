@@ -1,6 +1,6 @@
 {
   "name": "YourFavorite",
-  "version": "1.3.0-beta",
+  "version": "1.3.0",
   "description": "Get easier access to your favorite YouTubers",
   "main": "run.js",
   "scripts": {

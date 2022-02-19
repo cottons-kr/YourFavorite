@@ -1,3 +1,10 @@
+## v1.3.0
+2022/02/20 출시됨
+
+- 채널 버튼 수정 / Fixed Channel Button
+- 유튜브 영상 플레이어 추가 / Added YouTube Video Player
+- Windows에서 인코딩 에러 수정 / Fixed Encoding Error on Windows
+
 ## v1.2.1-stable
 2022/02/17 출시됨
 
@@ -8,7 +15,7 @@
 ## v1.2.0
 2022/02/14 출시됨
 
--패키지 기능 추가 / Added Package
+- 패키지 기능 추가 / Added Package
 - 버그 수정 / Fixed Bug
 
 ## v1.1.1
