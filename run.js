@@ -25,10 +25,10 @@ const defaultSettingKr = {
 const defaultSettingEn = {
     "autoReloadDelay":[60000,"Refresh Delay","ms","number"],
     "preloadDelay":[180000,"Preload Delay","ms","number"],
-    "windowWidth":[1920,"Window Width","숫자","number"],
-    "windowHeight":[1080,"Window Height","숫자","number"],
+    "windowWidth":[1920,"Window Width","Number","number"],
+    "windowHeight":[1080,"Window Height","Number","number"],
     "defaultBackground":[false,"Default Background Color","true/false","boolean"],
-    "simultaneousLoadNumber":[3,"Concurrent Loads","숫자","number"]
+    "simultaneousLoadNumber":[3,"Concurrent Loads","Number","number"]
 }
 let defaultSetting
 if (argLang != "") {
@@ -63,21 +63,27 @@ if (fs.existsSync("getInfo.py")) {
 if (OS_VERSION.includes("Windows")) {
     commandExist("python", (err, result) => {
         if (!result) {
-            dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")
+            if (lang.includes("ko")) {dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")}
+            else if (lang.includes("jp")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
+            else {dialog.showErrorBox("Please Install Python!", "or It seems that Python is not register on PATH")}
             process.exit()
         }
     })
 } else {
     commandExist("python3", (err, result) => {
         if (!result) {
-            dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")
+            if (lang.includes("ko")) {dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")}
+            else if (lang.includes("jp")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
+            else {dialog.showErrorBox("Please Install Python!", "or It seems that Python is not register on PATH")}
             process.exit()
         }
     })
 }
 commandExist("pip3", (err, result) => {
     if (!result) {
-        dialog.showErrorBox("PIP3가 감지되지 않았습니다!", "혹은 PIP가 PATH에 등록되지 않은걸수도 있어요")
+        if (lang.includes("ko")) {dialog.showErrorBox("PIP3가 감지되지 않았습니다!", "혹은 PIP가 PATH에 등록되지 않은걸수도 있어요")}
+        else if (lang.includes("jp")) {dialog.showErrorBox("PIP3が検出されませんでした!", "あるいは、PIPがPATHに登録されていないこともあります。")}
+        else {dialog.showErrorBox("PIP3 not detected!", "or It seems that PIP is not register on PATH")}
         process.exit()
     }
 })

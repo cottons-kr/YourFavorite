@@ -6,6 +6,7 @@ const url  = "https://raw.githubusercontent.com/cottons-kr/yf-archive/main/"
 function handleError(msg) {
     console.log(msg)
     if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "패키지 오류!", "올바른 형식의 패키지가 아니에요", "warning")}
+    else if (lang.includes("jp")) {ipcRenderer.invoke("showMessage", "パッケージエラー!", "올바른 형식의 패키지가 아니에요", "warning")}
     else {ipcRenderer.invoke("showMessage", "Package Error!", "This Package is not in the correct format", "warning")}
 }
 

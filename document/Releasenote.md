@@ -5,6 +5,7 @@
 - 유튜브 영상 플레이어 추가 / Added YouTube Video Player
 - Windows에서 인코딩 에러 수정 / Fixed Encoding Error on Windows
 - 부분적 일본어 지원 / Partial Japanese Support
+- 언어 관련 버그 수정 / Fixed Language Bug
 
 ## v1.2.1-stable
 2022/02/17 출시됨

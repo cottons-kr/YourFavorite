@@ -2,7 +2,7 @@ const fs = require("fs")
 const os = require('os')
 const path = require("path")
 const { ipcRenderer } = require("electron")
-import { mainColor, tuberListContainer } from "./index.js"
+import { lang, mainColor, tuberListContainer } from "./index.js"
 
 const homeDir = os.homedir()
 const rootPath = fs.readFileSync(path.resolve(homeDir, ".yf/path"), "utf8")
@@ -106,13 +106,19 @@ function checkUpdate() {
     fetch("https://raw.githubusercontent.com/cottons-kr/YourFavorite/main/package.json").then(res => res.json())
     .then(data => {
         if (data["version"] == PROGRAM_VERSION) {
-            UpdateCheckPopupTitle.innerText = "최신버전을 쓰고있어요"
+            if (lang.includes("ko")) {UpdateCheckPopupTitle.innerText = "최신버전을 쓰고있어요"}
+            else if (lang.includes("jp")) {UpdateCheckPopupTitle.innerText = "最新バージョンを書いています。"}
+            else {UpdateCheckPopupTitle.innerText = "You are using Lastest Version"}
             UpdateCheckPopupLink.style.display = "none"
         } else {
-            UpdateCheckPopupTitle.innerText = "새로운 버전이 있어요"
+            if (lang.includes("ko")) {UpdateCheckPopupTitle.innerText = "새로운 버전이 있어요"}
+            else if (lang.includes("jp")) {UpdateCheckPopupTitle.innerText = "新しいバージョンがあります。"}
+            else {UpdateCheckPopupTitle.innerText = "There is a New Version"}
             UpdateCheckPopupLink.style.display = "block"
         }
-        UpdateCheckPopupContent.innerHTML = `현재 버전 : ${PROGRAM_VERSION }<br>최신 버전 : ${data["version"]}`
+        if (lang.includes("ko")) {UpdateCheckPopupContent.innerHTML = `현재 버전 : ${PROGRAM_VERSION }<br>최신 버전 : ${data["version"]}`}
+        else if (lang.includes("jp")) {UpdateCheckPopupContent.innerHTML = `現行版 : ${PROGRAM_VERSION }<br>新バージョン : ${data["version"]}`}
+        else {UpdateCheckPopupContent.innerHTML = `Current Version : ${PROGRAM_VERSION }<br>New Version: ${data["version"]}`}
 
         UpdateCheckPopupLink.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.25)`
         UpdateCheckPopup.style.display = "block"
