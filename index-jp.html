@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/setting.css">
     <link rel="stylesheet" href="css/package.css">
     <link rel="stylesheet" href="css/ytplayer.css">
-    <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <title>YourFavorite</title>
 </head>
 <body>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="container">
-        <h1 id="noList">There is No Registered YouTuber. Register by Clicking The Button Next to It!</h1>
+        <h1 id="noList">登録したYouTubeがありません。 隣のボタンで登録してみてください!</h1>
         <div id="infoProfileImg"><a><img></a></div>
         <div id="infoChannelName">
             <h1></h1>
@@ -41,21 +41,21 @@
         </div>
 
         <div class="infoAbout">
-            <button id="infoAboutMoreButton" title="About">
+            <button id="infoAboutMoreButton" title="チャンネルの説明">
                 <div id="infoAboutRoot">
                     <img id="infoAboutImg" src="resource/about.svg">
                     <div id="infoAbout"></div>
                 </div>
             </button>
-            <div id="infoTotalViewRoot" title="Total Views">
+            <div id="infoTotalViewRoot" title="総合ヒット">
                 <img id="infoTotalViewImg" src="resource/view.svg">
                 <h3 id="infoTotalView"></h3>
             </div>
-            <div id="infoLocationRoot" title="Country">
+            <div id="infoLocationRoot" title="国の地域">
                 <img id="infoLocationImg" src="resource/world.svg">
                 <h3 id="infoLocation"></h3>
             </div>
-            <div id="infoJoinDateRoot" title="Join Date">
+            <div id="infoJoinDateRoot" title="登録日">
                 <img id="infoJoinDateImg" src="resource/join.svg">
                 <h3 id="infoJoinDate"></h3>
             </div>
@@ -65,7 +65,7 @@
         <button class="infoStream">
             <div id="infoStreamRoot">
             <div id="infoStreamTitle">
-                 <h2>Streaming</h2>
+                 <h2>ストリーミング</h2>
             </div>
             <div id="infoStreamList">
             </div>
@@ -74,7 +74,7 @@
         <button class="infoCommunity">
             <div id="infoCommunityRoot">
             <div id="infoCommunityTitle">
-                <h2>Community</h2>
+                <h2>コミュニティ</h2>
             </div>
             <div id="infoCommunityList">
             </div>
@@ -84,7 +84,7 @@
         <button class="infoVideos">
             <div id="infoVideosRoot">
             <div id="infoVideoTitle">
-                <h2>Video</h2>
+                <h2>動画</h2>
             </div>
             <div id="infoVideosList">
             </div>
@@ -92,40 +92,40 @@
         </div>
     
         <div id="infoTuberLoading">
-            <img title="Please Wait!" src="resource/loading.svg">
+            <img title="ちょっと我慢してください!" src="resource/loading.svg">
             <h2></h2>
         </div>
     </div>
 
     <div class="addTuberPopup">
         <span>
-            <h4 id="addTuberPopupText">Register YouTuber</h4>
+            <h4 id="addTuberPopupText">Youtuber登録</h4>
             <img id="addTuberPopupExit" src="resource/x-circle.svg">
         </span>
         <form id="addTuberPopupFormUrl">
-            <input type="text" placeholder="Paste URL Here">
+            <input type="text" placeholder="チャンネルのURLを入力してください">
         </form>
-        <p>Register Package</p>
+        <p>パッケージ登録</p>
         <div id="addTuberPopupFormFile">
             <input id="addTuberPopupFormFileInput" type="file" accept=".json">
         </div>
     </div>
 
     <div class="showPackagePopup">
-        <h3 id="showPackagePopupTitle">Package</h3>
+        <h3 id="showPackagePopupTitle">パッケージ</h3>
         <div id="showPackagePopupList">
         </div>
     </div>
 
     <div class="packageInfoPopup">
-        <div id="packageInfoPopupAddBtn">Register</div>
+        <div id="packageInfoPopupAddBtn">登録</div>
         <h1 id="packageInfoPopupTitle"></h1>
         <h3 id="packageInfoPopupMadeby"></h3>
 
         <h4 id="packageInfoPopupAboutTitle">About</h4>
         <div id="packageInfoPopupAbout"></div>
 
-        <h4 id="packageInfoPopupContentTitle">Youtubers</h4>
+        <h4 id="packageInfoPopupContentTitle">登録するYouTuber</h4>
         <div id="packageInfoPopupContentList">
             <div id="packageInfoPopupContent"></div>
         </div>
@@ -140,7 +140,7 @@
 
     <div class="removeTuberPopup">
         <span>
-            <h4 id="removeTuberPopupText">Remove YouTuber</h4>
+            <h4 id="removeTuberPopupText">Youtuber削除</h4>
             <img id="removeTuberPopupExit" src="resource/x-circle.svg">
         </span>
         <div id="removeTuberPopupList"></div>
@@ -148,40 +148,40 @@
 
     <div class="settingPopup">
         <span>
-            <h4 id="settingPopupText">Settings</h4>
+            <h4 id="settingPopupText">設定</h4>
             <img id="settingPopupExit" src="resource/x-circle.svg">
         </span>
         <div id="settingPopupList">
         </div>
         <div id="resetSetting">
-            <img id="resetSettingImg" src="resource/resetSetting.svg" title="Restart After Initializing Settings">
+            <img id="resetSettingImg" src="resource/resetSetting.svg" title="設定初期化後の再起動">
         </div>
         <div id="resetAll">
-            <img id="resetAllImg" src="resource/resetAll.svg" title="Restart After Resetting EVERYTHING">
+            <img id="resetAllImg" src="resource/resetAll.svg" title="すべて初期化後に再起動">
         </div>
         <div id="backupAll">
-            <img id="backupAllImg" src="resource/backup.svg" title="YouTuber, Settings Backup">
+            <img id="backupAllImg" src="resource/backup.svg" title="YouTuber、設定バックアップ">
         </div>
         <div id="showInfo">
-            <img id="showInfoImg" src="resource/info.svg" title="Infomation">
+            <img id="showInfoImg" src="resource/info.svg" title="情報">
         </div>
     </div>
 
     <div class="checkResetAllPopup">
-        <h3 id="checkResetAllPopupText">Are you Sure?</h3>
-        <div id="checkResetAllPopupYes"><img id="checkResetAllPopupYesImg" src="resource/check.svg" title="Yes"></div>
-        <div id="checkResetAllPopupNo"><img id="checkResetAllPopupNoImg" src="resource/x-circle.svg" title="Give me Time to Think"></div>
+        <h3 id="checkResetAllPopupText">本当にみんな初期化しますか?</h3>
+        <div id="checkResetAllPopupYes"><img id="checkResetAllPopupYesImg" src="resource/check.svg" title="はい"></div>
+        <div id="checkResetAllPopupNo"><img id="checkResetAllPopupNoImg" src="resource/x-circle.svg" title="考える時間をください"></div>
     </div>
 
     <div class="backupCompletePopup">
-        <h3 id="backupCompletePopupText">Backup Complete!</h3>
-        <p id="backupCompletePopupPath"></p>
+        <h3 id="backupCompletePopupText">バックアップ完了!</h3>
+        <p>デスクトップに保存しました!</p>
     </div>
 
     <div class="UpdateCheckPopup">
         <h2 id="UpdateCheckPopupTitle"></h2>
         <p id="UpdateCheckPopupContent"></p>
-        <a href="https://github.com/cottons-kr/YourFavorite/releases" target="_blank"><div id="UpdateCheckPopupLink">Download</div></a>
+        <a href="https://github.com/cottons-kr/YourFavorite/releases" target="_blank"><div id="UpdateCheckPopupLink">ダウンロード</div></a>
     </div>
 
     <div class="youtubePlayer">

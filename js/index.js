@@ -77,6 +77,7 @@ fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 const url = location.href
 if (url.includes("en")) {lang = "en"}
+else if (url.includes("jp")) {lang = "jp"}
 else {lang = "ko"}
 
 function handleError(msg) {

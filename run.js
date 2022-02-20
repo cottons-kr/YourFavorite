@@ -103,6 +103,7 @@ app.on("ready", () => {
 
     if (argLang != "") {
         if (argLang == "ko") {win.loadFile("index.html")}
+        else if (argLang == "jp") {win.loadFile("index-jp.html")}
         else {win.loadFile(`index-en.html`)}
     } else {
         if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {
