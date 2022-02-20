@@ -10,6 +10,10 @@ let settingPath = path.resolve(homeDir, ".yf/setting.json")
 let defaultSetttingPath = path.resolve(homeDir, ".yf/defaultSetting.json")
 let backupPath = path.resolve(homeDir, "Desktop/yf_backup.json")
 
+const settingKr = ["새로고침 간격", "미리 불러오는 간격", "창의 가로크기", "창의 세로크기", "기본 배경색", "동시로딩갯수"]
+const settingJp = ["更新遅延", "プリロード遅延", "ウィンドウ幅", "窓の高さ", "デフォルトの背景色", "同時ロード数"]
+const settingEn = ["Refresh Delay", "Preload Delay", "Window Width", "Window Height", "Default Background Color", "Concurrent Loads"]
+
 const settingButtonImg = document.querySelector("#settingButtonImg")
 const settingPopupExit = document.querySelector("#settingPopupExit")
 const settingPopup = document.querySelector(".settingPopup")
@@ -28,6 +32,11 @@ function showSetting() {
     while (settingPopupList.hasChildNodes()) {
         settingPopupList.removeChild(settingPopupList.firstChild)
     }
+    let settingName
+    let i = 0
+    if (lang.includes("ko")) {settingName = settingKr}
+    else if (lang.includes("jp")) {settingName = settingJp}
+    else {settingName = settingEn}
     for (let setting of Object.keys(settings)) {
         const info = settings[setting]
         const div1 = document.createElement("div")
@@ -42,7 +51,7 @@ function showSetting() {
         input.setAttribute("placeholder", info[2])
         input.value = info[0]
         div1.setAttribute("title", setting)
-        div2.innerText = info[1]
+        div2.innerText = settingName[i]
         form.addEventListener("input", (event) => {
             event.preventDefault()
             if (input.value === "") {return null}
@@ -54,6 +63,7 @@ function showSetting() {
         div1.appendChild(div2)
         div1.appendChild(div3)
         settingPopupList.appendChild(div1)
+        i++
     }
 }
 
