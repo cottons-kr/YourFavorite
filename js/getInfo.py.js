@@ -33,7 +33,7 @@ const fileContent = `while True:
 
 osType = platform.platform()
 waitTime = 10
-rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r").read()
+rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r", encoding="utf-8").read()
 
 def getBrowser(type):
     options = Options()

@@ -618,6 +618,7 @@ addButtonImg.addEventListener("click", () => {
     showPackage()
     addTuberPopup.style.display = "block"
     showPackagePopup.style.display = "block"
+    tuberListContainer.style.pointerEvents = "none"
     addTuberPopup.classList.remove("hidePopup")
     showPackagePopup.classList.remove("hidePopup")
     addTuberPopup.classList.add("showPopup")
@@ -636,11 +637,13 @@ addTuberPopupExit.addEventListener("click", () => {
         addTuberPopup.style.display = "none"
         showPackagePopup.style.display = "none"
         packageInfoPopup.style.display = "none"
+        tuberListContainer.style.pointerEvents = "all"
     }, 250)
 })
 
 removeButtonImg.addEventListener("click", () => {
     removeTuberPopup.style.display = "block"
+    tuberListContainer.style.pointerEvents = "none"
     removeTuberPopup.classList.remove("hidePopup")
     removeTuberPopup.classList.add("showPopup")
     removeTuber()
@@ -649,7 +652,10 @@ removeButtonImg.addEventListener("click", () => {
 removeTuberPopupExit.addEventListener("click", () => {
     removeTuberPopup.classList.remove("addPopup")
     removeTuberPopup.classList.add("hidePopup")
-    setTimeout(() => {removeTuberPopup.style.display = "none"}, 250)
+    setTimeout(() => {
+        removeTuberPopup.style.display = "none"
+        tuberListContainer.style.pointerEvents = "all"
+    }, 250)
 })
 
 addTuberPopupFormUrl.addEventListener("submit", addTuber)
@@ -679,5 +685,5 @@ window.onload = () => {
     }, 1500)
 }
 
-export { removeTuber, loadList, lang, mainColor }
+export { removeTuber, loadList, lang, mainColor, tuberListContainer }
 export default addTuber

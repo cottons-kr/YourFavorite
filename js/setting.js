@@ -2,6 +2,7 @@ const fs = require("fs")
 const os = require('os')
 const path = require("path")
 const { ipcRenderer } = require("electron")
+import { mainColor, tuberListContainer } from "./index.js"
 
 const homeDir = os.homedir()
 const rootPath = fs.readFileSync(path.resolve(homeDir, ".yf/path"), "utf8")
@@ -95,7 +96,7 @@ function backup() {
 function showInfo() {
     ipcRenderer.invoke("showInfo")
 }
-import { mainColor } from "./index.js"
+
 const UpdateCheckPopup = document.querySelector(".UpdateCheckPopup")
 const UpdateCheckPopupTitle = document.querySelector("#UpdateCheckPopupTitle")
 const UpdateCheckPopupContent = document.querySelector("#UpdateCheckPopupContent")
@@ -128,12 +129,14 @@ settingButtonImg.addEventListener("mouseout", () => {
 })
 settingButtonImg.addEventListener("click", () => {
     settingPopup.style.display = "block"
+    tuberListContainer.style.pointerEvents = "none"
     settingPopup.classList.remove("hidePopup")
     settingPopup.classList.add("showPopup")
     showSetting()
     checkUpdate()
 })
 settingPopupExit.addEventListener("click", () => {
+    tuberListContainer.style.pointerEvents = "all"
     settingPopup.classList.remove("addPopup")
     checkResetAllPopup.classList.remove("addPopup")
     backupCompletePopup.classList.remove("addPopup")

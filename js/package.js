@@ -1,7 +1,7 @@
 const { ipcRenderer } = require("electron")
+import { removeTuber, loadList, tuberListContainer, lang, mainColor } from "./index.js"
 
 const url  = "https://raw.githubusercontent.com/cottons-kr/yf-archive/main/"
-import { lang, mainColor } from "./index.js"
 
 function handleError(msg) {
     console.log(msg)
@@ -80,8 +80,6 @@ function showPackageInfo(name, file=false) {
     }
 }
 
-import { removeTuber, loadList } from "./index.js"
-const tuberListContainer = document.querySelector("#tuberList")
 const removeTuberPopupList = document.querySelector("#removeTuberPopupList")
 function removePackage() {
     const data = selectedPackage
