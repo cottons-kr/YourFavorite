@@ -597,9 +597,8 @@ function autoPreload() {
 
 function changeBgColor(rgb = null) {
     if (settings["defaultBackground"][0] !== "true") {
-        if (rgb === null) {body.setAttribute("style", `background-color: tomato !important;`)}
-        else {body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`)}
-        mainColor = rgb
+        if (rgb === null) {body.setAttribute("style", `background-color: tomato !important;`); mainColor = [255, 99, 71]}
+        else {body.setAttribute("style", `background: rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) !important;`); mainColor = rgb}
     } else {
         body.setAttribute("style", "background: linear-gradient(45deg, whitesmoke, tomato) no-repeat fixed;")
         mainColor = [255, 99, 71]
@@ -688,6 +687,7 @@ window.onload = () => {
     setTimeout(autoPreload, 1500)
     setInterval(autoPreload, settings["preloadDelay"][0])
     changeBgColor()
+
     setTimeout(() => {
         loading.classList.add("hideLoading")
         setTimeout(() => {loading.style.display = "none"}, 1000)
