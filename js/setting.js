@@ -111,7 +111,7 @@ const UpdateCheckPopup = document.querySelector(".UpdateCheckPopup")
 const UpdateCheckPopupTitle = document.querySelector("#UpdateCheckPopupTitle")
 const UpdateCheckPopupContent = document.querySelector("#UpdateCheckPopupContent")
 const UpdateCheckPopupLink = document.querySelector("#UpdateCheckPopupLink")
-const PROGRAM_VERSION = "1.3.0"
+const PROGRAM_VERSION = "1.3.0-beta"
 function checkUpdate() {
     fetch("https://raw.githubusercontent.com/cottons-kr/YourFavorite/main/package.json").then(res => res.json())
     .then(data => {
