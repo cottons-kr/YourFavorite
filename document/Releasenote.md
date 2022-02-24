@@ -1,9 +1,8 @@
 ## v1.4.0-stable
-2022/02/22 출시
+2022/02/25 출시
 
 - 개선된 유튜브 영상 플레이어 / Better Youtube Video Player
 - 여러 버그 수정 / Fixed many bugs
-- 설치과정 간략화 / Installation Process Simplification
 
 ## v1.3.0-beta
 2022/02/20 출시됨
