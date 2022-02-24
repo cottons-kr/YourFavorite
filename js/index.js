@@ -77,13 +77,13 @@ fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 const url = location.href
 if (url.includes("en")) {lang = "en"}
-else if (url.includes("jp")) {lang = "jp"}
+else if (url.includes("jp")) {lang = "ja"}
 else {lang = "ko"}
 
 function handleError(msg) {
     console.log(msg)
     if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")}
-    else if (lang.includes("jp")) {ipcRenderer.invoke("showMessage", "エラーが発生しました!", `Github Issueタブにお問い合わせいただきありがとうございます :)\n\n${msg}`, "error")}
+    else if (lang.includes("ja")) {ipcRenderer.invoke("showMessage", "エラーが発生しました!", `Github Issueタブにお問い合わせいただきありがとうございます :)\n\n${msg}`, "error")}
     else {ipcRenderer.invoke("showMessage", "An Error Occurred!", `Please let us know this error on Github Issue :)\n\n${msg}`, "error")}
 }
 
@@ -142,7 +142,7 @@ function addTuber(event=null, url=null, callback=null) {
             console.log(error.message)
             if (error.message.includes("InvalidArgumentException")) {
                 if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")}
-                else if (lang.includes("jp")) {ipcRenderer.invoke("showMessage", "URLエラー!", "URLが間違っていると思います。", "warning")}
+                else if (lang.includes("ja")) {ipcRenderer.invoke("showMessage", "URLエラー!", "URLが間違っていると思います。", "warning")}
                 else { ipcRenderer.invoke("showMessage", "URL Error!", "It seem the URL is wrong.", "warning")}
                 return 0
             }
@@ -222,7 +222,7 @@ function loadVideos(info, noContent) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
             if (lang.includes("ko")) {h1.innerText = "올린 영상이 없어요"}
-            else if (lang.includes("jp")) {h1.innerText = "アップロードした画像はありません。"}
+            else if (lang.includes("ja")) {h1.innerText = "アップロードした画像はありません。"}
             else {h1.innerText = "No Videos :("}
             h1.setAttribute("id", "noVideo")
             h1.classList.add("showVideo")
@@ -237,11 +237,11 @@ function loadVideos(info, noContent) {
         img.setAttribute("src", getThumbnail(video[1]))
         if (video[2] == "") {
             if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
-            else if (lang.includes("jp")) {img.setAttribute("title", `${video[0]} /  ヒット: ${video[3]}`)}
+            else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} /  ヒット: ${video[3]}`)}
             else {img.setAttribute("title", `${video[0]} / Views : ${video[3]}`)}
         } else {
             if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
-            else if (lang.includes("jp")) {img.setAttribute("title", `${video[0]} / ヒット : ${video[3]} / ${video[2]} 前`)}
+            else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} / ヒット : ${video[3]} / ${video[2]} 前`)}
             else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
         }
         img.setAttribute("id", "videoThumbnail")
@@ -261,7 +261,7 @@ function loadStreams(info, noContent) {
         if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
             if (lang.includes("ko")) {h1.innerText = "스트리밍을 하고있지 않아요"}
-            else if (lang.includes("jp")) {h1.innerText = "ストリーミングしていません。"}
+            else if (lang.includes("ja")) {h1.innerText = "ストリーミングしていません。"}
             else {h1.innerText = "No Stream :("}
             h1.setAttribute("id", "noStream")
             h1.classList.add("showStream")
@@ -289,7 +289,7 @@ function loadCommunitys(info, noContent) {
     if (info.length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
         if (lang.includes("ko")) {h1.innerText = "커뮤니티 게시글이 없어요"}
-        else if (lang.includes("jp")) {h1.innerText = "コミュニティの投稿はありません。"}
+        else if (lang.includes("ja")) {h1.innerText = "コミュニティの投稿はありません。"}
         else {h1.innerText = "No Community :("}
         h1.setAttribute("id", "noCommunity")
         h1.classList.add("showCommunity")
@@ -303,7 +303,7 @@ function loadCommunitys(info, noContent) {
         div.setAttribute("id", "community")
         div.setAttribute("style", `background-color: rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.2);`)
         if (lang.includes("ko")) {div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)}
-        else if (lang.includes("jp")) {div.setAttribute("title", `いいね : ${community[1]} / ${community[2]}`)}
+        else if (lang.includes("ja")) {div.setAttribute("title", `いいね : ${community[1]} / ${community[2]}`)}
         else {div.setAttribute("title", `Likes : ${community[1]} / ${community[2]}`)}
         p.innerText = community[0]
         div.appendChild(p)
@@ -322,7 +322,7 @@ function showInfo(info, channelId) {
     infoProfileLink.href = baseInfo["url"]
     infoChannelName.innerText = baseInfo["channelName"]
     if (lang.includes("ko")) {infoProfileImg.title = `${baseInfo["channelName"]} 채널로 이동`}
-    else if (lang.includes("jp")) {infoProfileImg.title = `${baseInfo["channelName"]}のチャンネルに移動`}
+    else if (lang.includes("ja")) {infoProfileImg.title = `${baseInfo["channelName"]}のチャンネルに移動`}
     else {infoProfileImg.title = `Go to ${baseInfo["channelName"]}'s Channel`}
     infoProfileImg.src = baseInfo["profileImg"]
     const rgb = baseInfo["backgroundRgb"]
@@ -334,7 +334,7 @@ function showInfo(info, channelId) {
 
     const about = info["about"]
     if (lang.includes("ko")) {infoAbout.innerText = "채널 설명"}
-    else if (lang.includes("jp")) {infoAbout.innerText = "チャンネルの説明"}
+    else if (lang.includes("ja")) {infoAbout.innerText = "チャンネルの説明"}
     else {infoAbout.innerText = "About Description"}
 
     infoAboutClass.style.display = "inline-block"
@@ -347,7 +347,7 @@ function showInfo(info, channelId) {
     infoAboutmore.innerText = about[0]
     if (infoAboutmore.innerText == "") {
         if (lang.includes("ko")) {infoAboutmore.innerText = "채널 설명이 없어요"}
-        else if (lang.includes("jp")) {infoAboutmore.innerText = "チャンネルの説明はありません。"}
+        else if (lang.includes("ja")) {infoAboutmore.innerText = "チャンネルの説明はありません。"}
         else {infoAboutmore.innerText = "There is no Channel Description"}
     }
 
@@ -396,7 +396,7 @@ function loadInfo(channelId) {
     option.args = [info["url"], "all"]
     infoTuberLoading.style.display = "block"
     if (lang.includes("ko")) {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
-    else if (lang.includes("jp")) {infoTuberLoadingName.innerText = `${info["channelName"]} ロード中...`}
+    else if (lang.includes("ja")) {infoTuberLoadingName.innerText = `${info["channelName"]} ロード中...`}
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
     PythonShell.run(scriptPath, option, (error, result) => {
         if (error) {

@@ -50,7 +50,7 @@ if (OS_VERSION.includes("Windows")) {
     commandExist("python", (err, result) => {
         if (!result) {
             if (lang.includes("ko")) {dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")}
-            else if (lang.includes("jp")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
+            else if (lang.includes("ja")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
             else {dialog.showErrorBox("Please Install Python!", "or It seems that Python is not register on PATH")}
             process.exit()
         }
@@ -59,7 +59,7 @@ if (OS_VERSION.includes("Windows")) {
     commandExist("python3", (err, result) => {
         if (!result) {
             if (lang.includes("ko")) {dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")}
-            else if (lang.includes("jp")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
+            else if (lang.includes("ja")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
             else {dialog.showErrorBox("Please Install Python!", "or It seems that Python is not register on PATH")}
             process.exit()
         }
@@ -68,7 +68,7 @@ if (OS_VERSION.includes("Windows")) {
 commandExist("pip3", (err, result) => {
     if (!result) {
         if (lang.includes("ko")) {dialog.showErrorBox("PIP3가 감지되지 않았습니다!", "혹은 PIP가 PATH에 등록되지 않은걸수도 있어요")}
-        else if (lang.includes("jp")) {dialog.showErrorBox("PIP3が検出されませんでした!", "あるいは、PIPがPATHに登録されていないこともあります。")}
+        else if (lang.includes("ja")) {dialog.showErrorBox("PIP3が検出されませんでした!", "あるいは、PIPがPATHに登録されていないこともあります。")}
         else {dialog.showErrorBox("PIP3 not detected!", "or It seems that PIP is not register on PATH")}
         process.exit()
     }
@@ -93,12 +93,9 @@ app.on("ready", () => {
         else if (argLang == "jp") {win.loadFile("index-jp.html")}
         else {win.loadFile(`index-en.html`)}
     } else {
-        if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {
-            win.loadFile("index.html")
-        } else {
-            console.log(Intl.DateTimeFormat().resolvedOptions().locale)
-            win.loadFile(`index-en.html`)
-        }
+        if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ko")) {win.loadFile("index.html")}
+        else if (Intl.DateTimeFormat().resolvedOptions().locale.includes("ja")) {win.loadFile("index-jp.html")}
+        else {win.loadFile(`index-en.html`)}
     }
     ipcMain.handle("showMessage", (err, title, msg, type="info") => {
         if (type == "error") {

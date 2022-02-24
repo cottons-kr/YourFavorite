@@ -32,7 +32,7 @@ while True:
         continue
 
 osType = platform.platform()
-waitTime = 10
+waitTime = 1500000
 rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r", encoding="utf-8").read()
 
 def getBrowser(type):
@@ -49,7 +49,7 @@ def getBase(url, lang, returns):
     try:
         subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')
         if "ko" in lang: subscriber = subscriber[1].replace('명', '')
-        elif "jp" in lang: subscriber = subscriber[1].replace("人", '')
+        elif "ja" in lang: subscriber = subscriber[1].replace("人", '')
         else: subscriber = subscriber[0]
     except:
         subscriber = "CantLoad"
@@ -89,12 +89,10 @@ def getVideos(url, lang, returns):
                 if "전" in videoInfo:
                     try: videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
                     except: videoUpload = ""
-            elif "jp" in lang:
-                try: videoView = videoInfo.split(" ")[2]
+            elif "ja" in lang:
+                try: videoView = videoInfo.split(" ")[-2]
                 except: continue
                 if "前" in videoInfo:
-                    #try: videoUpload = videoInfo.split(' ')
-                    #except: videoUpload = ""
                     videoUpload = ""
                     parsedText = videoInfo.split(" ")
                     for i in range(len(parsedText)):
@@ -144,13 +142,13 @@ def getAbout(url, lang, returns):
     except:
         location = "CantLoad"
     try:
-        joinDate = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]/span[2]''').get_attribute("innerText").replace(' ', '')
-    except:
-        joinDate = "CantLoad"
+        if "ja" in lang: joinDate = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]''').get_attribute("innerText").split(" ")[0]
+        else: joinDate = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]/span[2]''').get_attribute("innerText").replace(' ', '')
+    except: joinDate = "CantLoad"
     try:
         totalViews = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[3]''').get_attribute("innerText")
         if "ko" in lang: totalViews = totalViews.replace("조회수 ", '').replace("회", "")
-        elif "jp" in lang: totalViews = totalViews.replace(" 回視聴", "")
+        elif "ja" in lang: totalViews = totalViews.replace(" 回視聴", "")
         else: totalViews = totalViews.split(' ')[0]
     except:
         totalViews = "CantLoad"

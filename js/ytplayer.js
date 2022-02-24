@@ -27,18 +27,18 @@ function showInfo(video) {
     if (video[2] !== undefined) {
         if (video[2] == "") {
             if (lang.includes("ko")) {youtubePlayerInfo.innerText = `조회수 : ${video[3]}`}
-            else if (lang.includes("ko")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]}`}
+            else if (lang.includes("ja")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]}`}
             else {youtubePlayerInfo.innerText = `Views : ${video[3]}`}
         }
         else {
             if (lang.includes("ko")) {youtubePlayerInfo.innerText = `조회수 : ${video[3]} / ${video[2]} 전`}
-            else if (lang.includes("ko")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]} / ${video[2]}前`}
+            else if (lang.includes("ja")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]} / ${video[2]}前`}
             else {youtubePlayerInfo.innerText = `Views : ${video[3]} / ${video[2]} ago`}
         }
     } else {
         if (video[3] !== undefined) {
             if (lang.includes("ko")) {youtubePlayerInfo.innerText = `조회수 : ${video[3]}`}
-            else if (lang.includes("ko")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]}`}
+            else if (lang.includes("ja")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]}`}
             else {youtubePlayerInfo.innerText = `Views : ${video[3]}`}
         } else {youtubePlayerInfo.innerText = ""}
     }
@@ -65,7 +65,7 @@ export default function loadPlayer(data, channelVideos) {
         if (video[2] !== undefined) {
             if (video[2] == "") {
                 if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
-                else if (lang.includes("jp")) {img.setAttribute("title", `${video[0]} / ヒット : ${video[3]}`)}
+                else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} / ヒット : ${video[3]}`)}
                 else {img.setAttribute("title", `${video[0]} / Views : ${video[3]}`)}
             } else {
                 if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
@@ -75,7 +75,7 @@ export default function loadPlayer(data, channelVideos) {
         } else {
             if (video[3] !== undefined) {
                 if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
-                else if (lang.includes("jp")) {img.setAttribute("title", `${video[0]} /  ヒット: ${video[3]}`)}
+                else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} /  ヒット: ${video[3]}`)}
                 else {img.setAttribute("title", `${video[0]} / Views : ${video[3]}`)}
             } else {img.setAttribute("title", video[0])}
         }

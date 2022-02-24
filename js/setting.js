@@ -36,7 +36,7 @@ function showSetting() {
     let settingName
     let i = 0
     if (lang.includes("ko")) {settingName = settingKr}
-    else if (lang.includes("jp")) {settingName = settingJp}
+    else if (lang.includes("ja")) {settingName = settingJp}
     else {settingName = settingEn}
     for (let setting of Object.keys(settings)) {
         const info = settings[setting]
@@ -117,17 +117,17 @@ function checkUpdate() {
     .then(data => {
         if (data["version"] == PROGRAM_VERSION) {
             if (lang.includes("ko")) {UpdateCheckPopupTitle.innerText = "최신버전을 쓰고있어요"}
-            else if (lang.includes("jp")) {UpdateCheckPopupTitle.innerText = "最新バージョンを書いています。"}
+            else if (lang.includes("ja")) {UpdateCheckPopupTitle.innerText = "最新バージョンを書いています。"}
             else {UpdateCheckPopupTitle.innerText = "You are using Lastest Version"}
             UpdateCheckPopupLink.style.display = "none"
         } else {
             if (lang.includes("ko")) {UpdateCheckPopupTitle.innerText = "새로운 버전이 있어요"}
-            else if (lang.includes("jp")) {UpdateCheckPopupTitle.innerText = "新しいバージョンがあります。"}
+            else if (lang.includes("ja")) {UpdateCheckPopupTitle.innerText = "新しいバージョンがあります。"}
             else {UpdateCheckPopupTitle.innerText = "There is a New Version"}
             UpdateCheckPopupLink.style.display = "block"
         }
         if (lang.includes("ko")) {UpdateCheckPopupContent.innerHTML = `현재 버전 : ${PROGRAM_VERSION }<br>최신 버전 : ${data["version"]}`}
-        else if (lang.includes("jp")) {UpdateCheckPopupContent.innerHTML = `現行版 : ${PROGRAM_VERSION }<br>新バージョン : ${data["version"]}`}
+        else if (lang.includes("ja")) {UpdateCheckPopupContent.innerHTML = `現行版 : ${PROGRAM_VERSION }<br>新バージョン : ${data["version"]}`}
         else {UpdateCheckPopupContent.innerHTML = `Current Version : ${PROGRAM_VERSION }<br>New Version: ${data["version"]}`}
 
         UpdateCheckPopupLink.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.25)`
