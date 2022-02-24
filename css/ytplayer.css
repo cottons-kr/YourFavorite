@@ -2,28 +2,29 @@
     display: none;
     z-index: 9999;
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 15px / 15px;
+    background-color: white;
+    border-radius: 25px 0px 0px 25px;
 
-    width: 75vw;
-    height: 75vh;
-    padding-left: 5vw;
+    width: 90vw;
+    height: 86vh;
+    padding-top: 9vh;
     padding-bottom: 5vh;
-    margin-top: 5%;
     margin-left: 10vw;
 }
 
 #youtubePlayerExit {
-    float: right;
-    margin: 0.6%;
-    width: auto;
-    height: 2rem;
+    position: absolute;
+    width: 2vw;
+    height: 2vh;
+    margin-top: 40vh;
+    margin-left: 0.6vw;
     transition-duration: 0.4s;
 }
 
 #youtubePlayerExit img {
-    width: auto;
-    height: 100%;
+    transform: rotate(180deg);
+    width: 100%;
+    height: auto;
 }
 
 #youtubePlayerExit:active {
@@ -33,9 +34,74 @@
 
 #player {
     background-color: black;
-    width: 70vw;
-    height: 70vh;
+    width: 69vw;
+    height: 69vh;
 
-    margin-right: 5vw;
+    margin-left: 3vw;
     border-radius: 20px / 20px;
+}
+
+#youtubePlayerTitle, #youtubePlayerInfo {
+    margin-left: 3vw;
+    margin-top: 1vh;
+    width: 69vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#youtubePlayerVideoList {
+    position: absolute;
+    float: left;
+    width: 16.8vw;
+    height: 82vh;
+    margin-left: 73vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 10px / 10px;
+}
+
+#youtubePlayerVideo {
+    margin-bottom: 2%;
+    transition-duration: 0.4s;
+}
+
+#youtubePlayerVideo:active {
+    transition-duration: 0.4s;
+    transform: scale(95%);
+}
+
+#youtubePlayerVideo img {
+    width: 98%;
+    height: auto;
+    border-radius: 10px / 10px;
+}
+
+.showPlayer {
+    animation-name: showPlayer;
+    animation-fill-mode: forwards;
+    animation-duration: 0.7s;
+}
+
+.hidePlayer {
+    animation-name: hidePlayer;
+    animation-fill-mode: forwards;
+    animation-duration: 0.7s;
+}
+
+@keyframes showPlayer {
+    0% {
+        margin-left: 100vw;
+    }
+    100% {
+        margin-left: 10vw;
+    }
+}
+
+@keyframes hidePlayer {
+    0% {
+        margin-left: 10vw;
+    }
+    100% {
+        margin-left: 100vw;
+    }
 }

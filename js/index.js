@@ -221,8 +221,8 @@ function loadVideos(info, noContent) {
     for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
-            if (lang.includes("ko")) {h1.innerText = "アップロードした画像はありません。"}
-            else if (lang.includes("jp")) {h1.innerText = ""}
+            if (lang.includes("ko")) {h1.innerText = "올린 영상이 없어요"}
+            else if (lang.includes("jp")) {h1.innerText = "アップロードした画像はありません。"}
             else {h1.innerText = "No Videos :("}
             h1.setAttribute("id", "noVideo")
             h1.classList.add("showVideo")
@@ -247,7 +247,7 @@ function loadVideos(info, noContent) {
         img.setAttribute("id", "videoThumbnail")
         div.appendChild(img)
         div.classList.add("showVideo")
-        div.addEventListener("click", () => {loadPlayer(video[1].split("?v=")[1])})
+        div.addEventListener("click", () => {loadPlayer(video, info)})
 
         setTimeout(() => {div.classList.remove("showVideo")}, 400)
         infoVideosList.appendChild(div)
@@ -277,7 +277,7 @@ function loadStreams(info, noContent) {
         img.setAttribute("title", stream[0])
         img.setAttribute("id", "streamThumbnail")
         div.appendChild(img)
-        div.addEventListener("click", () => {loadPlayer(stream[1].split("?v=")[1])})
+        div.addEventListener("click", () => {loadPlayer(stream, info)})
         div.classList.add("showStream")
         setTimeout(() => {div.classList.remove("showStream")}, 400)
         infoStreamList.appendChild(div)

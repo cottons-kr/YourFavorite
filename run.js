@@ -73,6 +73,7 @@ commandExist("pip3", (err, result) => {
         process.exit()
     }
 })
+app.disableHardwareAcceleration()
 app.on("ready", () => {
     const win = new BrowserWindow({
         width: settings["windowWidth"][0],

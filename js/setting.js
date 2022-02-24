@@ -4,6 +4,7 @@ const path = require("path")
 const { ipcRenderer } = require("electron")
 import { lang, mainColor, tuberListContainer } from "./index.js"
 
+const PROGRAM_VERSION = "1.4.0-stable"
 const homeDir = os.homedir()
 const rootPath = fs.readFileSync(path.resolve(homeDir, ".yf/path"), "utf8")
 let settingPath = path.resolve(homeDir, ".yf/setting.json")
@@ -111,7 +112,6 @@ const UpdateCheckPopup = document.querySelector(".UpdateCheckPopup")
 const UpdateCheckPopupTitle = document.querySelector("#UpdateCheckPopupTitle")
 const UpdateCheckPopupContent = document.querySelector("#UpdateCheckPopupContent")
 const UpdateCheckPopupLink = document.querySelector("#UpdateCheckPopupLink")
-const PROGRAM_VERSION = "1.3.0-beta"
 function checkUpdate() {
     fetch("https://raw.githubusercontent.com/cottons-kr/YourFavorite/main/package.json").then(res => res.json())
     .then(data => {
