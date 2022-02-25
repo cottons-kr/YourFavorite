@@ -124,7 +124,7 @@ function addTuber(event=null, url=null, callback=null) {
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = "";
-    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} simple`, (err, result) => {
+    childProcess.exec(`${path.resolve(__dirname, "../yt-parser/getInfo")} ${url} simple`, (err, result) => {
         if (err) {
             console.log(err.message)
             if (err.message.includes("InvalidArgumentException")) {
@@ -391,7 +391,7 @@ function loadInfo(channelId) {
     if (lang.includes("ko")) {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
     else if (lang.includes("ja")) {infoTuberLoadingName.innerText = `${info["channelName"]} ロード中...`}
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
-    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${info["url"]} all`, (err, result) => {
+    childProcess.exec(`${path.resolve(__dirname, "../yt-parser/getInfo")} ${info["url"]} all`, (err, result) => {
         if (err) {
             handleError(err)
             return 0
@@ -428,7 +428,7 @@ function autoRefresh(channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
     let noContent = []
-    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${info["url"]} all`, (err, result) => {
+    childProcess.exec(`${path.resolve(__dirname, "../yt-parser/getInfo")} ${info["url"]} all`, (err, result) => {
         if (err) {
             handleError(err)
             return 0
@@ -568,7 +568,7 @@ function autoPreload() {
         if (loadingTuberList.length >= parseInt(settings["simultaneousLoadNumber"][0])) {break}
         loadingTuberList.push(channelName)
         console.log(`Preloading : ${channelName}`)
-        childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"]} all`, (err, result) => {
+        childProcess.exec(`${path.resolve(__dirname, "../yt-parser/getInfo")} ${JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"]} all`, (err, result) => {
             if (err) {
                 handleError(err)
                 return 0

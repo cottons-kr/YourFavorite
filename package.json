@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization .",
-    "deploy": "electron-builder --linux --windows"
+    "deploy": "electron-builder --linux deb"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
         "yourfavorite"
       ]
     },
+    "extraResources": ["./yt-parser/**"],
     "win": {
       "target": [
         "zip",
@@ -53,12 +54,6 @@
         "deb",
         "rpm",
         "tar.gz"
-      ]
-    },
-    "mac": {
-      "target": [
-        "dmg",
-        "pkg"
       ]
     },
     "nsis": {
