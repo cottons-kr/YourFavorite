@@ -1,4 +1,4 @@
-const { PythonShell } = require("python-shell")
+const childProcess = require("child_process")
 const ColorThief = require('colorthief');
 const os = require('os')
 const fs = require("fs")
@@ -137,47 +137,54 @@ function addTuber(event=null, url=null, callback=null) {
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = "";
-    PythonShell.run(scriptPath, option, (error, result) => {
-        if (error) {
-            console.log(error.message)
-            if (error.message.includes("InvalidArgumentException")) {
+    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} simple`, (err, result) => {
+        if (err) {
+            console.log(err.message)
+            if (err.message.includes("InvalidArgumentException")) {
                 if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")}
                 else if (lang.includes("ja")) {ipcRenderer.invoke("showMessage", "URLエラー!", "URLが間違っていると思います。", "warning")}
                 else { ipcRenderer.invoke("showMessage", "URL Error!", "It seem the URL is wrong.", "warning")}
                 return 0
             }
-            handleError(error)
         }
-        console.log(result)
 
-        const data = result[0].replace("b'", '').replace("'", '')
+        const data = result.replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
-        const info = buff.toString("utf-8").split("::")
+        console.log(buff)
+        if (buff.includes("InvalidArgumentException")) {
+            if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")}
+            else if (lang.includes("ja")) {ipcRenderer.invoke("showMessage", "URLエラー!", "URLが間違っていると思います。", "warning")}
+            else { ipcRenderer.invoke("showMessage", "URL Error!", "It seem the URL is wrong.", "warning")}
+            return 0
+        }
+        else if (buff.includes("Traceback")) {handleError(buff)}
+        else {
+            const info = buff.toString("utf-8").split("::")
 
-        channelName = info[0]
-        profileImg = info[1]
-        ColorThief.getColor(profileImg)
-        .then(color => {
-            backgroundRgb = color
-            const json = {
-                "channelName": channelName,
-                "profileImg": profileImg,
-                "backgroundRgb": backgroundRgb,
-                "url": url
-            }
+            channelName = info[0]
+            profileImg = info[1]
+            ColorThief.getColor(profileImg)
+            .then(color => {
+                backgroundRgb = color
+                const json = {
+                    "channelName": channelName,
+                    "profileImg": profileImg,
+                    "backgroundRgb": backgroundRgb,
+                    "url": url
+                }
 
-            if (localStorage["youtuber"] === undefined) {localStorage.setItem("youtuber", "{}")}
-            const mainJson = JSON.parse(localStorage["youtuber"])
-            mainJson[channelName] = JSON.stringify(json)
-            localStorage["youtuber"] = JSON.stringify(mainJson)
-            addList(channelName)
-            console.log(`New Tuber : ${channelName}`)
-            loadInfo(channelName)
-            mainColor = backgroundRgb
-            removeTuber()
-            if (callback != null) {callback()}
-        })
-        .catch(err => {handleError(err)})
+                if (localStorage["youtuber"] === undefined) {localStorage.setItem("youtuber", "{}")}
+                const mainJson = JSON.parse(localStorage["youtuber"])
+                mainJson[channelName] = JSON.stringify(json)
+                localStorage["youtuber"] = JSON.stringify(mainJson)
+                addList(channelName)
+                console.log(`New Tuber : ${channelName}`)
+                loadInfo(channelName)
+                mainColor = backgroundRgb
+                removeTuber()
+                if (callback != null) {callback()}
+            }).catch(err => {handleError(err)})
+        }
     })
 }
 
@@ -398,13 +405,13 @@ function loadInfo(channelId) {
     if (lang.includes("ko")) {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
     else if (lang.includes("ja")) {infoTuberLoadingName.innerText = `${info["channelName"]} ロード中...`}
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
-    PythonShell.run(scriptPath, option, (error, result) => {
-        if (error) {
-            handleError(error)
+    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} all`, (err, result) => {
+        if (err) {
+            handleError(err)
             return 0
         }
 
-        const data = result[0].replace("b'", '').replace("'", '')
+        const data = result.replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
@@ -436,13 +443,13 @@ function autoRefresh(channelId) {
     const info = JSON.parse(mainJson[channelId])
     let noContent = []
     option.args = [info["url"], "all"]
-    PythonShell.run(scriptPath, option, (error, result) => {
-        if (error) {
-            handleError(error)
+    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} all`, (err, result) => {
+        if (err) {
+            handleError(err)
             return 0
         }
 
-        const data = result[0].replace("b'", '').replace("'", '')
+        const data = result.replace("b'", '').replace("'", '')
         const buff = Buffer.from(data, "base64")
         let info = buff.toString("utf-8")
         info = JSON.parse(info)
@@ -577,9 +584,9 @@ function autoPreload() {
         loadingTuberList.push(channelName)
         option.args = [JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"], "all"]
         console.log(`Preloading : ${channelName}`)
-        PythonShell.run(scriptPath, option, (error, result) => {
-            if (error) {
-                handleError(error)
+        childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} all`, (err, result) => {
+            if (err) {
+                handleError(err)
                 return 0
             }
     
