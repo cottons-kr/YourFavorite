@@ -1,5 +1,7 @@
 from multiprocessing import Process, freeze_support, Manager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from selenium import webdriver
 import sys
 import base64
@@ -14,14 +16,15 @@ rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) 
 
 def getBrowser(type):
     options = Options()
-    options.add_argument("headless")
+    options.add_argument("--headless")
+    options.add_argument("--log-level=OFF")
     if "Windows" in osType: execFile = "chromedriver.exe"
     else: execFile = "chromedriver"
     if getattr(sys, 'frozen', False): 
-        chromedriver_path = os.path.join(sys._MEIPASS, execFile)
-        driver = webdriver.Chrome(chromedriver_path, options=options)
+        chromedriver_path = Service(os.path.join(sys._MEIPASS, execFile))
+        driver = webdriver.Chrome(service=chromedriver_path, options=options)
     else:
-        driver = webdriver.Chrome("./"+execFile, options=options)
+        driver = webdriver.Chrome(service=Service("./"+execFile), options=options)
     return driver
 
 def getBase(url, lang, returns):
@@ -30,7 +33,7 @@ def getBase(url, lang, returns):
     driver.execute_script("window.scrollTo(0, 999999999)")
     driver.implicitly_wait(waitTime)
     try:
-        subscriber = driver.find_element_by_xpath('''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')
+        subscriber = driver.find_element(By.XPATH, '''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')
         if "ko" in lang: subscriber = subscriber[1].replace('명', '')
         elif "ja" in lang: subscriber = subscriber[1].replace("人", '')
         else: subscriber = subscriber[0]
@@ -38,14 +41,14 @@ def getBase(url, lang, returns):
         subscriber = "CantLoad"
     streams = []
     try:
-        streamDiv = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse[1]/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer[1]/div[3]/ytd-channel-featured-content-renderer/div[2]''')
-        streamDiv = streamDiv.find_elements_by_tag_name("ytd-video-renderer")
+        streamDiv = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse[1]/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer[1]/div[3]/ytd-channel-featured-content-renderer/div[2]''')
+        streamDiv = streamDiv.find_elements(By.TAG_NAME, "ytd-video-renderer")
     except:
         streams = "CantLoad"
     if streams != "CantLoad":
         for stream in streamDiv:
-            link = stream.find_element_by_xpath('''.//*[@id="thumbnail"]''').get_attribute("href")
-            name = stream.find_element_by_xpath('''.//*[@id="video-title"]/yt-formatted-string''').get_attribute("innerText")
+            link = stream.find_element(By.XPATH, '''.//*[@id="thumbnail"]''').get_attribute("href")
+            name = stream.find_element(By.XPATH, '''.//*[@id="video-title"]/yt-formatted-string''').get_attribute("innerText")
             streams.append([name, link])
     returns[0] = subscriber
     returns[1] = streams
@@ -57,14 +60,14 @@ def getVideos(url, lang, returns):
     videos = []
     driver.implicitly_wait(waitTime)
     try:
-        recentVideos = driver.find_element_by_xpath("/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-grid-renderer/div[1]")
-        recentVideos = recentVideos.find_elements_by_tag_name("ytd-grid-video-renderer")
+        recentVideos = driver.find_element(By.XPATH, "/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-grid-renderer/div[1]")
+        recentVideos = recentVideos.find_elements(By.TAG_NAME, "ytd-grid-video-renderer")
     except:
         videos = "CantLoad"
     if videos != "CantLoad":
         for video in recentVideos:
-            videoInfo = video.find_element_by_id("video-title").get_attribute("aria-label")
-            videoLink = video.find_element_by_id("video-title").get_attribute("href")
+            videoInfo = video.find_element(By.ID, "video-title").get_attribute("aria-label")
+            videoLink = video.find_element(By.ID, "video-title").get_attribute("href")
             videoUpload = ""
             if "ko" in lang:
                 try: videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
@@ -87,7 +90,7 @@ def getVideos(url, lang, returns):
                 if "ago" in videoInfo:
                     try: videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
                     except: videoUpload = ""
-            videoName = video.find_element_by_id("video-title").get_attribute("title")
+            videoName = video.find_element(By.ID, "video-title").get_attribute("title")
             videos.append([videoName, videoLink, videoUpload, videoView])
     returns[2] = videos
 
@@ -98,16 +101,16 @@ def getCommunity(url, returns):
     communitys = []
     driver.implicitly_wait(waitTime)
     try:
-        communityLogs = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-backstage-items/ytd-item-section-renderer/div[3]''')
-        communityLogs = communityLogs.find_elements_by_tag_name("ytd-backstage-post-thread-renderer")
+        communityLogs = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-backstage-items/ytd-item-section-renderer/div[3]''')
+        communityLogs = communityLogs.find_elements(By.TAG_NAME, "ytd-backstage-post-thread-renderer")
     except:
         communitys = "CantLoad"
     if communitys != "CantLoad":
         for communityLog in communityLogs:
-            main = communityLog.find_element_by_xpath('''.//*[@id="main"]''')
-            communityUpload = main.find_element_by_xpath('''.//*[@id="published-time-text"]/a''').get_attribute('innerText')
-            communityContent = main.find_element_by_xpath('''.//*[@id="content-text"]''').get_attribute('innerText')
-            communityLikes = main.find_element_by_xpath('''.//*[@id="vote-count-middle"]''').get_attribute("innerText")
+            main = communityLog.find_element(By.XPATH, '''.//*[@id="main"]''')
+            communityUpload = main.find_element(By.XPATH, '''.//*[@id="published-time-text"]/a''').get_attribute('innerText')
+            communityContent = main.find_element(By.XPATH, '''.//*[@id="content-text"]''').get_attribute('innerText')
+            communityLikes = main.find_element(By.XPATH, '''.//*[@id="vote-count-middle"]''').get_attribute("innerText")
             communitys.append([communityContent, communityLikes, communityUpload])
     returns[3] = communitys
 
@@ -117,19 +120,19 @@ def getAbout(url, lang, returns):
     driver.execute_script("window.scrollTo(0, 999999999)")
     driver.implicitly_wait(waitTime)
     try:
-        about = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[1]/div[1]/yt-formatted-string[2]''').get_attribute("innerText")
+        about = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[1]/div[1]/yt-formatted-string[2]''').get_attribute("innerText")
     except:
         about = "CantLoad"
     try:    
-        location = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[1]/div[4]/table/tbody/tr[2]/td[2]/yt-formatted-string''').get_attribute("innerText")
+        location = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[1]/div[4]/table/tbody/tr[2]/td[2]/yt-formatted-string''').get_attribute("innerText")
     except:
         location = "CantLoad"
     try:
-        if "ja" in lang: joinDate = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]''').get_attribute("innerText").split(" ")[0]
-        else: joinDate = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]/span[2]''').get_attribute("innerText").replace(' ', '')
+        if "ja" in lang: joinDate = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]''').get_attribute("innerText").split(" ")[0]
+        else: joinDate = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]/span[2]''').get_attribute("innerText").replace(' ', '')
     except: joinDate = "CantLoad"
     try:
-        totalViews = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[3]''').get_attribute("innerText")
+        totalViews = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[3]''').get_attribute("innerText")
         if "ko" in lang: totalViews = totalViews.replace("조회수 ", '').replace("회", "")
         elif "ja" in lang: totalViews = totalViews.replace(" 回視聴", "")
         else: totalViews = totalViews.split(' ')[0]
@@ -137,14 +140,14 @@ def getAbout(url, lang, returns):
         totalViews = "CantLoad"
     links = []
     try:
-        linkDiv = driver.find_element_by_id('''link-list-container''')
-        linkDiv = linkDiv.find_elements_by_tag_name('a')
+        linkDiv = driver.find_element(By.ID, '''link-list-container''')
+        linkDiv = linkDiv.find_elements(By.TAG_NAME, 'a')
     except:
         links = "CantLoad"
     if links != "CantLoad":
         for link in linkDiv:
             Link = link.get_attribute("href")
-            info = link.find_element_by_tag_name("yt-formatted-string").get_attribute("innerText")
+            info = link.find_element(By.TAG_NAME, "yt-formatted-string").get_attribute("innerText")
             links.append([Link, info])
     about = [about, location, joinDate, totalViews, links]
     returns[4] = about
@@ -166,8 +169,8 @@ if __name__ == "__main__":
         driver  = getBrowser("simple")
         driver.get(url)
         driver.implicitly_wait(waitTime)
-        channelName = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/div/div[1]/ytd-channel-name/div/div/yt-formatted-string''').get_attribute('innerText')
-        profileImg = driver.find_element_by_xpath('''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/yt-img-shadow/img''').get_attribute("src")
+        channelName = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/div/div[1]/ytd-channel-name/div/div/yt-formatted-string''').get_attribute('innerText')
+        profileImg = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/div[3]/ytd-c4-tabbed-header-renderer/tp-yt-app-header-layout/div/tp-yt-app-header/div[2]/div[2]/div/div[1]/yt-img-shadow/img''').get_attribute("src")
         print(base64.b64encode(f"{channelName}::{profileImg}".encode("utf-8")))
         driver.quit()
     elif type == "all":
