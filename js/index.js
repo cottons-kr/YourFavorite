@@ -6,7 +6,6 @@ const path = require("path")
 const { ipcRenderer } = require("electron")
 
 import addPackageFile, { showPackage } from "./package.js";
-import fileContent from "./getInfo.py.js"
 import loadPlayer from "./ytplayer.js";
 
 const body = document.querySelector("body"),
@@ -56,7 +55,6 @@ const rootPath = os.homedir()
 const settingPath = path.resolve(rootPath, ".yf/setting.json")
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 let lang = Intl.DateTimeFormat().resolvedOptions().locale
-const scriptPath = path.resolve(rootPath, ".yf/getInfo.py")
 
 let globalInterval = null
 let loadingTuber = null
@@ -64,16 +62,6 @@ let showingTuber = null
 let mainColor = null
 let loadedTuberList = []
 let loadingTuberList = []
-
-const option = {
-    mode: "text",
-    pythonPath: "",
-    pythonOptions: ["-u"],
-    scriptPath: "",
-    encoding: "utf8"
-}
-
-fs.writeFileSync(scriptPath, fileContent, "utf8")
 
 const url = location.href
 if (url.includes("en")) {lang = "en"}
@@ -133,7 +121,6 @@ function addTuber(event=null, url=null, callback=null) {
     if (url == null) {
         url = addTuberPopupInput.value
     }
-    option.args = [url, "simple"]
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = "";
@@ -400,12 +387,11 @@ function loadInfo(channelId) {
     if (localStorage[channelId] !== undefined) {showInfo(JSON.parse(localStorage[channelId]), channelId); return null}
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
-    option.args = [info["url"], "all"]
     infoTuberLoading.style.display = "block"
     if (lang.includes("ko")) {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
     else if (lang.includes("ja")) {infoTuberLoadingName.innerText = `${info["channelName"]} ロード中...`}
     else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
-    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} all`, (err, result) => {
+    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${info["url"]} all`, (err, result) => {
         if (err) {
             handleError(err)
             return 0
@@ -442,8 +428,7 @@ function autoRefresh(channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
     let noContent = []
-    option.args = [info["url"], "all"]
-    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} all`, (err, result) => {
+    childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${info["url"]} all`, (err, result) => {
         if (err) {
             handleError(err)
             return 0
@@ -582,15 +567,14 @@ function autoPreload() {
         if (loadedTuberList.includes(channelName)) {continue}
         if (loadingTuberList.length >= parseInt(settings["simultaneousLoadNumber"][0])) {break}
         loadingTuberList.push(channelName)
-        option.args = [JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"], "all"]
         console.log(`Preloading : ${channelName}`)
-        childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${url} all`, (err, result) => {
+        childProcess.exec(`${path.resolve(__dirname, "getInfo")} ${JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"]} all`, (err, result) => {
             if (err) {
                 handleError(err)
                 return 0
             }
     
-            const data = result[0].replace("b'", '').replace("'", '')
+            const data = result.replace("b'", '').replace("'", '')
             const buff = Buffer.from(data, "base64")
             let info = buff.toString("utf-8")
             info = JSON.parse(info)

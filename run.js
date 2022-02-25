@@ -41,39 +41,6 @@ fs.writeFileSync(path.resolve(homeDir, ".yf/path"), homeDir, "utf8")
 fs.writeFileSync(path.resolve(homeDir, ".yf/lang"), lang, "utf8")
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
 
-if (fs.existsSync("getInfo.py")) {
-    const data = `const fileContent = \`${fs.readFileSync("getInfo.py", "utf8")}\`; export default fileContent`
-    fs.writeFileSync("js/getInfo.py.js", data, "utf8")
-}
-
-if (OS_VERSION.includes("Windows")) {
-    commandExist("python", (err, result) => {
-        if (!result) {
-            if (lang.includes("ko")) {dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")}
-            else if (lang.includes("ja")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
-            else {dialog.showErrorBox("Please Install Python!", "or It seems that Python is not register on PATH")}
-            process.exit()
-        }
-    })
-} else {
-    commandExist("python3", (err, result) => {
-        if (!result) {
-            if (lang.includes("ko")) {dialog.showErrorBox("Python을 설치해주세요!", "혹은 Python이 PATH에 등록되지 않은걸수도 있어요")}
-            else if (lang.includes("ja")) {dialog.showErrorBox("Pythonをインストールしてください!", "あるいは、PythonがPATHに登録されていないこともあります。")}
-            else {dialog.showErrorBox("Please Install Python!", "or It seems that Python is not register on PATH")}
-            process.exit()
-        }
-    })
-}
-commandExist("pip3", (err, result) => {
-    if (!result) {
-        if (lang.includes("ko")) {dialog.showErrorBox("PIP3가 감지되지 않았습니다!", "혹은 PIP가 PATH에 등록되지 않은걸수도 있어요")}
-        else if (lang.includes("ja")) {dialog.showErrorBox("PIP3が検出されませんでした!", "あるいは、PIPがPATHに登録されていないこともあります。")}
-        else {dialog.showErrorBox("PIP3 not detected!", "or It seems that PIP is not register on PATH")}
-        process.exit()
-    }
-})
-app.disableHardwareAcceleration()
 app.on("ready", () => {
     const win = new BrowserWindow({
         width: settings["windowWidth"][0],
