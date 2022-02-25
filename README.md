@@ -16,7 +16,7 @@ Get easier access to your favorite YouTubers
 - Windows(.exe) : [v1.4.0-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.4.0-stable/YourFavorite.Setup.1.4.0-stable.exe)
 - Linux(.deb) : [v1.4.0-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.4.0-stable/YourFavorite_1.4.0-stable_amd64.deb)
 - Linux(.rpm) : [v1.4.0-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.4.0-stable/YourFavorite-1.4.0-stable.x86_64.rpm)
-- tar.gz : [v1.4.0-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.4.0-stable/YourFavorite-1.4.0-stable.tar.gz)
+- Linux(.tar.gz) : [v1.4.0-stable](https://github.com/cottons-kr/YourFavorite/releases/download/v1.4.0-stable/YourFavorite-1.4.0-stable.tar.gz)
 
 # [Releasenote](https://github.com/cottons-kr/YourFavorite/blob/main/document/Releasenote.md)
 
