@@ -1,44 +1,27 @@
-while True:
-    try:
-        from multiprocessing import Process, freeze_support, Manager
-        from selenium.webdriver.chrome.service import Service
-        from selenium.webdriver.chrome.options import Options
-        from selenium.webdriver.common.by import By
-        from webdriver_manager.chrome import ChromeDriverManager
-        from selenium import webdriver
-        from subprocess import run
-        import sys
-        import base64
-        import json
-        import os
-        import platform
-        import locale
-        break
-    except ModuleNotFoundError:
-        from subprocess import run
-        import platform
-        if platform.system() == "Windows":
-            run(["powershell", "pip3 install --user selenium"], shell=True)
-            run(["powershell", "pip3 install --user --upgrade requests"], shell=True)
-            run(["powershell", "pip3 install --user --upgrade selenium"], shell=True)
-            run(["powershell", "pip3 install --user --upgrade pip"], shell=True)
-            run(["powershell", "pip3 install --user webdriver-manager"], shell=True)
-        else:
-            run(["pip3 install --user selenium msedge-selenium-tools"], shell=True)
-            run(["pip3 install --user --upgrade requests"], shell=True)
-            run(["pip3 install --user --upgrade selenium"], shell=True)
-            run(["pip3 install --user --upgrade pip"], shell=True)
-            run(["pip3 install --user webdriver-manager"], shell=True)
-        continue
+from multiprocessing import Process, freeze_support, Manager
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
+import sys
+import base64
+import json
+import os
+import platform
+import locale
 
 osType = platform.platform()
-waitTime = 1500000
+waitTime = 20
 rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r", encoding="utf-8").read()
 
 def getBrowser(type):
     options = Options()
     options.add_argument("headless")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    if "Windows" in osType: execFile = "chromedriver.exe"
+    else: execFile = "chromedriver"
+    if getattr(sys, 'frozen', False): 
+        chromedriver_path = os.path.join(sys._MEIPASS, execFile)
+        driver = webdriver.Chrome(chromedriver_path, options=options)
+    else:
+        driver = webdriver.Chrome("./"+execFile, options=options)
     return driver
 
 def getBase(url, lang, returns):
