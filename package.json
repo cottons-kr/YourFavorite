@@ -29,7 +29,8 @@
   "dependencies": {
     "colorthief": "^2.3.2",
     "command-exists": "^1.2.9",
-    "python-shell": "^3.0.1"
+    "python-shell": "^3.0.1",
+    "youtube-player": "^5.5.2"
   },
   "build": {
     "productName": "YourFavorite",
@@ -41,7 +42,9 @@
         "yourfavorite"
       ]
     },
-    "extraResources": ["./yt-parser/**"],
+    "extraResources": [
+      "./yt-parser/**"
+    ],
     "win": {
       "target": [
         "zip",

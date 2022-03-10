@@ -1,4 +1,5 @@
-const youtubePlayer = document.querySelector("#player")
+const YouTubePlayer = require("youtube-player")
+
 const youtubePlayerPopup = document.querySelector(".youtubePlayer")
 const listContainer = document.querySelector(".listContainer")
 const container = document.querySelector(".container")
@@ -6,6 +7,7 @@ const youtubePlayerTitle = document.querySelector("#youtubePlayerTitle")
 const youtubePlayerInfo = document.querySelector("#youtubePlayerInfo")
 const youtubePlayerExit = document.querySelector("#youtubePlayerExit")
 const youtubePlayerVideoList = document.querySelector("#youtubePlayerVideoList")
+let youtubePlayer = null
 import { lang } from "./index.js"
 
 function ytPlayerExit() {
@@ -15,14 +17,20 @@ function ytPlayerExit() {
     youtubePlayerPopup.classList.add("hidePlayer")
     setTimeout(() => {
         youtubePlayerPopup.style.display = "none"
-        youtubePlayer.src = ""
         youtubePlayerTitle.innerText = ""
         youtubePlayerInfo.innerText = ""
+        youtubePlayer.destroy()
+        youtubePlayer = null
     }, 700)
 }
 
+function makePlayer(key) {
+    if (youtubePlayer == null) {youtubePlayer = YouTubePlayer("youtubeVideoPlayer")}
+    youtubePlayer.loadVideoById(key)
+}
+
 function showInfo(video) {
-    youtubePlayer.src = `https://www.youtube-nocookie.com/embed/${video[1].split("?v=")[1]}?rel=0`
+    makePlayer(video[1].split("?v=")[1])
     youtubePlayerTitle.innerText = video[0]
     if (video[2] !== undefined) {
         if (video[2] == "") {
@@ -52,7 +60,6 @@ export default function loadPlayer(data, channelVideos) {
     while (youtubePlayerVideoList.hasChildNodes()) {
         youtubePlayerVideoList.removeChild(youtubePlayerVideoList.lastChild)
     }
-    youtubePlayer.removeAttribute("style")
     listContainer.style.pointerEvents = "none"
     container.style.pointerEvents = "none"
     showInfo(data)
