@@ -52,6 +52,7 @@ app.on("ready", () => {
             contextIsolation: false
         }
     })
+    win.setAlwaysOnTop(true)
     win.setMenuBarVisibility(false)
     win.setAspectRatio(16/9)
 
