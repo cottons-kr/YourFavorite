@@ -1,3 +1,16 @@
+## v1.5.0-beta
+2022/03 출시
+
+* 게임모드 / Game Mode 🎮
+    * 새로고침을 일시중지하여 성능 최적화 / Pause Refresh for Better Performance
+    * 백그라운드 영상 반복 재생 / Repeat Play Background Video
+
+* 구글 계정 연동 / Google Account Linking 🔗
+    * 구독한 채널 자동 추가 / Auto Register Subscribe Channels
+    * 좋아요, 싫어요 / Like and Dislike
+
+* 유튜브 동영상 PIP 모드 / YouTube Video PIP Mode
+
 ## v1.4.0-stable
 2022/02/25 출시
 
