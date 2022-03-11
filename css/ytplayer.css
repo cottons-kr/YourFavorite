@@ -76,6 +76,23 @@
     border-radius: 10px / 10px;
 }
 
+#youtubePlayerPIP {
+    width: 4vw;
+    height: 3vh;
+    text-align: center;
+    line-height: 3vh;
+    margin-left: 3vw;
+    margin-top: 1vh;
+    background-color: whitesmoke;
+    border-radius: 1.5vh;
+    transition-duration: 0.4s;
+}
+
+#youtubePlayerPIP:active {
+    transition-duration: 0.4s;
+    transform: scale(95%);
+}
+
 .showPlayer {
     animation-name: showPlayer;
     animation-fill-mode: forwards;

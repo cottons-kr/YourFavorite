@@ -1,4 +1,5 @@
 const YouTubePlayer = require("youtube-player")
+const { BrowserWindow } = require('@electron/remote')
 
 const youtubePlayerPopup = document.querySelector(".youtubePlayer")
 const listContainer = document.querySelector(".listContainer")
@@ -7,7 +8,9 @@ const youtubePlayerTitle = document.querySelector("#youtubePlayerTitle")
 const youtubePlayerInfo = document.querySelector("#youtubePlayerInfo")
 const youtubePlayerExit = document.querySelector("#youtubePlayerExit")
 const youtubePlayerVideoList = document.querySelector("#youtubePlayerVideoList")
+const youtubePlayerPIP = document.querySelector("#youtubePlayerPIP")
 let youtubePlayer = null
+let currentKey = ""
 import { lang } from "./index.js"
 
 const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay))
@@ -39,6 +42,7 @@ function ytPlayerExit() {
 
 function makePlayer(key) {
     if (youtubePlayer == null) {youtubePlayer = YouTubePlayer("youtubeVideoPlayer")}
+    currentKey = key
     youtubePlayer.loadVideoById(key)
 }
 
@@ -112,3 +116,26 @@ export default function loadPlayer(data, channelVideos) {
 }
 
 youtubePlayerExit.addEventListener("click", ytPlayerExit)
+youtubePlayerPIP.addEventListener("click", () => {
+    let win = new BrowserWindow({
+        width: 420,
+        height:250,
+        minWidth: 420,
+        maxWidth: 1000,
+        frame: false,
+        transparent: true,
+        resizable: true,
+        simpleFullscreen: false,
+        fullscreenable: false,
+        maximizable: false,
+        minimizable: false,
+        acceptFirstMouse: true
+    })
+    win.on('maximize', () => {
+        win.unmaximize()
+    })
+    win.setAspectRatio(16/9)
+    win.setMenuBarVisibility(false)
+    win.setAlwaysOnTop(true, "screen")
+    win.loadFile("pip.html", {query: {"key": currentKey}})
+})

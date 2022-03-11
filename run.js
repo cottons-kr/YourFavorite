@@ -52,6 +52,8 @@ app.on("ready", () => {
             contextIsolation: false
         }
     })
+    require('@electron/remote/main').initialize()
+    require("@electron/remote/main").enable(win.webContents)
     win.setMenuBarVisibility(false)
     win.setAspectRatio(16/9)
 

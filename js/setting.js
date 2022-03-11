@@ -4,7 +4,7 @@ const path = require("path")
 const { ipcRenderer } = require("electron")
 import { lang, mainColor, tuberListContainer } from "./index.js"
 
-const PROGRAM_VERSION = "1.4.0-stable"
+const PROGRAM_VERSION = "1.5.0-beta"
 const homeDir = os.homedir()
 const rootPath = fs.readFileSync(path.resolve(homeDir, ".yf/path"), "utf8")
 let settingPath = path.resolve(homeDir, ".yf/setting.json")

@@ -1,0 +1,54 @@
+<style>
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .root {
+        width: 100%;
+        height: calc(100vh - 20px);
+        border-radius: 0px 0px 10px 10px;
+        background-color: black;
+        overflow: hidden;
+    }
+
+    #youtubeVideoPlayer {
+        width: 100%;
+        height: 100%;
+    }
+
+    #dragbar {
+        width: 100%;
+        height: 20px;
+        background-color: black;
+        border-radius: 10px 10px 0px 0px;
+        -webkit-app-region: drag
+    }
+    
+    #dragbar img {
+        width: auto;
+        height: 12px;
+        float: right;
+        margin-top: 4px;
+        margin-right: 12px;
+        -webkit-app-region: no-drag
+    }
+
+    ::-webkit-scrollbar {display: none;}
+</style>
+<div id="dragbar"><img src="resource/pip-x.svg"></div>
+<div class="root">
+    <iframe id="youtubeVideoPlayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" title="YouTube video player"></iframe>
+</div>
+<script>
+    const url = new URL(window.location.href)
+    const urlParams = url.searchParams
+    const key = urlParams.get('key')
+
+    const player = document.querySelector("#youtubeVideoPlayer")
+    player.src = `https://www.youtube.com/embed/${key}`
+    const exit = document.querySelector("#dragbar img")
+    exit.addEventListener("click", () => {window.close()})
+</script>
