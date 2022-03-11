@@ -7,6 +7,7 @@ const { ipcRenderer } = require("electron")
 
 import addPackageFile, { showPackage } from "./package.js";
 import loadPlayer from "./ytplayer.js";
+import { gamemode, checkNoLoadingTuber } from "./gameMode.js";
 
 const body = document.querySelector("body"),
       addButtonImg = document.querySelector("#addButtonImg"),
@@ -169,6 +170,7 @@ function addTuber(event=null, url=null, callback=null) {
                 loadInfo(channelName)
                 mainColor = backgroundRgb
                 removeTuber()
+                checkNoLoadingTuber()
                 if (callback != null) {callback()}
             }).catch(err => {handleError(err)})
         }
@@ -408,6 +410,7 @@ function loadInfo(channelId) {
         }
         localStorage[channelId] = JSON.stringify(info)
 
+        checkNoLoadingTuber()
         showInfo(info, channelId)
     })
     if (showingTuber !== channelId) {
@@ -422,6 +425,10 @@ function autoRefresh(channelId) {
     if (showingTuber !== channelId || loadingTuber !== null) {
         console.log(`${channelId} : Refresh Canceled [Loading another Tuber: ${loadingTuber}]`)
         return null
+    }
+    if (gamemode) {
+        console.log(`${channelId} : Refresh Canceled [Gamemode Activated]`)
+        return 0
     }
     console.log(`${channelId} : Refresh!`)
     loadingTuber = `Refreshing : ${channelId}`
@@ -486,6 +493,7 @@ function autoRefresh(channelId) {
             for (let video of document.querySelectorAll("#video")) {video.classList.remove("onlyVideo")}
         }
         
+        checkNoLoadingTuber()
         localStorage[channelId] = JSON.stringify(info)
         console.log(`${channelId} : Refreshed!`)
     })
@@ -581,6 +589,7 @@ function autoPreload() {
             localStorage[channelName] = JSON.stringify(info)
             loadedTuberList.push(channelName)
             loadingTuberList.splice(loadingTuberList.indexOf(channelName), 1)
+            checkNoLoadingTuber()
             console.log(`Preloaded : ${channelName}`)
         })
     }
@@ -685,5 +694,5 @@ window.onload = () => {
     }, 1500)
 }
 
-export { removeTuber, loadList, lang, mainColor, tuberListContainer }
+export { removeTuber, loadList, lang, mainColor, tuberListContainer, loadingTuberList }
 export default addTuber
