@@ -10,18 +10,31 @@ const youtubePlayerVideoList = document.querySelector("#youtubePlayerVideoList")
 let youtubePlayer = null
 import { lang } from "./index.js"
 
+const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay))
+
+async function muteYtPlayer() {
+    let volume = await youtubePlayer.getVolume()
+    const waittime = 600 / volume
+    console.log(waittime)
+    for(;volume>0;volume-=1) {
+        await youtubePlayer.setVolume(volume)
+        await wait(waittime)
+    }
+}
+
 function ytPlayerExit() {
     listContainer.style.pointerEvents = "all"
     container.style.pointerEvents = "all"
     youtubePlayerPopup.classList.remove("showPlayer")
     youtubePlayerPopup.classList.add("hidePlayer")
+    muteYtPlayer()
     setTimeout(() => {
         youtubePlayerPopup.style.display = "none"
         youtubePlayerTitle.innerText = ""
         youtubePlayerInfo.innerText = ""
         youtubePlayer.destroy()
         youtubePlayer = null
-    }, 700)
+    }, 710)
 }
 
 function makePlayer(key) {

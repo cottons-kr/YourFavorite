@@ -1,0 +1,85 @@
+.gameModeSwitchRoot {
+    height: 1.5vh;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 1vh 1vw;
+    font-size: 1.5vh;
+}
+
+#gameModeSwitch {
+    width: 2vw;
+    height: 100%;
+    margin-left: 0.5vw;
+    float: right;
+    background-color: white;
+    border-radius: 0.75vh;
+}
+
+#gameModeSwitchDot {
+    width: 1.1vh;
+    height: 1.1vh;
+    margin-top: 0.2vh;
+    margin-left: 0.2vw;
+    border-radius: 50%;
+    background-color: black;
+}
+
+.gameModeAlertPopupRoot {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.7);
+    z-index: 999;
+}
+
+#gameModeAlertPopup {
+    position: absolute;
+    width: 13vw;
+    height: 20vh;
+    padding: 5vh 1vw;
+    text-align: center;
+    font-size: 1.5rem;
+    background-color: white;
+    border-radius: 20px;
+
+    top: 35vh;
+    left: 42.5vw;
+}
+
+#gameModeAlertPopup img {
+    margin-top: 4vh;
+    width: 40%;
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+.switchOn {
+    animation-name: on;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+.switchOff {
+    animation-name: off;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes on {
+    0% {margin-left: 0.2vw;}
+    100% {margin-left: 1.2vw;}
+}
+
+@keyframes off {
+    0% {margin-left: 1.2vw;}
+    100% {margin-left: 0.2vw;}
+}
