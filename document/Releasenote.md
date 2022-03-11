@@ -3,10 +3,7 @@
 
 * 게임모드 / Game Mode 🎮
     * 새로고침을 일시중지하여 성능 최적화 / Pause Refresh for Better Performance
-
-* 구글 계정 연동 / Google Account Linking 🔗
-    * 구독한 채널 자동 추가 / Auto Register Subscribe Channels
-    * 좋아요, 싫어요 / Like and Dislike
+    * 추후 업데이트로 기능 추가 / Add More Feature in Future Update
 
 * 유튜브 동영상 PIP 모드 / YouTube Video PIP Mode
 
