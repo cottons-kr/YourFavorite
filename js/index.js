@@ -574,6 +574,7 @@ function autoPreload() {
         if (showingTuber === channelName) {continue}
         if (loadedTuberList.includes(channelName)) {continue}
         if (loadingTuberList.length >= parseInt(settings["simultaneousLoadNumber"][0])) {break}
+        if (gamemode) {break}
         loadingTuberList.push(channelName)
         console.log(`Preloading : ${channelName}`)
         childProcess.exec(`${path.resolve(__dirname, "../yt-parser/getInfo")} ${JSON.parse(JSON.parse(localStorage["youtuber"])[channelName])["url"]} all`, (err, result) => {
