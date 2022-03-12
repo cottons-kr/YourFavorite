@@ -5,7 +5,7 @@ const os = require('os')
 const path = require("path")
 const commandExist = require("command-exists")
 
-const PROGRAM_VERSION  = "1.4.0-stable",
+const PROGRAM_VERSION  = "1.5.0-beta",
             NODE_VERSION     = process.versions.node,
             ELECTRON_VERSION = process.versions.electron,
             V8_VERSION       = process.versions.v8,
