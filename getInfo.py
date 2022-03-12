@@ -12,12 +12,13 @@ import locale
 
 osType = platform.platform()
 waitTime = 20
-rootPath = open(os.path.join(os.path.join(os.path.expanduser('~'), ".yf/path")) , "r", encoding="utf-8").read()
 
 def getBrowser(type):
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--log-level=OFF")
+    #options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
+    #options.add_experimental_option('prefs', {'intl.accept_languages': 'ja,ja_JP'})
     if "Windows" in osType: execFile = "chromedriver.exe"
     else: execFile = "chromedriver"
     if getattr(sys, 'frozen', False): 
@@ -158,6 +159,8 @@ if __name__ == "__main__":
     url = sys.argv[1]
     type = sys.argv[2]
     lang = locale.getdefaultlocale()[0]
+    #lang = "en_US"
+    #lang = "ja_JP"
     procs = []
     manager = Manager()
     returns = manager.dict()

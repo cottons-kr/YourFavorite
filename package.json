@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization .",
-    "deploy": "electron-builder --linux"
+    "deploy": "pyinstaller -F -w --add-binary \"chromedriver\":\".\" getInfo.py && electron-builder --linux"
   },
   "repository": {
     "type": "git",
