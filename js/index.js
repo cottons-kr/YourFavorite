@@ -47,7 +47,8 @@ const body = document.querySelector("body"),
       infoVideoTitle = document.querySelector("#infoVideoTitle"),
       infoCommunityTitle = document.querySelector("#infoCommunityTitle h2"),
       infoStreamTitle = document.querySelector("#infoStreamTitle h2"),
-      addTuberPopupFormFileInput = document.querySelector("#addTuberPopupFormFileInput")
+      addTuberPopupFormFileInput = document.querySelector("#addTuberPopupFormFileInput"),
+      addTuberPopupStatus = document.querySelector("#addTuberPopupStatus")
 
 /*globalInterval은 현재 정보가 표시된 유튜버의 자동새로고침 함수
 loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
@@ -63,6 +64,7 @@ let showingTuber = null
 let mainColor = null
 let loadedTuberList = []
 let loadingTuberList = []
+let addingTuberList = []
 
 const url = location.href
 if (url.includes("en")) {lang = "en"}
@@ -125,6 +127,8 @@ function addTuber(event=null, url=null, callback=null) {
     let channelName, profileImg, backgroundRgb;
 
     addTuberPopupInput.value = "";
+    addingTuberList.push(url)
+    addTuberPopupStatus.innerText = `유튜버 ${addingTuberList.length}명 추가중...`
     childProcess.exec(`${path.resolve(__dirname, "../yt-parser/getInfo")} ${url} simple`, (err, result) => {
         if (err) {
             console.log(err.message)
@@ -171,6 +175,10 @@ function addTuber(event=null, url=null, callback=null) {
                 mainColor = backgroundRgb
                 removeTuber()
                 checkNoLoadingTuber()
+                addingTuberList.splice(addingTuberList.indexOf(url), 1)
+                if (addingTuberList.length == 0) {addTuberPopupStatus.innerText = "추가중인 유튜버가 없어요"}
+                else {addTuberPopupStatus.innerText = `유튜버 ${addingTuberList.length}명 추가중...`}
+
                 if (callback != null) {callback()}
             }).catch(err => {handleError(err)})
         }

@@ -223,7 +223,7 @@ li {
 
 #addTuberPopupFormUrl, #addTuberPopupFormFile {
     width: 60%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 #addTuberPopupFormFileInput {
@@ -234,6 +234,10 @@ li {
 .addTuberPopup p {
     margin-left: 3%;
     text-align: left;
+}
+
+#addTuberPopupStatus {
+    margin-bottom: 3%;
 }
 
 #addTuberPopupExit, #removeTuberPopupExit, #settingPopupExit {
