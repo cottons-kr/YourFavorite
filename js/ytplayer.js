@@ -119,22 +119,18 @@ youtubePlayerExit.addEventListener("click", ytPlayerExit)
 youtubePlayerPIP.addEventListener("click", () => {
     let win = new BrowserWindow({
         width: 420,
-        height:250,
-        minWidth: 420,
-        maxWidth: 1000,
+        height: 250,
         frame: false,
         transparent: true,
         resizable: true,
         simpleFullscreen: false,
         fullscreenable: false,
         maximizable: false,
-        minimizable: false,
-        acceptFirstMouse: true
+        minimizable: false
     })
     win.on('maximize', () => {
         win.unmaximize()
     })
-    win.setAspectRatio(16/9)
     win.setMenuBarVisibility(false)
     win.setAlwaysOnTop(true, "screen")
     win.loadFile("pip.html", {query: {"key": currentKey}})
