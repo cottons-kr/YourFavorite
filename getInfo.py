@@ -17,8 +17,6 @@ def getBrowser(type):
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--log-level=OFF")
-    #options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-    #options.add_experimental_option('prefs', {'intl.accept_languages': 'ja,ja_JP'})
     if "Windows" in osType: execFile = "chromedriver.exe"
     else: execFile = "chromedriver"
     if getattr(sys, 'frozen', False): 
@@ -28,16 +26,14 @@ def getBrowser(type):
         driver = webdriver.Chrome(service=Service("./"+execFile), options=options)
     return driver
 
-def getBase(url, lang, returns):
+def getBase(url, returns):
     driver = getBrowser("all")
     driver.get(url)
     driver.execute_script("window.scrollTo(0, 999999999)")
     driver.implicitly_wait(waitTime)
     try:
         subscriber = driver.find_element(By.XPATH, '''//*[@id="subscriber-count"]''').get_attribute("aria-label").split(' ')
-        if "ko" in lang: subscriber = subscriber[1].replace('명', '')
-        elif "ja" in lang: subscriber = subscriber[1].replace("人", '')
-        else: subscriber = subscriber[0]
+        subscriber = subscriber[1].replace('명', '')
     except:
         subscriber = "CantLoad"
     streams = []
@@ -54,7 +50,7 @@ def getBase(url, lang, returns):
     returns[0] = subscriber
     returns[1] = streams
 
-def getVideos(url, lang, returns):
+def getVideos(url, returns):
     driver = getBrowser("all")
     driver.get(url+"/videos")
     driver.execute_script(f"window.scrollTo(0, {str(999999999 * 3)})")
@@ -70,27 +66,12 @@ def getVideos(url, lang, returns):
             videoInfo = video.find_element(By.ID, "video-title").get_attribute("aria-label")
             videoLink = video.find_element(By.ID, "video-title").get_attribute("href")
             videoUpload = ""
-            if "ko" in lang:
-                try: videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
-                except: continue
-                if "전" in videoInfo:
-                    try: videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
-                    except: videoUpload = ""
-            elif "ja" in lang:
-                try: videoView = videoInfo.split(" ")[-2]
-                except: continue
-                if "前" in videoInfo:
-                    videoUpload = ""
-                    parsedText = videoInfo.split(" ")
-                    for i in range(len(parsedText)):
-                        if "前" in parsedText[i-1]:
-                            videoUpload = f"{parsedText[i-2]} {parsedText[i-1].replace('前', '')}"
-            else:
-                try: videoView = videoInfo.split(" ")[videoInfo.split(" ").index("views")-1]
-                except: continue
-                if "ago" in videoInfo:
-                    try: videoUpload = f'''{videoInfo.split(' ')[videoInfo.split(' ').index("ago")-2]} {videoInfo.split(' ')[videoInfo.split(' ').index("ago")-1]}'''
-                    except: videoUpload = ""
+            try: videoView = videoInfo.split(" 조회수 ")[1].replace("회", '')
+            except: continue
+
+            if "전" in videoInfo:
+                try: videoUpload = videoInfo.split(' ')[videoInfo.split(' ').index("전")-1]
+                except: videoUpload = ""
             videoName = video.find_element(By.ID, "video-title").get_attribute("title")
             videos.append([videoName, videoLink, videoUpload, videoView])
     returns[2] = videos
@@ -115,7 +96,7 @@ def getCommunity(url, returns):
             communitys.append([communityContent, communityLikes, communityUpload])
     returns[3] = communitys
 
-def getAbout(url, lang, returns):
+def getAbout(url, returns):
     driver = getBrowser("all")
     driver.get(url+"/about")
     driver.execute_script("window.scrollTo(0, 999999999)")
@@ -129,14 +110,11 @@ def getAbout(url, lang, returns):
     except:
         location = "CantLoad"
     try:
-        if "ja" in lang: joinDate = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]''').get_attribute("innerText").split(" ")[0]
-        else: joinDate = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]/span[2]''').get_attribute("innerText").replace(' ', '')
+        joinDate = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[2]/span[2]''').get_attribute("innerText").replace(' ', '')
     except: joinDate = "CantLoad"
     try:
         totalViews = driver.find_element(By.XPATH, '''/html/body/ytd-app/div/ytd-page-manager/ytd-browse/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-about-metadata-renderer/div[2]/yt-formatted-string[3]''').get_attribute("innerText")
-        if "ko" in lang: totalViews = totalViews.replace("조회수 ", '').replace("회", "")
-        elif "ja" in lang: totalViews = totalViews.replace(" 回視聴", "")
-        else: totalViews = totalViews.split(' ')[0]
+        totalViews = totalViews.replace("조회수 ", '').replace("회", "")
     except:
         totalViews = "CantLoad"
     links = []
@@ -158,9 +136,6 @@ if __name__ == "__main__":
     freeze_support()
     url = sys.argv[1]
     type = sys.argv[2]
-    lang = locale.getdefaultlocale()[0]
-    #lang = "en_US"
-    #lang = "ja_JP"
     procs = []
     manager = Manager()
     returns = manager.dict()
@@ -177,10 +152,10 @@ if __name__ == "__main__":
         print(base64.b64encode(f"{channelName}::{profileImg}".encode("utf-8")))
         driver.quit()
     elif type == "all":
-        procs.append(Process(target=getBase, args=(url, lang, returns)))
-        procs.append(Process(target=getVideos, args=(url, lang, returns)))
+        procs.append(Process(target=getBase, args=(url, returns)))
+        procs.append(Process(target=getVideos, args=(url, returns)))
         procs.append(Process(target=getCommunity, args=(url, returns)))
-        procs.append(Process(target=getAbout, args=(url, lang, returns)))
+        procs.append(Process(target=getAbout, args=(url, returns)))
         for proc in procs:
             proc.start()
         for proc in procs:
