@@ -1,11 +1,12 @@
 ## v1.5.0-stable
 2022/03/14 출시
 
-* 게임모드 / Game Mode 🎮
-    * 새로고침을 일시중지하여 성능 최적화 / Pause Refresh for Better Performance
-    * 추후 업데이트로 기능 추가 / Add More Feature in Future Update
+* 게임모드 🎮
+    * 새로고침을 일시중지하여 성능 최적화
+    * 추후 업데이트로 기능 추가
 
-* 유튜브 동영상 PIP 모드 / YouTube Video PIP Mode
+* 유튜브 동영상 PIP 모드
+* 타언어 지원 중지
 
 ## v1.4.0-stable
 2022/02/25 출시
