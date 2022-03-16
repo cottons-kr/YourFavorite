@@ -27,7 +27,6 @@ const body = document.querySelector("body"),
       infoStreamList = document.querySelector("#infoStreamList"),
       infoVideosList = document.querySelector("#infoVideosList"),
       infoCommunityList = document.querySelector("#infoCommunityList"),
-      infoAbout = document.querySelector("#infoAbout"),
       infoTotalView = document.querySelector("#infoTotalView"),
       infoLocation = document.querySelector("#infoLocation"),
       infoJoinDate = document.querySelector("#infoJoinDate"),
@@ -56,7 +55,6 @@ loadingTuber는 현재 로딩상태, null이 아니면 함수실행중지*/
 const rootPath = os.homedir()
 const settingPath = path.resolve(rootPath, ".yf/setting.json")
 const settings = JSON.parse(fs.readFileSync(settingPath, "utf8"))
-let lang = Intl.DateTimeFormat().resolvedOptions().locale
 
 let globalInterval = null
 let loadingTuber = null
@@ -67,15 +65,10 @@ let loadingTuberList = []
 let addingTuberList = []
 
 const url = location.href
-if (url.includes("en")) {lang = "en"}
-else if (url.includes("jp")) {lang = "ja"}
-else {lang = "ko"}
 
 function handleError(msg) {
     console.log(msg)
-    if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")}
-    else if (lang.includes("ja")) {ipcRenderer.invoke("showMessage", "エラーが発生しました!", `Github Issueタブにお問い合わせいただきありがとうございます :)\n\n${msg}`, "error")}
-    else {ipcRenderer.invoke("showMessage", "An Error Occurred!", `Please let us know this error on Github Issue :)\n\n${msg}`, "error")}
+    ipcRenderer.invoke("showMessage", "오류가 발생했어요!", `Github Issue탭에 문의해주시면 감사하겠습니다 :)\n\n${msg}`, "error")
 }
 
 function loadList() {
@@ -133,9 +126,7 @@ function addTuber(event=null, url=null, callback=null) {
         if (err) {
             console.log(err.message)
             if (err.message.includes("InvalidArgumentException")) {
-                if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")}
-                else if (lang.includes("ja")) {ipcRenderer.invoke("showMessage", "URLエラー!", "URLが間違っていると思います。", "warning")}
-                else { ipcRenderer.invoke("showMessage", "URL Error!", "It seem the URL is wrong.", "warning")}
+                ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")
                 return 0
             }
         }
@@ -144,9 +135,7 @@ function addTuber(event=null, url=null, callback=null) {
         const buff = Buffer.from(data, "base64")
         console.log(buff)
         if (buff.includes("InvalidArgumentException")) {
-            if (lang.includes("ko")) {ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")}
-            else if (lang.includes("ja")) {ipcRenderer.invoke("showMessage", "URLエラー!", "URLが間違っていると思います。", "warning")}
-            else { ipcRenderer.invoke("showMessage", "URL Error!", "It seem the URL is wrong.", "warning")}
+            ipcRenderer.invoke("showMessage", "URL 오류!", "URL이 잘못된것 같아요", "warning")
             return 0
         }
         else if (buff.includes("Traceback")) {handleError(buff)}
@@ -225,9 +214,7 @@ function loadVideos(info, noContent) {
     for (let video of info) {
         if (video[1] === undefined && infoVideosList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
-            if (lang.includes("ko")) {h1.innerText = "올린 영상이 없어요"}
-            else if (lang.includes("ja")) {h1.innerText = "アップロードした画像はありません。"}
-            else {h1.innerText = "No Videos :("}
+            h1.innerText = "올린 영상이 없어요"
             h1.setAttribute("id", "noVideo")
             h1.classList.add("showVideo")
             setTimeout(() => {h1.classList.remove("showVideo")}, 400)
@@ -239,15 +226,8 @@ function loadVideos(info, noContent) {
         const img = document.createElement("img")
         div.setAttribute("id", "video")
         img.setAttribute("src", getThumbnail(video[1]))
-        if (video[2] == "") {
-            if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
-            else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} /  ヒット: ${video[3]}`)}
-            else {img.setAttribute("title", `${video[0]} / Views : ${video[3]}`)}
-        } else {
-            if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
-            else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} / ヒット : ${video[3]} / ${video[2]} 前`)}
-            else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
-        }
+        if (video[2] == "") {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
+        else {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
         img.setAttribute("id", "videoThumbnail")
         div.appendChild(img)
         div.classList.add("showVideo")
@@ -264,9 +244,7 @@ function loadStreams(info, noContent) {
     for (let stream of info) {
         if (stream[1] === undefined && infoStreamList.hasChildNodes() === false) {
             const h1 = document.createElement("h1")
-            if (lang.includes("ko")) {h1.innerText = "스트리밍을 하고있지 않아요"}
-            else if (lang.includes("ja")) {h1.innerText = "ストリーミングしていません。"}
-            else {h1.innerText = "No Stream :("}
+            h1.innerText = "스트리밍을 하고있지 않아요"
             h1.setAttribute("id", "noStream")
             h1.classList.add("showStream")
             setTimeout(() => {h1.classList.remove("showStream")}, 400)
@@ -292,9 +270,7 @@ function loadCommunitys(info, noContent) {
     infoCommunityTitle.style.color = `rgb(${mainColor[0]-30}, ${mainColor[1]-30}, ${mainColor[2]-30})`
     if (info.length == 0 && infoCommunityList.hasChildNodes() === false) {
         const h1 = document.createElement("h1")
-        if (lang.includes("ko")) {h1.innerText = "커뮤니티 게시글이 없어요"}
-        else if (lang.includes("ja")) {h1.innerText = "コミュニティの投稿はありません。"}
-        else {h1.innerText = "No Community :("}
+        h1.innerText = "커뮤니티 게시글이 없어요"
         h1.setAttribute("id", "noCommunity")
         h1.classList.add("showCommunity")
         setTimeout(() => {h1.classList.remove("showCommunity")}, 400)
@@ -306,9 +282,7 @@ function loadCommunitys(info, noContent) {
         const p = document.createElement("p")
         div.setAttribute("id", "community")
         div.setAttribute("style", `background-color: rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.2);`)
-        if (lang.includes("ko")) {div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)}
-        else if (lang.includes("ja")) {div.setAttribute("title", `いいね : ${community[1]} / ${community[2]}`)}
-        else {div.setAttribute("title", `Likes : ${community[1]} / ${community[2]}`)}
+        div.setAttribute("title", `좋아요 : ${community[1]} / ${community[2]}`)
         p.innerText = community[0]
         div.appendChild(p)
         div.classList.add("showCommunity")
@@ -325,9 +299,7 @@ function showInfo(info, channelId) {
     infoSubscriber.innerText = info["subscriber"]
     infoProfileLink.href = baseInfo["url"]
     infoChannelName.innerText = baseInfo["channelName"]
-    if (lang.includes("ko")) {infoProfileImg.title = `${baseInfo["channelName"]} 채널로 이동`}
-    else if (lang.includes("ja")) {infoProfileImg.title = `${baseInfo["channelName"]}のチャンネルに移動`}
-    else {infoProfileImg.title = `Go to ${baseInfo["channelName"]}'s Channel`}
+    infoProfileImg.title = `${baseInfo["channelName"]} 채널로 이동`
     infoProfileImg.src = baseInfo["profileImg"]
     const rgb = baseInfo["backgroundRgb"]
     changeBgColor(rgb)
@@ -337,9 +309,6 @@ function showInfo(info, channelId) {
     loadCommunitys(info["communitys"], noContent)
 
     const about = info["about"]
-    if (lang.includes("ko")) {infoAbout.innerText = "채널 설명"}
-    else if (lang.includes("ja")) {infoAbout.innerText = "チャンネルの説明"}
-    else {infoAbout.innerText = "About Description"}
 
     infoAboutClass.style.display = "inline-block"
     infoSubscriber.style.visibility = "visible"
@@ -349,11 +318,7 @@ function showInfo(info, channelId) {
     infoLocation.innerText = locationFilter(about)
     infoJoinDate.innerText = about[2]
     infoAboutmore.innerText = about[0]
-    if (infoAboutmore.innerText == "") {
-        if (lang.includes("ko")) {infoAboutmore.innerText = "채널 설명이 없어요"}
-        else if (lang.includes("ja")) {infoAboutmore.innerText = "チャンネルの説明はありません。"}
-        else {infoAboutmore.innerText = "There is no Channel Description"}
-    }
+    if (infoAboutmore.innerText == "") {infoAboutmore.innerText = "채널 설명이 없어요"}
 
     infoChannelName.style.display = "inline-block"
     infoTuberLoading.style.display = "none"
@@ -398,9 +363,7 @@ function loadInfo(channelId) {
     const mainJson = JSON.parse(localStorage["youtuber"])
     const info = JSON.parse(mainJson[channelId])
     infoTuberLoading.style.display = "block"
-    if (lang.includes("ko")) {infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`}
-    else if (lang.includes("ja")) {infoTuberLoadingName.innerText = `${info["channelName"]} ロード中...`}
-    else {infoTuberLoadingName.innerText = `Loading ${info["channelName"]}...`}
+    infoTuberLoadingName.innerText = `${info["channelName"]} 로딩중...`
     childProcess.exec(`${path.resolve(__dirname, "../yt-parser/getInfo")} ${info["url"]} all`, (err, result) => {
         if (err) {
             handleError(err)
@@ -513,7 +476,6 @@ function clearInfo() {
     infoLocation.innerText = ""
     infoJoinDate.innerText = ""
     infoAboutmore.innerText = ""
-    infoAbout.innerText = ""
 
     infoChannelName.style.visibility = "hidden"
     infoSubscriber.style.visibility = "hidden"
@@ -703,5 +665,5 @@ window.onload = () => {
     }, 1500)
 }
 
-export { removeTuber, loadList, lang, mainColor, tuberListContainer, loadingTuberList }
+export { removeTuber, loadList, mainColor, tuberListContainer, loadingTuberList }
 export default addTuber

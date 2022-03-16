@@ -2,18 +2,15 @@ const fs = require("fs")
 const os = require('os')
 const path = require("path")
 const { ipcRenderer } = require("electron")
-import { lang, mainColor, tuberListContainer } from "./index.js"
+import { mainColor, tuberListContainer } from "./index.js"
 
 const PROGRAM_VERSION = "1.5.0-stable"
 const homeDir = os.homedir()
-const rootPath = fs.readFileSync(path.resolve(homeDir, ".yf/path"), "utf8")
 let settingPath = path.resolve(homeDir, ".yf/setting.json")
 let defaultSetttingPath = path.resolve(homeDir, ".yf/defaultSetting.json")
 let backupPath = path.resolve(homeDir, "Desktop/yf_backup.json")
 
 const settingKr = ["새로고침 간격", "미리 불러오는 간격", "창의 가로크기", "창의 세로크기", "기본 배경색", "동시로딩갯수"]
-const settingJp = ["更新遅延", "プリロード遅延", "ウィンドウ幅", "窓の高さ", "デフォルトの背景色", "同時ロード数"]
-const settingEn = ["Refresh Delay", "Preload Delay", "Window Width", "Window Height", "Default Background Color", "Concurrent Loads"]
 
 const settingButtonImg = document.querySelector("#settingButtonImg")
 const settingPopupExit = document.querySelector("#settingPopupExit")
@@ -35,9 +32,7 @@ function showSetting() {
     }
     let settingName
     let i = 0
-    if (lang.includes("ko")) {settingName = settingKr}
-    else if (lang.includes("ja")) {settingName = settingJp}
-    else {settingName = settingEn}
+    settingName = settingKr
     for (let setting of Object.keys(settings)) {
         const info = settings[setting]
         const div1 = document.createElement("div")
@@ -116,19 +111,13 @@ function checkUpdate() {
     fetch("https://raw.githubusercontent.com/cottons-kr/YourFavorite/main/package.json").then(res => res.json())
     .then(data => {
         if (data["version"] == PROGRAM_VERSION) {
-            if (lang.includes("ko")) {UpdateCheckPopupTitle.innerText = "최신버전을 쓰고있어요"}
-            else if (lang.includes("ja")) {UpdateCheckPopupTitle.innerText = "最新バージョンを書いています。"}
-            else {UpdateCheckPopupTitle.innerText = "You are using Lastest Version"}
+            UpdateCheckPopupTitle.innerText = "최신버전을 쓰고있어요"
             UpdateCheckPopupLink.style.display = "none"
         } else {
-            if (lang.includes("ko")) {UpdateCheckPopupTitle.innerText = "새로운 버전이 있어요"}
-            else if (lang.includes("ja")) {UpdateCheckPopupTitle.innerText = "新しいバージョンがあります。"}
-            else {UpdateCheckPopupTitle.innerText = "There is a New Version"}
+            UpdateCheckPopupTitle.innerText = "새로운 버전이 있어요"
             UpdateCheckPopupLink.style.display = "block"
         }
-        if (lang.includes("ko")) {UpdateCheckPopupContent.innerHTML = `현재 버전 : ${PROGRAM_VERSION }<br>최신 버전 : ${data["version"]}`}
-        else if (lang.includes("ja")) {UpdateCheckPopupContent.innerHTML = `現行版 : ${PROGRAM_VERSION }<br>新バージョン : ${data["version"]}`}
-        else {UpdateCheckPopupContent.innerHTML = `Current Version : ${PROGRAM_VERSION }<br>New Version: ${data["version"]}`}
+        UpdateCheckPopupContent.innerHTML = `현재 버전 : ${PROGRAM_VERSION }<br>최신 버전 : ${data["version"]}`
 
         UpdateCheckPopupLink.style.backgroundColor = `rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, 0.25)`
         UpdateCheckPopup.style.display = "block"

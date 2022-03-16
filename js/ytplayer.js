@@ -11,7 +11,6 @@ const youtubePlayerVideoList = document.querySelector("#youtubePlayerVideoList")
 const youtubePlayerPIP = document.querySelector("#youtubePlayerPIP")
 let youtubePlayer = null
 let currentKey = ""
-import { lang } from "./index.js"
 
 const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay))
 
@@ -51,20 +50,14 @@ function showInfo(video) {
     youtubePlayerTitle.innerText = video[0]
     if (video[2] !== undefined) {
         if (video[2] == "") {
-            if (lang.includes("ko")) {youtubePlayerInfo.innerText = `조회수 : ${video[3]}`}
-            else if (lang.includes("ja")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]}`}
-            else {youtubePlayerInfo.innerText = `Views : ${video[3]}`}
+            youtubePlayerInfo.innerText = `조회수 : ${video[3]}`
         }
         else {
-            if (lang.includes("ko")) {youtubePlayerInfo.innerText = `조회수 : ${video[3]} / ${video[2]} 전`}
-            else if (lang.includes("ja")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]} / ${video[2]}前`}
-            else {youtubePlayerInfo.innerText = `Views : ${video[3]} / ${video[2]} ago`}
+            youtubePlayerInfo.innerText = `조회수 : ${video[3]} / ${video[2]} 전`
         }
     } else {
         if (video[3] !== undefined) {
-            if (lang.includes("ko")) {youtubePlayerInfo.innerText = `조회수 : ${video[3]}`}
-            else if (lang.includes("ja")) {youtubePlayerInfo.innerText = `ヒット : ${video[3]}`}
-            else {youtubePlayerInfo.innerText = `Views : ${video[3]}`}
+            youtubePlayerInfo.innerText = `조회수 : ${video[3]}`
         } else {youtubePlayerInfo.innerText = ""}
     }
 }
@@ -88,19 +81,13 @@ export default function loadPlayer(data, channelVideos) {
         img.setAttribute("src", getThumbnail(video[1]))
         if (video[2] !== undefined) {
             if (video[2] == "") {
-                if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
-                else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} / ヒット : ${video[3]}`)}
-                else {img.setAttribute("title", `${video[0]} / Views : ${video[3]}`)}
+                img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)
             } else {
-                if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)}
-                else if (lang.includes("jp")) {img.setAttribute("title", `${video[0]} / ヒット : ${video[3]} / ${video[2]} 前`)}
-                else {img.setAttribute("title", `${video[0]} / Views : ${video[3]} / ${video[2]} ago`)}
+                img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]} / ${video[2]} 전`)
             }
         } else {
             if (video[3] !== undefined) {
-                if (lang.includes("ko")) {img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)}
-                else if (lang.includes("ja")) {img.setAttribute("title", `${video[0]} /  ヒット: ${video[3]}`)}
-                else {img.setAttribute("title", `${video[0]} / Views : ${video[3]}`)}
+                img.setAttribute("title", `${video[0]} / 조회수 : ${video[3]}`)
             } else {img.setAttribute("title", video[0])}
         }
 
